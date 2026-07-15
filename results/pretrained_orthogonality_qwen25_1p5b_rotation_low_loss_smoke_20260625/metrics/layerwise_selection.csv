@@ -1,0 +1,3 @@
+layer,layer_family,layer_short,selected_order,selected_predicted_hessian_cost,selected_q_method,selected_r_method,selected_s_method,selection_family
+model.layers.0.self_attn.o_proj,attention,L0:o_proj,rsq,1.8677520751953125,rotated_rtn,whitened_svd,wanda,hessian_layerwise
+model.layers.0.self_attn.q_proj,attention,L0:q_proj,rsq,27.056055068969727,rotated_rtn,whitened_svd,wanda,hessian_layerwise

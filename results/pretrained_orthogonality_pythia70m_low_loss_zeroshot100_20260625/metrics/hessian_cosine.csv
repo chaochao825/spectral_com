@@ -1,0 +1,4 @@
+abs_rho_h,layer,layer_short,pair,rho_h
+0.0058552412957671406,gpt_neox.layers.0.attention.dense,L0:dense,qs,0.0058552412957671406
+0.0037094501295867133,gpt_neox.layers.0.attention.dense,L0:dense,qr,-0.0037094501295867133
+0.06150147271005563,gpt_neox.layers.0.attention.dense,L0:dense,sr,-0.06150147271005563

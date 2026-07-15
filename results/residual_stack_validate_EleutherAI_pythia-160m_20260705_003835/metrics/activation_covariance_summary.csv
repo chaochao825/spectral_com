@@ -1,0 +1,5 @@
+activation_rows,input_dim,layer,layer_short,mean_diag,trace
+128,768,gpt_neox.layers.0.attention.dense,L0:dense,0.05238117277622223,40.22874450683594
+128,3072,gpt_neox.layers.0.mlp.dense_4h_to_h,L0:dense_4h_to_h,0.024964576587080956,76.69117736816406
+128,768,gpt_neox.layers.0.mlp.dense_h_to_4h,L0:dense_h_to_4h,0.6389169096946716,490.6881103515625
+128,768,gpt_neox.layers.6.attention.dense,L6:dense,0.058204736560583115,44.70123291015625

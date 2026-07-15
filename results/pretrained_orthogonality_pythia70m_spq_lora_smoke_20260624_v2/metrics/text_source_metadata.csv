@@ -1,0 +1,3 @@
+backup_path,backup_root,fingerprint,rows_available,rows_loaded_from_backup,rows_used_for_text_source,source,split,task
+/home/wangmeiqi/dataset_backup/ai2_arc_easy,/home/wangmeiqi/dataset_backup,3c8375eec3653bc7,570,32,16,zero_shot_backup,validation,arc_easy
+/home/wangmeiqi/dataset_backup/hellaswag,/home/wangmeiqi/dataset_backup,ed539f7cf7b47812,10042,32,16,zero_shot_backup,validation,hellaswag

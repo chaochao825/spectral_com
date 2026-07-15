@@ -1,0 +1,13 @@
+fixed_spq_order,fixed_spq_predicted_hessian_cost,guided_q_method,guided_r_method,guided_s_method,guided_spq_order,guided_spq_predicted_hessian_cost,layer,layer_family,layer_short,predicted_order_cost_gap_fixed_minus_reversed,reversed_spq_order,reversed_spq_predicted_hessian_cost,spq_ops,spq_pair,spq_pair_rho_h
+rq,0.48033151030540466,rtn,whitened_svd,,rq,0.36090806126594543,gpt_neox.layers.0.attention.dense,attention,L0:dense,0.032895416021347046,qr,0.4474360942840576,rq,qr,9.131410289648034e-05
+rq,104.96440124511719,rtn,whitened_svd,,rq,35.369930267333984,gpt_neox.layers.0.attention.query_key_value,attention,L0:query_key_value,-3.542022705078125,qr,108.50642395019531,rq,qr,-0.002862128647462388
+sq,0.7693086862564087,rtn,,wanda,qs,0.7452672719955444,gpt_neox.layers.0.mlp.dense_4h_to_h,mlp,L0:dense_4h_to_h,0.024041414260864258,qs,0.7452672719955444,sq,qs,0.33492414785910324
+sq,46.18114471435547,rtn,,wanda,sq,46.18114471435547,gpt_neox.layers.0.mlp.dense_h_to_4h,mlp,L0:dense_h_to_4h,-2.9100265502929688,qs,49.09117126464844,sq,qs,0.07176234613379792
+rq,2.464602470397949,rtn,whitened_svd,,rq,2.149101734161377,gpt_neox.layers.3.attention.dense,attention,L3:dense,0.10695981979370117,qr,2.357642650604248,rq,qr,0.004295913807962313
+rq,724.5899658203125,rtn,whitened_svd,,rq,623.22216796875,gpt_neox.layers.3.attention.query_key_value,attention,L3:query_key_value,4.80584716796875,qr,719.7841186523438,rq,qr,0.0007093018086430305
+sq,8.602001190185547,rtn,,magnitude,qs,8.428735733032227,gpt_neox.layers.3.mlp.dense_4h_to_h,mlp,L3:dense_4h_to_h,0.1732654571533203,qs,8.428735733032227,sq,qs,0.23511895705347455
+sq,70.20459747314453,rtn,,wanda,sq,70.20459747314453,gpt_neox.layers.3.mlp.dense_h_to_4h,mlp,L3:dense_h_to_4h,-8.556594848632812,qs,78.76119232177734,sq,qs,0.1592005242750887
+rq,4.411778450012207,rtn,whitened_svd,,rq,2.472592830657959,gpt_neox.layers.5.attention.dense,attention,L5:dense,0.9439935684204102,qr,3.467784881591797,rq,qr,0.000691090830014482
+rq,53622.9453125,rtn,whitened_svd,,rq,52362.0234375,gpt_neox.layers.5.attention.query_key_value,attention,L5:query_key_value,223.41015625,qr,53399.53515625,rq,qr,-0.000554028419208934
+sq,126.77711486816406,rtn,,wanda,sq,126.77711486816406,gpt_neox.layers.5.mlp.dense_4h_to_h,mlp,L5:dense_4h_to_h,-5.000823974609375,qs,131.77793884277344,sq,qs,0.0795533226404085
+sq,102.90933990478516,rtn,,wanda,sq,102.90933990478516,gpt_neox.layers.5.mlp.dense_h_to_4h,mlp,L5:dense_h_to_4h,-8.241249084472656,qs,111.15058898925781,sq,qs,0.13792035887456844

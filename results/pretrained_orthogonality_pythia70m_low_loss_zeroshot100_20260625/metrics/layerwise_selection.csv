@@ -1,0 +1,2 @@
+layer,layer_family,layer_short,selected_order,selected_predicted_hessian_cost,selected_q_method,selected_r_method,selected_s_method,selection_family
+gpt_neox.layers.0.attention.dense,attention,L0:dense,rsq,0.18434475362300873,rtn,whitened_svd,wanda,hessian_layerwise

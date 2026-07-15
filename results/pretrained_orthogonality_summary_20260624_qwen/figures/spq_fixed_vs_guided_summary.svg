@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="760" viewBox="0 0 1180 760">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="48.0" y="42.0" font-size="24" text-anchor="start" font-weight="700" fill="#222">SPQ-like fixed recipe vs Hessian-guided SPQ</text>
+<text x="48.0" y="70.0" font-size="13" text-anchor="start" font-weight="400" fill="#555">Same nominal bits/keep/rank; LoRA rows use equal rank and step budgets. Lower PPL degradation is better.</text>
+<text x="48.0" y="112.0" font-size="16" text-anchor="start" font-weight="700" fill="#222">A. Strategy PPL degradation, log10 scale</text>
+<line x1="250.0" y1="114.0" x2="250.0" y2="392.0" stroke="#e3e6ea" stroke-width="1.0"/>
+<text x="250.0" y="108.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">0</text>
+<line x1="380.0" y1="114.0" x2="380.0" y2="392.0" stroke="#e3e6ea" stroke-width="1.0"/>
+<text x="380.0" y="108.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">9</text>
+<line x1="510.0" y1="114.0" x2="510.0" y2="392.0" stroke="#e3e6ea" stroke-width="1.0"/>
+<text x="510.0" y="108.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">99</text>
+<line x1="640.0" y1="114.0" x2="640.0" y2="392.0" stroke="#e3e6ea" stroke-width="1.0"/>
+<text x="640.0" y="108.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">999</text>
+<line x1="770.0" y1="114.0" x2="770.0" y2="392.0" stroke="#e3e6ea" stroke-width="1.0"/>
+<text x="770.0" y="108.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">9999</text>
+<text x="48.0" y="142.0" font-size="14" text-anchor="start" font-weight="700" fill="#222">Pythia-70M</text>
+<text x="48.0" y="162.0" font-size="11" text-anchor="start" font-weight="400" fill="#666">base PPL 59.87</text>
+<text x="112.0" y="146.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">fixed no-LoRA</text>
+<rect x="250.0" y="132.0" width="397.2" height="18.0" fill="#6b7c93" opacity="1.00"/>
+<text x="655.2" y="146.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 1194.7 / deg 1134.9</text>
+<text x="112.0" y="174.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">guided no-LoRA</text>
+<rect x="250.0" y="160.0" width="299.4" height="18.0" fill="#167f74" opacity="1.00"/>
+<text x="557.4" y="174.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 259.7 / deg 199.8</text>
+<text x="112.0" y="202.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">fixed LoRA</text>
+<rect x="250.0" y="188.0" width="387.4" height="18.0" fill="#b45b0b" opacity="1.00"/>
+<text x="645.4" y="202.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 1013.4 / deg 953.5</text>
+<text x="112.0" y="230.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">guided LoRA</text>
+<rect x="250.0" y="216.0" width="292.2" height="18.0" fill="#7c2bd6" opacity="1.00"/>
+<text x="550.2" y="230.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 235.6 / deg 175.8</text>
+<text x="48.0" y="278.0" font-size="14" text-anchor="start" font-weight="700" fill="#222">Qwen2.5-1.5B</text>
+<text x="48.0" y="298.0" font-size="11" text-anchor="start" font-weight="400" fill="#666">base PPL 30.61</text>
+<text x="112.0" y="282.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">fixed no-LoRA</text>
+<rect x="250.0" y="268.0" width="201.0" height="18.0" fill="#6b7c93" opacity="1.00"/>
+<text x="459.0" y="282.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 64.78 / deg 34.16</text>
+<text x="112.0" y="310.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">guided no-LoRA</text>
+<rect x="250.0" y="296.0" width="171.4" height="18.0" fill="#167f74" opacity="1.00"/>
+<text x="429.4" y="310.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 50.45 / deg 19.84</text>
+<text x="112.0" y="338.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">fixed LoRA</text>
+<rect x="250.0" y="324.0" width="197.2" height="18.0" fill="#b45b0b" opacity="1.00"/>
+<text x="455.2" y="338.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 62.52 / deg 31.91</text>
+<text x="112.0" y="366.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">guided LoRA</text>
+<rect x="250.0" y="352.0" width="169.6" height="18.0" fill="#7c2bd6" opacity="1.00"/>
+<text x="427.6" y="366.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">PPL 49.78 / deg 19.17</text>
+<text x="820.0" y="112.0" font-size="16" text-anchor="start" font-weight="700" fill="#222">B. Guided PPL reduction vs fixed recipe</text>
+<line x1="820.0" y1="124.0" x2="820.0" y2="274.0" stroke="#999" stroke-width="1.0"/>
+<line x1="1080.0" y1="124.0" x2="1080.0" y2="274.0" stroke="#ddd" stroke-width="1.0"/>
+<text x="820.0" y="116.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">0%</text>
+<text x="1080.0" y="116.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">100%</text>
+<text x="820.0" y="130.0" font-size="13" text-anchor="start" font-weight="700" fill="#222">Pythia-70M</text>
+<text x="820.0" y="154.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">no-LoRA</text>
+<rect x="880.0" y="140.0" width="203.5" height="18.0" fill="#167f74" opacity="1.00"/>
+<text x="1087.5" y="154.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">78.3%</text>
+<text x="820.0" y="184.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">LoRA</text>
+<rect x="880.0" y="170.0" width="199.5" height="18.0" fill="#7c2bd6" opacity="1.00"/>
+<text x="1083.5" y="184.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">76.7%</text>
+<text x="820.0" y="208.0" font-size="13" text-anchor="start" font-weight="700" fill="#222">Qwen2.5-1.5B</text>
+<text x="820.0" y="232.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">no-LoRA</text>
+<rect x="880.0" y="218.0" width="57.5" height="18.0" fill="#167f74" opacity="1.00"/>
+<text x="941.5" y="232.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">22.1%</text>
+<text x="820.0" y="262.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">LoRA</text>
+<rect x="880.0" y="248.0" width="53.0" height="18.0" fill="#7c2bd6" opacity="1.00"/>
+<text x="937.0" y="262.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">20.4%</text>
+<text x="820.0" y="360.0" font-size="16" text-anchor="start" font-weight="700" fill="#222">C. Diagnostic correlations</text>
+<line x1="930.0" y1="374.0" x2="930.0" y2="678.0" stroke="#999" stroke-width="1.0"/>
+<line x1="1120.0" y1="374.0" x2="1120.0" y2="678.0" stroke="#ddd" stroke-width="1.0"/>
+<text x="930.0" y="366.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">0</text>
+<text x="1120.0" y="366.0" font-size="10" text-anchor="middle" font-weight="400" fill="#666">1</text>
+<text x="820.0" y="405.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">rho_H vs add.</text>
+<rect x="930.0" y="392.0" width="43.6" height="12.0" fill="#6b7c93" opacity="1.00"/>
+<text x="979.6" y="402.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.23</text>
+<rect x="930.0" y="407.0" width="56.5" height="12.0" fill="#167f74" opacity="1.00"/>
+<text x="992.5" y="417.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.30</text>
+<text x="820.0" y="451.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">rho_H vs PPL</text>
+<rect x="930.0" y="438.0" width="35.2" height="12.0" fill="#6b7c93" opacity="1.00"/>
+<text x="971.2" y="448.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.19</text>
+<rect x="930.0" y="453.0" width="27.8" height="12.0" fill="#167f74" opacity="1.00"/>
+<text x="963.8" y="463.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.15</text>
+<text x="820.0" y="497.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">Taylor vs loss</text>
+<rect x="930.0" y="484.0" width="129.9" height="12.0" fill="#6b7c93" opacity="1.00"/>
+<text x="1065.9" y="494.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.68</text>
+<rect x="930.0" y="499.0" width="123.3" height="12.0" fill="#167f74" opacity="1.00"/>
+<text x="1059.3" y="509.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.65</text>
+<text x="820.0" y="543.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">Frob. vs loss</text>
+<rect x="930.0" y="530.0" width="78.4" height="12.0" fill="#6b7c93" opacity="1.00"/>
+<text x="1014.4" y="540.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.41</text>
+<rect x="930.0" y="545.0" width="84.4" height="12.0" fill="#167f74" opacity="1.00"/>
+<text x="1020.4" y="555.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.44</text>
+<text x="820.0" y="589.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">Spec. vs order</text>
+<rect x="930.0" y="576.0" width="68.9" height="12.0" fill="#6b7c93" opacity="1.00"/>
+<text x="1004.9" y="586.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.36</text>
+<rect x="930.0" y="591.0" width="121.8" height="12.0" fill="#167f74" opacity="1.00"/>
+<text x="1057.8" y="601.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.64</text>
+<text x="820.0" y="635.0" font-size="11" text-anchor="start" font-weight="400" fill="#333">Disagree vs order</text>
+<rect x="930.0" y="622.0" width="130.2" height="12.0" fill="#6b7c93" opacity="1.00"/>
+<text x="1066.2" y="632.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.69</text>
+<rect x="930.0" y="637.0" width="153.7" height="12.0" fill="#167f74" opacity="1.00"/>
+<text x="1089.7" y="647.0" font-size="10" text-anchor="start" font-weight="400" fill="#333">0.81</text>
+<rect x="820.0" y="696.0" width="14.0" height="10.0" fill="#6b7c93" opacity="1.00"/>
+<text x="840.0" y="705.0" font-size="11" text-anchor="start" font-weight="400" fill="#444">Pythia-70M</text>
+<rect x="930.0" y="696.0" width="14.0" height="10.0" fill="#167f74" opacity="1.00"/>
+<text x="950.0" y="705.0" font-size="11" text-anchor="start" font-weight="400" fill="#444">Qwen2.5-1.5B</text>
+</svg>

@@ -1,0 +1,31 @@
+schema_version: 1
+scope: sync-time validation only
+date_utc: "2026-07-16"
+server_profile: "210"
+host: hi-X640-G40
+environment: monarch_attn
+python: "3.10.20"
+packages:
+  matplotlib: "3.10.8"
+  numpy: "2.2.6"
+  pandas: "2.3.3"
+  protobuf: "7.34.0"
+  pytest: "8.4.2"
+  pyyaml: "6.0.3"
+  safetensors: "0.7.0"
+  torch: "2.7.0"
+  tqdm: "4.67.3"
+  transformers: "5.3.0"
+not_installed_in_validation_environment:
+  - accelerate
+  - sentencepiece
+checks:
+  compileall: passed
+  pytest: "87 passed"
+  publishable_tree: "1118 files passed"
+  synthetic_mvp_smoke: passed
+  wheel_install_smoke: passed
+limitations:
+  - This manifest is not the environment used to generate the archived experiment results.
+  - Large-model loading was not rerun on server 210 during publication validation.
+  - CUDA build metadata is not fully captured by pip package versions.

@@ -1,0 +1,49 @@
+run,run_kind,result_dir,strategy,strategy_label,memory_ratio,perplexity,ppl_delta,zero_shot_accuracy
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,baseline,Dense,1.0,113.46704050592791,0.0,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,residual_q_only,Q only,0.25,118.990225470425,5.523184964497091,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,residual_q_l_same_budget,Q+L,0.257421875,123.53810292306322,10.071062417135309,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,residual_q_s_same_budget,Q+S,0.2579994201660156,118.98258847124357,5.515547965315662,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,residual_q_s_l_same_budget,Q+S+L,0.25708694458007814,131.6593015465586,18.192261040630683,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,residual_stack_selector,Selector,0.2575244903564453,125.5270137568948,12.059973250966891,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,sequential_qsr_matched_budget,Sequential QSR,0.25794042968750003,117.92620062044683,4.459160114518923,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,spq_like_rsq_no_lora_matched_budget,SPQ-like,0.258,125.49631046281313,12.029269956885216,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,hessian_guided_spq_no_lora_matched_budget,Hessian-SPQ,0.258,125.60374401664123,12.136703510713318,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,paper_lq_factor_quant_matched_budget,Paper L->Q proxy,0.2576171875,142.3048350026994,28.837794496771494,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,paper_dam_closed_matched_budget,DAM closed proxy,0.2576171875,154.19337914529802,40.72633863937011,0.5
+Pythia-70M,small,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,paper_dam_activation_grid_matched_budget,DAM grid proxy,0.2576171875,148.65527371281604,35.18823320688813,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,baseline,Dense,1.0,78.80964568284374,0.0,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,residual_q_only,Q only,0.25,79.00524345630262,0.19559777345888563,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,residual_q_l_same_budget,Q+L,0.25677083333333334,79.51208223111587,0.7024365482721322,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,residual_q_s_same_budget,Q+S,0.25799967447916666,79.19331827048444,0.383672587640703,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,residual_q_s_l_same_budget,Q+S+L,0.25724538167317706,78.06180097627768,-0.7478447065660561,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,residual_stack_selector,Selector,0.2575154622395833,80.99820400169786,2.1885583188541204,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,sequential_qsr_matched_budget,Sequential QSR,0.2579518229166667,79.13911254078299,0.3294668579392521,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,spq_like_rsq_no_lora_matched_budget,SPQ-like,0.258,78.5498871007336,-0.2597585821101376,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,hessian_guided_spq_no_lora_matched_budget,Hessian-SPQ,0.258,80.50680800261811,1.6971623197743781,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,paper_lq_factor_quant_matched_budget,Paper L->Q proxy,0.2579427083333333,104.74252995813977,25.932884275296033,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,paper_dam_closed_matched_budget,DAM closed proxy,0.2579427083333333,105.57272925512562,26.763083572281886,0.5
+Pythia-160M,small,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,paper_dam_activation_grid_matched_budget,DAM grid proxy,0.2579427083333333,101.96058502433955,23.150939341495814,0.5
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,baseline,Dense,1.0,67.11550468158823,0.0,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,residual_q_only,Q only,0.25,67.01586700727418,-0.09963767431405302,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,residual_q_l_same_budget,Q+L,0.2578125,66.5785318398142,-0.5369728417740305,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,residual_q_s_same_budget,Q+S,0.25799996512276785,67.55878874064662,0.4432840590583851,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,residual_q_s_l_same_budget,Q+S+L,0.25767408098493305,67.28073434952161,0.16522966793337446,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,residual_stack_selector,Selector,0.25799996512276785,67.55878874064662,0.4432840590583851,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,sequential_qsr_matched_budget,Sequential QSR,0.2579799107142857,67.16721732745249,0.0517126458642565,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,spq_like_rsq_no_lora_matched_budget,SPQ-like,0.25502232142857145,67.83404903972765,0.7185443581394111,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,hessian_guided_spq_no_lora_matched_budget,Hessian-SPQ,0.25502232142857145,68.08486599970624,0.9693613181180041,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,paper_lq_factor_quant_matched_budget,Paper L->Q proxy,0.25795200892857145,75.49973413738446,8.38422945579623,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,paper_dam_closed_matched_budget,DAM closed proxy,0.25795200892857145,71.66077966597824,4.545274984390005,0.75
+Qwen2-7B attention-only,7b_o_proj,residual_stack_validate_Qwen_Qwen2-7B_20260707_014041,paper_dam_activation_grid_matched_budget,DAM grid proxy,0.25795200892857145,70.94887163272617,3.8333669511379327,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,baseline,Dense,1.0,45.575910199830844,0.0,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,residual_q_only,Q only,0.25,45.960052470401905,0.3841422705710613,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,residual_q_l_same_budget,Q+L,0.2579502865961199,45.60468592973684,0.02877572990599475,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,residual_q_s_same_budget,Q+S,0.2579999920342124,45.29986779097895,-0.27604240885189313,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,residual_q_s_l_same_budget,Q+S+L,0.25796344629250717,45.295221487254004,-0.2806887125768398,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,residual_stack_selector,Selector,0.2579999920342124,45.29986779097895,-0.27604240885189313,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,sequential_qsr_matched_budget,Sequential QSR,0.2578653067129629,47.11217942944181,1.5362692296109657,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,spq_like_rsq_no_lora_matched_budget,SPQ-like,0.2579586226851852,45.666616392822995,0.0907061929921511,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,hessian_guided_spq_no_lora_matched_budget,Hessian-SPQ,0.2579586226851852,45.865230732832245,0.28932053300140126,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,paper_lq_factor_quant_matched_budget,Paper L->Q proxy,0.2579761215828924,50.11461568072407,4.538705480893228,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,paper_dam_closed_matched_budget,DAM closed proxy,0.2579761215828924,49.668553879108536,4.092643679277693,0.75
+Qwen2-7B attn+MLP,7b_attn_mlp,residual_stack_validate_Qwen_Qwen2-7B_20260707_015218,paper_dam_activation_grid_matched_budget,DAM grid proxy,0.2579761215828924,49.89846999898011,4.322559799149268,0.75

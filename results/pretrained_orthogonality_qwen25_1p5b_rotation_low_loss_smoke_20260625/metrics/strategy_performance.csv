@@ -1,0 +1,8 @@
+all_three_ops,benchmark_drop_fraction,benchmark_drop_percent,benchmark_metric_effective,benchmark_metric_requested,candidate_index,layer_policy,lora_params,lora_steps_completed,loss_degradation,lossless_pass,lossless_threshold_percent,nll,nominal_bits,nominal_keep_fraction,nominal_rank_fraction,order,perplexity,ppl_degradation,predicted_hessian_cost,q_method,r_method,recovery,s_method,strategy,tokens,zero_shot_accuracy,zero_shot_accuracy_degradation
+,,,,,,,0,0,0.0,,,3.60135680671752,4,0.5,0.5,none,36.64792487655407,0.0,,,,none,,baseline,127,0.5,0.0
+,,,,,,,0,0,-0.013503667876476388,,,3.5878531388410435,4,0.5,0.5,qsr,36.156369838176325,-0.49155503837774717,,rtn,svd,none,magnitude,fixed_qsr_naive,127,0.5,0.0
+,,,,,,,0,0,-0.00233831931286943,,,3.5990184874046505,4,0.5,0.5,qsr,36.562330438602956,-0.08559443795111576,,rtn,whitened_svd,none,wanda,fixed_qsr_default,127,0.5,0.0
+,,,,,,,0,0,-0.009519802303764813,,,3.591837004413755,4,0.5,0.5,srq,36.300699258824025,-0.34722561773004657,,rtn,whitened_svd,none,wanda,slim_like_srq_proxy,127,0.5,0.0
+,,,,,,,0,0,0.001263956385334275,,,3.602620763102854,4,0.5,0.5,layerwise,36.69427554164984,0.046350665095765464,,selected,selected,none,selected,hessian_layerwise,127,0.5,0.0
+,,,,,,,0,0,-0.0009405181163879561,,,3.600416288601132,4,0.5,0.5,qsr,36.613473043106,-0.0344518334480739,,rotated_rtn,whitened_svd,none,wanda,fixed_qsr_rotated_q,127,0.5,0.0
+True,0.00024417042974778905,0.024417042974778903,ppl,ppl,2,global_low_loss_triple_search,0,0,0.000244140625,True,1.0,3.60160094734252,8,0.995,0.995,rqs,36.656873216120545,0.008948339566472896,0.046625387854874134,rotated_rtn,whitened_svd,none,wanda,low_loss_triple_stack,127,0.5,0.0

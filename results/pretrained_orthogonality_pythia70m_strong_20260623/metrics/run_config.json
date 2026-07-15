@@ -1,0 +1,39 @@
+{
+  "model": "EleutherAI/pythia-70m",
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "gpt_neox.layers.0.attention.dense",
+    "gpt_neox.layers.0.attention.query_key_value",
+    "gpt_neox.layers.0.mlp.dense_4h_to_h",
+    "gpt_neox.layers.0.mlp.dense_h_to_4h",
+    "gpt_neox.layers.3.attention.dense",
+    "gpt_neox.layers.3.attention.query_key_value",
+    "gpt_neox.layers.3.mlp.dense_4h_to_h",
+    "gpt_neox.layers.3.mlp.dense_h_to_4h",
+    "gpt_neox.layers.5.attention.dense",
+    "gpt_neox.layers.5.attention.query_key_value",
+    "gpt_neox.layers.5.mlp.dense_4h_to_h",
+    "gpt_neox.layers.5.mlp.dense_h_to_4h"
+  ],
+  "data": {
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "sequence_length": 128,
+    "batch_size": 1,
+    "allow_fallback": false
+  },
+  "text_source_requested": "zero_shot_backup",
+  "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+  "eval_text_count": 64,
+  "compression": {
+    "bits": 2,
+    "keep_fraction": 0.4,
+    "rank_fraction": 0.4,
+    "q_method": "rtn",
+    "s_method": "wanda",
+    "r_method": "whitened_svd"
+  }
+}

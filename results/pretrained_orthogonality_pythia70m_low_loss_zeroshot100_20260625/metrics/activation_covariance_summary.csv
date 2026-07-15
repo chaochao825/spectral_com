@@ -1,0 +1,2 @@
+activation_rows,input_dim,layer,layer_short,mean_diag,trace
+128,512,gpt_neox.layers.0.attention.dense,L0:dense,0.07053422182798386,36.113521575927734

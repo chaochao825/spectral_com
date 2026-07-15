@@ -1,0 +1,83 @@
+seed: 17
+model: Qwen/Qwen2.5-1.5B
+revision: 8faed761d45a263340a0528343f099c05c9a4323
+trust_remote_code: false
+output_dir: results/structured_qwen25_1p5b
+device: auto
+torch_dtype: bfloat16
+local_files_only: false
+low_cpu_mem_usage: true
+
+target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+layers: all
+
+data:
+  dataset: wikitext
+  subset: wikitext-2-raw-v1
+  split: validation
+  backup_name: wikitext_2_raw
+  calibration_sequences: 32
+  eval_sequences: 32
+  sequence_length: 128
+  batch_size: 1
+  allow_fallback: false
+
+budgets:
+  compression_ratios: [2, 4, 8, 16]
+  residual_fractions: [0.0, 0.01, 0.02, 0.04]
+
+approximation:
+  svd_device: auto
+  block_sizes: [16, 32, 64, 128]
+  monarch_block_size: 64
+  monarch_terms: 2
+  residual_types: [none, low_rank, sparse, channel]
+
+phase2:
+  sample_limit: 2048
+  layer_positions: [first, middle, last]
+
+phase3:
+  structure: best_weight_error
+  residual_type: low_rank
+  eval_limit: 32
+  zero_shot_tasks: [piqa, arc_easy, hellaswag]
+  zero_shot_limit: 16
+  stages:
+    - name: down_proj
+      modules: [down_proj]
+    - name: up_gate_proj
+      modules: [up_proj, gate_proj]
+    - name: o_proj
+      modules: [o_proj]
+    - name: qkv_proj
+      modules: [q_proj, k_proj, v_proj]
+
+phase4:
+  target_modules: [down_proj]
+  layer_positions: [first, middle, last]
+  methods: [structured, structured_lora, lora, mora, fourierft, bca]
+  parameter_budgets: [65536, 131072]
+  lora_rank: 8
+  train_steps: 40
+  learning_rate: 0.0005
+  eval_limit: 16
+  rank_sensitivity: [4, 8, 16]
+  task_conditions: [natural, structured]
+
+phase5:
+  target_modules: [down_proj]
+  layer_positions: [first, middle, last]
+  rotation_types: [none, hadamard, learned_butterfly]
+  bit_widths: [4, 3, 2]
+  residual_precision: float16
+  learned_rotation_steps: 16
+  learned_rotation_lr: 0.05
+  max_matrices: 12

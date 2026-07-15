@@ -1,0 +1,4 @@
+block_size,compression_ratio_actual,compression_ratio_target,has_bias,in_features,layer,method,module_type,name,out_features,params_original,params_structured,rank,relative_weight_error,terms
+,4.009845603043186,4.0,False,8960,0,low_rank,down_proj,model.layers.0.mlp.down_proj,1536,13762560,3432192,327,0.798180680943304,
+16,16.0,4.0,False,8960,0,block_circulant,down_proj,model.layers.0.mlp.down_proj,1536,13762560,860160,0,0.9682182703296197,
+64,4.0,4.0,False,8960,0,monarch_like,down_proj,model.layers.0.mlp.down_proj,1536,13762560,3440640,96,0.9946482100885331,2

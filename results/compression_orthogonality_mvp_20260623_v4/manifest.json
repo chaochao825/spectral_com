@@ -1,0 +1,18 @@
+{
+  "seed": 7,
+  "device": "cuda",
+  "vocab_size": 28,
+  "num_train_examples": 37081,
+  "num_val_examples": 6544,
+  "eval_batches": 0,
+  "baseline_eval_examples": 6544,
+  "layers": [
+    "fc1",
+    "fc2",
+    "head"
+  ],
+  "q_bits": 3,
+  "keep_fraction": 0.62,
+  "rank_fraction": 0.5,
+  "fixed_order": "qsr"
+}

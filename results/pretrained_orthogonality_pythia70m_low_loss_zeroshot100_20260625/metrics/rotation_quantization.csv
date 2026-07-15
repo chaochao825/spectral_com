@@ -1,0 +1,3 @@
+bits,hessian_self_cost,input_channel_max_over_median_before,input_channel_max_over_median_quant_basis,layer,layer_short,original_input_dim,padded_input_dim,q_method,relative_weight_error
+4,0.0853913277387619,1.311644801680411,1.311644801680411,gpt_neox.layers.0.attention.dense,L0:dense,512,512,rtn,0.14639926247966867
+4,0.07237942516803741,1.311644801680411,1.2656069279966362,gpt_neox.layers.0.attention.dense,L0:dense,512,512,rotated_rtn,0.13324947656686043

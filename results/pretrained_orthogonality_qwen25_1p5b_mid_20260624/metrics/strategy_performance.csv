@@ -1,0 +1,6 @@
+loss_degradation,nll,order,perplexity,ppl_degradation,q_method,r_method,s_method,strategy,tokens,zero_shot_accuracy,zero_shot_accuracy_degradation
+0.0,2.515661404827448,none,12.37479081938005,0.0,,,,baseline,508,0.5,0.0
+0.8638047345979949,3.379466139425443,qsr,29.35509540124234,16.980304581862292,rtn,svd,magnitude,fixed_qsr_naive,508,0.5,0.0
+0.3978572454978164,2.9135186503252646,qsr,18.421503492511388,6.046712673131337,rtn,whitened_svd,wanda,fixed_qsr_default,508,0.5,0.0
+0.32457048311008263,2.840231887937531,srq,17.119734936925724,4.744944117545673,rtn,whitened_svd,wanda,slim_like_srq_proxy,508,0.5,0.0
+0.3323814812607653,2.8480428860882134,layerwise,17.253980769285956,4.879189949905905,selected,selected,selected,hessian_layerwise,508,0.5,0.0

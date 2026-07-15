@@ -1,0 +1,5 @@
+activation_sample_rows,input_dim,layer,layer_short
+128,768,gpt_neox.layers.0.attention.dense,L0:dense
+128,3072,gpt_neox.layers.0.mlp.dense_4h_to_h,L0:dense_4h_to_h
+128,768,gpt_neox.layers.0.mlp.dense_h_to_4h,L0:dense_h_to_4h
+128,768,gpt_neox.layers.6.attention.dense,L6:dense

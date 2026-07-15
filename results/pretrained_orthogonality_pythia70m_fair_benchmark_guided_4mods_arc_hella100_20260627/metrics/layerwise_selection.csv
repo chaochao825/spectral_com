@@ -1,0 +1,5 @@
+layer,layer_family,layer_short,selected_nominal_bits,selected_nominal_keep_fraction,selected_nominal_rank_fraction,selected_order,selected_predicted_hessian_cost,selected_q_method,selected_r_method,selected_s_method,selection_family
+gpt_neox.layers.0.attention.dense,attention,L0:dense,4,0.5,0.5,rsq,0.14862680435180664,rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.attention.query_key_value,attention,L0:query_key_value,4,0.5,0.5,rsq,16.85436248779297,rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.mlp.dense_4h_to_h,mlp,L0:dense_4h_to_h,4,0.5,0.5,rsq,0.2200697362422943,rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.mlp.dense_h_to_4h,mlp,L0:dense_h_to_4h,4,0.5,0.5,rsq,9.078207015991211,rtn,whitened_svd,wanda,hessian_layerwise

@@ -1,0 +1,28 @@
+supported_models:
+  gpt2:
+    hf_id: gpt2
+    family: gpt2
+    roles: [mvp, baseline]
+    variants: [pretrained, random]
+  pythia_70m:
+    hf_id: EleutherAI/pythia-70m
+    family: pythia
+    roles: [mvp, checkpoints]
+    variants: [pretrained, random]
+  pythia_160m:
+    hf_id: EleutherAI/pythia-160m
+    family: pythia
+    roles: [scale_sweep, checkpoints]
+    variants: [pretrained, random]
+  pythia_410m:
+    hf_id: EleutherAI/pythia-410m
+    family: pythia
+    roles: [scale_sweep, checkpoints]
+    variants: [pretrained, random]
+
+pythia_checkpoint_revisions:
+  - step0
+  - step1000
+  - step10000
+  - step143000
+

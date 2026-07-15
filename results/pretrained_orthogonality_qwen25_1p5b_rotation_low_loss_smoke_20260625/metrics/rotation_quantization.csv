@@ -1,0 +1,5 @@
+bits,hessian_self_cost,input_channel_max_over_median_before,input_channel_max_over_median_quant_basis,layer,layer_short,original_input_dim,padded_input_dim,q_method,relative_weight_error
+4,1.9561033248901367,1.2517795380451406,1.2517795380451406,model.layers.0.self_attn.o_proj,L0:o_proj,1536,2048,rtn,0.184788335818334
+4,1.3437036275863647,1.2517795380451406,1.1946597214429597,model.layers.0.self_attn.o_proj,L0:o_proj,1536,2048,rotated_rtn,0.15195940776601274
+4,33.85160827636719,2.9155364054886665,2.9155364054886665,model.layers.0.self_attn.q_proj,L0:q_proj,1536,2048,rtn,0.2057673201193023
+4,15.144731521606445,2.9155364054886665,1.694590211240134,model.layers.0.self_attn.q_proj,L0:q_proj,1536,2048,rotated_rtn,0.1302468378733848

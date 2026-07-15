@@ -1,0 +1,234 @@
+{
+  "budgets": [
+    {
+      "target_memory_ratio": 0.196,
+      "status": "ok",
+      "selected_memory_ratio": 0.194921875,
+      "selected_mean_score": 0.07741483300924301
+    },
+    {
+      "target_memory_ratio": 0.22,
+      "status": "ok",
+      "selected_memory_ratio": 0.219140625,
+      "selected_mean_score": 0.07359310584142803
+    },
+    {
+      "target_memory_ratio": 0.258,
+      "status": "ok",
+      "selected_memory_ratio": 0.257421875,
+      "selected_mean_score": 0.014257591520436107
+    }
+  ],
+  "selected": [
+    {
+      "target_memory_ratio": 0.196,
+      "layer": "gpt_neox.layers.0.attention.dense",
+      "layer_short": "L0:dense",
+      "family": "q_l",
+      "memory_ratio": 0.1953125,
+      "score": 0.08104479871690273,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 2
+    },
+    {
+      "target_memory_ratio": 0.196,
+      "layer": "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "layer_short": "L0:dense_4h_to_h",
+      "family": "q_l",
+      "memory_ratio": 0.19482421875,
+      "score": 0.05834582187235356,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 3
+    },
+    {
+      "target_memory_ratio": 0.196,
+      "layer": "gpt_neox.layers.0.mlp.dense_h_to_4h",
+      "layer_short": "L0:dense_h_to_4h",
+      "family": "q_l",
+      "memory_ratio": 0.19482421875,
+      "score": 0.057754802703857425,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 3
+    },
+    {
+      "target_memory_ratio": 0.196,
+      "layer": "gpt_neox.layers.1.attention.dense",
+      "layer_short": "L1:dense",
+      "family": "q_l",
+      "memory_ratio": 0.1953125,
+      "score": 0.11251390874385833,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 2
+    },
+    {
+      "target_memory_ratio": 0.22,
+      "layer": "gpt_neox.layers.0.attention.dense",
+      "layer_short": "L0:dense",
+      "family": "q_l",
+      "memory_ratio": 0.21875,
+      "score": 0.07553714402019977,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 8
+    },
+    {
+      "target_memory_ratio": 0.22,
+      "layer": "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "layer_short": "L0:dense_4h_to_h",
+      "family": "q_l",
+      "memory_ratio": 0.21923828125,
+      "score": 0.05512392669916153,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 13
+    },
+    {
+      "target_memory_ratio": 0.22,
+      "layer": "gpt_neox.layers.0.mlp.dense_h_to_4h",
+      "layer_short": "L0:dense_h_to_4h",
+      "family": "q_l",
+      "memory_ratio": 0.21923828125,
+      "score": 0.055807621031999585,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 13
+    },
+    {
+      "target_memory_ratio": 0.22,
+      "layer": "gpt_neox.layers.1.attention.dense",
+      "layer_short": "L1:dense",
+      "family": "q_l",
+      "memory_ratio": 0.21875,
+      "score": 0.10790373161435127,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 3,
+      "block_size": 0,
+      "rank": 8
+    },
+    {
+      "target_memory_ratio": 0.258,
+      "layer": "gpt_neox.layers.0.attention.dense",
+      "layer_short": "L0:dense",
+      "family": "q_l",
+      "memory_ratio": 0.2578125,
+      "score": 0.014999039005488157,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 4,
+      "block_size": 0,
+      "rank": 2
+    },
+    {
+      "target_memory_ratio": 0.258,
+      "layer": "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "layer_short": "L0:dense_4h_to_h",
+      "family": "q_l",
+      "memory_ratio": 0.25732421875,
+      "score": 0.010513982828706503,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 4,
+      "block_size": 0,
+      "rank": 3
+    },
+    {
+      "target_memory_ratio": 0.258,
+      "layer": "gpt_neox.layers.0.mlp.dense_h_to_4h",
+      "layer_short": "L0:dense_h_to_4h",
+      "family": "q_l",
+      "memory_ratio": 0.25732421875,
+      "score": 0.010768407676368951,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 4,
+      "block_size": 0,
+      "rank": 3
+    },
+    {
+      "target_memory_ratio": 0.258,
+      "layer": "gpt_neox.layers.1.attention.dense",
+      "layer_short": "L1:dense",
+      "family": "q_l",
+      "memory_ratio": 0.2578125,
+      "score": 0.02074893657118082,
+      "filter_rho": 0.0,
+      "filter_pass": true,
+      "q_method": "rtn",
+      "q_bits": 4,
+      "block_size": 0,
+      "rank": 2
+    }
+  ],
+  "config": {
+    "model": "EleutherAI/pythia-70m",
+    "selected_layers": [
+      "gpt_neox.layers.0.attention.dense",
+      "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "gpt_neox.layers.0.mlp.dense_h_to_4h",
+      "gpt_neox.layers.1.attention.dense"
+    ],
+    "memory_ratios": [
+      0.196,
+      0.22,
+      0.258
+    ],
+    "splits": [
+      [
+        0.25,
+        0.75
+      ],
+      [
+        0.5,
+        0.5
+      ],
+      [
+        0.75,
+        0.25
+      ]
+    ],
+    "q_methods": [
+      "rtn"
+    ],
+    "q_bits_list": [
+      4,
+      3,
+      2
+    ],
+    "block_sizes": [
+      16,
+      32,
+      64
+    ],
+    "overlap_threshold": 0.3
+  }
+}

@@ -1,0 +1,8 @@
+dataset_condition,dmd_count,dmd_decay_score,dmd_max_radius,dmd_mean_radius,dmd_rank,dmd_real_ratio,dmd_residual,dmd_rotation_score,kind,layer,max_abs_pc_autocorr,mean_abs_pc_autocorr,mean_pc_timescale,model,pc1_autocorr,revision,site,tau,variant
+natural,,,,,,,,,lag,23,0.7501189481670222,0.37859457117772455,,/data6/user20111239/Qwen1.5-MoE-A2.7B,-0.015494955199830112,,resid_post,1,pretrained
+natural,,,,,,,,,lag,23,0.6691247935383576,0.2576405823247621,,/data6/user20111239/Qwen1.5-MoE-A2.7B,-0.08885096569000608,,resid_post,2,pretrained
+natural,,,,,,,,,lag,23,0.5783814911513111,0.2083887116446907,,/data6/user20111239/Qwen1.5-MoE-A2.7B,0.10958672948266818,,resid_post,4,pretrained
+natural,,,,,,,,,lag,23,0.44058800828798994,0.1500082128705619,,/data6/user20111239/Qwen1.5-MoE-A2.7B,0.028890496252089348,,resid_post,8,pretrained
+natural,,,,,,,,,lag,23,0.20402553130799603,0.08541512608417515,,/data6/user20111239/Qwen1.5-MoE-A2.7B,0.0004485358782687279,,resid_post,16,pretrained
+natural,,,,,,,,,lag,23,0.21839345485670744,0.08784881592314842,,/data6/user20111239/Qwen1.5-MoE-A2.7B,0.09192770684116763,,resid_post,32,pretrained
+natural,16,0.5045619228925564,0.8728331473198366,0.4954380771074436,16,0.25,0.7917711782228012,0.7228198861723228,dmd,23,,,130.36318064876485,/data6/user20111239/Qwen1.5-MoE-A2.7B,,,resid_post,,pretrained

@@ -1,0 +1,4 @@
+operation,backend,seconds,relative_diff
+phase1_down_proj,residual_batch_1,25.26,0.0
+phase1_down_proj,residual_batch_2,17.09,0.0
+phase1_down_proj,residual_batch_4,26.06,0.0

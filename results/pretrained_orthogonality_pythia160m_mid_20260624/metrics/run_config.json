@@ -1,0 +1,61 @@
+{
+  "model": "EleutherAI/pythia-160m",
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "gpt_neox.layers.0.attention.dense",
+    "gpt_neox.layers.0.attention.query_key_value",
+    "gpt_neox.layers.0.mlp.dense_4h_to_h",
+    "gpt_neox.layers.0.mlp.dense_h_to_4h",
+    "gpt_neox.layers.6.attention.dense",
+    "gpt_neox.layers.6.attention.query_key_value",
+    "gpt_neox.layers.6.mlp.dense_4h_to_h",
+    "gpt_neox.layers.6.mlp.dense_h_to_4h",
+    "gpt_neox.layers.11.attention.dense",
+    "gpt_neox.layers.11.attention.query_key_value",
+    "gpt_neox.layers.11.mlp.dense_4h_to_h",
+    "gpt_neox.layers.11.mlp.dense_h_to_4h"
+  ],
+  "data": {
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "sequence_length": 128,
+    "batch_size": 1,
+    "allow_fallback": false
+  },
+  "text_source_requested": "zero_shot_backup",
+  "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+  "text_source_metadata": [
+    {
+      "task": "arc_easy",
+      "backup_path": "/home/wangmeiqi/dataset_backup/ai2_arc_easy",
+      "split": "validation",
+      "rows_available": 570,
+      "rows_used_for_text_source": 64,
+      "fingerprint": "3c8375eec3653bc7",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    },
+    {
+      "task": "hellaswag",
+      "backup_path": "/home/wangmeiqi/dataset_backup/hellaswag",
+      "split": "validation",
+      "rows_available": 10042,
+      "rows_used_for_text_source": 64,
+      "fingerprint": "ed539f7cf7b47812",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    }
+  ],
+  "eval_text_count": 64,
+  "compression": {
+    "bits": 3,
+    "keep_fraction": 0.5,
+    "rank_fraction": 0.5,
+    "q_method": "rtn",
+    "s_method": "wanda",
+    "r_method": "whitened_svd"
+  }
+}

@@ -1,0 +1,13 @@
+layer,layer_short,selected_order,selected_predicted_hessian_cost,selected_q_method,selected_r_method,selected_s_method
+model.layers.0.mlp.down_proj,L0:down_proj,rqs,6.642924785614014,rtn,whitened_svd,magnitude
+model.layers.0.mlp.up_proj,L0:up_proj,rsq,46.475730895996094,rtn,whitened_svd,magnitude
+model.layers.0.self_attn.o_proj,L0:o_proj,rqs,7.607552528381348,rtn,whitened_svd,magnitude
+model.layers.0.self_attn.q_proj,L0:q_proj,rqs,288.8459167480469,rtn,whitened_svd,magnitude
+model.layers.14.mlp.down_proj,L14:down_proj,rqs,17.136341094970703,rtn,whitened_svd,magnitude
+model.layers.14.mlp.up_proj,L14:up_proj,rqs,112.95633697509766,rtn,whitened_svd,wanda
+model.layers.14.self_attn.o_proj,L14:o_proj,rqs,13.452364921569824,rtn,whitened_svd,magnitude
+model.layers.14.self_attn.q_proj,L14:q_proj,rqs,112.75978088378906,rtn,whitened_svd,magnitude
+model.layers.27.mlp.down_proj,L27:down_proj,rqs,2464.23388671875,rtn,whitened_svd,magnitude
+model.layers.27.mlp.up_proj,L27:up_proj,rsq,662.9736938476562,rtn,whitened_svd,wanda
+model.layers.27.self_attn.o_proj,L27:o_proj,rqs,330.35040283203125,rtn,whitened_svd,magnitude
+model.layers.27.self_attn.q_proj,L27:q_proj,qrs,99.7640609741211,rtn,svd,wanda

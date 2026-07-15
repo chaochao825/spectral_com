@@ -1,0 +1,31 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B",
+  "layers": [
+    0
+  ],
+  "modules": [
+    "down_proj"
+  ],
+  "rows": [
+    {
+      "name": "model.layers.0.mlp.down_proj",
+      "layer": 0,
+      "module_type": "down_proj",
+      "in_features": 8960,
+      "out_features": 1536,
+      "has_bias": false,
+      "compression_ratio_target": 4.0,
+      "best_method": "low_rank",
+      "residual_l1": 233162.02740590402,
+      "residual_l2": 79.36061879066283,
+      "residual_density_1e_6": 0.9999593098958334,
+      "residual_top_1pct_l1_frac": 0.03805005570559862,
+      "out_channel_max_over_median": 1.0659597198832234,
+      "out_channel_outlier_count": 0,
+      "out_channel_top1pct_energy_frac": 0.011611195555728477,
+      "in_channel_max_over_median": 1.4116300152176127,
+      "in_channel_outlier_count": 1,
+      "in_channel_top1pct_energy_frac": 0.013401110833646653
+    }
+  ]
+}

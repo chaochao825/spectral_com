@@ -1,0 +1,10 @@
+layer_policy,lora_params,lora_steps_completed,loss_degradation,nll,nominal_bits,nominal_keep_fraction,nominal_rank_fraction,order,perplexity,ppl_degradation,q_method,r_method,recovery,s_method,strategy,tokens,zero_shot_accuracy,zero_shot_accuracy_degradation
+,0,0,0.0,4.092118030457985,3,0.5,0.5,none,59.866556707146295,0.0,,,none,,baseline,508,0.5,0.0
+,0,0,6.662688608244648,10.754806638702632,3,0.5,0.5,qsr,46854.701681944985,46794.83512523784,rtn,svd,none,magnitude,fixed_qsr_naive,508,0.75,-0.25
+,0,0,1.2915580929733634,5.383676123431348,3,0.5,0.5,qsr,217.82154430218338,157.9549875950371,rtn,whitened_svd,none,wanda,fixed_qsr_default,508,0.5,0.0
+,0,0,1.8580252579816685,5.950143288439653,3,0.5,0.5,srq,383.8083304179964,323.9417737108501,rtn,whitened_svd,none,wanda,slim_like_srq_proxy,508,0.5,0.0
+,0,0,1.3572218286709523,5.449339859128937,3,0.5,0.5,layerwise,232.60456343448612,172.73800672733984,selected,selected,none,selected,hessian_layerwise,508,0.75,-0.25
+spq_layer_typed,0,0,2.9935556246539736,7.085673655111958,3,0.5,0.5,spq_layer_typed_rq_sq,1194.7277989480215,1134.861242240875,rtn,svd,none,wanda,spq_like_rsq_no_lora,508,1.0,-0.5
+hessian_guided_spq,0,0,1.4673810343104083,5.559499064768393,3,0.5,0.5,hessian_guided_spq,259.69271450428334,199.82615779713706,rtn,selected,none,selected,hessian_guided_spq_no_lora,508,0.5,0.0
+spq_layer_typed,98304,5,2.828945490318959,6.9210635207769435,3,0.5,0.5,spq_layer_typed_rq_sq+lora,1013.3971905906792,953.5306338835329,rtn,svd,lora,wanda,spq_like_rsq_lora,508,1.0,-0.5
+hessian_guided_spq,98304,5,1.3700965220533954,5.46221455251138,3,0.5,0.5,hessian_guided_spq+lora,235.6186368700036,175.7520801628573,rtn,selected,lora,selected,hessian_guided_spq_lora,508,0.5,0.0

@@ -1,0 +1,6 @@
+layer_policy,lora_params,lora_steps_completed,loss_degradation,nll,nominal_bits,nominal_keep_fraction,nominal_rank_fraction,order,perplexity,ppl_degradation,q_method,r_method,recovery,s_method,strategy,tokens,zero_shot_accuracy,zero_shot_accuracy_degradation
+,0,0,0.0,3.8864172988050565,4,0.5,0.5,none,48.73596696150178,0.0,,,none,,baseline,254,nan,nan
+,0,0,2.724923561877153,6.611340860682209,4,0.5,0.5,qsr,743.4792527598961,694.7432857983944,rtn,svd,none,magnitude,fixed_qsr_naive,254,nan,nan
+,0,0,0.149083415354331,4.0355007141593875,4,0.5,0.5,qsr,56.571239168352385,7.835272206850604,rtn,whitened_svd,none,wanda,fixed_qsr_default,254,nan,nan
+,0,0,0.1233001468688486,4.009717445673905,4,0.5,0.5,srq,55.131290777787086,6.395323816285305,rtn,whitened_svd,none,wanda,slim_like_srq_proxy,254,nan,nan
+,0,0,0.09523058313084398,3.9816478819359005,4,0.5,0.5,layerwise,53.605296684538736,4.869329723036955,selected,selected,none,selected,hessian_layerwise,254,nan,nan

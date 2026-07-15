@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="520" viewBox="0 0 1250 520">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:#222}.small{font-size:10px}.axis{stroke:#333;stroke-width:1}.grid{stroke:#ddd;stroke-width:1}.legend{font-size:11px}</style>
+<text x="70.0" y="24.0" text-anchor="start">Mid configuration model-family comparison</text>
+<line x1="70" y1="385.0" x2="680" y2="385.0" class="grid"/>
+<text x="62.0" y="389.0" text-anchor="end" class="small">-0.1000</text>
+<line x1="70" y1="319.0" x2="680" y2="319.0" class="grid"/>
+<text x="62.0" y="323.0" text-anchor="end" class="small">0.0800</text>
+<line x1="70" y1="253.0" x2="680" y2="253.0" class="grid"/>
+<text x="62.0" y="257.0" text-anchor="end" class="small">0.2600</text>
+<line x1="70" y1="187.0" x2="680" y2="187.0" class="grid"/>
+<text x="62.0" y="191.0" text-anchor="end" class="small">0.4400</text>
+<line x1="70" y1="121.0" x2="680" y2="121.0" class="grid"/>
+<text x="62.0" y="125.0" text-anchor="end" class="small">0.6200</text>
+<line x1="70" y1="55.0" x2="680" y2="55.0" class="grid"/>
+<text x="62.0" y="59.0" text-anchor="end" class="small">0.8000</text>
+<line x1="70" y1="348.3" x2="680" y2="348.3" stroke="#111"/>
+<rect x="104.0" y="295.2" width="15.3" height="53.1" fill="#59A14F"/>
+<rect x="122.0" y="324.4" width="15.3" height="24.0" fill="#F28E2B"/>
+<rect x="140.0" y="206.2" width="15.3" height="142.1" fill="#B07AA1"/>
+<text x="131.0" y="405.0" text-anchor="middle" class="small">rho add.</text>
+<rect x="226.0" y="284.2" width="15.3" height="64.1" fill="#59A14F"/>
+<rect x="244.0" y="240.8" width="15.3" height="107.5" fill="#F28E2B"/>
+<rect x="262.0" y="316.2" width="15.3" height="32.1" fill="#B07AA1"/>
+<text x="253.0" y="405.0" text-anchor="middle" class="small">rho PPL</text>
+<rect x="348.0" y="82.7" width="15.3" height="265.7" fill="#59A14F"/>
+<rect x="366.0" y="179.3" width="15.3" height="169.0" fill="#F28E2B"/>
+<rect x="384.0" y="172.4" width="15.3" height="175.9" fill="#B07AA1"/>
+<text x="375.0" y="405.0" text-anchor="middle" class="small">Taylor</text>
+<rect x="470.0" y="165.0" width="15.3" height="183.4" fill="#59A14F"/>
+<rect x="488.0" y="311.2" width="15.3" height="37.1" fill="#F28E2B"/>
+<rect x="506.0" y="279.8" width="15.3" height="68.5" fill="#B07AA1"/>
+<text x="497.0" y="405.0" text-anchor="middle" class="small">Frob.</text>
+<rect x="592.0" y="296.7" width="15.3" height="51.7" fill="#59A14F"/>
+<rect x="610.0" y="215.1" width="15.3" height="133.3" fill="#F28E2B"/>
+<rect x="628.0" y="155.4" width="15.3" height="192.9" fill="#B07AA1"/>
+<text x="619.0" y="405.0" text-anchor="middle" class="small">Spec-order</text>
+<text x="70.0" y="435.0" text-anchor="start" class="small">Correlation metrics</text>
+<line x1="760" y1="385.0" x2="1120" y2="385.0" class="grid"/>
+<text x="752.0" y="389.0" text-anchor="end" class="small">0.0000</text>
+<line x1="760" y1="349.5" x2="1120" y2="349.5" class="grid"/>
+<text x="752.0" y="353.5" text-anchor="end" class="small">10.0000</text>
+<line x1="760" y1="262.3" x2="1120" y2="262.3" class="grid"/>
+<text x="752.0" y="266.3" text-anchor="end" class="small">100.0</text>
+<line x1="760" y1="148.8" x2="1120" y2="148.8" class="grid"/>
+<text x="752.0" y="152.8" text-anchor="end" class="small">1000.0</text>
+<line x1="760" y1="31.4" x2="1120" y2="31.4" class="grid"/>
+<text x="752.0" y="35.4" text-anchor="end" class="small">10000.0</text>
+<rect x="786.0" y="-87.4" width="14.4" height="472.4" fill="#76B7B2"/>
+<rect x="803.0" y="204.6" width="14.4" height="180.4" fill="#9C755F"/>
+<rect x="820.0" y="196.6" width="14.4" height="188.4" fill="#BAB0AC"/>
+<rect x="837.0" y="211.8" width="14.4" height="173.2" fill="#2F4B7C"/>
+<text x="820.0" y="403.0" text-anchor="middle" class="small" transform="rotate(-20 820.0 403.0)">70M_mid</text>
+<rect x="906.0" y="53.7" width="14.4" height="331.3" fill="#76B7B2"/>
+<rect x="923.0" y="267.3" width="14.4" height="117.7" fill="#9C755F"/>
+<rect x="940.0" y="280.2" width="14.4" height="104.8" fill="#BAB0AC"/>
+<rect x="957.0" y="280.8" width="14.4" height="104.2" fill="#2F4B7C"/>
+<text x="940.0" y="403.0" text-anchor="middle" class="small" transform="rotate(-20 940.0 403.0)">160M_mid</text>
+<rect x="1026.0" y="334.2" width="14.4" height="50.8" fill="#76B7B2"/>
+<rect x="1043.0" y="360.8" width="14.4" height="24.2" fill="#9C755F"/>
+<rect x="1060.0" y="365.1" width="14.4" height="19.9" fill="#BAB0AC"/>
+<rect x="1077.0" y="364.7" width="14.4" height="20.3" fill="#2F4B7C"/>
+<text x="1060.0" y="403.0" text-anchor="middle" class="small" transform="rotate(-20 1060.0 403.0)">Qwen2.5_1.5B_mid</text>
+<text x="760.0" y="435.0" text-anchor="start" class="small">PPL degradation vs baseline, log-like scale</text>
+<rect x="70" y="420" width="12" height="12" fill="#59A14F"/>
+<text x="88.0" y="430.0" text-anchor="start" class="legend">70M_mid_3bit_12mods</text>
+<rect x="70" y="438" width="12" height="12" fill="#F28E2B"/>
+<text x="88.0" y="448.0" text-anchor="start" class="legend">160M_mid_3bit_12mods</text>
+<rect x="70" y="456" width="12" height="12" fill="#B07AA1"/>
+<text x="88.0" y="466.0" text-anchor="start" class="legend">Qwen2.5_1.5B_mid_3bit_12mods</text>
+<rect x="70" y="474" width="12" height="12" fill="#76B7B2"/>
+<text x="88.0" y="484.0" text-anchor="start" class="legend">naive QSR</text>
+<rect x="70" y="492" width="12" height="12" fill="#9C755F"/>
+<text x="88.0" y="502.0" text-anchor="start" class="legend">default QSR</text>
+<rect x="70" y="510" width="12" height="12" fill="#BAB0AC"/>
+<text x="88.0" y="520.0" text-anchor="start" class="legend">SLiM proxy</text>
+<rect x="70" y="528" width="12" height="12" fill="#2F4B7C"/>
+<text x="88.0" y="538.0" text-anchor="start" class="legend">H-layer</text>
+</svg>

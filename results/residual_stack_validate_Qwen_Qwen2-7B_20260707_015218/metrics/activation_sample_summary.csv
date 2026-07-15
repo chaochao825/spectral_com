@@ -1,0 +1,7 @@
+activation_sample_rows,input_dim,layer,layer_short
+64,18944,model.layers.0.mlp.down_proj,L0:down_proj
+64,3584,model.layers.0.mlp.up_proj,L0:up_proj
+64,3584,model.layers.0.self_attn.o_proj,L0:o_proj
+64,18944,model.layers.14.mlp.down_proj,L14:down_proj
+64,3584,model.layers.14.mlp.up_proj,L14:up_proj
+64,3584,model.layers.14.self_attn.o_proj,L14:o_proj

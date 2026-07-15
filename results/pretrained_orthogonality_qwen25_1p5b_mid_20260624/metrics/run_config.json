@@ -1,0 +1,61 @@
+{
+  "model": "/home/wangmeiqi/ZHuan/model/Qwen2.5-1.5B",
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "model.layers.0.mlp.down_proj",
+    "model.layers.0.mlp.up_proj",
+    "model.layers.0.self_attn.o_proj",
+    "model.layers.0.self_attn.q_proj",
+    "model.layers.14.mlp.down_proj",
+    "model.layers.14.mlp.up_proj",
+    "model.layers.14.self_attn.o_proj",
+    "model.layers.14.self_attn.q_proj",
+    "model.layers.27.mlp.down_proj",
+    "model.layers.27.mlp.up_proj",
+    "model.layers.27.self_attn.o_proj",
+    "model.layers.27.self_attn.q_proj"
+  ],
+  "data": {
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "sequence_length": 128,
+    "batch_size": 1,
+    "allow_fallback": false
+  },
+  "text_source_requested": "zero_shot_backup",
+  "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+  "text_source_metadata": [
+    {
+      "task": "arc_easy",
+      "backup_path": "/home/wangmeiqi/dataset_backup/ai2_arc_easy",
+      "split": "validation",
+      "rows_available": 570,
+      "rows_used_for_text_source": 32,
+      "fingerprint": "3c8375eec3653bc7",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    },
+    {
+      "task": "hellaswag",
+      "backup_path": "/home/wangmeiqi/dataset_backup/hellaswag",
+      "split": "validation",
+      "rows_available": 10042,
+      "rows_used_for_text_source": 32,
+      "fingerprint": "a800affdf11589f0",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    }
+  ],
+  "eval_text_count": 32,
+  "compression": {
+    "bits": 3,
+    "keep_fraction": 0.5,
+    "rank_fraction": 0.5,
+    "q_method": "rtn",
+    "s_method": "wanda",
+    "r_method": "whitened_svd"
+  }
+}

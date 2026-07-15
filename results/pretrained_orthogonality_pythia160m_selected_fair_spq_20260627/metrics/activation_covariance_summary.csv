@@ -1,0 +1,13 @@
+activation_rows,input_dim,layer,layer_short,mean_diag,trace
+4096,768,gpt_neox.layers.0.attention.dense,L0:dense,0.03721921518445015,28.58435821533203
+4096,768,gpt_neox.layers.0.attention.query_key_value,L0:query_key_value,0.6924298405647278,531.7861328125
+4096,3072,gpt_neox.layers.0.mlp.dense_4h_to_h,L0:dense_4h_to_h,0.0239197239279747,73.48139190673828
+4096,768,gpt_neox.layers.0.mlp.dense_h_to_4h,L0:dense_h_to_4h,0.7202587723731995,553.15869140625
+4096,768,gpt_neox.layers.6.attention.dense,L6:dense,0.06352034956216812,48.783634185791016
+4096,768,gpt_neox.layers.6.attention.query_key_value,L6:query_key_value,1.9906138181686401,1528.7913818359375
+4096,3072,gpt_neox.layers.6.mlp.dense_4h_to_h,L6:dense_4h_to_h,0.04121165722608566,126.60221099853516
+4096,768,gpt_neox.layers.6.mlp.dense_h_to_4h,L6:dense_h_to_4h,0.7753398418426514,595.4609375
+4096,768,gpt_neox.layers.11.attention.dense,L11:dense,0.17730265855789185,136.16844177246094
+4096,768,gpt_neox.layers.11.attention.query_key_value,L11:query_key_value,37.44447708129883,28757.361328125
+4096,3072,gpt_neox.layers.11.mlp.dense_4h_to_h,L11:dense_4h_to_h,0.5235903263092041,1608.469482421875
+4096,768,gpt_neox.layers.11.mlp.dense_h_to_4h,L11:dense_h_to_4h,1.4142402410507202,1086.136474609375

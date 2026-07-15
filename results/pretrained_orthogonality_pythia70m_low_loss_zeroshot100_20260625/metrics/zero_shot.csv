@@ -1,0 +1,11 @@
+accuracy,candidate_index,examples,layer,pair,scope,status,strategy,task
+0.34,,100,gpt_neox.layers.0.attention.dense,qs,additivity_pair,ok,,arc_easy
+0.31,,100,gpt_neox.layers.0.attention.dense,qr,additivity_pair,ok,,arc_easy
+0.29,,100,gpt_neox.layers.0.attention.dense,sr,additivity_pair,ok,,arc_easy
+0.32,,100,,,strategy,ok,fixed_qsr_naive,arc_easy
+0.33,,100,,,strategy,ok,fixed_qsr_default,arc_easy
+0.31,,100,,,strategy,ok,slim_like_srq_proxy,arc_easy
+0.29,,100,,,strategy,ok,hessian_layerwise,arc_easy
+0.31,,100,,,strategy,ok,fixed_qsr_rotated_q,arc_easy
+0.32,1,100,,,strategy,ok,low_loss_triple_stack,arc_easy
+0.33,2,100,,,strategy,ok,low_loss_triple_stack,arc_easy

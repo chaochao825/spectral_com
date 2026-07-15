@@ -1,0 +1,40 @@
+seed: 17
+log_level: INFO
+output_dir: results
+device: auto
+
+models:
+  - gpt2
+  - EleutherAI/pythia-70m
+variants:
+  - pretrained
+  - random
+
+dataset_condition: natural
+num_sequences: 512
+sequence_length: 256
+batch_size: 2
+
+layers: all
+sites:
+  - resid_post
+  - attn_out
+  - mlp_out
+
+analysis:
+  zscore: false
+  exclude_first_tokens: 1
+  sample_limit: 2048
+  powerlaw_rank_min: 2
+  powerlaw_rank_max: 128
+  bootstrap_samples: 200
+  dynamic:
+    enabled: true
+    site: resid_post
+    layer: last
+    pca_rank: 64
+    max_sequences: 64
+    lags: [1, 2, 4, 8, 16, 32]
+
+plots: true
+

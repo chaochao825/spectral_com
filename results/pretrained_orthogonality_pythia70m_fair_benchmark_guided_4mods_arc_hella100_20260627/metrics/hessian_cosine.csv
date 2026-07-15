@@ -1,0 +1,13 @@
+abs_rho_h,layer,layer_short,pair,rho_h
+0.010087202454003111,gpt_neox.layers.0.attention.dense,L0:dense,qs,0.010087202454003111
+0.00024270121474787143,gpt_neox.layers.0.attention.dense,L0:dense,qr,-0.00024270121474787143
+0.020552357573643928,gpt_neox.layers.0.attention.dense,L0:dense,sr,0.020552357573643928
+0.0005286711363498245,gpt_neox.layers.0.attention.query_key_value,L0:query_key_value,qs,-0.0005286711363498245
+0.0014456349776714493,gpt_neox.layers.0.attention.query_key_value,L0:query_key_value,qr,0.0014456349776714493
+0.056293379801631314,gpt_neox.layers.0.attention.query_key_value,L0:query_key_value,sr,-0.056293379801631314
+0.0230618416065463,gpt_neox.layers.0.mlp.dense_4h_to_h,L0:dense_4h_to_h,qs,0.0230618416065463
+0.0004687526165817774,gpt_neox.layers.0.mlp.dense_4h_to_h,L0:dense_4h_to_h,qr,-0.0004687526165817774
+0.012255181322131764,gpt_neox.layers.0.mlp.dense_4h_to_h,L0:dense_4h_to_h,sr,-0.012255181322131764
+0.01646328507166828,gpt_neox.layers.0.mlp.dense_h_to_4h,L0:dense_h_to_4h,qs,0.01646328507166828
+0.002791558777479029,gpt_neox.layers.0.mlp.dense_h_to_4h,L0:dense_h_to_4h,qr,0.002791558777479029
+0.02158566753947407,gpt_neox.layers.0.mlp.dense_h_to_4h,L0:dense_h_to_4h,sr,-0.02158566753947407

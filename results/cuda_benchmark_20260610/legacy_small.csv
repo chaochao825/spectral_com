@@ -1,0 +1,5 @@
+operation,backend,seconds,relative_diff
+block_circulant,numpy_vectorized,0.04319202102487907,0.0
+monarch_like,numpy_batched,0.21749201399507,0.0
+monarch_like,torch_cuda_batched,0.1514879179885611,9.479742610924804e-06
+monarch_like,numpy_legacy_per_block,0.1193878659978509,0.0

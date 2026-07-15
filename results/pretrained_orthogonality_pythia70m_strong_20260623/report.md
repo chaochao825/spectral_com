@@ -1,0 +1,37 @@
+# Pretrained Small-LLM Compression Orthogonality
+
+- Model: `EleutherAI/pythia-70m`
+- Target modules: `query_key_value, dense, dense_h_to_4h, dense_4h_to_h`; selected count: 12
+- Text source used for PPL/calibration: `zero_shot_backup:arc_easy,hellaswag` (64 texts).
+- Compression settings: q=rtn/bits2, s=wanda/keep0.4, r=whitened_svd/rank0.4
+- Baseline PPL: 68.5878; NLL: 4.2281; zero-shot mean: 0.1875
+
+## Goal-Criterion Evidence
+
+- Hessian cosine heatmap generated for q/s/r over 12 pretrained model modules.
+- Higher overlap vs additivity: Spearman(|rho_H|, |A_ij|) = 0.4842 (n=36).
+- Real degradation: Spearman(|rho_H|, PPL degradation) = 0.2165 (n=36); zero-shot degradation = 0.0460 (n=36).
+- Taylor/cross-term prediction vs actual loss degradation = 0.5367 (n=36); Frobenius baseline = 0.4857 (n=36); trace-only baseline = 0.2896 (n=36).
+- Order gap explanation: R-first conditional overlap = -0.0183 (n=24); singular entropy shift = 0.4261 (n=24); symmetric overlap = 0.2887 (n=24).
+- Highest |rho_H| row: L0:dense_4h_to_h pair=qs |rho_H|=0.4510, |A_ij|=0.4097.
+- Largest order gap: L0:dense_4h_to_h rq vs qr abs loss gap=0.3412.
+- Best compressed strategy by PPL: hessian_layerwise PPL=36071719.3811, degradation=36071650.7933; baseline PPL=68.5878.
+
+## Method-Coverage Notes
+
+This run is a pretrained-LLM framework experiment, not a claim that the native script reimplements every external baseline.
+Unavailable external baselines in this environment:
+- q/gptq: auto-gptq package is not installed in the current environment
+- q/awq: AWQ/AutoAWQ package is not installed in the current environment
+- s/sparsegpt: SparseGPT package/integration is not installed in the current environment
+
+Native baselines included: RTN quantization, magnitude pruning, Wanda-style activation-aware pruning, vanilla SVD, and activation-whitened SVD proxy.
+The `slim_like_srq_proxy` row is a fixed triple-compression recipe proxy; it is not the official SLiM implementation.
+
+## Artifacts
+
+- `metrics/hessian_cosine.csv` and `figures/hessian_cosine_heatmap.png`
+- `metrics/additivity.csv`, `metrics/order_gap.csv`, `metrics/correlations.csv`
+- `metrics/strategy_performance.csv`, `metrics/layerwise_selection.csv`, `metrics/method_status.csv`
+- `figures/pretrained_goal_dashboard.png`
+- `figures/largest_order_gap_singular_spectrum.png`

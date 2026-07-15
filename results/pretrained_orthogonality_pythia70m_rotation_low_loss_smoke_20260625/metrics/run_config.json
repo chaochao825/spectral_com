@@ -1,0 +1,138 @@
+{
+  "model": "EleutherAI/pythia-70m",
+  "model_parameter_count": 70426624,
+  "trainable_parameter_count": 70426624,
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "gpt_neox.layers.0.attention.dense",
+    "gpt_neox.layers.0.attention.query_key_value",
+    "gpt_neox.layers.0.mlp.dense_4h_to_h",
+    "gpt_neox.layers.0.mlp.dense_h_to_4h"
+  ],
+  "runtime_args": {
+    "allow_fallback": false,
+    "backup_name": "wikitext_2_raw",
+    "batch_size": 1,
+    "bits": 4,
+    "calib_limit": 2,
+    "dataset": "wikitext",
+    "device": "cuda",
+    "eval_limit": 2,
+    "guided_q_methods": "rtn,rotated_rtn",
+    "include_low_loss_triple": true,
+    "include_rotation_analysis": true,
+    "include_spq_strategies": true,
+    "keep_fraction": 0.5,
+    "layer_positions": [
+      "first"
+    ],
+    "layers": [],
+    "local_files_only": false,
+    "lossless_benchmark_drop_threshold": 0.01,
+    "lossless_benchmark_metric": "ppl",
+    "low_loss_bits_list": "8,6",
+    "low_loss_keep_list": "0.995,0.99",
+    "low_loss_max_candidates": 8,
+    "low_loss_orders": "qsr,rqs",
+    "low_loss_q_methods": "rotated_rtn,rtn",
+    "low_loss_r_methods": "whitened_svd,svd",
+    "low_loss_rank_list": "0.995,0.99",
+    "low_loss_s_methods": "wanda",
+    "max_modules": 4,
+    "model": "EleutherAI/pythia-70m",
+    "module_types": [
+      "query_key_value",
+      "dense",
+      "dense_h_to_4h",
+      "dense_4h_to_h"
+    ],
+    "output_dir": "results/pretrained_orthogonality_pythia70m_rotation_low_loss_smoke_20260625",
+    "q_method": "rtn",
+    "r_method": "whitened_svd",
+    "rank_fraction": 0.5,
+    "s_method": "wanda",
+    "seed": 17,
+    "selected_layers": [
+      "gpt_neox.layers.0.attention.dense",
+      "gpt_neox.layers.0.attention.query_key_value",
+      "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "gpt_neox.layers.0.mlp.dense_h_to_4h"
+    ],
+    "sequence_length": 128,
+    "split": "validation",
+    "spq_guided_q_methods": "rtn,rotated_rtn",
+    "spq_guided_r_methods": "svd,whitened_svd",
+    "spq_guided_s_methods": "magnitude,wanda",
+    "spq_lora_alpha": 32.0,
+    "spq_lora_lr": 5e-05,
+    "spq_lora_rank": 8,
+    "spq_lora_steps": 0,
+    "spq_lora_train_limit": 8,
+    "spq_r_method": "svd",
+    "spq_s_method": "wanda",
+    "subset": "wikitext-2-raw-v1",
+    "svd_device": "cuda",
+    "text_source": "zero_shot_backup",
+    "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+    "torch_dtype": "float16",
+    "zero_shot_additivity_limit": 1,
+    "zero_shot_strategy_limit": 1,
+    "zero_shot_tasks": [
+      "arc_easy",
+      "hellaswag"
+    ]
+  },
+  "versions": {
+    "python": "3.10.20",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.45.2",
+    "datasets": "2.15.0",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.8"
+  },
+  "data": {
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "sequence_length": 128,
+    "batch_size": 1,
+    "allow_fallback": false
+  },
+  "text_source_requested": "zero_shot_backup",
+  "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+  "text_source_metadata": [
+    {
+      "task": "arc_easy",
+      "backup_path": "/home/wangmeiqi/dataset_backup/ai2_arc_easy",
+      "split": "validation",
+      "rows_available": 570,
+      "rows_loaded_from_backup": 16,
+      "rows_used_for_text_source": 8,
+      "fingerprint": "3c8375eec3653bc7",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    },
+    {
+      "task": "hellaswag",
+      "backup_path": "/home/wangmeiqi/dataset_backup/hellaswag",
+      "split": "validation",
+      "rows_available": 10042,
+      "rows_loaded_from_backup": 16,
+      "rows_used_for_text_source": 8,
+      "fingerprint": "ed539f7cf7b47812",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    }
+  ],
+  "eval_text_count": 16,
+  "compression": {
+    "bits": 4,
+    "keep_fraction": 0.5,
+    "rank_fraction": 0.5,
+    "q_method": "rtn",
+    "s_method": "wanda",
+    "r_method": "whitened_svd"
+  }
+}

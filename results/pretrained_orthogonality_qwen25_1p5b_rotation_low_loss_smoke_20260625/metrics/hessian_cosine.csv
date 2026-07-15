@@ -1,0 +1,7 @@
+abs_rho_h,layer,layer_short,pair,rho_h
+0.03850749539144553,model.layers.0.self_attn.o_proj,L0:o_proj,qs,0.03850749539144553
+0.0024771796696215795,model.layers.0.self_attn.o_proj,L0:o_proj,qr,-0.0024771796696215795
+0.016356762383520518,model.layers.0.self_attn.o_proj,L0:o_proj,sr,-0.016356762383520518
+0.04254298027974287,model.layers.0.self_attn.q_proj,L0:q_proj,qs,0.04254298027974287
+0.039108806401628185,model.layers.0.self_attn.q_proj,L0:q_proj,qr,0.039108806401628185
+0.07407780921540409,model.layers.0.self_attn.q_proj,L0:q_proj,sr,-0.07407780921540409

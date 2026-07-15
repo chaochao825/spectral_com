@@ -1,0 +1,27 @@
+residual_stream:
+  - resid_pre
+  - resid_mid
+  - resid_post
+
+attention:
+  - attn_out
+  - q
+  - k
+  - v
+  - pattern
+
+ffn:
+  - mlp_out
+  - ffn_intermediate
+
+kv_cache:
+  - k_cache
+  - v_cache
+  - attention_logits
+  - attention_probabilities
+
+mvp_sites:
+  - resid_post
+  - attn_out
+  - mlp_out
+

@@ -1,0 +1,4 @@
+cols,in_channel_max_over_median_after,in_channel_max_over_median_before,in_channel_outlier_count_after,in_channel_outlier_count_before,layer,module_type,name,out_channel_max_over_median_after,out_channel_max_over_median_before,out_channel_outlier_count_after,out_channel_outlier_count_before,relative_norm_change,rotation_type,rows
+8960,1.2365988488075772,1.2365988488075772,18,18,0,down_proj,model.layers.0.mlp.down_proj,1.8224236820279784,1.8224236820279784,2,2,0.0,none,1536
+8960,1.079136023322185,1.2365988488075772,0,18,0,down_proj,model.layers.0.mlp.down_proj,1.8224236827760514,1.8224236820279784,2,2,7.120568644928932e-05,hadamard,1536
+8960,1.1562078331162808,1.2365988488075772,3,18,0,down_proj,model.layers.0.mlp.down_proj,1.8224236846271324,1.8224236820279784,2,2,7.120568644928932e-05,learned_butterfly,1536

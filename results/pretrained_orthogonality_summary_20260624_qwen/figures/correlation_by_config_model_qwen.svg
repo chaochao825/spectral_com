@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="560" viewBox="0 0 1250 560">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:#222}.small{font-size:10px}.axis{stroke:#333;stroke-width:1}.grid{stroke:#ddd;stroke-width:1}.legend{font-size:11px}</style>
+<text x="80.0" y="24.0" text-anchor="start">Correlation comparison across pretrained runs</text>
+<line x1="80" y1="430.0" x2="990" y2="430.0" class="grid"/>
+<text x="72.0" y="434.0" text-anchor="end" class="small">-0.5500</text>
+<line x1="80" y1="353.0" x2="990" y2="353.0" class="grid"/>
+<text x="72.0" y="357.0" text-anchor="end" class="small">-0.2700</text>
+<line x1="80" y1="276.0" x2="990" y2="276.0" class="grid"/>
+<text x="72.0" y="280.0" text-anchor="end" class="small">0.0100</text>
+<line x1="80" y1="199.0" x2="990" y2="199.0" class="grid"/>
+<text x="72.0" y="203.0" text-anchor="end" class="small">0.2900</text>
+<line x1="80" y1="122.0" x2="990" y2="122.0" class="grid"/>
+<text x="72.0" y="126.0" text-anchor="end" class="small">0.5700</text>
+<line x1="80" y1="45.0" x2="990" y2="45.0" class="grid"/>
+<text x="72.0" y="49.0" text-anchor="end" class="small">0.8500</text>
+<line x1="80" y1="278.8" x2="990" y2="278.8" stroke="#111"/>
+<line x1="80" y1="45" x2="80" y2="430" class="axis"/>
+<line x1="80" y1="430" x2="990" y2="430" class="axis"/>
+<text x="18.0" y="237.5" text-anchor="middle" transform="rotate(-90 18.0 237.5)">Spearman correlation</text>
+<rect x="90.6" y="244.4" width="13.8" height="34.3" fill="#4C78A8"/>
+<rect x="106.6" y="238.9" width="13.8" height="39.9" fill="#59A14F"/>
+<rect x="122.6" y="145.6" width="13.8" height="133.1" fill="#E15759"/>
+<rect x="138.6" y="260.8" width="13.8" height="18.0" fill="#F28E2B"/>
+<rect x="154.6" y="172.1" width="13.8" height="106.6" fill="#B07AA1"/>
+<text x="125.6" y="448.0" text-anchor="end" class="small" transform="rotate(-35 125.6 448.0)">rho additivity</text>
+<rect x="191.7" y="197.9" width="13.8" height="80.9" fill="#4C78A8"/>
+<rect x="207.7" y="230.7" width="13.8" height="48.1" fill="#59A14F"/>
+<rect x="223.7" y="219.2" width="13.8" height="59.5" fill="#E15759"/>
+<rect x="239.7" y="198.1" width="13.8" height="80.6" fill="#F28E2B"/>
+<rect x="255.7" y="254.7" width="13.8" height="24.1" fill="#B07AA1"/>
+<text x="226.7" y="448.0" text-anchor="end" class="small" transform="rotate(-35 226.7 448.0)">rho PPL</text>
+<rect x="292.8" y="199.6" width="13.8" height="79.1" fill="#4C78A8"/>
+<rect x="308.8" y="278.8" width="13.8" height="13.8" fill="#59A14F"/>
+<rect x="324.8" y="246.7" width="13.8" height="32.0" fill="#E15759"/>
+<rect x="340.8" y="267.7" width="13.8" height="11.0" fill="#F28E2B"/>
+<rect x="356.8" y="243.4" width="13.8" height="35.4" fill="#B07AA1"/>
+<text x="327.8" y="448.0" text-anchor="end" class="small" transform="rotate(-35 327.8 448.0)">rho zero-shot</text>
+<rect x="393.9" y="278.8" width="13.8" height="14.5" fill="#4C78A8"/>
+<rect x="409.9" y="79.5" width="13.8" height="199.3" fill="#59A14F"/>
+<rect x="425.9" y="131.2" width="13.8" height="147.6" fill="#E15759"/>
+<rect x="441.9" y="152.0" width="13.8" height="126.8" fill="#F28E2B"/>
+<rect x="457.9" y="146.8" width="13.8" height="131.9" fill="#B07AA1"/>
+<text x="428.9" y="448.0" text-anchor="end" class="small" transform="rotate(-35 428.9 448.0)">Taylor vs loss</text>
+<rect x="495.0" y="243.3" width="13.8" height="35.5" fill="#4C78A8"/>
+<rect x="511.0" y="141.2" width="13.8" height="137.5" fill="#59A14F"/>
+<rect x="527.0" y="145.2" width="13.8" height="133.6" fill="#E15759"/>
+<rect x="543.0" y="250.9" width="13.8" height="27.8" fill="#F28E2B"/>
+<rect x="559.0" y="227.4" width="13.8" height="51.4" fill="#B07AA1"/>
+<text x="530.0" y="448.0" text-anchor="end" class="small" transform="rotate(-35 530.0 448.0)">Frobenius vs loss</text>
+<rect x="596.1" y="211.5" width="13.8" height="67.3" fill="#4C78A8"/>
+<rect x="612.1" y="212.3" width="13.8" height="66.5" fill="#59A14F"/>
+<rect x="628.1" y="198.2" width="13.8" height="80.6" fill="#E15759"/>
+<rect x="644.1" y="278.8" width="13.8" height="3.2" fill="#F28E2B"/>
+<rect x="660.1" y="152.8" width="13.8" height="125.9" fill="#B07AA1"/>
+<text x="631.1" y="448.0" text-anchor="end" class="small" transform="rotate(-35 631.1 448.0)">Param cosine vs add.</text>
+<rect x="697.2" y="278.8" width="13.8" height="6.5" fill="#4C78A8"/>
+<rect x="713.2" y="80.8" width="13.8" height="198.0" fill="#59A14F"/>
+<rect x="729.2" y="132.9" width="13.8" height="145.9" fill="#E15759"/>
+<rect x="745.2" y="155.6" width="13.8" height="123.2" fill="#F28E2B"/>
+<rect x="761.2" y="151.0" width="13.8" height="127.8" fill="#B07AA1"/>
+<text x="732.2" y="448.0" text-anchor="end" class="small" transform="rotate(-35 732.2 448.0)">Act recon vs loss</text>
+<rect x="798.3" y="278.8" width="13.8" height="41.7" fill="#4C78A8"/>
+<rect x="814.3" y="152.5" width="13.8" height="126.3" fill="#59A14F"/>
+<rect x="830.3" y="199.1" width="13.8" height="79.6" fill="#E15759"/>
+<rect x="846.3" y="239.1" width="13.8" height="39.6" fill="#F28E2B"/>
+<rect x="862.3" y="165.9" width="13.8" height="112.8" fill="#B07AA1"/>
+<text x="833.3" y="448.0" text-anchor="end" class="small" transform="rotate(-35 833.3 448.0)">Trace-only vs loss</text>
+<rect x="899.4" y="278.8" width="13.8" height="128.8" fill="#4C78A8"/>
+<rect x="915.4" y="240.0" width="13.8" height="38.7" fill="#59A14F"/>
+<rect x="931.4" y="161.6" width="13.8" height="117.2" fill="#E15759"/>
+<rect x="947.4" y="178.8" width="13.8" height="100.0" fill="#F28E2B"/>
+<rect x="963.4" y="134.1" width="13.8" height="144.7" fill="#B07AA1"/>
+<text x="934.4" y="448.0" text-anchor="end" class="small" transform="rotate(-35 934.4 448.0)">Spectrum entropy vs order</text>
+<rect x="1015" y="55" width="12" height="12" fill="#4C78A8"/>
+<text x="1033.0" y="65.0" text-anchor="start" class="legend">70M_default_4bit_6mods</text>
+<rect x="1015" y="73" width="12" height="12" fill="#59A14F"/>
+<text x="1033.0" y="83.0" text-anchor="start" class="legend">70M_mid_3bit_12mods</text>
+<rect x="1015" y="91" width="12" height="12" fill="#E15759"/>
+<text x="1033.0" y="101.0" text-anchor="start" class="legend">70M_strong_2bit_12mods</text>
+<rect x="1015" y="109" width="12" height="12" fill="#F28E2B"/>
+<text x="1033.0" y="119.0" text-anchor="start" class="legend">160M_mid_3bit_12mods</text>
+<rect x="1015" y="127" width="12" height="12" fill="#B07AA1"/>
+<text x="1033.0" y="137.0" text-anchor="start" class="legend">Qwen2.5_1.5B_mid_3bit_12mods</text>
+</svg>

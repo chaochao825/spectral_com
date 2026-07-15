@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="430" viewBox="0 0 1100 430">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;font-size:12px;fill:#222}.small{font-size:10px}.axis{stroke:#333;stroke-width:1}.grid{stroke:#ddd;stroke-width:1}.legend{font-size:11px}</style>
+<text x="60.0" y="24.0" text-anchor="start">Representative |rho_H| vs |additivity error|</text>
+<rect x="70" y="55" width="410" height="285" fill="#fafafa" stroke="#ccc"/>
+<line x1="70.0" y1="55" x2="70.0" y2="340" class="grid"/>
+<line x1="70" y1="55.0" x2="480" y2="55.0" class="grid"/>
+<line x1="172.5" y1="55" x2="172.5" y2="340" class="grid"/>
+<line x1="70" y1="126.2" x2="480" y2="126.2" class="grid"/>
+<line x1="275.0" y1="55" x2="275.0" y2="340" class="grid"/>
+<line x1="70" y1="197.5" x2="480" y2="197.5" class="grid"/>
+<line x1="377.5" y1="55" x2="377.5" y2="340" class="grid"/>
+<line x1="70" y1="268.8" x2="480" y2="268.8" class="grid"/>
+<line x1="480.0" y1="55" x2="480.0" y2="340" class="grid"/>
+<line x1="70" y1="340.0" x2="480" y2="340.0" class="grid"/>
+<circle cx="313.2" cy="264.4" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="103.4" cy="328.6" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="136.4" cy="232.8" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="353.5" cy="223.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="138.1" cy="328.6" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="149.2" cy="313.3" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="442.7" cy="197.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="208.7" cy="316.7" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="198.3" cy="272.8" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="210.4" cy="80.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="102.7" cy="289.5" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="164.7" cy="126.3" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="396.5" cy="274.3" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="130.0" cy="327.1" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="119.3" cy="159.8" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="117.8" cy="315.1" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="74.8" cy="326.4" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="143.5" cy="335.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="348.9" cy="279.6" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="185.5" cy="306.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="152.4" cy="336.5" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="345.6" cy="244.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="122.5" cy="320.2" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="144.5" cy="323.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="292.3" cy="333.5" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="78.7" cy="338.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="143.1" cy="249.8" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="88.1" cy="314.7" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="75.0" cy="327.2" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="138.7" cy="308.0" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="294.9" cy="292.0" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="98.6" cy="329.5" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="148.6" cy="263.9" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="367.2" cy="284.5" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="121.1" cy="333.0" r="3.5" fill="#E15759" opacity="0.75"/>
+<circle cx="142.9" cy="332.7" r="3.5" fill="#E15759" opacity="0.75"/>
+<text x="70.0" y="41.0" text-anchor="start">Pythia-70M strong</text>
+<text x="78.0" y="73.0" text-anchor="start" class="small">Spearman=0.484</text>
+<text x="275.0" y="375.0" text-anchor="middle" class="small">|rho_H|</text>
+<text x="25.0" y="197.5" text-anchor="middle" class="small" transform="rotate(-90 25.0 197.5)">|add. err|</text>
+<text x="70.0" y="354.0" text-anchor="start" class="small">0</text>
+<text x="480.0" y="354.0" text-anchor="end" class="small">0.4961</text>
+<rect x="600" y="55" width="410" height="285" fill="#fafafa" stroke="#ccc"/>
+<line x1="600.0" y1="55" x2="600.0" y2="340" class="grid"/>
+<line x1="600" y1="55.0" x2="1010" y2="55.0" class="grid"/>
+<line x1="702.5" y1="55" x2="702.5" y2="340" class="grid"/>
+<line x1="600" y1="126.2" x2="1010" y2="126.2" class="grid"/>
+<line x1="805.0" y1="55" x2="805.0" y2="340" class="grid"/>
+<line x1="600" y1="197.5" x2="1010" y2="197.5" class="grid"/>
+<line x1="907.5" y1="55" x2="907.5" y2="340" class="grid"/>
+<line x1="600" y1="268.8" x2="1010" y2="268.8" class="grid"/>
+<line x1="1010.0" y1="55" x2="1010.0" y2="340" class="grid"/>
+<line x1="600" y1="340.0" x2="1010" y2="340.0" class="grid"/>
+<circle cx="919.3" cy="280.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="601.0" cy="333.1" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="603.5" cy="315.7" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="849.6" cy="306.9" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="600.9" cy="80.9" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="605.1" cy="324.8" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="840.7" cy="197.7" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="601.3" cy="333.0" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="604.8" cy="337.3" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="716.9" cy="335.0" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="617.1" cy="339.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="647.0" cy="302.8" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="970.8" cy="276.4" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="603.9" cy="336.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="605.6" cy="324.1" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="972.7" cy="289.9" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="600.4" cy="330.9" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="608.9" cy="319.3" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="806.2" cy="331.4" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="603.6" cy="334.9" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="607.7" cy="315.9" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="764.7" cy="327.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="613.2" cy="336.5" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="617.7" cy="333.6" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="906.4" cy="320.1" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="606.6" cy="336.0" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="621.3" cy="333.3" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="836.4" cy="327.0" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="601.2" cy="340.0" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="604.2" cy="338.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="796.9" cy="323.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="602.5" cy="337.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="603.2" cy="302.1" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="723.7" cy="274.4" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="606.8" cy="330.5" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<circle cx="604.7" cy="313.2" r="3.5" fill="#B07AA1" opacity="0.75"/>
+<text x="600.0" y="41.0" text-anchor="start">Qwen2.5-1.5B mid</text>
+<text x="608.0" y="73.0" text-anchor="start" class="small">Spearman=0.388</text>
+<text x="805.0" y="375.0" text-anchor="middle" class="small">|rho_H|</text>
+<text x="555.0" y="197.5" text-anchor="middle" class="small" transform="rotate(-90 555.0 197.5)">|add. err|</text>
+<text x="600.0" y="354.0" text-anchor="start" class="small">0</text>
+<text x="1010.0" y="354.0" text-anchor="end" class="small">0.3955</text>
+</svg>

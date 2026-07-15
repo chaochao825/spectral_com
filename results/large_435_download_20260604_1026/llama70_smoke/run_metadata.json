@@ -1,0 +1,25 @@
+[
+  {
+    "model": "/data6/user24111736/meta-llama/Llama-2-70b-chat-hf",
+    "variant": "pretrained",
+    "revision": "",
+    "device": "cuda:0",
+    "device_map": "auto",
+    "torch_dtype": "float16",
+    "local_files_only": true,
+    "low_cpu_mem_usage": true,
+    "num_sequences": 4,
+    "sequence_length": 64,
+    "batch_size": 1,
+    "sites": [
+      "resid_post",
+      "attn_out",
+      "mlp_out"
+    ],
+    "layers": [
+      0,
+      40,
+      79
+    ]
+  }
+]

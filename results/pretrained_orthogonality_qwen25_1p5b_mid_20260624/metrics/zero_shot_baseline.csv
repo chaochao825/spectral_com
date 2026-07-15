@@ -1,0 +1,3 @@
+accuracy,examples,scope,status,task
+0.75,4,baseline,ok,arc_easy
+0.25,4,baseline,ok,hellaswag

@@ -1,0 +1,16 @@
+family,n,spearman_rho,x,y
+additivity,27,0.7582417582417583,abs_rho_h,abs_additivity_error
+additivity,27,0.5354090354090355,rho_h,additivity_error
+real_ppl,27,0.5586080586080587,abs_rho_h,ppl_degradation_pair
+real_accuracy,27,0.4899281919710891,abs_rho_h,accuracy_degradation_pair
+taylor,27,0.9420024420024421,taylor_predicted_loss_delta,loss_degradation_pair
+frobenius_baseline,27,0.5927960927960929,frobenius_delta_sum,loss_degradation_pair
+param_cos_baseline,27,0.7142857142857144,abs_parameter_cosine,abs_additivity_error
+order_gap,12,0.5795378640469799,abs_conditional_hessian_overlap,abs_loss_gap
+order_gap_ppl,12,0.5795378640469799,abs_conditional_hessian_overlap,abs_ppl_gap
+order_gap_accuracy,12,0.8073215183223174,abs_conditional_hessian_overlap,abs_accuracy_gap
+spectrum_order_rank90,12,-0.2560457782495946,abs_first_rank_90_delta,abs_loss_gap
+spectrum_order_entropy,12,0.7982717345852616,abs_first_spectral_entropy_delta,abs_loss_gap
+spectrum_order_top1,12,0.7982717345852616,abs_first_top1_energy_delta,abs_loss_gap
+spectrum_order_stable_rank,12,0.7982717345852616,abs_first_stable_rank_delta,abs_loss_gap
+order_disagreement,12,0.38461538461538464,final_weight_disagreement,abs_loss_gap

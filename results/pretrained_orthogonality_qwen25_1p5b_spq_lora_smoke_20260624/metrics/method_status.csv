@@ -1,0 +1,13 @@
+component,method,reason,status
+q,rtn,native symmetric row-wise round-to-nearest,available
+q,gptq,auto-gptq package is not installed in the current environment,unavailable
+q,awq,AWQ/AutoAWQ package is not installed in the current environment,unavailable
+s,magnitude,native top-k magnitude pruning,available
+s,wanda,native activation-aware |W| sqrt(diag(XtX)) pruning,available
+s,sparsegpt,SparseGPT package/integration is not installed in the current environment,unavailable
+r,svd,native truncated SVD,available
+r,whitened_svd,native activation-whitened SVD proxy in the spirit of SVD-LLM,available
+r,svd_llm,represented by native whitened_svd; official SVD-LLM code is not invoked,proxy
+recipe,spq_like_rsq_no_lora,"native SPQ-like fixed recipe proxy: attention R+Q, MLP S+Q, no recovery",available
+recipe,hessian_guided_spq_no_lora,native SPQ-like layer-type prior with Hessian-guided order/method selection under the same nominal bit/keep/rank budget,available
+recipe,spq_like_rsq_lora,optional native LoRA recovery wrapper for the SPQ-like fixed recipe; enabled when --spq-lora-steps > 0,available

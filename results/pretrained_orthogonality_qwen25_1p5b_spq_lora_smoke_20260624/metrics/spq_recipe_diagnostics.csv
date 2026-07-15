@@ -1,0 +1,9 @@
+fixed_spq_order,fixed_spq_predicted_hessian_cost,guided_q_method,guided_r_method,guided_s_method,guided_spq_order,guided_spq_predicted_hessian_cost,layer,layer_family,layer_short,predicted_order_cost_gap_fixed_minus_reversed,reversed_spq_order,reversed_spq_predicted_hessian_cost,spq_ops,spq_pair,spq_pair_rho_h
+sq,10.535472869873047,rtn,,magnitude,qs,10.435361862182617,model.layers.0.mlp.down_proj,mlp,L0:down_proj,0.10011100769042969,qs,10.435361862182617,sq,qs,0.29959188323350117
+sq,57.20781707763672,rtn,,magnitude,sq,56.005374908447266,model.layers.0.mlp.up_proj,mlp,L0:up_proj,-0.6270828247070312,qs,57.83489990234375,sq,qs,0.23038739040892808
+rq,16.131196975708008,rtn,whitened_svd,,rq,7.59124755859375,model.layers.0.self_attn.o_proj,attention,L0:o_proj,-2.225828170776367,qr,18.357025146484375,rq,qr,-0.0032636353765967785
+rq,273.6082763671875,rtn,whitened_svd,,rq,266.3572998046875,model.layers.0.self_attn.q_proj,attention,L0:q_proj,-7.657989501953125,qr,281.2662658691406,rq,qr,-0.07402707429600869
+sq,3771.96240234375,rtn,,magnitude,sq,3759.76513671875,model.layers.27.mlp.down_proj,mlp,L27:down_proj,11.39111328125,qs,3760.5712890625,sq,qs,0.282722452199185
+sq,958.3829345703125,rtn,,wanda,sq,958.3829345703125,model.layers.27.mlp.up_proj,mlp,L27:up_proj,-0.730712890625,qs,959.1136474609375,sq,qs,0.20640530911874322
+rq,368.3613586425781,rtn,whitened_svd,,rq,330.94189453125,model.layers.27.self_attn.o_proj,attention,L27:o_proj,-2.770660400390625,qr,371.13201904296875,rq,qr,0.0007301304598142437
+rq,107.61175537109375,rtn,svd,,qr,95.75051879882812,model.layers.27.self_attn.q_proj,attention,L27:q_proj,11.861236572265625,qr,95.75051879882812,rq,qr,-0.02009626548219515

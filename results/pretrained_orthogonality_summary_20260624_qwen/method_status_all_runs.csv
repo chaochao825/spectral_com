@@ -1,0 +1,46 @@
+component,method,reason,run,status
+q,rtn,native symmetric row-wise round-to-nearest,70M_default_4bit_6mods,available
+q,gptq,auto-gptq package is not installed in the current environment,70M_default_4bit_6mods,unavailable
+q,awq,AWQ/AutoAWQ package is not installed in the current environment,70M_default_4bit_6mods,unavailable
+s,magnitude,native top-k magnitude pruning,70M_default_4bit_6mods,available
+s,wanda,native activation-aware |W| sqrt(diag(XtX)) pruning,70M_default_4bit_6mods,available
+s,sparsegpt,SparseGPT package/integration is not installed in the current environment,70M_default_4bit_6mods,unavailable
+r,svd,native truncated SVD,70M_default_4bit_6mods,available
+r,whitened_svd,native activation-whitened SVD proxy in the spirit of SVD-LLM,70M_default_4bit_6mods,available
+r,svd_llm,represented by native whitened_svd; official SVD-LLM code is not invoked,70M_default_4bit_6mods,proxy
+q,rtn,native symmetric row-wise round-to-nearest,70M_mid_3bit_12mods,available
+q,gptq,auto-gptq package is not installed in the current environment,70M_mid_3bit_12mods,unavailable
+q,awq,AWQ/AutoAWQ package is not installed in the current environment,70M_mid_3bit_12mods,unavailable
+s,magnitude,native top-k magnitude pruning,70M_mid_3bit_12mods,available
+s,wanda,native activation-aware |W| sqrt(diag(XtX)) pruning,70M_mid_3bit_12mods,available
+s,sparsegpt,SparseGPT package/integration is not installed in the current environment,70M_mid_3bit_12mods,unavailable
+r,svd,native truncated SVD,70M_mid_3bit_12mods,available
+r,whitened_svd,native activation-whitened SVD proxy in the spirit of SVD-LLM,70M_mid_3bit_12mods,available
+r,svd_llm,represented by native whitened_svd; official SVD-LLM code is not invoked,70M_mid_3bit_12mods,proxy
+q,rtn,native symmetric row-wise round-to-nearest,70M_strong_2bit_12mods,available
+q,gptq,auto-gptq package is not installed in the current environment,70M_strong_2bit_12mods,unavailable
+q,awq,AWQ/AutoAWQ package is not installed in the current environment,70M_strong_2bit_12mods,unavailable
+s,magnitude,native top-k magnitude pruning,70M_strong_2bit_12mods,available
+s,wanda,native activation-aware |W| sqrt(diag(XtX)) pruning,70M_strong_2bit_12mods,available
+s,sparsegpt,SparseGPT package/integration is not installed in the current environment,70M_strong_2bit_12mods,unavailable
+r,svd,native truncated SVD,70M_strong_2bit_12mods,available
+r,whitened_svd,native activation-whitened SVD proxy in the spirit of SVD-LLM,70M_strong_2bit_12mods,available
+r,svd_llm,represented by native whitened_svd; official SVD-LLM code is not invoked,70M_strong_2bit_12mods,proxy
+q,rtn,native symmetric row-wise round-to-nearest,160M_mid_3bit_12mods,available
+q,gptq,auto-gptq package is not installed in the current environment,160M_mid_3bit_12mods,unavailable
+q,awq,AWQ/AutoAWQ package is not installed in the current environment,160M_mid_3bit_12mods,unavailable
+s,magnitude,native top-k magnitude pruning,160M_mid_3bit_12mods,available
+s,wanda,native activation-aware |W| sqrt(diag(XtX)) pruning,160M_mid_3bit_12mods,available
+s,sparsegpt,SparseGPT package/integration is not installed in the current environment,160M_mid_3bit_12mods,unavailable
+r,svd,native truncated SVD,160M_mid_3bit_12mods,available
+r,whitened_svd,native activation-whitened SVD proxy in the spirit of SVD-LLM,160M_mid_3bit_12mods,available
+r,svd_llm,represented by native whitened_svd; official SVD-LLM code is not invoked,160M_mid_3bit_12mods,proxy
+q,rtn,native symmetric row-wise round-to-nearest,Qwen2.5_1.5B_mid_3bit_12mods,available
+q,gptq,auto-gptq package is not installed in the current environment,Qwen2.5_1.5B_mid_3bit_12mods,unavailable
+q,awq,AWQ/AutoAWQ package is not installed in the current environment,Qwen2.5_1.5B_mid_3bit_12mods,unavailable
+s,magnitude,native top-k magnitude pruning,Qwen2.5_1.5B_mid_3bit_12mods,available
+s,wanda,native activation-aware |W| sqrt(diag(XtX)) pruning,Qwen2.5_1.5B_mid_3bit_12mods,available
+s,sparsegpt,SparseGPT package/integration is not installed in the current environment,Qwen2.5_1.5B_mid_3bit_12mods,unavailable
+r,svd,native truncated SVD,Qwen2.5_1.5B_mid_3bit_12mods,available
+r,whitened_svd,native activation-whitened SVD proxy in the spirit of SVD-LLM,Qwen2.5_1.5B_mid_3bit_12mods,available
+r,svd_llm,represented by native whitened_svd; official SVD-LLM code is not invoked,Qwen2.5_1.5B_mid_3bit_12mods,proxy

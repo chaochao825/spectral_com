@@ -1,0 +1,7 @@
+activation_rows,input_dim,layer,layer_short,mean_diag,trace
+128,18944,model.layers.0.mlp.down_proj,L0:down_proj,0.002479954855516553,46.98026657104492
+128,3584,model.layers.0.mlp.up_proj,L0:up_proj,0.06553132086992264,234.8642578125
+128,3584,model.layers.0.self_attn.o_proj,L0:o_proj,0.01929176226258278,69.14167022705078
+128,18944,model.layers.14.mlp.down_proj,L14:down_proj,0.019654320552945137,372.3314514160156
+128,3584,model.layers.14.mlp.up_proj,L14:up_proj,0.3338688313961029,1196.5859375
+128,3584,model.layers.14.self_attn.o_proj,L14:o_proj,0.042774707078933716,153.30455017089844

@@ -1,0 +1,10 @@
+bit_width,cols,layer,module_type,name,relative_quantization_error,rotation_type,rows,target
+4,8960,0,down_proj,model.layers.0.mlp.down_proj,0.1869169078793088,none,1536,rotated_weight
+3,8960,0,down_proj,model.layers.0.mlp.down_proj,0.4266379845414898,none,1536,rotated_weight
+2,8960,0,down_proj,model.layers.0.mlp.down_proj,0.936635696450527,none,1536,rotated_weight
+4,8960,0,down_proj,model.layers.0.mlp.down_proj,0.16572391698156075,hadamard,1536,rotated_weight
+3,8960,0,down_proj,model.layers.0.mlp.down_proj,0.3866114263439889,hadamard,1536,rotated_weight
+2,8960,0,down_proj,model.layers.0.mlp.down_proj,0.9275786583271951,hadamard,1536,rotated_weight
+4,8960,0,down_proj,model.layers.0.mlp.down_proj,0.16796062039730147,learned_butterfly,1536,rotated_weight
+3,8960,0,down_proj,model.layers.0.mlp.down_proj,0.39171848838745355,learned_butterfly,1536,rotated_weight
+2,8960,0,down_proj,model.layers.0.mlp.down_proj,0.9286853325547871,learned_butterfly,1536,rotated_weight

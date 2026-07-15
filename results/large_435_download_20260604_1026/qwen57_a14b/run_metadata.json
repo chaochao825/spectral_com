@@ -1,0 +1,25 @@
+[
+  {
+    "model": "/data6/user20111239/Qwen2-57B-A14B-Instruct",
+    "variant": "pretrained",
+    "revision": "",
+    "device": "cuda:0",
+    "device_map": "auto",
+    "torch_dtype": "bfloat16",
+    "local_files_only": true,
+    "low_cpu_mem_usage": true,
+    "num_sequences": 16,
+    "sequence_length": 128,
+    "batch_size": 1,
+    "sites": [
+      "resid_post",
+      "attn_out",
+      "mlp_out"
+    ],
+    "layers": [
+      0,
+      14,
+      27
+    ]
+  }
+]

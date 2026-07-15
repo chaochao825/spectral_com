@@ -1,0 +1,133 @@
+{
+  "model": "/home/wangmeiqi/ZHuan/model/Qwen2.5-1.5B",
+  "model_parameter_count": 1543714304,
+  "trainable_parameter_count": 1543714304,
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "model.layers.0.mlp.down_proj",
+    "model.layers.0.mlp.up_proj",
+    "model.layers.0.self_attn.o_proj",
+    "model.layers.0.self_attn.q_proj",
+    "model.layers.27.mlp.down_proj",
+    "model.layers.27.mlp.up_proj",
+    "model.layers.27.self_attn.o_proj",
+    "model.layers.27.self_attn.q_proj"
+  ],
+  "runtime_args": {
+    "allow_fallback": false,
+    "backup_name": "wikitext_2_raw",
+    "batch_size": 1,
+    "bits": 3,
+    "calib_limit": 2,
+    "dataset": "wikitext",
+    "device": "cuda",
+    "eval_limit": 2,
+    "include_spq_strategies": true,
+    "keep_fraction": 0.5,
+    "layer_positions": [
+      "first",
+      "last"
+    ],
+    "layers": [],
+    "local_files_only": false,
+    "max_modules": 8,
+    "model": "/home/wangmeiqi/ZHuan/model/Qwen2.5-1.5B",
+    "module_types": [
+      "q_proj",
+      "o_proj",
+      "up_proj",
+      "down_proj"
+    ],
+    "output_dir": "results/pretrained_orthogonality_qwen25_1p5b_spq_lora_smoke_20260624",
+    "q_method": "rtn",
+    "r_method": "whitened_svd",
+    "rank_fraction": 0.5,
+    "s_method": "wanda",
+    "seed": 17,
+    "selected_layers": [
+      "model.layers.0.mlp.down_proj",
+      "model.layers.0.mlp.up_proj",
+      "model.layers.0.self_attn.o_proj",
+      "model.layers.0.self_attn.q_proj",
+      "model.layers.27.mlp.down_proj",
+      "model.layers.27.mlp.up_proj",
+      "model.layers.27.self_attn.o_proj",
+      "model.layers.27.self_attn.q_proj"
+    ],
+    "sequence_length": 128,
+    "split": "validation",
+    "spq_guided_r_methods": "svd,whitened_svd",
+    "spq_guided_s_methods": "magnitude,wanda",
+    "spq_lora_alpha": 16.0,
+    "spq_lora_lr": 5e-05,
+    "spq_lora_rank": 4,
+    "spq_lora_steps": 3,
+    "spq_lora_train_limit": 2,
+    "spq_r_method": "svd",
+    "spq_s_method": "wanda",
+    "subset": "wikitext-2-raw-v1",
+    "svd_device": "cuda",
+    "text_source": "zero_shot_backup",
+    "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+    "torch_dtype": "float16",
+    "zero_shot_additivity_limit": 2,
+    "zero_shot_strategy_limit": 2,
+    "zero_shot_tasks": [
+      "arc_easy",
+      "hellaswag"
+    ]
+  },
+  "versions": {
+    "python": "3.10.18",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.57.1",
+    "datasets": "4.3.0",
+    "numpy": "2.2.6",
+    "matplotlib": "3.10.7"
+  },
+  "data": {
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "sequence_length": 128,
+    "batch_size": 1,
+    "allow_fallback": false
+  },
+  "text_source_requested": "zero_shot_backup",
+  "text_source_used": "zero_shot_backup:arc_easy,hellaswag",
+  "text_source_metadata": [
+    {
+      "task": "arc_easy",
+      "backup_path": "/home/wangmeiqi/dataset_backup/ai2_arc_easy",
+      "split": "validation",
+      "rows_available": 570,
+      "rows_loaded_from_backup": 16,
+      "rows_used_for_text_source": 8,
+      "fingerprint": "3c8375eec3653bc7",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    },
+    {
+      "task": "hellaswag",
+      "backup_path": "/home/wangmeiqi/dataset_backup/hellaswag",
+      "split": "validation",
+      "rows_available": 10042,
+      "rows_loaded_from_backup": 16,
+      "rows_used_for_text_source": 8,
+      "fingerprint": "a800affdf11589f0",
+      "source": "zero_shot_backup",
+      "backup_root": "/home/wangmeiqi/dataset_backup"
+    }
+  ],
+  "eval_text_count": 16,
+  "compression": {
+    "bits": 3,
+    "keep_fraction": 0.5,
+    "rank_fraction": 0.5,
+    "q_method": "rtn",
+    "s_method": "wanda",
+    "r_method": "whitened_svd"
+  }
+}

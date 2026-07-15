@@ -1,0 +1,46 @@
+{
+  "model": "EleutherAI/pythia-70m",
+  "device": "cuda",
+  "selected_layers": [
+    "gpt_neox.layers.0.attention.dense",
+    "gpt_neox.layers.0.mlp.dense_4h_to_h",
+    "gpt_neox.layers.0.mlp.dense_h_to_4h",
+    "gpt_neox.layers.1.attention.dense"
+  ],
+  "data": {
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "sequence_length": 128,
+    "batch_size": 1,
+    "allow_fallback": true
+  },
+  "args": {
+    "model": "EleutherAI/pythia-70m",
+    "local_files_only": true,
+    "device": "cuda",
+    "torch_dtype": "float16",
+    "target_types": "attention_o,mlp_up,mlp_down",
+    "max_layers": 4,
+    "q_methods": "rtn",
+    "q_bits_list": "4,3,2",
+    "group_size": 128,
+    "block_sizes": "16,32,64",
+    "memory_ratios": "0.196,0.220,0.258",
+    "splits": "0.25:0.75,0.5:0.5,0.75:0.25",
+    "overlap_threshold": 0.3,
+    "include_l_c_order": true,
+    "calib_limit": 8,
+    "eval_limit": 8,
+    "activation_sample_rows": 128,
+    "sequence_length": 128,
+    "batch_size": 1,
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "validation",
+    "backup_name": "wikitext_2_raw",
+    "allow_fallback": true,
+    "output_dir": "results/oasr_structured_residual_pythia70m_20260628"
+  }
+}

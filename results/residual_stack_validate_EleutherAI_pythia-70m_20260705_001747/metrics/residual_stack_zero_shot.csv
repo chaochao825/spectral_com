@@ -1,0 +1,17 @@
+accuracy,examples,scope,status,strategy,task
+1.0,2,residual_stack_validate,ok,residual_q_only,arc_easy
+0.0,2,residual_stack_validate,ok,residual_q_only,hellaswag
+1.0,2,residual_stack_validate,ok,residual_q_l_same_budget,arc_easy
+0.0,2,residual_stack_validate,ok,residual_q_l_same_budget,hellaswag
+1.0,2,residual_stack_validate,ok,residual_q_s_same_budget,arc_easy
+0.5,2,residual_stack_validate,ok,residual_q_s_same_budget,hellaswag
+1.0,2,residual_stack_validate,ok,residual_q_s_l_same_budget,arc_easy
+0.5,2,residual_stack_validate,ok,residual_q_s_l_same_budget,hellaswag
+1.0,2,residual_stack_validate,ok,residual_stack_selector,arc_easy
+0.0,2,residual_stack_validate,ok,residual_stack_selector,hellaswag
+1.0,2,residual_stack_validate,ok,sequential_qsr_default,arc_easy
+0.0,2,residual_stack_validate,ok,sequential_qsr_default,hellaswag
+1.0,2,residual_stack_validate,ok,spq_like_rsq_no_lora,arc_easy
+0.0,2,residual_stack_validate,ok,spq_like_rsq_no_lora,hellaswag
+1.0,2,residual_stack_validate,ok,hessian_guided_spq_no_lora,arc_easy
+0.0,2,residual_stack_validate,ok,hessian_guided_spq_no_lora,hellaswag

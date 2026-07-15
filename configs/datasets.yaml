@@ -1,0 +1,16 @@
+conditions:
+  natural:
+    description: Built-in natural text seed corpus; replace with WikiText-103 or OpenWebText when datasets is installed.
+  random_uniform:
+    description: Uniform random tokens over the tokenizer vocabulary.
+  structured:
+    description: Copy, induction-like, arithmetic, and few-shot QA prompts.
+
+planned_external_sources:
+  wikitext103:
+    hf_dataset: Salesforce/wikitext
+    subset: wikitext-103-raw-v1
+  openwebtext:
+    hf_dataset: openwebtext
+    subset: null
+

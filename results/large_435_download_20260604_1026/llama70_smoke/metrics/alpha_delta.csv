@@ -1,0 +1,2 @@
+metric,reason,status
+alpha,requires matched pretrained and random variants in the same model/layer/site group,unavailable

@@ -1,0 +1,9 @@
+layer,layer_family,layer_short,selected_order,selected_predicted_hessian_cost,selected_q_method,selected_r_method,selected_s_method,selection_family
+gpt_neox.layers.0.attention.dense,attention,L0:dense,rsq,0.15396958589553833,rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.attention.query_key_value,attention,L0:query_key_value,rsq,18.426300048828125,rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.mlp.dense_4h_to_h,mlp,L0:dense_4h_to_h,rsq,0.23394829034805298,rotated_rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.mlp.dense_h_to_4h,mlp,L0:dense_h_to_4h,rsq,9.43794059753418,rtn,whitened_svd,wanda,hessian_layerwise
+gpt_neox.layers.0.attention.dense,attention,L0:dense,rq,0.054009512066841125,rotated_rtn,whitened_svd,,hessian_guided_spq
+gpt_neox.layers.0.attention.query_key_value,attention,L0:query_key_value,rq,7.212028503417969,rtn,whitened_svd,,hessian_guided_spq
+gpt_neox.layers.0.mlp.dense_4h_to_h,mlp,L0:dense_4h_to_h,sq,0.3593572974205017,rtn,,wanda,hessian_guided_spq
+gpt_neox.layers.0.mlp.dense_h_to_4h,mlp,L0:dense_h_to_4h,sq,13.693347930908203,rtn,,wanda,hessian_guided_spq

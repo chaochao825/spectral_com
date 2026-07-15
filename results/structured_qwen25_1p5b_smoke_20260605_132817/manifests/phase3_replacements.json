@@ -1,0 +1,44 @@
+[
+  {
+    "compression_ratio_target": 4.0,
+    "residual_fraction": 0.0,
+    "methods": {
+      "down_proj": "low_rank"
+    },
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "low_rank",
+        "compression_ratio": 4.0,
+        "residual_type": "none",
+        "residual_fraction": 0.0,
+        "params_original": 13762560,
+        "params_structured": 3432192,
+        "params_residual": 0
+      }
+    ]
+  },
+  {
+    "compression_ratio_target": 4.0,
+    "residual_fraction": 0.02,
+    "methods": {
+      "down_proj": "low_rank"
+    },
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "low_rank",
+        "compression_ratio": 4.0,
+        "residual_type": "low_rank",
+        "residual_fraction": 0.02,
+        "params_original": 13762560,
+        "params_structured": 3432192,
+        "params_residual": 272896
+      }
+    ]
+  }
+]

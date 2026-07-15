@@ -1,0 +1,2 @@
+metric,reason,status
+top_1_explained_variance,requires matched pretrained and random variants in the same model/layer/site group,unavailable

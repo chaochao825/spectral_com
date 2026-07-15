@@ -1,0 +1,8 @@
+dataset_condition,dmd_count,dmd_decay_score,dmd_max_radius,dmd_mean_radius,dmd_rank,dmd_real_ratio,dmd_residual,dmd_rotation_score,kind,layer,max_abs_pc_autocorr,mean_abs_pc_autocorr,mean_pc_timescale,model,pc1_autocorr,revision,site,tau,variant
+natural,,,,,,,,,lag,79,0.697761087673777,0.4802761881714916,,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,0.5012931133104375,,resid_post,1,pretrained
+natural,,,,,,,,,lag,79,0.6147500253309157,0.32198458169340693,,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,0.2862333632666657,,resid_post,2,pretrained
+natural,,,,,,,,,lag,79,0.47774840809358055,0.23240272421734515,,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,0.044253747933425736,,resid_post,4,pretrained
+natural,,,,,,,,,lag,79,0.37822672884714026,0.17512911869564007,,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,-0.12952213495494772,,resid_post,8,pretrained
+natural,,,,,,,,,lag,79,0.21468425155060952,0.10766619982486003,,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,-0.08816999671485595,,resid_post,16,pretrained
+natural,,,,,,,,,lag,79,0.40146047592429324,0.12621324127281816,,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,0.40146047592429324,,resid_post,32,pretrained
+natural,16,0.4595600232742155,0.9315116205559438,0.5404399767257845,16,0.125,0.7724996428618015,0.4382502886042681,dmd,79,,,47.952657540465125,/data6/user24111736/meta-llama/Llama-2-70b-chat-hf,,,resid_post,,pretrained
