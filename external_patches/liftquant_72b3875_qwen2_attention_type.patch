@@ -1,0 +1,17 @@
+diff --git a/quantize/liftq.py b/quantize/liftq.py
+index ffe4e20..c96fbe0 100755
+--- a/quantize/liftq.py
++++ b/quantize/liftq.py
+@@ -149,6 +149,11 @@ def liftq(
+             super().__init__()
+             self.module = module
+             self.is_llama = False
++            # transformers>=4.57 consults this decoder-layer attribute while
++            # constructing the Qwen2 causal mask.  The wrapper must preserve
++            # the wrapped layer's routing metadata before it intercepts the
++            # first forward pass.
++            self.attention_type = module.attention_type
+-
++
+         def forward(self, inp, **kwargs):
+             inps[cache["i"]] = inp.to('cpu')

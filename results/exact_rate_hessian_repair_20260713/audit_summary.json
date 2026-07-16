@@ -1,0 +1,13 @@
+{
+  "scope": "Exploratory audit of committed results; no new endpoint is implied.",
+  "qsl_core_wins": 2,
+  "qsl_core_runs": 4,
+  "mean_q_s_hessian_rho": -0.6098166327993049,
+  "strict_rate_tolerance": 0.01,
+  "conclusions": [
+    "The current Q+S+L advantage is run-dependent rather than universal.",
+    "Negative Q/S Hessian cosine is repair cancellation, not orthogonality.",
+    "Sparse index/value overhead invalidates the nominal 0.258 matched-rate claim.",
+    "Q+L is closest to its nominal payload and is the most credible current parameter-efficient repair."
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "created_at": "2026-07-14T01:53:29+0800",
+  "model": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+  "revision": null,
+  "model_identity": {
+    "requested_revision": null,
+    "resolved_model_commit_hash": "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+    "resolved_tokenizer_commit_hash": null,
+    "model_config_sha256": "12df5dbe56f963b1431a83ae8b650897e11eed415ea40076f9ae6af034c74ae4",
+    "model_name_or_path": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+    "tokenizer_name_or_path": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42"
+  },
+  "git": {
+    "commit": "4366a2f1dbd41347a53ba67a05d1df0e9abedc19",
+    "branch": "agent/hessian-repair-exact-rate-20260713",
+    "dirty": true,
+    "status_porcelain": "M results/compression_method_comparison_20260713/method_matrix.csv\n M results/compression_method_comparison_20260713/summary.md\n M scripts/build_compression_method_matrix.py\n M scripts/run_pretrained_hessian_repair.py\n M tests/test_compression_method_matrix.py\n?? external_patches/\n?? results/confirmatory_hessian_protocol_20260714/\n?? results/liftquant_official_integration_20260714/\n?? results/pretrained_hessian_repair_pythia70m_serialized_20260714/\n?? scripts/audit_liftquant_official.py\n?? scripts/build_confirmatory_hessian_protocol.py\n?? src/llm_spectral_dynamics/structured/codec_artifact.py\n?? tests/test_codec_artifact.py\n?? tests/test_confirmatory_hessian_protocol.py\n?? tests/test_hessian_artifact_integration.py\n?? tests/test_liftquant_official_audit.py"
+  },
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "gpt_neox.layers.0.mlp.dense_4h_to_h",
+    "gpt_neox.layers.0.mlp.dense_h_to_4h",
+    "gpt_neox.layers.3.mlp.dense_4h_to_h",
+    "gpt_neox.layers.3.mlp.dense_h_to_4h",
+    "gpt_neox.layers.5.mlp.dense_4h_to_h",
+    "gpt_neox.layers.5.mlp.dense_h_to_4h"
+  ],
+  "selected_parameter_count": 6291456,
+  "model_parameter_count": 70426624,
+  "baseline_metrics": {
+    "nll": 4.267632401834323,
+    "perplexity": 71.35250142583105,
+    "tokens": 2032
+  },
+  "actual_eval_tokens": 2032,
+  "payload_scope": "selected_linear_weights_only",
+  "payload_codec": {
+    "reference": "FP16 weights",
+    "q_codes": "packed 4-bit symmetric row RTN",
+    "q_scales": "FP16 row or row-column-block scales",
+    "sparse_values": "FP16",
+    "sparse_support": "fixed-width CSR (storage index width inferred from columns, uint32 row pointers)",
+    "lowrank_factors": "two FP16 factors",
+    "folded_repairs": "no additional payload; rounded back into already-counted FP16 values/scales/factors",
+    "container_headers": "measured in deterministic 64-byte-aligned research artifacts",
+    "research_codec_only": true,
+    "production_inference_backend": false
+  },
+  "artifact_evidence": {
+    "emitted": true,
+    "manifest": "artifact_manifest.json",
+    "payload_table": "artifact_payloads.csv",
+    "strategy_count": 11,
+    "alignment_bytes": 64,
+    "serialized_rate_cap_enforced": true,
+    "pre_evaluation_natural_file_bytes": {
+      "Q+L": 3248832,
+      "Q+S+L_QL_budget": 3233152,
+      "Q+S+L_QL_budget_component_scale": 3233152
+    }
+  },
+  "hessian_proxy": "input covariance C kron I_out; activation MSE proxy, not full task Hessian",
+  "targets": [
+    0.258,
+    0.275,
+    0.3
+  ],
+  "endpoint_target": 0.258,
+  "data": {
+    "requested": {
+      "dataset": "wikitext",
+      "subset": "wikitext-2-raw-v1",
+      "split": "validation",
+      "backup_name": "",
+      "sequence_length": 128,
+      "batch_size": 1,
+      "allow_fallback": false
+    },
+    "source_used": "dataset:wikitext",
+    "source_metadata": [
+      {
+        "source": "dataset",
+        "dataset": "wikitext",
+        "subset": "wikitext-2-raw-v1",
+        "split": "validation",
+        "backup_name": "",
+        "rows_requested": 264
+      }
+    ],
+    "fallback_allowed": false,
+    "split_policy": "content_disjoint_sequential_text_windows",
+    "text_pool_count": 264,
+    "unique_text_pool_count": 200,
+    "calib_text_count": 64,
+    "eval_text_count": 128,
+    "eval_window_count": 16,
+    "window_interval_semantics": "paired fixed-window mean +/- 1.96 standard errors; descriptive, not an independence-based population CI",
+    "calib_digest": "b3ca96a257a192adec7ba5faf434c614703eea3ade73af897b1144ebf8de87c2",
+    "eval_digest": "564e29e6dbc79b093a2f74f7e8bf0fbc93857e6a04cdda44eaeb79a7258c5f0a",
+    "identical_text_overlap_count": 0,
+    "content_disjoint": true
+  },
+  "activation_counts": {
+    "gpt_neox.layers.0.mlp.dense_4h_to_h": 1024,
+    "gpt_neox.layers.0.mlp.dense_h_to_4h": 1024,
+    "gpt_neox.layers.3.mlp.dense_4h_to_h": 1024,
+    "gpt_neox.layers.3.mlp.dense_h_to_4h": 1024,
+    "gpt_neox.layers.5.mlp.dense_4h_to_h": 1024,
+    "gpt_neox.layers.5.mlp.dense_h_to_4h": 1024
+  },
+  "factorizer_input_dims": {
+    "gpt_neox.layers.0.mlp.dense_4h_to_h": 2048,
+    "gpt_neox.layers.0.mlp.dense_h_to_4h": 512,
+    "gpt_neox.layers.3.mlp.dense_4h_to_h": 2048,
+    "gpt_neox.layers.3.mlp.dense_h_to_4h": 512,
+    "gpt_neox.layers.5.mlp.dense_4h_to_h": 2048,
+    "gpt_neox.layers.5.mlp.dense_h_to_4h": 512
+  },
+  "runtime": {
+    "python": "3.10.18",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.57.1",
+    "datasets": "4.3.0",
+    "numpy": "2.2.6",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA A800 80GB PCIe"
+  },
+  "arguments": {
+    "artifact_alignment": 64,
+    "backup_name": "",
+    "batch_size": 1,
+    "bits": 4,
+    "calib_limit": 8,
+    "comfort_absolute_tolerance": 0.0001,
+    "comfort_epsilons": [
+      0.0,
+      0.03125,
+      0.0625,
+      0.09375,
+      0.125,
+      0.1875,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875,
+      1.0
+    ],
+    "comfort_fit_max_epsilon": 0.125,
+    "comfort_relative_tolerance": 0.2,
+    "comfort_strategies": [
+      "Q",
+      "Q_block_scale",
+      "Q+S_OBS",
+      "Q+L",
+      "Q+S+L_QL_budget_component_scale",
+      "Q+S+L_component_scale"
+    ],
+    "dataset": "wikitext",
+    "device": "cuda",
+    "disjoint_text_splits": true,
+    "emit_codec_artifacts": true,
+    "endpoint_target": 0.258,
+    "enforce_serialized_rate_cap": true,
+    "eval_limit": 16,
+    "l_method": "whitened_svd",
+    "layer_positions": [
+      "first",
+      "middle",
+      "last"
+    ],
+    "layers": [],
+    "local_files_only": true,
+    "max_allocation_ranks": 32,
+    "max_modules": 6,
+    "model": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+    "module_types": [
+      "dense_h_to_4h",
+      "dense_4h_to_h"
+    ],
+    "obs_rcond": 1e-10,
+    "output_dir": "results/pretrained_hessian_repair_pythia70m_serialized_20260714",
+    "proxy_only": false,
+    "rate_tolerance": 0.01,
+    "repair_block_sizes": [
+      32,
+      64,
+      128,
+      256,
+      512
+    ],
+    "revision": "",
+    "rho_threshold": 0.1,
+    "s_method": "wanda",
+    "scale_bounds": [
+      0.0,
+      2.0
+    ],
+    "scale_max": 2.0,
+    "scale_min": 0.0,
+    "seed": 17,
+    "selected_layers": [
+      "gpt_neox.layers.0.mlp.dense_4h_to_h",
+      "gpt_neox.layers.0.mlp.dense_h_to_4h",
+      "gpt_neox.layers.3.mlp.dense_4h_to_h",
+      "gpt_neox.layers.3.mlp.dense_h_to_4h",
+      "gpt_neox.layers.5.mlp.dense_4h_to_h",
+      "gpt_neox.layers.5.mlp.dense_h_to_4h"
+    ],
+    "selector_activation_sample_rows": 256,
+    "sequence_length": 128,
+    "skip_comfort": false,
+    "skip_plots": false,
+    "split": "validation",
+    "spq_lora_steps": 0,
+    "spq_lora_train_limit": 0,
+    "subset": "wikitext-2-raw-v1",
+    "support_encoding": "csr_fixed",
+    "svd_device": "cuda",
+    "target_ratios": [
+      0.258,
+      0.275,
+      0.3
+    ],
+    "text_pool_count": 264,
+    "text_source": "dataset",
+    "text_source_used": "dataset:wikitext",
+    "text_split_policy": "content_disjoint_sequential_text_windows",
+    "texts_per_batch_window": 8,
+    "torch_dtype": "float32",
+    "unique_text_pool_count": 200,
+    "zero_shot_tasks": []
+  }
+}

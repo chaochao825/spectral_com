@@ -1,0 +1,113 @@
+# 交互感知异构压缩：两阶段方法与当前结果
+
+更新时间：2026-07-17
+
+## 1. 当前研究问题
+
+当前方法不再把目标限定为“提出一种 Q+S+L 组合”，而是研究：
+
+> 在真实序列化字节、输出敏感几何和独立验证集约束下，如何自动选择量化、稀疏、低秩、分组尺度以及 dense fallback，并判断同层组件交互是否真的有价值。
+
+每个被选线性层的候选可写为：
+
+```text
+W_hat = Q(W; bitwidth, quantizer, group_size) + S + L
+```
+
+候选池同时包含：
+
+- 3/4-bit 等 base quantization 位宽；
+- row scale 与 column-group scale；
+- symmetric RTN 与 MSE clip；
+- sparse support 及固定 support 上的 OBS value refit；
+- 不同 rank 的 covariance-whitened low-rank repair；
+- 4/8/16-bit low-rank factors；
+- pure-S、pure-L、逐层二选一 no-joint 和允许同层 S+L 的 QSL。
+
+## 2. 两阶段分配
+
+### 阶段 A：代理筛选
+
+在完整 multi-layer canonical artifact 上计算真实 natural serialized bytes。动态规划在共享 Q+L cap 下按 Hessian/activation-covariance cost 保留 top-K，而不是用各层 nominal bits 相加代替容器字节。
+
+### 阶段 B：validation NLL 重排
+
+代理 top-K 分别替换模型，在独立 validation split 上计算 NLL。validation winner 才成为最终 endpoint。train 用于 covariance/calibration，validation 只用于分配，test 在选择完成前不访问。
+
+当前输出包括：
+
+- `allocation_validation_rerank.csv`
+- `allocation_validation_window_nll.csv`
+- `endpoint_window_nll.csv`
+- `strategy_endpoints.csv`
+- `artifact_manifest.json`
+- `artifact_payloads.csv`
+
+## 3. 同层交互的严格门禁
+
+QSL 只有同时满足以下条件，才能支持“同层联合有价值”：
+
+1. no-joint 使用相同候选基础，只禁止任一层同时启用 S 和 L；
+2. validation 选定 QSL 后，no-joint 重新在该 QSL 的 exact natural file bytes 上分配；
+3. 两个最终 artifact 的 natural bytes 完全相等，尾部 padding 相等不算；
+4. final test 上 QSL NLL 严格低于 no-joint。
+
+若精确自然字节匹配不可达，或 QSL 只退化为 pure-S/pure-L，结果仍可描述，但不能作为同层交互证据。
+
+全 MLP 候选较多时，exact-natural 动态规划可能触及硬状态上限。此时核心 QSL 与共享上限下的 cap-best no-joint 结果仍可输出，但 exact-natural 反事实被标记为 `state_limit_exceeded`，联合价值结论强制为不可判定；不得用近似字节匹配或碰巧相等的已输出文件替代该门禁。
+
+## 4. 已完成真实 smoke
+
+运行目录：
+
+```text
+/home/wangmeiqi/codex_worktrees/com_compression-two-stage-20260717/
+results/two_stage_heterogeneous_pythia70m_natural_match_smoke_20260717
+```
+
+设置：Pythia-70M、一个 MLP tensor、train/validation/test 独立 split、`2 x 32` validation/test token windows、proxy top-2、异构量化与低秩位宽候选。
+
+关键结果：
+
+| 项目 | 结果 |
+|---|---:|
+| QSL natural bytes | 627,712 |
+| exact-matched no-joint natural bytes | 627,712 |
+| QSL final-test NLL | 4.544342 |
+| no-joint final-test NLL | 4.544342 |
+| QSL test NLL gain | 0.000000 |
+| joint-value claim | false |
+
+QSL 和 no-joint 最终都选择了同一个 4-bit row-scale RTN + FP16 low-rank 配置。该结果证明 exact-natural counterfactual 和 test gate 能正常工作，但不证明同层 S+L 有收益。
+
+pure-S endpoint 选择了 4-bit、group-64、MSE-clip base quantizer，说明异构候选分配确实生效，而非始终退化为默认量化器。
+
+## 5. 当前工程状态
+
+- codec 支持分组量化 scale、不同 base bitwidth/quantizer 和量化低秩 factors；
+- endpoint CSV 记录每层实际 `q_bits`、quantizer、group size 和 low-rank factor bits；
+- 91 项 codec/Hessian/suite 关键回归通过；目标发布树全量回归为 318 passed、3 skipped，skip 仅对应按发布政策省略的历史 `.hrc` payload；
+- 新增 `configs/large_model_interaction_aware_v4_20260717.json`；
+- v4 包含 Qwen2.5-3B、Llama-2-7B、Mistral-7B 的单层 sentinel、三深度 6-tensor 和全 MLP feasibility 阶段；
+- Qwen2.5-3B sentinel 使用缩减但仍异构的提交门禁网格：3/4-bit、row/group、RTN/MSE、4/16-bit factors、proxy top-2 validation rerank 和 exact-natural no-joint；更完整的 factor/rank 网格保留在三深度阶段；
+- 首个 Qwen2.5-3B sentinel 使用旧配置在 210 的物理 GPU 2 启动；其输出只保留为迁移审计，修复后的门禁结果完成前不作结论。
+
+## 6. 结果解释原则
+
+- Hessian cost 用于候选筛选，不等同于 task loss；
+- validation NLL 是模型选择证据，final test 只用于一次最终评估；
+- 同一 physical padded bytes 不代表同一自然资源；
+- 单层 no-joint 必然退化为 pure-S 或 pure-L，真正的异构 no-joint 优势主要在多层分配中出现；
+- QSL 若没有选择任何同层 S+L 状态，即使优于其他方法，也不能归因于联合交互；
+- selected-weight artifact 不是完整 checkpoint 压缩结果，必须明确 scope。
+
+## 7. 下一步判据
+
+三深度和全 MLP 阶段重点检查：
+
+1. QSL 是否在至少一层同时启用 S 和 L；
+2. matched no-joint 是否能在相同 natural bytes 下保持强竞争力；
+3. validation 选择是否稳定跨 Qwen/Llama/Mistral；
+4. QSL 的 final-test 改善是否超过 paired-window 不确定性；
+5. 异构量化和 repair 分配是否呈现可解释的深度/模块规律；
+6. 静态字节收益能否转化为峰值显存、运行时流量和真实延迟收益。

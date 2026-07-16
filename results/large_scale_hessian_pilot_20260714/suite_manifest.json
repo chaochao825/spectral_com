@@ -1,0 +1,739 @@
+{
+  "git": {
+    "branch": "agent/hessian-repair-exact-rate-20260713",
+    "commit": "49c34b9da47d4a145b4cfd1ea35a8b222ec6fc38",
+    "dirty": true,
+    "status_porcelain": "M scripts/run_pretrained_hessian_repair.py\n M src/llm_spectral_dynamics/structured/hessian_repair.py\n M tests/test_hessian_artifact_integration.py\n M tests/test_hessian_repair.py\n?? configs/\n?? results/_failed_archive/\n?? results/large_scale_hessian_pilot_20260714/\n?? scripts/run_large_scale_hessian_suite.py\n?? tests/test_large_scale_hessian_suite.py"
+  },
+  "jobs": [
+    {
+      "actual": {
+        "actual_calibration_activation_tokens_max": 512,
+        "actual_calibration_activation_tokens_min": 512,
+        "actual_eval_tokens": 1016,
+        "calib_digest": "a4d7fead255c1d7d4478029044303c3b29bd8ad86e409d6a44d5c149ce1e6597",
+        "calib_text_count": 32,
+        "content_disjoint": true,
+        "eval_digest": "062de6de18b886c7151fc2e9bf4e5ab047ed7b9c52cee08f3f0be5631c840d8b",
+        "eval_text_count": 64,
+        "model_identity": {
+          "model_config_sha256": "d12b1ec0229ff952800b61829e498b8bebb85840f0a9388f241c222738472a08",
+          "model_name_or_path": "EleutherAI/pythia-70m",
+          "requested_revision": "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+          "resolved_model_commit_hash": "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+          "resolved_tokenizer_commit_hash": null,
+          "tokenizer_name_or_path": "EleutherAI/pythia-70m"
+        },
+        "model_parameter_count": 70426624,
+        "payload_scope": "selected_linear_weights_only",
+        "reference_artifact": {
+          "file_bytes": 25171776,
+          "path": "artifacts/selected_linear_fp16_reference.hrc",
+          "sha256": "5ae2ad5c9cb880ee7fa76db781be6568a3b54755cdd40ee9663bee858473e195"
+        },
+        "runtime": {
+          "cuda_available": true,
+          "cuda_device": "NVIDIA A800 80GB PCIe",
+          "datasets": "4.3.0",
+          "numpy": "2.2.6",
+          "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+          "python": "3.10.18",
+          "torch": "2.9.0+cu128",
+          "transformers": "4.57.1"
+        },
+        "scope_claim": "all transformer-block MLP projection weights; embeddings, attention, and output head remain dense",
+        "selected_parameter_count": 12582912,
+        "selected_tensor_count": 12,
+        "strategy_artifacts": {
+          "Q": {
+            "file_bytes": 6334784,
+            "path": "artifacts/Q.hrc",
+            "sha256": "1df209a4b25315c7e16c5ece52b4de28b5053a2d7409a0140b7cc9978c91bbeb"
+          },
+          "Q+L": {
+            "file_bytes": 6497344,
+            "path": "artifacts/Q_L.hrc",
+            "sha256": "1c14fb4ff926a2a0c3f101b133547edf251e77851d844b1ba4977f1c254ea8b9"
+          },
+          "Q+S": {
+            "file_bytes": 6520898,
+            "path": "artifacts/Q_S.hrc",
+            "sha256": "066134f08ff4d0f8e82385e6946cab9d39dafe4887cb5c855bc4174f5a7f045c"
+          },
+          "Q+S+L": {
+            "file_bytes": 6507456,
+            "path": "artifacts/Q_S_L.hrc",
+            "sha256": "fd07dbba6fdc6344ff91e2ddaec3eac49f499345f81eaa710cb561f54012a236"
+          },
+          "Q+S+L_QL_budget": {
+            "file_bytes": 6497344,
+            "path": "artifacts/Q_S_L_QL_budget.hrc",
+            "sha256": "e2fc1d123cc4486f7fcf332a82499e9fd309c8bbef19adfe2f935c00f8c11606"
+          },
+          "Q+S+L_QL_budget_component_scale": {
+            "file_bytes": 6497344,
+            "path": "artifacts/Q_S_L_QL_budget_component_scale.hrc",
+            "sha256": "9f65d9883cee9c51bbb2726ec8ed2b44f0985d46ec5dc2ac0966e578fa233041"
+          },
+          "Q+S+L_component_scale": {
+            "file_bytes": 6507456,
+            "path": "artifacts/Q_S_L_component_scale.hrc",
+            "sha256": "f217430424517117f4649c955b3299e22c58381cccd980ae7013b82c2440f9ba"
+          },
+          "Q+S_OBS": {
+            "file_bytes": 6520898,
+            "path": "artifacts/Q_S_OBS.hrc",
+            "sha256": "c223c734a7f786ff4be21dc08ddb4972d5c181aa179651081482b4f3a8f680fb"
+          },
+          "Q+S_OBS+L": {
+            "file_bytes": 6507456,
+            "path": "artifacts/Q_S_OBS_L.hrc",
+            "sha256": "b078979ba8f22e92c4917183499923b56ca2bc9b7266127f1423db59c498637f"
+          },
+          "Q_block_scale": {
+            "file_bytes": 6500672,
+            "path": "artifacts/Q_block_scale.hrc",
+            "sha256": "defa770883d1bd5730df66f4506b5bd8d7ed3b471fc0040fc71c1201100fcc67"
+          },
+          "Q_global_scale": {
+            "file_bytes": 6334784,
+            "path": "artifacts/Q_global_scale.hrc",
+            "sha256": "e415bc4e1546f92ebbde4e5844d21281f1e5c0d2caf20f3b80b0ebdc0523735d"
+          }
+        }
+      },
+      "availability_note": "cache verified on server 210 at pinned snapshot",
+      "command": [
+        "/home/wangmeiqi/anaconda3/envs/base-2-bitnet/bin/python",
+        "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/scripts/run_pretrained_hessian_repair.py",
+        "--model",
+        "EleutherAI/pythia-70m",
+        "--revision",
+        "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+        "--output-dir",
+        "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/results/large_scale_hessian_pilot_20260714/jobs/pythia70m_full_mlp_pilot__seed17__rate0p258",
+        "--device",
+        "auto",
+        "--svd-device",
+        "auto",
+        "--torch-dtype",
+        "float32",
+        "--local-files-only",
+        "--dataset",
+        "wikitext",
+        "--subset",
+        "wikitext-2-raw-v1",
+        "--split",
+        "validation",
+        "--calib-limit",
+        "4",
+        "--eval-limit",
+        "8",
+        "--sequence-length",
+        "128",
+        "--batch-size",
+        "1",
+        "--texts-per-batch-window",
+        "8",
+        "--selector-activation-sample-rows",
+        "256",
+        "--module-types",
+        "dense_h_to_4h,dense_4h_to_h",
+        "--layers",
+        "0,1,2,3,4,5",
+        "--max-modules",
+        "0",
+        "--bits",
+        "4",
+        "--target-ratios",
+        "0.258",
+        "--endpoint-target",
+        "0.258",
+        "--support-encoding",
+        "csr_fixed",
+        "--emit-codec-artifacts",
+        "--enforce-serialized-rate-cap",
+        "--artifact-alignment",
+        "64",
+        "--s-method",
+        "wanda",
+        "--l-method",
+        "whitened_svd",
+        "--repair-block-sizes",
+        "32,64,128,256,512",
+        "--max-allocation-ranks",
+        "32",
+        "--obs-rcond",
+        "1e-10",
+        "--scale-min",
+        "0.0",
+        "--scale-max",
+        "2.0",
+        "--rho-threshold",
+        "0.1",
+        "--rate-tolerance",
+        "0.01",
+        "--comfort-epsilons",
+        "0.0,0.03125,0.0625,0.09375,0.125,0.1875,0.25,0.375,0.5,0.625,0.75,0.875,1.0",
+        "--comfort-strategies",
+        "Q,Q_block_scale,Q+S_OBS,Q+L,Q+S+L_QL_budget_component_scale,Q+S+L_component_scale",
+        "--comfort-fit-max-epsilon",
+        "0.125",
+        "--comfort-relative-tolerance",
+        "0.2",
+        "--comfort-absolute-tolerance",
+        "0.0001",
+        "--seed",
+        "17"
+      ],
+      "data_window_independence": "shared_sequential_windows_not_independent_across_seeds",
+      "evidence_role": "scalability_smoke",
+      "execution_fingerprint_sha256": "90bd385a9e89d866cec80ef33b8b5fc71aa3de260dbb7fdb45dfc1ed749ce3e9",
+      "exit_code": 0,
+      "job_config_sha256": "0f02b37eeb31baf91945eab7dcb11447b2585a27a30ca92e996ac6867d3dd216",
+      "job_id": "pythia70m_full_mlp_pilot__seed17__rate0p258",
+      "lane": "A_post_training_no_backward",
+      "model_argument": "EleutherAI/pythia-70m",
+      "model_availability": "required",
+      "model_declared": "EleutherAI/pythia-70m",
+      "model_override_env": "COMPRESSION_PYTHIA70M_MODEL",
+      "model_scale": "70M",
+      "numerical_source_sha256": "d5444b26c3f77718ba611ef95c386c28799ca511cc9be50ade2628467b6266b3",
+      "output_dir": "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/results/large_scale_hessian_pilot_20260714/jobs/pythia70m_full_mlp_pilot__seed17__rate0p258",
+      "planned_calibration_tokens_per_selected_tensor": 512,
+      "planned_eval_nll_tokens": 1016,
+      "protocol_manifest_consumed": false,
+      "reason": null,
+      "revision": "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+      "seed": 17,
+      "seed_aggregation_allowed": false,
+      "stage_id": "pythia70m_full_mlp_pilot",
+      "status": "completed_valid",
+      "suite_config_sha256": "ed7710e3343444b879c3c06771847708641e00e5c1c5760f6a2fcfdf7c56aab5",
+      "target_rate": 0.258,
+      "tensor_scope": {
+        "claim_scope": "all transformer-block MLP projection weights; embeddings, attention, and output head remain dense",
+        "expected_selected_tensors": 12,
+        "id": "full_mlp_weights",
+        "layers": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "max_modules": 0,
+        "module_types": [
+          "dense_h_to_4h",
+          "dense_4h_to_h"
+        ]
+      }
+    },
+    {
+      "actual": {
+        "actual_calibration_activation_tokens_max": 512,
+        "actual_calibration_activation_tokens_min": 512,
+        "actual_eval_tokens": 1016,
+        "calib_digest": "a4d7fead255c1d7d4478029044303c3b29bd8ad86e409d6a44d5c149ce1e6597",
+        "calib_text_count": 32,
+        "content_disjoint": true,
+        "eval_digest": "062de6de18b886c7151fc2e9bf4e5ab047ed7b9c52cee08f3f0be5631c840d8b",
+        "eval_text_count": 64,
+        "model_identity": {
+          "model_config_sha256": "b05fff435f07e2d162b4af7e95a917fe5ec5d3b4a8810936930c05f56660ae09",
+          "model_name_or_path": "/home/spco/base-2-bitnet/.hf_cache/hub/models--facebook--opt-125m/snapshots/27dcfa74d334bc871f3234de431e71c6eeba5dd6",
+          "requested_revision": null,
+          "resolved_model_commit_hash": "27dcfa74d334bc871f3234de431e71c6eeba5dd6",
+          "resolved_tokenizer_commit_hash": null,
+          "tokenizer_name_or_path": "/home/spco/base-2-bitnet/.hf_cache/hub/models--facebook--opt-125m/snapshots/27dcfa74d334bc871f3234de431e71c6eeba5dd6"
+        },
+        "model_parameter_count": 125239296,
+        "payload_scope": "selected_linear_weights_only",
+        "reference_artifact": {
+          "file_bytes": 47190592,
+          "path": "artifacts/selected_linear_fp16_reference.hrc",
+          "sha256": "7ea7cf624bbbdbd23d548c93b1ae661315aaa095ef326763c6d995606278f91b"
+        },
+        "runtime": {
+          "cuda_available": true,
+          "cuda_device": "NVIDIA A800 80GB PCIe",
+          "datasets": "4.3.0",
+          "numpy": "2.2.6",
+          "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+          "python": "3.10.18",
+          "torch": "2.9.0+cu128",
+          "transformers": "4.57.1"
+        },
+        "scope_claim": "five depth-stratified transformer blocks; only fc1/fc2 MLP projection weights are charged and perturbed",
+        "selected_parameter_count": 23592960,
+        "selected_tensor_count": 10,
+        "strategy_artifacts": {
+          "Q": {
+            "file_bytes": 11844800,
+            "path": "artifacts/Q.hrc",
+            "sha256": "be0919c4574a61e48276322952fbf86c71c37c03e66addf0fbafdef9e002a55e"
+          },
+          "Q+L": {
+            "file_bytes": 12158976,
+            "path": "artifacts/Q_L.hrc",
+            "sha256": "54d0418cdf4a93edc1c151f0b3e91c7e6b072c8d5d5dc25095ba67dd9f7aafd8"
+          },
+          "Q+S": {
+            "file_bytes": 12195064,
+            "path": "artifacts/Q_S.hrc",
+            "sha256": "fa1d2a79fc9199f1c3da1d6fc13c4d82faa6065f10007ebc78c2cf768f6e6bee"
+          },
+          "Q+S+L": {
+            "file_bytes": 12201984,
+            "path": "artifacts/Q_S_L.hrc",
+            "sha256": "158639907b02e5ace671fdc0180a07d08546392efa4604d00d43d4f95e0bc965"
+          },
+          "Q+S+L_QL_budget": {
+            "file_bytes": 12158976,
+            "path": "artifacts/Q_S_L_QL_budget.hrc",
+            "sha256": "7973830383f7dfb9d20990a7892c5715a179f557fec3cab29264e649537793fa"
+          },
+          "Q+S+L_QL_budget_component_scale": {
+            "file_bytes": 12158976,
+            "path": "artifacts/Q_S_L_QL_budget_component_scale.hrc",
+            "sha256": "3d04c8cd246233da6d2d0eaea2806f532c29de1ea15adc94a2bf53a4f716a58f"
+          },
+          "Q+S+L_component_scale": {
+            "file_bytes": 12201984,
+            "path": "artifacts/Q_S_L_component_scale.hrc",
+            "sha256": "e3d3d4aaf92e4120ecf21e873c91e11f87f47925c034445e99db590df702545c"
+          },
+          "Q+S_OBS": {
+            "file_bytes": 12195064,
+            "path": "artifacts/Q_S_OBS.hrc",
+            "sha256": "919787ec995c1d332841a34d7a534e208a40345cb74cb35f5816bc7677a548bf"
+          },
+          "Q+S_OBS+L": {
+            "file_bytes": 12201984,
+            "path": "artifacts/Q_S_OBS_L.hrc",
+            "sha256": "7263675d4a5e916b2a4e10dae6e580038e275438562814ac3b687d04703c0fe6"
+          },
+          "Q_block_scale": {
+            "file_bytes": 12156672,
+            "path": "artifacts/Q_block_scale.hrc",
+            "sha256": "dca11753350ac5cc9fa03a64f7a9de33e682b77550d302575dfc6869f09d1b64"
+          },
+          "Q_global_scale": {
+            "file_bytes": 11844800,
+            "path": "artifacts/Q_global_scale.hrc",
+            "sha256": "751fe998a53c0c6d5b1f3b7f189b6b308f55426758b3185df7e5b631c1387f63"
+          }
+        }
+      },
+      "availability_note": "cache verified on server 210; architecture-control scope",
+      "command": [
+        "/home/wangmeiqi/anaconda3/envs/base-2-bitnet/bin/python",
+        "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/scripts/run_pretrained_hessian_repair.py",
+        "--model",
+        "/home/spco/base-2-bitnet/.hf_cache/hub/models--facebook--opt-125m/snapshots/27dcfa74d334bc871f3234de431e71c6eeba5dd6",
+        "--output-dir",
+        "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/results/large_scale_hessian_pilot_20260714/jobs/opt125m_depth_mlp_pilot__seed17__rate0p258",
+        "--device",
+        "auto",
+        "--svd-device",
+        "auto",
+        "--torch-dtype",
+        "float32",
+        "--local-files-only",
+        "--dataset",
+        "wikitext",
+        "--subset",
+        "wikitext-2-raw-v1",
+        "--split",
+        "validation",
+        "--calib-limit",
+        "4",
+        "--eval-limit",
+        "8",
+        "--sequence-length",
+        "128",
+        "--batch-size",
+        "1",
+        "--texts-per-batch-window",
+        "8",
+        "--selector-activation-sample-rows",
+        "256",
+        "--module-types",
+        "fc1,fc2",
+        "--layers",
+        "0,3,6,9,11",
+        "--max-modules",
+        "0",
+        "--bits",
+        "4",
+        "--target-ratios",
+        "0.258",
+        "--endpoint-target",
+        "0.258",
+        "--support-encoding",
+        "csr_fixed",
+        "--emit-codec-artifacts",
+        "--enforce-serialized-rate-cap",
+        "--artifact-alignment",
+        "64",
+        "--s-method",
+        "wanda",
+        "--l-method",
+        "whitened_svd",
+        "--repair-block-sizes",
+        "32,64,128,256,512",
+        "--max-allocation-ranks",
+        "32",
+        "--obs-rcond",
+        "1e-10",
+        "--scale-min",
+        "0.0",
+        "--scale-max",
+        "2.0",
+        "--rho-threshold",
+        "0.1",
+        "--rate-tolerance",
+        "0.01",
+        "--comfort-epsilons",
+        "0.0,0.03125,0.0625,0.09375,0.125,0.1875,0.25,0.375,0.5,0.625,0.75,0.875,1.0",
+        "--comfort-strategies",
+        "Q,Q_block_scale,Q+S_OBS,Q+L,Q+S+L_QL_budget_component_scale,Q+S+L_component_scale",
+        "--comfort-fit-max-epsilon",
+        "0.125",
+        "--comfort-relative-tolerance",
+        "0.2",
+        "--comfort-absolute-tolerance",
+        "0.0001",
+        "--seed",
+        "17"
+      ],
+      "data_window_independence": "shared_sequential_windows_not_independent_across_seeds",
+      "evidence_role": "scalability_smoke",
+      "execution_fingerprint_sha256": "426b5df9bd46a09ad68752fdb4e7021a729bb0aac6d3e42fedee006997bd425f",
+      "exit_code": 0,
+      "job_config_sha256": "466fadf198f84158e272f2697bf978c908a33c2d1c039db9ef7f2f2a1375859c",
+      "job_id": "opt125m_depth_mlp_pilot__seed17__rate0p258",
+      "lane": "A_post_training_no_backward",
+      "model_argument": "/home/spco/base-2-bitnet/.hf_cache/hub/models--facebook--opt-125m/snapshots/27dcfa74d334bc871f3234de431e71c6eeba5dd6",
+      "model_availability": "optional",
+      "model_declared": "facebook/opt-125m",
+      "model_override_env": "COMPRESSION_OPT125M_MODEL",
+      "model_scale": "125M",
+      "numerical_source_sha256": "d5444b26c3f77718ba611ef95c386c28799ca511cc9be50ade2628467b6266b3",
+      "output_dir": "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/results/large_scale_hessian_pilot_20260714/jobs/opt125m_depth_mlp_pilot__seed17__rate0p258",
+      "planned_calibration_tokens_per_selected_tensor": 512,
+      "planned_eval_nll_tokens": 1016,
+      "protocol_manifest_consumed": false,
+      "reason": null,
+      "revision": null,
+      "seed": 17,
+      "seed_aggregation_allowed": false,
+      "stage_id": "opt125m_depth_mlp_pilot",
+      "status": "completed_valid",
+      "suite_config_sha256": "ed7710e3343444b879c3c06771847708641e00e5c1c5760f6a2fcfdf7c56aab5",
+      "target_rate": 0.258,
+      "tensor_scope": {
+        "claim_scope": "five depth-stratified transformer blocks; only fc1/fc2 MLP projection weights are charged and perturbed",
+        "expected_selected_tensors": 10,
+        "id": "five_depth_mlp_weights",
+        "layers": [
+          0,
+          3,
+          6,
+          9,
+          11
+        ],
+        "max_modules": 0,
+        "module_types": [
+          "fc1",
+          "fc2"
+        ]
+      }
+    },
+    {
+      "actual": {
+        "actual_calibration_activation_tokens_max": 512,
+        "actual_calibration_activation_tokens_min": 512,
+        "actual_eval_tokens": 1016,
+        "calib_digest": "a4d7fead255c1d7d4478029044303c3b29bd8ad86e409d6a44d5c149ce1e6597",
+        "calib_text_count": 32,
+        "content_disjoint": true,
+        "eval_digest": "062de6de18b886c7151fc2e9bf4e5ab047ed7b9c52cee08f3f0be5631c840d8b",
+        "eval_text_count": 64,
+        "model_identity": {
+          "model_config_sha256": "7755bfc939c6b4ab353d65fd0fdf9952f9314238ef4d3187d914698f6e09281b",
+          "model_name_or_path": "/home/zengqiuhao/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+          "requested_revision": null,
+          "resolved_model_commit_hash": "c1899de289a04d12100db370d81485cdf75e47ca",
+          "resolved_tokenizer_commit_hash": null,
+          "tokenizer_name_or_path": "/home/zengqiuhao/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca"
+        },
+        "model_parameter_count": 596049920,
+        "payload_scope": "selected_linear_weights_only",
+        "reference_artifact": {
+          "file_bytes": 62919296,
+          "path": "artifacts/selected_linear_fp16_reference.hrc",
+          "sha256": "4e3bfdc4cf0bf42aad56818016eec700283d752404f4a6250b674cb349fffb89"
+        },
+        "runtime": {
+          "cuda_available": true,
+          "cuda_device": "NVIDIA A800 80GB PCIe",
+          "datasets": "4.3.0",
+          "numpy": "2.2.6",
+          "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+          "python": "3.10.18",
+          "torch": "2.9.0+cu128",
+          "transformers": "4.57.1"
+        },
+        "scope_claim": "five depth-stratified transformer blocks; only up/down MLP projection weights are charged and perturbed",
+        "selected_parameter_count": 31457280,
+        "selected_tensor_count": 10,
+        "strategy_artifacts": {
+          "Q": {
+            "file_bytes": 15779648,
+            "path": "artifacts/Q.hrc",
+            "sha256": "94600e2b661953dde34baccc3c2f7419d549558de22bc05ba039917dc6d88b2e"
+          },
+          "Q+L": {
+            "file_bytes": 16196352,
+            "path": "artifacts/Q_L.hrc",
+            "sha256": "2a96d95a7cdddd14b310cbc7554e9eb9374e6b1a2458e68b874633b90dac6cc0"
+          },
+          "Q+S": {
+            "file_bytes": 16254218,
+            "path": "artifacts/Q_S.hrc",
+            "sha256": "39500f98b4e6df505d1e2c03895948c500613a84341a3600c2c3209cee11b23f"
+          },
+          "Q+S+L": {
+            "file_bytes": 16261248,
+            "path": "artifacts/Q_S_L.hrc",
+            "sha256": "7fba3879c5dde24e3112996646aac12b4791d195208dc937c47da1cbca58872c"
+          },
+          "Q+S+L_QL_budget": {
+            "file_bytes": 16196352,
+            "path": "artifacts/Q_S_L_QL_budget.hrc",
+            "sha256": "6f05da8433721c8d2adce6f303aafd9fb57ade866c8e557793ce0301590b816b"
+          },
+          "Q+S+L_QL_budget_component_scale": {
+            "file_bytes": 16196352,
+            "path": "artifacts/Q_S_L_QL_budget_component_scale.hrc",
+            "sha256": "95336e620bcd40abf865f83534efd82c0614d9a353467f563174e3341def0c11"
+          },
+          "Q+S+L_component_scale": {
+            "file_bytes": 16261248,
+            "path": "artifacts/Q_S_L_component_scale.hrc",
+            "sha256": "02b1db523dc5a870c3dc7590c2e28351b0cad2d00c405c074241480a05635b14"
+          },
+          "Q+S_OBS": {
+            "file_bytes": 16254218,
+            "path": "artifacts/Q_S_OBS.hrc",
+            "sha256": "75669199b51bdf92d38a5ecfc80d58f46a11abef6001aaa68b5cad6897492a1e"
+          },
+          "Q+S_OBS+L": {
+            "file_bytes": 16261248,
+            "path": "artifacts/Q_S_OBS_L.hrc",
+            "sha256": "9a88723f8c752c119ba83c26f46b355e104928bb78efc72feed3ff1be9c6d2d0"
+          },
+          "Q_block_scale": {
+            "file_bytes": 16230272,
+            "path": "artifacts/Q_block_scale.hrc",
+            "sha256": "d40ed1dcde23cf1d8fe706965189d06cafa758fc3c68d5b5868294edb8dd7155"
+          },
+          "Q_global_scale": {
+            "file_bytes": 15779648,
+            "path": "artifacts/Q_global_scale.hrc",
+            "sha256": "f4a4795dd1b481ca539a07b09accdd73fff0e3f98446b1cc87044ba1059ebbd7"
+          }
+        }
+      },
+      "availability_note": "cache verified on server 210; architecture-control scope",
+      "command": [
+        "/home/wangmeiqi/anaconda3/envs/base-2-bitnet/bin/python",
+        "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/scripts/run_pretrained_hessian_repair.py",
+        "--model",
+        "/home/zengqiuhao/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+        "--output-dir",
+        "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/results/large_scale_hessian_pilot_20260714/jobs/qwen3_06b_depth_mlp_pilot__seed17__rate0p258",
+        "--device",
+        "auto",
+        "--svd-device",
+        "auto",
+        "--torch-dtype",
+        "float32",
+        "--local-files-only",
+        "--dataset",
+        "wikitext",
+        "--subset",
+        "wikitext-2-raw-v1",
+        "--split",
+        "validation",
+        "--calib-limit",
+        "4",
+        "--eval-limit",
+        "8",
+        "--sequence-length",
+        "128",
+        "--batch-size",
+        "1",
+        "--texts-per-batch-window",
+        "8",
+        "--selector-activation-sample-rows",
+        "256",
+        "--module-types",
+        "up_proj,down_proj",
+        "--layers",
+        "0,7,14,21,27",
+        "--max-modules",
+        "0",
+        "--bits",
+        "4",
+        "--target-ratios",
+        "0.258",
+        "--endpoint-target",
+        "0.258",
+        "--support-encoding",
+        "csr_fixed",
+        "--emit-codec-artifacts",
+        "--enforce-serialized-rate-cap",
+        "--artifact-alignment",
+        "64",
+        "--s-method",
+        "wanda",
+        "--l-method",
+        "whitened_svd",
+        "--repair-block-sizes",
+        "32,64,128,256,512",
+        "--max-allocation-ranks",
+        "32",
+        "--obs-rcond",
+        "1e-10",
+        "--scale-min",
+        "0.0",
+        "--scale-max",
+        "2.0",
+        "--rho-threshold",
+        "0.1",
+        "--rate-tolerance",
+        "0.01",
+        "--comfort-epsilons",
+        "0.0,0.03125,0.0625,0.09375,0.125,0.1875,0.25,0.375,0.5,0.625,0.75,0.875,1.0",
+        "--comfort-strategies",
+        "Q,Q_block_scale,Q+S_OBS,Q+L,Q+S+L_QL_budget_component_scale,Q+S+L_component_scale",
+        "--comfort-fit-max-epsilon",
+        "0.125",
+        "--comfort-relative-tolerance",
+        "0.2",
+        "--comfort-absolute-tolerance",
+        "0.0001",
+        "--seed",
+        "17"
+      ],
+      "data_window_independence": "shared_sequential_windows_not_independent_across_seeds",
+      "evidence_role": "scalability_smoke",
+      "execution_fingerprint_sha256": "bddc48723932e32cd417780634b3ed41bf5fa5fc6954a6f65d00c8bbaf9d20fd",
+      "exit_code": 0,
+      "job_config_sha256": "b6aba40261704db83d0bd7211abf7e511acbbebab4664a2fb3050092af0f22ab",
+      "job_id": "qwen3_06b_depth_mlp_pilot__seed17__rate0p258",
+      "lane": "A_post_training_no_backward",
+      "model_argument": "/home/zengqiuhao/.cache/huggingface/hub/models--Qwen--Qwen3-0.6B/snapshots/c1899de289a04d12100db370d81485cdf75e47ca",
+      "model_availability": "optional",
+      "model_declared": "Qwen/Qwen3-0.6B",
+      "model_override_env": "COMPRESSION_QWEN3_06B_MODEL",
+      "model_scale": "0.6B",
+      "numerical_source_sha256": "d5444b26c3f77718ba611ef95c386c28799ca511cc9be50ade2628467b6266b3",
+      "output_dir": "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/results/large_scale_hessian_pilot_20260714/jobs/qwen3_06b_depth_mlp_pilot__seed17__rate0p258",
+      "planned_calibration_tokens_per_selected_tensor": 512,
+      "planned_eval_nll_tokens": 1016,
+      "protocol_manifest_consumed": false,
+      "reason": null,
+      "revision": null,
+      "seed": 17,
+      "seed_aggregation_allowed": false,
+      "stage_id": "qwen3_06b_depth_mlp_pilot",
+      "status": "completed_valid",
+      "suite_config_sha256": "ed7710e3343444b879c3c06771847708641e00e5c1c5760f6a2fcfdf7c56aab5",
+      "target_rate": 0.258,
+      "tensor_scope": {
+        "claim_scope": "five depth-stratified transformer blocks; only up/down MLP projection weights are charged and perturbed",
+        "expected_selected_tensors": 10,
+        "id": "five_depth_mlp_weights",
+        "layers": [
+          0,
+          7,
+          14,
+          21,
+          27
+        ],
+        "max_modules": 0,
+        "module_types": [
+          "up_proj",
+          "down_proj"
+        ]
+      }
+    }
+  ],
+  "method_contract": {
+    "artifact_scope_is_not_whole_model_unless_run_config_says_so": true,
+    "confirmatory_requires_protocol_manifest_consumed": true,
+    "current_seed_policy": "seed values share sequential data windows; repeated jobs are scalability checks and must not be pooled as independent evidence",
+    "expected_strategies": [
+      "Q",
+      "Q_global_scale",
+      "Q_block_scale",
+      "Q+S",
+      "Q+S_OBS",
+      "Q+L",
+      "Q+S+L_QL_budget",
+      "Q+S+L_QL_budget_component_scale",
+      "Q+S+L",
+      "Q+S_OBS+L",
+      "Q+S+L_component_scale"
+    ],
+    "one_process_per_model_seed_scope_rate": true,
+    "protocol_manifest_interface_supported_by_current_runner": false,
+    "resume_policy": "COMPLETED marker + exit_code 0 + matching suite/job/source hashes + all expected outputs and artifact hashes",
+    "running_or_failed_policy": "fail_closed_manual_quarantine_required"
+  },
+  "numerical_source_snapshot": {
+    "base_runner": {
+      "path": "scripts/run_pretrained_llm_orthogonality.py",
+      "sha256": "599a096a6f5009c14d0466c260f1d37577573569655d4a798a7109715cc2c08c",
+      "size_bytes": 239797
+    },
+    "codec": {
+      "path": "src/llm_spectral_dynamics/structured/codec_artifact.py",
+      "sha256": "503df2c2d7279989711a2dc1399ff8542d356298d823f3c4a6699f87bd857773",
+      "size_bytes": 29754
+    },
+    "hessian_repair": {
+      "path": "src/llm_spectral_dynamics/structured/hessian_repair.py",
+      "sha256": "86fdefcf6c0d028e4f5abe2c5fe72c7c1f4054d66b86ffa9628a07f446f20f00",
+      "size_bytes": 34705
+    },
+    "runner": {
+      "path": "scripts/run_pretrained_hessian_repair.py",
+      "sha256": "0b8caea5146314cb262b1e1786e5c0efa6c82d8bbbf5a9a14dd0d8b821977331",
+      "size_bytes": 114094
+    }
+  },
+  "orchestration_runtime": {
+    "cuda_visible_devices": "2",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "python_executable": "/home/wangmeiqi/anaconda3/envs/base-2-bitnet/bin/python",
+    "python_version": "3.10.18"
+  },
+  "runner": "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/scripts/run_pretrained_hessian_repair.py",
+  "schema_version": "large_scale_hessian_suite_manifest.v1",
+  "status_counts": {
+    "completed_valid": 3,
+    "failed": 0,
+    "invalid": 0,
+    "planned": 0,
+    "running": 0
+  },
+  "suite_config": "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/configs/large_scale_hessian_pilot_20260714.json",
+  "suite_config_sha256": "ed7710e3343444b879c3c06771847708641e00e5c1c5760f6a2fcfdf7c56aab5",
+  "suite_id": "large_scale_hessian_pilot_20260714",
+  "updated_at": "2026-07-13T20:55:35Z"
+}

@@ -209,7 +209,15 @@ def package_version(name: str) -> str:
 
 
 def args_snapshot(args: argparse.Namespace) -> dict[str, object]:
-    excluded = {"eval_texts", "calib_texts", "recovery_texts", "text_source_metadata", "data_cfg"}
+    excluded = {
+        "eval_texts",
+        "calib_texts",
+        "selection_texts",
+        "recovery_texts",
+        "comfort_texts",
+        "text_source_metadata",
+        "data_cfg",
+    }
     snapshot: dict[str, object] = {}
     for key, value in sorted(vars(args).items()):
         if key in excluded:

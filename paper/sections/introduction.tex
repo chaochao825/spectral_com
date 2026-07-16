@@ -1,0 +1,74 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Weight-only post-training compression is no longer a single-knob problem.
+Second-order quantizers, activation-aware scales, one-shot pruning, sparse
+outliers, and low-rank error reconstruction all preserve different parts of a
+pretrained model~\citep{frantar2023gptq,frantar2023sparsegpt,lin2024awq,dettmers2024spqr,zhang2024lqer}.
+This diversity motivates a natural hypothesis: if every mechanism has a
+small-perturbation regime in which loss grows slowly, then splitting a severe
+compression target across several mechanisms could remain inside several
+comfort zones and outperform concentrating all repair bytes in one mechanism
+over the same mandatory quantized base.
+
+Joint mechanisms and their interactions are not new by themselves.  SLiM
+combines quantization, semi-structured sparsity, and low-rank compensation;
+Harma et al. analyze Q/S order and non-orthogonality; OBR applies Hessian
+compensation to joint quantization and sparsification; and prior rate--distortion
+work couples Hessian or Fisher sensitivity to entropy or bit allocation
+~\citep{mozaffari2025slim,harma2025effective,guo2026optimal,choi2017towards,orr2025optimal,young2025radio}.
+We therefore study a narrower reproducibility question: what conclusions
+survive when realized heterogeneous endpoints are decoded from a declared
+self-describing artifact and compared by natural and final file bytes?
+
+Two gaps obstruct a clean test.  First, a nominal bit rate does not determine a
+heterogeneous artifact's size.  Sparse corrections need support indices and row
+pointers; low-rank corrections need two factors; scales and codebooks need
+descriptors; containers need headers and alignment.  A value-stream calculation
+can therefore call two endpoints equal-rate even when their decoded files
+differ.  Second, a small Hessian-weighted perturbation is not itself an
+accuracy certificate.  The task Hessian may be indefinite, a PSD proxy may not
+match it, the first-order term need not vanish, and curvature can drift along
+the path to the final codec endpoint.
+
+We study these gaps through \emph{exact-byte Hessian diagnostics}.  A
+deterministic research codec serializes the selected tensors, round-trips every
+endpoint, and charges codes, scales, sparse state, factors, descriptors, and
+padding.  In a declared PSD activation-Gram geometry, realized Q, S, and L
+increments are decomposed into self and signed cross terms.  A 13-point
+interpolation then checks whether the local proxy tracks held-out NLL all the
+way to the only deployable point, $\epsilon=1$.
+
+Our contributions are:
+\begin{itemize}
+  \item an executable, byte-faithful protocol and fail-closed artifact
+  validator, exact under the declared research codec, for
+  quantization (Q), scale protection, sparse residuals (S), fixed-support
+  Optimal Brain Surgeon (OBS)
+  value repair, low-rank residuals (L), and their compositions;
+  \item a theory that states what PSD near-orthogonality does guarantee and a
+  stricter same-byte exchange condition that includes gradient, interactions,
+  path error, and discrete byte overhead;
+  \item a parameter-utilization analysis based on held-out loss recovered per
+  added file byte, with zero-byte repairs reported separately; and
+  \item an evidence-aware comparison framework separating data-free PTQ,
+  calibrated frozen PTQ, backward-assisted correction, and global
+  fine-tuning/quantization-aware training (QAT).
+\end{itemize}
+
+The current strict result is intentionally negative.  On one \VerifiedModel{}
+run over \VerifiedTensorCount{} selected MLP tensors, Q+L and scaled Q+S+L are
+both \QLBytes{} bytes, but their perplexity increases are \QLDeltaPPL{} and
+\StrictQSLDeltaPPL{}.  This verified physical endpoint shows that a logical
+payload estimate is insufficient for the operational comparison.  Its strict
+QSL natural artifact is \StrictQSLTailPaddingBytes{} bytes below Q+L and is
+tail-padded to equal final length, so this result rejects the tested
+conservative per-layer candidate rather than a budget-exhausted global
+frontier.  It does not establish that composite compression is universally
+inferior.  We additionally
+execute all native endpoints in three separate single-seed scalability-smoke
+jobs: full Pythia-70M MLP scope and depth-stratified OPT-125M and Qwen3-0.6B
+MLP scopes.  All three retain a positive strict-scaled-QSL-minus-QL NLL sign
+despite near-orthogonal S--L proxy geometry.  This repeated diagnostic enlarges
+the execution scope, but unequal tensor scopes and one seed preclude a pooled
+or model-scale conclusion.

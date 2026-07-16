@@ -1,0 +1,78 @@
+\section{Related Work and Comparison Lanes}
+\label{sec:related}
+
+\paragraph{Frozen post-training methods.}
+GPTQ uses second-order information to update remaining weights during
+quantization, while SparseGPT applies an analogous one-shot view to
+pruning~\citep{frantar2023gptq,frantar2023sparsegpt}.  Wanda replaces the
+second-order solve with an activation--magnitude score~\citep{sun2024wanda}.
+AWQ searches activation-aware scales that protect salient
+channels~\citep{lin2024awq}.  SpQR and SqueezeLLM combine dense low-bit state
+with sparse high-precision state, but the latter's Fisher-sensitivity path
+requires loss gradients and therefore belongs in a different compute
+lane~\citep{dettmers2024spqr,kim2024squeezellm}.  LQER, QERA, EoRA, and SLiM
+reconstruct compression error in low-rank or joint sparse/quantized
+representations~\citep{zhang2024lqer,zhang2025qera,liu2024eora,mozaffari2025slim}.
+OBR applies closed-form Hessian compensation to joint quantization and
+sparsification~\citep{guo2026optimal}.  Optimal Brain Surgeon and Optimal
+Brain Compression already establish the broader second-order correction
+lineage~\citep{hassibi1993obs,frantar2022obc}.  Fixed-support OBS refitting,
+low-rank reconstruction, and Q/S/L composition are therefore baselines and
+mechanisms in this paper, not base novelty claims.
+
+\paragraph{Interaction, orthogonality, and rate precedents.}
+Harma et al. prove that magnitude sparsification and max-scaled quantization
+are generally non-orthogonal and analyze their order-dependent compound
+error~\citep{harma2025effective}.  Their transformation-level notion differs
+from our signed, order-specific cross term under a common local PSD proxy, but
+it precludes any claim that this paper is the first interaction or
+orthogonality analysis.  ProjQ likewise coordinates quantization noise with a
+low-rank adapter through orthogonal subspace projection~\citep{yu2026projq}.
+Choi et al. combine Hessian-weighted distortion with Huffman coding and
+entropy-constrained scalar quantization~\citep{choi2017towards}; Orr et al.
+study variable-length weight formats and Fisher rate allocation
+~\citep{orr2025optimal}; and Radio optimizes an LLM rate--distortion
+objective~\citep{young2025radio}.  Our narrower target is an executable,
+byte-faithful audit under a declared research codec: every compared endpoint
+is round-trip decoded, its natural and padded file bytes are separated, and
+its signed local-PSD interactions are checked against realized NLL.  This is
+not a claim of the first Hessian-aware rate allocation or the first compressed
+bitstream.
+
+\paragraph{End-loss, adaptive, and trained recovery.}
+GuidedQuant uses end-loss information and YAQA performs full-model adaptive
+rounding; these works make
+the evaluation objective more explicit but use different optimization
+budgets~\citep{kim2025guidedquant,tseng2026yaqa}.
+Q-Palette targets fractional-bit allocation with codebooks~\citep{lee2025qpalette}.
+LiftQuant adds block correction and an optional end-to-end stage, while
+FPTQuant learns function-preserving transformations~\citep{he2026liftquant,vanbreugel2026fptquant}.
+SliderQuant learns fused channel scales and small low-rank auxiliary repairs
+under local sliding-window reconstruction, making it a close lane-B analogue
+to our scale-plus-low-rank parameter-utilization question~\citep{wang2026sliderquant}.
+Recent low-rank residual methods further refine where error should be
+preserved or reconstructed~\citep{cho2026srr,park2026serq,li2026rescomp}.
+We keep data-free frozen, calibrated no-backward, backward-assisted, and
+globally trained methods in separate lanes because these are different
+experimental interventions.
+
+\begin{table}[t]
+  \caption{Training-dependence lanes used throughout the comparison.}
+  \label{tab:lane-summary}
+  \centering
+  \small
+  \begin{tabular}{@{}clp{4.2cm}@{}}
+    \toprule
+    Lane & Backward? & Intervention \\
+    \midrule
+    A0 & No & Data-free frozen compression \\
+    A1 & No & Calibration-only frozen compression \\
+    B  & Yes & Encoder-side gradient/Hessian--vector products (HVPs), no global recovery \\
+    C  & Yes & Learned or globally fine-tuned recovery \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The selected primary-source protocol and payload audit is reported in
+\cref{tab:lanes}.  It is a literature taxonomy, not a protocol-matched
+empirical leaderboard.

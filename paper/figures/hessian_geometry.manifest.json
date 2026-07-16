@@ -1,0 +1,16 @@
+{
+  "evidence_status": "verified_local_experiment",
+  "input": "results/pretrained_hessian_repair_pythia70m_serialized_20260714/strategy_endpoints.csv",
+  "input_sha256": "5557f6a608d0e26bdd650d82ec2569606b824933fd74c9476acf24021a8a88e4",
+  "outputs": [
+    "hessian_geometry.pdf",
+    "hessian_geometry.svg",
+    "hessian_geometry.png"
+  ],
+  "rho_ql": -0.5718906816951213,
+  "rho_qs": -0.42339420601298483,
+  "rho_sl": 0.030353592768316028,
+  "schema_version": 1,
+  "scope": "Pythia-70M; conservative Q/S/L endpoint tail-padded to Q+L final bytes; natural underfill 15,680 bytes; six selected MLP tensors; one seed",
+  "strategy": "Q+S+L_QL_budget_component_scale"
+}

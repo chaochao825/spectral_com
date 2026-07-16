@@ -1,0 +1,29 @@
+{
+  "evidence_status": "verified_single_seed_scalability_smoke",
+  "inputs": {
+    "paper/results/scaling_pilot_endpoints.csv": "f18b95a6469291a816b2ebf47c035b48234b0d595056910d576e017042589135",
+    "paper/results/scaling_pilot_manifest.json": "e766ccbb838687b104e7705cbdc4040ac983bea58d53ebbca848615b8d82d503",
+    "paper/results/scaling_pilot_models.csv": "6f6f7168ac35981996ab05c3b8826a3a0956370c89706c26df6b1b55e8e474ae",
+    "paper/results/scaling_pilot_pairs.csv": "ee61d51d63f66d0d74024836deb4b189ddf2d3ad3c7a75381d73247a8f45dfff"
+  },
+  "interval_semantics": "fixed-window descriptive mean +/- 1.96 sample standard errors; not an independence-based confidence interval or significance test",
+  "outputs": {
+    "scaling_pilot_efficiency_geometry.pdf": "b52e85d4da02f6bfb8e5564becf84c201d69f464e272f4801f0264bb4e0afacd",
+    "scaling_pilot_efficiency_geometry.png": "21d7d67cb18dfcead73fcc6dbca04591b30d3206717fa17f24d4c43400757c79",
+    "scaling_pilot_efficiency_geometry.svg": "20fc5b337f32dab899d77b2dd3ac865b336cd9dba3773382612b267549fc108c"
+  },
+  "plot_script": {
+    "path": "paper/figures/scaling_pilot_plots.py",
+    "sha256": "6bb5fd84df31743b2c787a3b991713eaa72967a3469045692ddd13785f3c7fd1"
+  },
+  "prohibited_inference": [
+    "no cross-model absolute NLL or perplexity ranking",
+    "no whole-model compression claim",
+    "no multi-seed or population-significance claim",
+    "fixed-window intervals are descriptive and are not significance tests",
+    "path correlations apply only to the shown one-dimensional 13-point slices"
+  ],
+  "schema_version": "scaling_pilot_figure.v1",
+  "scope": "three separate single-seed, single-rate scalability-smoke jobs; conservative strict scaled QSL is tail-padded to Q+L final bytes; natural underfill is 31,360/640/1,024 bytes for Pythia/OPT/Qwen; models have unequal tensor scopes",
+  "taylor_fit_semantics": "fits use epsilon <= 0.125; dotted curves beyond 0.125 are extrapolations"
+}

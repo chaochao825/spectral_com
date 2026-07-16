@@ -1,0 +1,22 @@
+\section{Limitations and Conclusion}
+\label{sec:conclusion}
+
+The strongest detailed probe remains one seed on six selected Pythia-70M
+tensors, now accompanied by three separate seed-17 scalability-smoke jobs over
+full Pythia MLP and depth-stratified OPT/Qwen MLP scopes.  Their repeated sign
+is not multi-seed confirmation: the activation Gram is a PSD reconstruction
+proxy rather than the task Hessian, fixed windows do not support population
+inference, and unequal scopes forbid a model-scale trend.  The research codec
+also does not establish kernel speed, whole-checkpoint size, or energy savings.
+External methods remain literature-reported until their training budgets and
+physical payloads are reproduced under a matched protocol.
+
+Within that boundary, the result is consistent across the executed scopes:
+sparse and low-rank repairs can be nearly orthogonal without a same-byte
+composite advantage.  Exact serialization reveals the discrete cost that
+logical accounting hides.  OBS improves the already-paid sparse payload in all
+three smoke jobs, whereas zero-byte global-scale re-estimation has mixed sign;
+parameter thrift therefore helps only when the fitted update also lowers the
+held-out endpoint.  Composite compression is most plausible when mechanisms
+exchange real bytes at favorable held-out marginal cost.  Orthogonality is one
+diagnostic in that decision, not the decision itself.

@@ -1,0 +1,11 @@
+active,evidence,flag,run
+True,seed=17; no repeated run is committed,single_seed,Qwen2-7B attention
+True,text_split_policy=shared_text_pool,shared_calibration_and_eval,Qwen2-7B attention
+True,tokens=63,low_token_count,Qwen2-7B attention
+True,only aggregate nll/ppl is stored; bootstrap CI is impossible,no_per_sample_nll,Qwen2-7B attention
+True,seed=17; no repeated run is committed,single_seed,Qwen2-7B attn+MLP
+True,text_split_policy=shared_text_pool,shared_calibration_and_eval,Qwen2-7B attn+MLP
+True,tokens=126,low_token_count,Qwen2-7B attn+MLP
+True,only aggregate nll/ppl is stored; bootstrap CI is impossible,no_per_sample_nll,Qwen2-7B attn+MLP
+True,residual_stack_validate_EleutherAI_pythia-70m_20260705_171105,raw_run_missing,Pythia-70M
+True,residual_stack_validate_EleutherAI_pythia-160m_20260705_171130,raw_run_missing,Pythia-160M

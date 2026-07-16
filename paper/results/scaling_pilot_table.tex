@@ -1,0 +1,16 @@
+\begin{table*}[t]
+\centering
+\caption{Single-seed scalability smoke at target selected-weight artifact ratio 0.258. Pythia covers all MLP projections, while OPT and Qwen use ten depth-stratified MLP projections. Bytes are complete aligned research-codec files for selected tensors, not whole-model or production payloads. ``Strict$-$QL'' is the signed held-out NLL difference after tail padding to identical final bytes; the strict natural files leave 31,360/640/1,024 bytes unused for Pythia/OPT/Qwen. Negative favors the composite. Rows are not pooled or ranked across models.}
+\label{tab:scaling-pilot}
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrrr@{}}
+\toprule
+Model / scope & \shortstack{Tensors /\\M params} & \shortstack{QL=strict\\bytes (rate)} & $\Delta$NLL QL & $\Delta$NLL strict & Strict$-$QL & $\rho_{SL}$ & $\rho_{QS}/\rho_{QL}$ \\
+\midrule
+Pythia-70M / full MLP & 12 / 12.58 & 6,497,344 (0.2581) & +0.1963 & +0.2017 & +0.0054 & +0.026 & -0.334/-0.588 \\
+OPT-125M / 5-depth MLP & 10 / 23.59 & 12,158,976 (0.2577) & +0.0735 & +0.0744 & +0.0009 & +0.087 & -0.367/-0.611 \\
+Qwen3-0.6B / 5-depth MLP & 10 / 31.46 & 16,196,352 (0.2574) & +0.0226 & +0.0299 & +0.0073 & +0.022 & -0.521/-0.743 \\
+\bottomrule
+\end{tabular*}
+\end{table*}

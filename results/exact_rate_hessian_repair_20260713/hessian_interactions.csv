@@ -1,0 +1,33 @@
+abs_rho_h,interpretation,method,pair,rho_h,run
+0.0,orthogonal,Q,"Qerr,Sres",0.0,Qwen2-7B attention
+0.0,orthogonal,Q,"Qerr,Lres",0.0,Qwen2-7B attention
+0.0,orthogonal,Q,"Q+S err,Lres",0.0,Qwen2-7B attention
+0.0,orthogonal,Q,"Sres,Lres",0.0,Qwen2-7B attention
+0.0,orthogonal,Q+L,"Qerr,Sres",0.0,Qwen2-7B attention
+0.3186238865141839,repair_cancellation,Q+L,"Qerr,Lres",-0.3186238865141839,Qwen2-7B attention
+0.3186238865141839,repair_cancellation,Q+L,"Q+S err,Lres",-0.3186238865141839,Qwen2-7B attention
+0.0,orthogonal,Q+L,"Sres,Lres",0.0,Qwen2-7B attention
+0.6567790488381946,repair_cancellation,Q+S,"Qerr,Sres",-0.6567790488381946,Qwen2-7B attention
+0.0,orthogonal,Q+S,"Qerr,Lres",0.0,Qwen2-7B attention
+0.0,orthogonal,Q+S,"Q+S err,Lres",0.0,Qwen2-7B attention
+0.0,orthogonal,Q+S,"Sres,Lres",0.0,Qwen2-7B attention
+0.6301670516448743,repair_cancellation,Q+S+L,"Qerr,Sres",-0.6301670516448743,Qwen2-7B attention
+0.07362895368731248,repair_cancellation,Q+S+L,"Qerr,Lres",-0.07362895368731248,Qwen2-7B attention
+0.08133296452938472,repair_cancellation,Q+S+L,"Q+S err,Lres",-0.08133296452938472,Qwen2-7B attention
+0.01802303075366634,orthogonal,Q+S+L,"Sres,Lres",0.01802303075366634,Qwen2-7B attention
+0.0,orthogonal,Q,"Qerr,Sres",0.0,Qwen2-7B attn+MLP
+0.0,orthogonal,Q,"Qerr,Lres",0.0,Qwen2-7B attn+MLP
+0.0,orthogonal,Q,"Q+S err,Lres",0.0,Qwen2-7B attn+MLP
+0.0,orthogonal,Q,"Sres,Lres",0.0,Qwen2-7B attn+MLP
+0.0,orthogonal,Q+L,"Qerr,Sres",0.0,Qwen2-7B attn+MLP
+0.23846655323022722,repair_cancellation,Q+L,"Qerr,Lres",-0.23846655323022722,Qwen2-7B attn+MLP
+0.23846655323022722,repair_cancellation,Q+L,"Q+S err,Lres",-0.23846655323022722,Qwen2-7B attn+MLP
+0.0,orthogonal,Q+L,"Sres,Lres",0.0,Qwen2-7B attn+MLP
+0.5873911154304072,repair_cancellation,Q+S,"Qerr,Sres",-0.5873911154304072,Qwen2-7B attn+MLP
+0.0,orthogonal,Q+S,"Qerr,Lres",0.0,Qwen2-7B attn+MLP
+0.0,orthogonal,Q+S,"Q+S err,Lres",0.0,Qwen2-7B attn+MLP
+0.0,orthogonal,Q+S,"Sres,Lres",0.0,Qwen2-7B attn+MLP
+0.5649293152837433,repair_cancellation,Q+S+L,"Qerr,Sres",-0.5649293152837433,Qwen2-7B attn+MLP
+0.09765330883892763,repair_cancellation,Q+S+L,"Qerr,Lres",-0.09765330883892763,Qwen2-7B attn+MLP
+0.10135539837027215,repair_cancellation,Q+S+L,"Q+S err,Lres",-0.10135539837027215,Qwen2-7B attn+MLP
+0.030027153187061777,orthogonal,Q+S+L,"Sres,Lres",0.030027153187061777,Qwen2-7B attn+MLP

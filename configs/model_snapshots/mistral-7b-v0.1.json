@@ -1,0 +1,86 @@
+{
+  "schema_version": "model_snapshot_manifest.v1",
+  "label": "Mistral-7B-v0.1-local-snapshot",
+  "model_dir": "/home/wangmeiqi/zjh/mistralai/Mistral-7B-v0.1",
+  "output": "/home/wangmeiqi/codex_results/large_model_global_controls_v3_20260716_819ddc6/model_snapshots/mistral-7b-v0.1.json",
+  "generated_at": "2026-07-16T13:46:03Z",
+  "hash_algorithm": "sha256",
+  "aggregate_scope": "schema version plus newline-delimited canonical file records sorted by path; excludes label, locations, and generated_at",
+  "file_count": 9,
+  "total_bytes": 14485813893,
+  "aggregate_sha256": "11934f2e9345b99ca90eecb4a2cc5a32af9eddeb5fe639271c6e80d1d25ace0a",
+  "files": [
+    {
+      "path": "config.json",
+      "role": "config",
+      "bytes": 571,
+      "sha256": "cf25cdf4719f181d1d1d371973285d9afe9afde0d0c6a6fd48de857555ce1e0d",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "generation_config.json",
+      "role": "config",
+      "bytes": 116,
+      "sha256": "afcf2a1da583dbeb66bb367a759713901e23ce19ed83ed8f5a21b0e877addd5b",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "model-00001-of-00002.safetensors",
+      "role": "checkpoint",
+      "bytes": 9942981696,
+      "sha256": "9742cb4764964155b7a5f35eefad651f590006091ddeb536863d6c5865cca1b9",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "model-00002-of-00002.safetensors",
+      "role": "checkpoint",
+      "bytes": 4540516344,
+      "sha256": "9bcf56354ec0c68b5f8e97b4f3b02d16af899a65b0868d6dba5a51c1b30f01cb",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "role": "checkpoint",
+      "bytes": 25125,
+      "sha256": "c94ab46aaf5fcca44720c10bcc498c1b0d9759d47534a396e3512edc451ebd06",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "special_tokens_map.json",
+      "role": "tokenizer",
+      "bytes": 414,
+      "sha256": "6fa06efa2785e450051989a6f8fb4416b10149ded485ddd3f127a40734f5cfd0",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tokenizer.json",
+      "role": "tokenizer",
+      "bytes": 1795188,
+      "sha256": "11c08db21487c885d8c792180f0be237f6a261b89a46f128a6a80a3aa4bd1720",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tokenizer.model",
+      "role": "tokenizer",
+      "bytes": 493443,
+      "sha256": "dadfd56d766715c61d2ef780a525ab43b8e6da4de6865bda3d95fdef5e134055",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tokenizer_config.json",
+      "role": "tokenizer",
+      "bytes": 996,
+      "sha256": "ddb008229511e51607002ffe28925001c4a9ca4177dc4de3a655d085cc610b99",
+      "is_symlink": false,
+      "symlink_target": null
+    }
+  ]
+}

@@ -15,6 +15,7 @@ This directory is versioned because the CSV, JSON, Markdown, PNG, PDF, and small
 | Structured residual tests | `oasr_structured_residual_*`, `structured_residual_matched_*` | OASR and matched residual decompositions. |
 | Residual-stack validation | `residual_stack_validate_*` | Pythia and Qwen2-7B quantization/sparse/low-rank residual-stack experiments. |
 | Cross-method summary | `compare_7b_dam_residual_stack_20260707` | Matched-budget comparison tables, figures, and the July 2026 interpretation report. |
+| Interaction-aware two-stage validation | `two_stage_heterogeneous_*` | Exact natural-byte allocation, independent validation reranking, final-test isolation, and heterogeneous quantizer/repair controls. |
 
 ## Qualification notes
 
@@ -26,6 +27,9 @@ This directory is versioned because the CSV, JSON, Markdown, PNG, PDF, and small
 - Multiple versioned orthogonality directories preserve the development history. Use `compression_orthogonality_mvp_20260623_v7` for the latest MVP audit.
 - The July Qwen2-7B report is a layer-subset result with a small evaluation set. Negative PPL deltas there are encouraging screening signals, not population-level improvements.
 - The two Qwen2-7B run directories have different dense PPL baselines. Only within-run deltas are interpretable; the absolute PPL values are not a matched cross-row comparison.
+- `two_stage_heterogeneous_pythia70m_natural_match_smoke_20260717` is a one-tensor plumbing check. QSL and the exact-natural no-joint control both use `627,712` natural bytes and obtain the same final-test NLL, so it provides no evidence for same-layer joint S+L value.
+- The small CSV/JSON/Markdown audit record for that smoke is versioned, but its `.hrc` binary codec artifacts are intentionally omitted. Their filenames, hashes, byte counts, and publication limits are recorded in the run manifest and `PUBLISHING.md`.
+- `pretrained_hessian_repair_pythia70m_serialized_20260714` likewise omits 48,200,900 bytes of raw `.hrc` payloads. Its manifest retains the declared hashes and byte ledger; artifact re-open/hash tests run only in an archive that also contains those payloads.
 - Historical reports may contain absolute server paths from the run environment. Those paths are provenance, not repository setup requirements.
 - Historical environment capture is incomplete. `environments/validation_210_20260716.yaml` documents only the current sync-time tests and synthetic smoke, not the original experiment environments.
 

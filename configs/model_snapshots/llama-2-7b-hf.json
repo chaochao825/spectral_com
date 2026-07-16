@@ -1,0 +1,94 @@
+{
+  "schema_version": "model_snapshot_manifest.v1",
+  "label": "Llama-2-7b-hf-local-snapshot",
+  "model_dir": "/home/wangmeiqi/zjh/meta-llama/Llama-2-7b-hf",
+  "output": "/home/wangmeiqi/codex_results/large_model_global_controls_v3_20260716_819ddc6/model_snapshots/llama-2-7b-hf.json",
+  "generated_at": "2026-07-16T13:45:41Z",
+  "hash_algorithm": "sha256",
+  "aggregate_scope": "schema version plus newline-delimited canonical file records sorted by path; excludes label, locations, and generated_at",
+  "file_count": 10,
+  "total_bytes": 13479274325,
+  "aggregate_sha256": "0c7bd4003f17fe0cd20732204e60724940ac60edced8b92ebbafb89b5e4eee62",
+  "files": [
+    {
+      "path": "config.json",
+      "role": "config",
+      "bytes": 609,
+      "sha256": "9242e7db1bc2a17873e66084c3b1c6ed10883076e156b338fd6a7775748e2e3c",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "generation_config.json",
+      "role": "config",
+      "bytes": 188,
+      "sha256": "11e70f5fd0a1a47346b5a941ff0049d226b353a1647735d9ec171a2b1521e881",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "model-00001-of-00002.safetensors",
+      "role": "checkpoint",
+      "bytes": 9976578928,
+      "sha256": "4ec71fd53e99766de38f24753b30c9e8942630e9e576a1ba27b0ec531e87be41",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "model-00002-of-00002.safetensors",
+      "role": "checkpoint",
+      "bytes": 3500297344,
+      "sha256": "41780b5dac322ac35598737e99208d90bdc632a1ba3389ebedbb46a1d8385a7f",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "role": "checkpoint",
+      "bytes": 26788,
+      "sha256": "217d527037a95cd5cd30384afb425987824373b94cc7206beb48ec0c9499c98f",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "pytorch_model.bin.index.json",
+      "role": "checkpoint",
+      "bytes": 26788,
+      "sha256": "aca3c1facc89d12311a667c32e85ac86e625990992ea8a189e3b036ba371b931",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "special_tokens_map.json",
+      "role": "tokenizer",
+      "bytes": 414,
+      "sha256": "6fa06efa2785e450051989a6f8fb4416b10149ded485ddd3f127a40734f5cfd0",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tokenizer.json",
+      "role": "tokenizer",
+      "bytes": 1842767,
+      "sha256": "bcd04f0eadf90287bd26e1a183ac487d8a141b09b06aecb7725bbdd343640f2e",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tokenizer.model",
+      "role": "tokenizer",
+      "bytes": 499723,
+      "sha256": "9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347",
+      "is_symlink": false,
+      "symlink_target": null
+    },
+    {
+      "path": "tokenizer_config.json",
+      "role": "tokenizer",
+      "bytes": 776,
+      "sha256": "f514e7c3008881b6ba7e6a0cdb44c71ce47dc335920dac143ae7bc788197e53a",
+      "is_symlink": false,
+      "symlink_target": null
+    }
+  ]
+}

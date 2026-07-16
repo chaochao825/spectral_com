@@ -1,0 +1,3013 @@
+{
+  "audit_scope": "audit-generation process only (static/runtime compatibility probes); external official-unpatched and compatibility-patched smoke evidence is inspected separately",
+  "commands": {
+    "block_correction_full_after_path_fix": {
+      "blocking_conditions": [
+        "replace the hard-coded RedPajama cache with a reachable/configurable path",
+        "confirm whether README --epochs 2 means two epochs for each code stage or two epochs total",
+        "record actual GPU-hours, peak memory, calibration tokens, artifact bytes, and endpoint metrics"
+      ],
+      "command": "CUDA_VISIBLE_DEVICES=0 /home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python main.py \\\n  --model /home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1 --net Qwen2.5-3B-Instruct \\\n  --save_dir /path/to/qmodels --output_dir /path/to/log --cache_dir /path/to/cache \\\n  --eval_ppl --wbits 2 --expc 20to8 --w_sym \\\n  --abits 16 --kbits 16 --vbits 16 --true-sequential --act-order --use_fpinps \\\n  --Rres_init Hadamard --nsamples1 4096 --nsamples2 4096 \\\n  --epochs1 2 --epochs2 2 --batch_size 2 --calib_dataset redpajama \\\n  --usefullfp --training_trans --finetuning_weights --align 1 \\\n  --lscale_lr 5e-3 --lexw_lr 2e-2 --lw_lr 2e-5 --la_lr 2e-3 --lt_lr 2e-4",
+      "mapping_assumption": {
+        "--epochs 2": "--epochs1 2 --epochs2 2",
+        "--nsamples 4096": "--nsamples1 4096 --nsamples2 4096"
+      },
+      "status": "blocked_template_not_executed"
+    },
+    "reduced_qwen_smoke": {
+      "command": "PYTHONDONTWRITEBYTECODE=1 HF_DATASETS_OFFLINE=1 TRANSFORMERS_OFFLINE=1 CUDA_VISIBLE_DEVICES=0 \\\n/home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python main.py \\\n  --model /home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1 \\\n  --net Qwen2.5-3B-Instruct \\\n  --cache_dir /home/wangmeiqi/codex_scratch/liftquant-smoke/cache \\\n  --output_dir /home/wangmeiqi/codex_scratch/liftquant-smoke/log \\\n  --save_dir /home/wangmeiqi/codex_scratch/liftquant-smoke/qmodels \\\n  --wbits 2 --expc 20to8 --w_sym --abits 16 --kbits 16 --vbits 16 \\\n  --calib_dataset wikitext2 --seqlen 128 \\\n  --nsamples1 2 --nsamples2 2 --epochs1 0 --epochs2 0 --batch_size 1 \\\n  --quant_start 0 --quant_end 1 --training_trans --usefullfp --limit 1",
+      "limitations": "该模板把两个 optimization epoch 都设为 0，且没有 endpoint metric；只能做更小的控制流排障，不能复现 LiftQuant 精度。实际执行时仍需要 CUDA。",
+      "purpose": "model-load, cached WikiText, lifting initialization, and one-layer control-flow smoke",
+      "status": "template_only_not_executed"
+    }
+  },
+  "compatibility": {
+    "accuracy_claim_allowed": false,
+    "block_correction": "blocked_pending_upstream_or_local_adapter",
+    "external_reproduction": "pending",
+    "optional_e2e": "blocked_at_import",
+    "patched_layer0_smoke": "control_flow_and_artifact_passed"
+  },
+  "entrypoints": {
+    "e2e": {
+      "extra_args_occurrences": 1,
+      "help_probe": {
+        "command": [
+          "/home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python",
+          "-B",
+          "e2efinetune.py",
+          "--help"
+        ],
+        "returncode": 1,
+        "runtime_flags": [],
+        "status": "failed",
+        "stderr_excerpt": "Traceback (most recent call last):\n  File \"/home/wangmeiqi/codex_external/LiftQuant_audit_clean_72b3875/e2efinetune.py\", line 20, in <module>\n    from datautils_block import test_ppl\nModuleNotFoundError: No module named 'datautils_block'\n",
+        "stderr_length_chars": 238,
+        "stderr_line_count": 4,
+        "stderr_nonempty": true,
+        "stderr_sha256": "47bd544f4b1ce5aa2d2096d2ae2f4383a4db9617b93a23c4a71a2d8bf781a7a1",
+        "stderr_truncated": false,
+        "stdout_excerpt": "",
+        "stdout_length_chars": 0,
+        "stdout_line_count": 0,
+        "stdout_nonempty": false,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_truncated": false,
+        "timed_out": false
+      },
+      "inherits_transformers_training_arguments": true,
+      "local_dataclass_flags": [
+        "--auto_mix_precision",
+        "--cache_dir",
+        "--conv_temp",
+        "--dataset",
+        "--dataset_format",
+        "--diversity_penalty",
+        "--do_expand_eval",
+        "--do_mmlu_eval",
+        "--do_not_pre_eval",
+        "--do_ppl_eval",
+        "--do_sample",
+        "--do_train",
+        "--early_exit",
+        "--eval_dataset_size",
+        "--eval_tasks",
+        "--expc",
+        "--factor_a",
+        "--factor_h",
+        "--factor_t",
+        "--fp_model_path",
+        "--full_finetune",
+        "--gradient_accumulation_steps",
+        "--gradient_checkpointing",
+        "--group_by_length",
+        "--group_size",
+        "--learning_rate",
+        "--length_penalty",
+        "--load_per_layer",
+        "--logging_steps",
+        "--lr_scheduler_type",
+        "--mask_use",
+        "--max_eval_samples",
+        "--max_grad_norm",
+        "--max_memory_MB",
+        "--max_new_tokens",
+        "--max_steps",
+        "--max_train_samples",
+        "--min_new_tokens",
+        "--mmlu",
+        "--model_family",
+        "--no_repeat_ngram_size",
+        "--num_beam_groups",
+        "--num_beams",
+        "--optim",
+        "--output_dir",
+        "--overwrite_cache",
+        "--penalty_alpha",
+        "--per_device_train_batch_size",
+        "--preprocessing_num_workers",
+        "--pt_context_len",
+        "--quant_model_path",
+        "--remove_unused_columns",
+        "--repetition_penalty",
+        "--report_to",
+        "--resume_from_checkpoint",
+        "--save_steps",
+        "--save_strategy",
+        "--save_total_limit",
+        "--source_max_len",
+        "--target_max_len",
+        "--temperature",
+        "--top_k",
+        "--top_p",
+        "--train_on_source",
+        "--trust_remote_code",
+        "--typical_p",
+        "--use_auth_token",
+        "--use_cache",
+        "--w_ternary",
+        "--warmup_ratio",
+        "--wbits",
+        "--weight_decay"
+      ],
+      "local_dataclass_records": [
+        {
+          "class": "ModelArguments",
+          "class_bases": [],
+          "default": "",
+          "field": "fp_model_path",
+          "flag": "--fp_model_path",
+          "line": 43
+        },
+        {
+          "class": "ModelArguments",
+          "class_bases": [],
+          "default": "",
+          "field": "quant_model_path",
+          "flag": "--quant_model_path",
+          "line": 47
+        },
+        {
+          "class": "ModelArguments",
+          "class_bases": [],
+          "default": "llama-2",
+          "field": "model_family",
+          "flag": "--model_family",
+          "line": 51
+        },
+        {
+          "class": "ModelArguments",
+          "class_bases": [],
+          "default": false,
+          "field": "trust_remote_code",
+          "flag": "--trust_remote_code",
+          "line": 55
+        },
+        {
+          "class": "ModelArguments",
+          "class_bases": [],
+          "default": false,
+          "field": "use_auth_token",
+          "flag": "--use_auth_token",
+          "line": 59
+        },
+        {
+          "class": "ModelArguments",
+          "class_bases": [],
+          "default": false,
+          "field": "auto_mix_precision",
+          "flag": "--auto_mix_precision",
+          "line": 63
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": 1024,
+          "field": "eval_dataset_size",
+          "flag": "--eval_dataset_size",
+          "line": 70
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": null,
+          "field": "max_train_samples",
+          "flag": "--max_train_samples",
+          "line": 73
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": null,
+          "field": "max_eval_samples",
+          "flag": "--max_eval_samples",
+          "line": 80
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": 1024,
+          "field": "source_max_len",
+          "flag": "--source_max_len",
+          "line": 87
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": 256,
+          "field": "target_max_len",
+          "flag": "--target_max_len",
+          "line": 91
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": "alpaca",
+          "field": "dataset",
+          "flag": "--dataset",
+          "line": 95
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": "",
+          "field": "eval_tasks",
+          "flag": "--eval_tasks",
+          "line": 99
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": false,
+          "field": "mmlu",
+          "flag": "--mmlu",
+          "line": 103
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": "llama-2",
+          "field": "conv_temp",
+          "flag": "--conv_temp",
+          "line": 107
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": true,
+          "field": "mask_use",
+          "flag": "--mask_use",
+          "line": 111
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": null,
+          "field": "dataset_format",
+          "flag": "--dataset_format",
+          "line": 114
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": false,
+          "field": "overwrite_cache",
+          "flag": "--overwrite_cache",
+          "line": 118
+        },
+        {
+          "class": "DataArguments",
+          "class_bases": [],
+          "default": 32,
+          "field": "preprocessing_num_workers",
+          "flag": "--preprocessing_num_workers",
+          "line": 121
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": null,
+          "field": "cache_dir",
+          "flag": "--cache_dir",
+          "line": 128
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "train_on_source",
+          "flag": "--train_on_source",
+          "line": 131
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "do_mmlu_eval",
+          "flag": "--do_mmlu_eval",
+          "line": 135
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "do_expand_eval",
+          "flag": "--do_expand_eval",
+          "line": 139
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "do_ppl_eval",
+          "flag": "--do_ppl_eval",
+          "line": 143
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "do_not_pre_eval",
+          "flag": "--do_not_pre_eval",
+          "line": 147
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 1024,
+          "field": "pt_context_len",
+          "flag": "--pt_context_len",
+          "line": 151
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "full_finetune",
+          "flag": "--full_finetune",
+          "line": 155
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 2,
+          "field": "wbits",
+          "flag": "--wbits",
+          "line": 159
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": "none",
+          "field": "expc",
+          "flag": "--expc",
+          "line": 163
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "load_per_layer",
+          "flag": "--load_per_layer",
+          "line": 167
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "early_exit",
+          "flag": "--early_exit",
+          "line": 171
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": null,
+          "field": "w_ternary",
+          "flag": "--w_ternary",
+          "line": 175
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 64,
+          "field": "group_size",
+          "flag": "--group_size",
+          "line": 180
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 80000,
+          "field": "max_memory_MB",
+          "flag": "--max_memory_MB",
+          "line": 184
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": "none",
+          "field": "report_to",
+          "flag": "--report_to",
+          "line": 188
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": "./output",
+          "field": "output_dir",
+          "flag": "--output_dir",
+          "line": 192
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": null,
+          "field": "resume_from_checkpoint",
+          "flag": "--resume_from_checkpoint",
+          "line": 193
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": "paged_adamw_32bit",
+          "field": "optim",
+          "flag": "--optim",
+          "line": 194
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 1,
+          "field": "per_device_train_batch_size",
+          "flag": "--per_device_train_batch_size",
+          "line": 195
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 16,
+          "field": "gradient_accumulation_steps",
+          "flag": "--gradient_accumulation_steps",
+          "line": 196
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": -1,
+          "field": "max_steps",
+          "flag": "--max_steps",
+          "line": 197
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 0.0,
+          "field": "weight_decay",
+          "flag": "--weight_decay",
+          "line": 198
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 2e-05,
+          "field": "learning_rate",
+          "flag": "--learning_rate",
+          "line": 199
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 100,
+          "field": "factor_a",
+          "flag": "--factor_a",
+          "line": 200
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 10,
+          "field": "factor_t",
+          "flag": "--factor_t",
+          "line": 201
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 1,
+          "field": "factor_h",
+          "flag": "--factor_h",
+          "line": 202
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "remove_unused_columns",
+          "flag": "--remove_unused_columns",
+          "line": 203
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 0.3,
+          "field": "max_grad_norm",
+          "flag": "--max_grad_norm",
+          "line": 204
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": true,
+          "field": "gradient_checkpointing",
+          "flag": "--gradient_checkpointing",
+          "line": 205
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": true,
+          "field": "do_train",
+          "flag": "--do_train",
+          "line": 206
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": "cosine",
+          "field": "lr_scheduler_type",
+          "flag": "--lr_scheduler_type",
+          "line": 207
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 0.03,
+          "field": "warmup_ratio",
+          "flag": "--warmup_ratio",
+          "line": 208
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 1,
+          "field": "logging_steps",
+          "flag": "--logging_steps",
+          "line": 209
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": false,
+          "field": "group_by_length",
+          "flag": "--group_by_length",
+          "line": 210
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": "epoch",
+          "field": "save_strategy",
+          "flag": "--save_strategy",
+          "line": 211
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 250,
+          "field": "save_steps",
+          "flag": "--save_steps",
+          "line": 212
+        },
+        {
+          "class": "TrainingArguments",
+          "class_bases": [
+            "transformers.Seq2SeqTrainingArguments"
+          ],
+          "default": 5,
+          "field": "save_total_limit",
+          "flag": "--save_total_limit",
+          "line": 213
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 256,
+          "field": "max_new_tokens",
+          "flag": "--max_new_tokens",
+          "line": 220
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": null,
+          "field": "min_new_tokens",
+          "flag": "--min_new_tokens",
+          "line": 225
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": false,
+          "field": "do_sample",
+          "flag": "--do_sample",
+          "line": 231
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1,
+          "field": "num_beams",
+          "flag": "--num_beams",
+          "line": 232
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1,
+          "field": "num_beam_groups",
+          "flag": "--num_beam_groups",
+          "line": 233
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": null,
+          "field": "penalty_alpha",
+          "flag": "--penalty_alpha",
+          "line": 234
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": true,
+          "field": "use_cache",
+          "flag": "--use_cache",
+          "line": 235
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1.0,
+          "field": "temperature",
+          "flag": "--temperature",
+          "line": 238
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 50,
+          "field": "top_k",
+          "flag": "--top_k",
+          "line": 239
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1.0,
+          "field": "top_p",
+          "flag": "--top_p",
+          "line": 240
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1.0,
+          "field": "typical_p",
+          "flag": "--typical_p",
+          "line": 241
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 0.0,
+          "field": "diversity_penalty",
+          "flag": "--diversity_penalty",
+          "line": 242
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1.0,
+          "field": "repetition_penalty",
+          "flag": "--repetition_penalty",
+          "line": 243
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 1.0,
+          "field": "length_penalty",
+          "flag": "--length_penalty",
+          "line": 244
+        },
+        {
+          "class": "GenerationArguments",
+          "class_bases": [],
+          "default": 0,
+          "field": "no_repeat_ngram_size",
+          "flag": "--no_repeat_ngram_size",
+          "line": 245
+        }
+      ],
+      "missing_local_imports": [
+        {
+          "file": "e2efinetune.py",
+          "line": 20,
+          "module": "datautils_block"
+        }
+      ],
+      "readme_flags": [
+        "--bf16",
+        "--data_seed",
+        "--dataset",
+        "--dataset_format",
+        "--do_ppl_eval",
+        "--do_train",
+        "--eval_dataset_size",
+        "--eval_steps",
+        "--eval_tasks",
+        "--evaluation_strategy",
+        "--expc",
+        "--factor_a",
+        "--factor_t",
+        "--fp_model_path",
+        "--gradient_accumulation_steps",
+        "--learning_rate",
+        "--logging_steps",
+        "--max_grad_norm",
+        "--max_train_samples",
+        "--model_family",
+        "--num_train_epochs",
+        "--output_dir",
+        "--per_device_eval_batch_size",
+        "--per_device_train_batch_size",
+        "--preprocessing_num_workers",
+        "--pt_context_len",
+        "--quant_model_path",
+        "--save_strategy",
+        "--training_strategy",
+        "--wbits"
+      ],
+      "readme_flags_not_in_local_dataclasses": [
+        "--bf16",
+        "--data_seed",
+        "--eval_steps",
+        "--evaluation_strategy",
+        "--num_train_epochs",
+        "--per_device_eval_batch_size",
+        "--training_strategy"
+      ],
+      "return_remaining_strings": true
+    },
+    "main": {
+      "help_probe": {
+        "command": [
+          "/home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python",
+          "-B",
+          "main.py",
+          "--help"
+        ],
+        "returncode": 0,
+        "runtime_flags": [
+          "--Rres_init",
+          "--Use_RTN",
+          "--a1init",
+          "--a_dynamic_method",
+          "--a_quant_method",
+          "--abits",
+          "--act-order",
+          "--align",
+          "--attn_implementation",
+          "--aug_loss",
+          "--auto_mix_precision",
+          "--batch_size",
+          "--bias_init",
+          "--cache_dir",
+          "--calib_dataset",
+          "--deactive_amp",
+          "--disable_realq_replace",
+          "--disable_rotation",
+          "--dtype",
+          "--epochs1",
+          "--epochs2",
+          "--eval_KVnoq",
+          "--eval_ppl",
+          "--expc",
+          "--fast_nearest",
+          "--finetuning_weights",
+          "--gptq",
+          "--groupsize",
+          "--help",
+          "--hex",
+          "--info",
+          "--k_bias",
+          "--k_quant_method",
+          "--kbits",
+          "--la2_lr",
+          "--la_lr",
+          "--lab_lr",
+          "--lac",
+          "--lac_lr",
+          "--lexw_lr",
+          "--limit",
+          "--load_dir",
+          "--ls_lr",
+          "--lscale_lr",
+          "--lt2_lr",
+          "--lt_lr",
+          "--lvr_lr",
+          "--lw2_lr",
+          "--lw_lr",
+          "--lwc_lr",
+          "--model",
+          "--mpp",
+          "--mse",
+          "--net",
+          "--norm_instruction",
+          "--nsamples1",
+          "--nsamples2",
+          "--num_fewshot",
+          "--old_scale",
+          "--only_eval",
+          "--output_dir",
+          "--percdamp",
+          "--pre_epochs",
+          "--pre_eval",
+          "--pre_gptq",
+          "--pvtuning",
+          "--quant_end",
+          "--quant_mask",
+          "--quant_start",
+          "--qw_ips",
+          "--r4_quant_method",
+          "--real_quant",
+          "--resume",
+          "--save_dir",
+          "--save_per_layer",
+          "--scale_imask",
+          "--scale_keep",
+          "--scale_load_dir",
+          "--scale_tmask",
+          "--seed",
+          "--seqlen",
+          "--static-groups",
+          "--tasks",
+          "--train_o_scale",
+          "--train_vo_rotation",
+          "--training_trans",
+          "--transmask",
+          "--true-sequential",
+          "--upscale_mask",
+          "--use_fpinps",
+          "--use_fpinps_gptq",
+          "--usefullfp",
+          "--v_bias",
+          "--v_quant_method",
+          "--vbits",
+          "--vo_PCA_init",
+          "--w_dynamic_method",
+          "--w_sym",
+          "--w_ternary",
+          "--warmup",
+          "--wbits",
+          "--wd"
+        ],
+        "status": "ok",
+        "stderr_excerpt": "",
+        "stderr_length_chars": 0,
+        "stderr_line_count": 0,
+        "stderr_nonempty": false,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_truncated": false,
+        "stdout_excerpt": "CUDA extension not installed.\n['main.py', '--help']\nusage: main.py [-h] [--model MODEL] [--net NET] [--cache_dir CACHE_DIR]\n               [--output_dir OUTPUT_DIR] [--scale_load_dir SCALE_LOAD_DIR]\n               [--save_dir SAVE_DIR] [--load_dir LOAD_DIR] [--resume RESUME]\n               [--real_quant] [--calib_dataset {wikitext2,redpajama}]\n               [--epochs1 EPOCHS1] [--epochs2 EPOCHS2]\n               [--pre_epochs PRE_EPOCHS] [--nsamples1 NSAMPLES1]\n               [--nsamples2 NSAMPLES2] [--batch_size BATCH_SIZE] [--seed SEED]\n               [--tasks TASKS] [--eval_ppl] [--num_fewshot NUM_FEWSHOT]\n               [--align ALIGN] [--quant_start QUANT_START]\n               [--quant_end QUANT_END] [--fast_nearest] [--pvtuning]\n               [--save_per_layer] [--transmask TRANSMASK] [--a1init]\n               [--seqlen SEQLEN] [--wbits WBITS] [--w_ternary W_TERNARY]\n               [--abits ABITS] [--kbits KBITS] [--vbits VBITS]\n               [--auto_mix_precision] [--mpp MPP] [--training_trans]\n               [--expc EXPC] [--hex] [--finetuning_weights] [--usefullfp]\n               [--lab_lr LAB_LR] [--lscale_lr LSCALE_LR] [--lac_lr LAC_LR]\n               [--lwc_lr LWC_LR] [--lexw_lr LEXW_LR] [--lvr_lr LVR_LR]\n               [--lw_lr LW_LR] [--la_lr LA_LR] [--lt_lr LT_LR]\n               [--lw2_lr LW2_LR] [--la2_lr LA2_LR] [--lt2_lr LT2_LR]\n               [--ls_lr LS_LR] [--wd WD] [--aug_loss] [--lac]\n               [--k_quant_method {None,FFT,Hadamard,PCA}]\n               [--v_quant_method {None,FFT,Hadamard,PCA}]\n               [--a_quant_method {None,FFT,Hadamard,PCA}]\n               [--r4_quant_method {None,FFT,Hadamard,PCA}]\n               [--upscale_mask UPSCALE_MASK] [--quant_mask QUANT_MASK]\n               [--scale_tmask SCALE_TMASK] [--scale_imask SCALE_IMASK]\n               [--k_bias] [--v_bias] [--gptq] [--scale_keep] [--qw_ips]\n               [--eval_KVnoq] [--pre_gptq] [--use_fpinps] [--use_fpinps_gptq]\n               [--warmup] [--train_o_scale] [--train_vo_rotation]\n               [--old_scale] [--vo_PCA_init] [--Rres_init {Hadamard,PCA}]\n               [--bias_init {zeros,means}]\n               [--norm_instruction {ori,orib,hnorm,norm}]\n               [--dtype {float16,bfloat16}] [--disable_realq_replace]\n               [--disable_rotation] [--only_eval] [--pre_eval]\n               [--a_dynamic_method {per_token}]\n               [--w_dynamic_method {per_channel}] [--limit LIMIT]\n               [--deactive_amp] [--attn_implementation {eager}] [--mse]\n               [--Use_RTN] [--act-order] [--true-sequential] [--w_sym]\n               [--percdamp PERCDAMP] [--groupsize GROUPSIZE] [--static-groups]\n               [--info]\n\noptions:\n  -h, --help            show this help message and exit\n  --model MODEL         model name of model path\n  --net NET\n  --cache_dir CACHE_DIR\n                        cache dir of dataset, leading to faster debug\n  --output_dir OUTPUT_DIR\n                        direction of logging file\n  --scale_load_dir SCALE_LOAD_DIR\n                        direction for loading clipping paras\n  --save_dir SAVE_DIR   Directory to save the model weights (.pth)\n  --load_dir LOAD_DIR   Directory to save the model weights (.pth)\n  --resume RESUME\n  --real_quant          real quantization, which can see memory reduce. Note\n                        that due to the limitations of AutoGPTQ kernels, the\n                        real quantization of weight-only quantization can only\n                        lead memory reduction, but with slower inference\n                        speed.\n  --calib_dataset {wikitext2,redpajama}\n                        Where to extract calibration data from.\n  --epochs1 EPOCHS1     Training epochs for bias and asymmetric scaling\n  --epochs2 EPOCHS2     Training epochs for bias and asymmetric scaling\n  --pre_epochs PRE_EPOCHS\n                        Pre Training epochs for scaling and rotation_ov\n  --nsamples1 NSAMPLES1\n                        Number of calibration data sample",
+        "stdout_length_chars": 6759,
+        "stdout_line_count": 163,
+        "stdout_nonempty": true,
+        "stdout_sha256": "5e22f94d1e71a567a4c5c8965d0dd37688f42b5e76d7de206ada42ed44af583f",
+        "stdout_truncated": true,
+        "timed_out": false
+      },
+      "readme_flags": [
+        "--Rres_init",
+        "--abits",
+        "--act-order",
+        "--align",
+        "--batch_size",
+        "--calib_dataset",
+        "--epochs",
+        "--eval_ppl",
+        "--expc",
+        "--finetuning_weights",
+        "--kbits",
+        "--la_lr",
+        "--lexw_lr",
+        "--lscale_lr",
+        "--lt_lr",
+        "--lw_lr",
+        "--model",
+        "--nsamples",
+        "--save_dir",
+        "--training_trans",
+        "--true-sequential",
+        "--use_fpinps",
+        "--usefullfp",
+        "--vbits",
+        "--w_sym",
+        "--wbits"
+      ],
+      "readme_flags_missing_from_runtime_help": [
+        "--epochs",
+        "--nsamples"
+      ],
+      "readme_flags_missing_from_static_parser": [
+        "--epochs",
+        "--nsamples"
+      ],
+      "static_flags": [
+        "--Rres_init",
+        "--Use_RTN",
+        "--a1init",
+        "--a_dynamic_method",
+        "--a_quant_method",
+        "--abits",
+        "--act-order",
+        "--align",
+        "--attn_implementation",
+        "--aug_loss",
+        "--auto_mix_precision",
+        "--batch_size",
+        "--bias_init",
+        "--cache_dir",
+        "--calib_dataset",
+        "--deactive_amp",
+        "--disable_realq_replace",
+        "--disable_rotation",
+        "--dtype",
+        "--epochs1",
+        "--epochs2",
+        "--eval_KVnoq",
+        "--eval_ppl",
+        "--expc",
+        "--fast_nearest",
+        "--finetuning_weights",
+        "--gptq",
+        "--groupsize",
+        "--hex",
+        "--info",
+        "--k_bias",
+        "--k_quant_method",
+        "--kbits",
+        "--la2_lr",
+        "--la_lr",
+        "--lab_lr",
+        "--lac",
+        "--lac_lr",
+        "--lexw_lr",
+        "--limit",
+        "--load_dir",
+        "--ls_lr",
+        "--lscale_lr",
+        "--lt2_lr",
+        "--lt_lr",
+        "--lvr_lr",
+        "--lw2_lr",
+        "--lw_lr",
+        "--lwc_lr",
+        "--model",
+        "--mpp",
+        "--mse",
+        "--net",
+        "--norm_instruction",
+        "--nsamples1",
+        "--nsamples2",
+        "--num_fewshot",
+        "--old_scale",
+        "--only_eval",
+        "--output_dir",
+        "--percdamp",
+        "--pre_epochs",
+        "--pre_eval",
+        "--pre_gptq",
+        "--pvtuning",
+        "--quant_end",
+        "--quant_mask",
+        "--quant_start",
+        "--qw_ips",
+        "--r4_quant_method",
+        "--real_quant",
+        "--resume",
+        "--save_dir",
+        "--save_per_layer",
+        "--scale_imask",
+        "--scale_keep",
+        "--scale_load_dir",
+        "--scale_tmask",
+        "--seed",
+        "--seqlen",
+        "--static-groups",
+        "--tasks",
+        "--train_o_scale",
+        "--train_vo_rotation",
+        "--training_trans",
+        "--transmask",
+        "--true-sequential",
+        "--upscale_mask",
+        "--use_fpinps",
+        "--use_fpinps_gptq",
+        "--usefullfp",
+        "--v_bias",
+        "--v_quant_method",
+        "--vbits",
+        "--vo_PCA_init",
+        "--w_dynamic_method",
+        "--w_sym",
+        "--w_ternary",
+        "--warmup",
+        "--wbits",
+        "--wd"
+      ],
+      "static_parser_records": [
+        {
+          "action": null,
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--model"
+          ],
+          "line": 140
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--net"
+          ],
+          "line": 141
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "./cache",
+          "flags": [
+            "--cache_dir"
+          ],
+          "line": 142
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "../log/",
+          "flags": [
+            "--output_dir"
+          ],
+          "line": 143
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--scale_load_dir"
+          ],
+          "line": 144
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "",
+          "flags": [
+            "--save_dir"
+          ],
+          "line": 145
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "",
+          "flags": [
+            "--load_dir"
+          ],
+          "line": 146
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--resume"
+          ],
+          "line": 148
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--real_quant"
+          ],
+          "line": 149
+        },
+        {
+          "action": null,
+          "choices": [
+            "wikitext2",
+            "redpajama"
+          ],
+          "default": "wikitext2",
+          "flags": [
+            "--calib_dataset"
+          ],
+          "line": 150
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 10,
+          "flags": [
+            "--epochs1"
+          ],
+          "line": 155
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 10,
+          "flags": [
+            "--epochs2"
+          ],
+          "line": 156
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0,
+          "flags": [
+            "--pre_epochs"
+          ],
+          "line": 157
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 128,
+          "flags": [
+            "--nsamples1"
+          ],
+          "line": 159
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 128,
+          "flags": [
+            "--nsamples2"
+          ],
+          "line": 160
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 1,
+          "flags": [
+            "--batch_size"
+          ],
+          "line": 161
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 42,
+          "flags": [
+            "--seed"
+          ],
+          "line": 162
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "",
+          "flags": [
+            "--tasks"
+          ],
+          "line": 163
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--eval_ppl"
+          ],
+          "line": 164
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0,
+          "flags": [
+            "--num_fewshot"
+          ],
+          "line": 165
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": -1,
+          "flags": [
+            "--align"
+          ],
+          "line": 166
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0,
+          "flags": [
+            "--quant_start"
+          ],
+          "line": 167
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 999,
+          "flags": [
+            "--quant_end"
+          ],
+          "line": 168
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--fast_nearest"
+          ],
+          "line": 169
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--pvtuning"
+          ],
+          "line": 170
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--save_per_layer"
+          ],
+          "line": 171
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "1110",
+          "flags": [
+            "--transmask"
+          ],
+          "line": 172
+        },
+        {
+          "action": "store_false",
+          "choices": null,
+          "default": true,
+          "flags": [
+            "--a1init"
+          ],
+          "line": 173
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 2048,
+          "flags": [
+            "--seqlen"
+          ],
+          "line": 174
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 4,
+          "flags": [
+            "--wbits"
+          ],
+          "line": 176
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--w_ternary"
+          ],
+          "line": 177
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 4,
+          "flags": [
+            "--abits"
+          ],
+          "line": 178
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 4,
+          "flags": [
+            "--kbits"
+          ],
+          "line": 179
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 4,
+          "flags": [
+            "--vbits"
+          ],
+          "line": 180
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--auto_mix_precision"
+          ],
+          "line": 181
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.001,
+          "flags": [
+            "--mpp"
+          ],
+          "line": 182
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--training_trans"
+          ],
+          "line": 184
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "n",
+          "flags": [
+            "--expc"
+          ],
+          "line": 185
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--hex"
+          ],
+          "line": 186
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--finetuning_weights"
+          ],
+          "line": 187
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--usefullfp"
+          ],
+          "line": 188
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.002,
+          "flags": [
+            "--lab_lr"
+          ],
+          "line": 190
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.005,
+          "flags": [
+            "--lscale_lr"
+          ],
+          "line": 191
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.01,
+          "flags": [
+            "--lac_lr"
+          ],
+          "line": 192
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.01,
+          "flags": [
+            "--lwc_lr"
+          ],
+          "line": 193
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.005,
+          "flags": [
+            "--lexw_lr"
+          ],
+          "line": 194
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.005,
+          "flags": [
+            "--lvr_lr"
+          ],
+          "line": 195
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 2e-05,
+          "flags": [
+            "--lw_lr"
+          ],
+          "line": 196
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.001,
+          "flags": [
+            "--la_lr"
+          ],
+          "line": 197
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.001,
+          "flags": [
+            "--lt_lr"
+          ],
+          "line": 198
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 2e-05,
+          "flags": [
+            "--lw2_lr"
+          ],
+          "line": 199
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.001,
+          "flags": [
+            "--la2_lr"
+          ],
+          "line": 200
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.001,
+          "flags": [
+            "--lt2_lr"
+          ],
+          "line": 201
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.0,
+          "flags": [
+            "--ls_lr"
+          ],
+          "line": 202
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0,
+          "flags": [
+            "--wd"
+          ],
+          "line": 206
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--aug_loss"
+          ],
+          "line": 208
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--lac"
+          ],
+          "line": 209
+        },
+        {
+          "action": null,
+          "choices": [
+            "None",
+            "FFT",
+            "Hadamard",
+            "PCA"
+          ],
+          "default": "Hadamard",
+          "flags": [
+            "--k_quant_method"
+          ],
+          "line": 211
+        },
+        {
+          "action": null,
+          "choices": [
+            "None",
+            "FFT",
+            "Hadamard",
+            "PCA"
+          ],
+          "default": "Hadamard",
+          "flags": [
+            "--v_quant_method"
+          ],
+          "line": 212
+        },
+        {
+          "action": null,
+          "choices": [
+            "None",
+            "FFT",
+            "Hadamard",
+            "PCA"
+          ],
+          "default": "Hadamard",
+          "flags": [
+            "--a_quant_method"
+          ],
+          "line": 213
+        },
+        {
+          "action": null,
+          "choices": [
+            "None",
+            "FFT",
+            "Hadamard",
+            "PCA"
+          ],
+          "default": "Hadamard",
+          "flags": [
+            "--r4_quant_method"
+          ],
+          "line": 214
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "1111",
+          "flags": [
+            "--upscale_mask"
+          ],
+          "line": 218
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "1111",
+          "flags": [
+            "--quant_mask"
+          ],
+          "line": 219
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "11",
+          "flags": [
+            "--scale_tmask"
+          ],
+          "line": 220
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": "11",
+          "flags": [
+            "--scale_imask"
+          ],
+          "line": 221
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--k_bias"
+          ],
+          "line": 224
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--v_bias"
+          ],
+          "line": 225
+        },
+        {
+          "action": "store_false",
+          "choices": null,
+          "default": true,
+          "flags": [
+            "--gptq"
+          ],
+          "line": 226
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--scale_keep"
+          ],
+          "line": 227
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--qw_ips"
+          ],
+          "line": 228
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--eval_KVnoq"
+          ],
+          "line": 229
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--pre_gptq"
+          ],
+          "line": 230
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--use_fpinps"
+          ],
+          "line": 231
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--use_fpinps_gptq"
+          ],
+          "line": 232
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--warmup"
+          ],
+          "line": 233
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--train_o_scale"
+          ],
+          "line": 234
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--train_vo_rotation"
+          ],
+          "line": 235
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--old_scale"
+          ],
+          "line": 236
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--vo_PCA_init"
+          ],
+          "line": 237
+        },
+        {
+          "action": null,
+          "choices": [
+            "Hadamard",
+            "PCA"
+          ],
+          "default": "Hadamard",
+          "flags": [
+            "--Rres_init"
+          ],
+          "line": 238
+        },
+        {
+          "action": null,
+          "choices": [
+            "zeros",
+            "means"
+          ],
+          "default": "zeros",
+          "flags": [
+            "--bias_init"
+          ],
+          "line": 239
+        },
+        {
+          "action": null,
+          "choices": [
+            "ori",
+            "orib",
+            "hnorm",
+            "norm"
+          ],
+          "default": "ori",
+          "flags": [
+            "--norm_instruction"
+          ],
+          "line": 240
+        },
+        {
+          "action": null,
+          "choices": [
+            "float16",
+            "bfloat16"
+          ],
+          "default": "float16",
+          "flags": [
+            "--dtype"
+          ],
+          "line": 241
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--disable_realq_replace"
+          ],
+          "line": 242
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--disable_rotation"
+          ],
+          "line": 243
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--only_eval"
+          ],
+          "line": 244
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--pre_eval"
+          ],
+          "line": 245
+        },
+        {
+          "action": null,
+          "choices": [
+            "per_token"
+          ],
+          "default": "per_token",
+          "flags": [
+            "--a_dynamic_method"
+          ],
+          "line": 246
+        },
+        {
+          "action": null,
+          "choices": [
+            "per_channel"
+          ],
+          "default": "per_channel",
+          "flags": [
+            "--w_dynamic_method"
+          ],
+          "line": 247
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": -1,
+          "flags": [
+            "--limit"
+          ],
+          "line": 248
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--deactive_amp"
+          ],
+          "line": 250
+        },
+        {
+          "action": null,
+          "choices": [
+            "eager"
+          ],
+          "default": "eager",
+          "flags": [
+            "--attn_implementation"
+          ],
+          "line": 251
+        },
+        {
+          "action": "store_false",
+          "choices": null,
+          "default": true,
+          "flags": [
+            "--mse"
+          ],
+          "line": 260
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": false,
+          "flags": [
+            "--Use_RTN"
+          ],
+          "line": 262
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--act-order"
+          ],
+          "line": 264
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--true-sequential"
+          ],
+          "line": 266
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--w_sym"
+          ],
+          "line": 267
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": 0.01,
+          "flags": [
+            "--percdamp"
+          ],
+          "line": 268
+        },
+        {
+          "action": null,
+          "choices": null,
+          "default": -1,
+          "flags": [
+            "--groupsize"
+          ],
+          "line": 269
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--static-groups"
+          ],
+          "line": 270
+        },
+        {
+          "action": "store_true",
+          "choices": null,
+          "default": null,
+          "flags": [
+            "--info"
+          ],
+          "line": 272
+        }
+      ],
+      "unsupported_readme_flags": [
+        "--epochs",
+        "--nsamples"
+      ]
+    }
+  },
+  "execution": {
+    "dataset_loaded": false,
+    "does_not_describe_external_smoke_evidence": true,
+    "gpu_job_executed": false,
+    "model_loaded": false,
+    "quantization_executed": false,
+    "scope": "audit_process_only",
+    "subprocess_policy": "git metadata, importlib.metadata, and --help only; shell=False; bounded timeout",
+    "training_executed": false
+  },
+  "findings": [
+    {
+      "action": "Use explicit stage flags and ask upstream to define the intended two-stage mapping.",
+      "evidence": "README uses ['--epochs', '--nsamples']; they are absent from both main.py AST and the successful runtime --help output.",
+      "id": "README_MAIN_FLAGS_NOT_IMPLEMENTED",
+      "impact": "The published block-correction command exits in argparse before model loading.",
+      "scope": "block_correction",
+      "severity": "HIGH"
+    },
+    {
+      "action": "Make dataset cache/config a CLI argument and verify the exact dataset revision/split.",
+      "evidence": "datautils_e2e.py:122 -> /data/shared_data/datasets (missing); datautils_e2e.py:127 -> /data/shared_data/datasets (missing); datautils_e2e.py:131 -> /data/shared_data/datasets (missing); datautils.py:16 -> /mnt/bn/adsinfra-gpu-dev-hl/heliulu/datasets/redpajama_cache (missing)",
+      "id": "REDPAJAMA_CACHE_NOT_PORTABLE",
+      "impact": "README RedPajama calibration/fine-tuning cannot start on the audited 210 host.",
+      "scope": "block_and_e2e",
+      "severity": "HIGH"
+    },
+    {
+      "action": "Restore/provide datautils_block.py (or remove the import) and rerun the help-only gate.",
+      "evidence": "ModuleNotFoundError: No module named 'datautils_block'",
+      "id": "E2E_ENTRYPOINT_IMPORT_FAILURE",
+      "impact": "The optional E2E path cannot reach argument parsing, even for --help.",
+      "scope": "e2e_finetuning",
+      "severity": "HIGH"
+    },
+    {
+      "action": "Build a Python 3.12 environment from a satisfiable lock and capture pip freeze plus CUDA ABI.",
+      "evidence": "transformers declared=5.9.0 installed=4.57.1; bitblas declared=0.1.0.post1 installed=None",
+      "id": "ENVIRONMENT_REQUIREMENT_DRIFT",
+      "impact": "A help-capable environment is not evidence of a requirements-faithful training environment.",
+      "scope": "environment",
+      "severity": "MEDIUM"
+    },
+    {
+      "action": "Declare and pin direct runtime dependencies for each block/E2E/chat extra.",
+      "evidence": "Repository imports not listed in requirements.txt: ['accelerate', 'datasets', 'numpy', 'scipy'].",
+      "id": "DIRECT_IMPORTS_NOT_DECLARED",
+      "impact": "A clean install can fail or depend on accidental transitive packages.",
+      "scope": "environment",
+      "severity": "MEDIUM"
+    },
+    {
+      "action": "Obtain the missing source from upstream with provenance; do not invent benchmark logic locally.",
+      "evidence": "e2efinetune.py:20 imports datautils_block",
+      "id": "MISSING_REPOSITORY_LOCAL_IMPORT",
+      "impact": "The affected entrypoint is incomplete at the pinned commit.",
+      "scope": "e2e_finetuning",
+      "severity": "HIGH"
+    },
+    {
+      "action": "Log both counts and compare methods by actual tokens consumed by each optimization stage.",
+      "evidence": "Both stages iterate over 3968 samples after the in-code 1/32 reduction; the loaded calibration pool remains 4096.",
+      "id": "CALIBRATION_POOL_VS_OPTIMIZATION_COUNT",
+      "impact": "Loaded-pool size and per-stage optimization-example count must not be reported as the same quantity.",
+      "scope": "block_correction",
+      "severity": "MEDIUM"
+    },
+    {
+      "action": "Fail if extra_args is non-empty and persist the resolved TrainingArguments object.",
+      "evidence": "HfArgumentParser returns remaining strings into extra_args, which is not consumed after assignment.",
+      "id": "E2E_UNKNOWN_FLAGS_CAN_BE_SILENT",
+      "impact": "Misspelled or version-removed E2E flags can be silently ignored once imports are repaired.",
+      "scope": "e2e_finetuning",
+      "severity": "MEDIUM"
+    },
+    {
+      "action": "Keep the official failure as the baseline and report any compatibility patch as a separate source variant.",
+      "evidence": "AttributeError: 'Catcher' object has no attribute 'attention_type'",
+      "id": "OFFICIAL_QWEN_SMOKE_COMPATIBILITY_FAILURE",
+      "impact": "The unmodified pinned commit cannot complete the Qwen2.5 layer-0 smoke in the audited Transformers 4.57 environment.",
+      "scope": "block_correction_qwen_smoke",
+      "severity": "HIGH"
+    },
+    {
+      "action": "Retain external_reproduction_pending and run the preregistered full endpoint separately.",
+      "evidence": "patched layer-0 exit=0, elapsed=195.71s, scope={'model': 'Qwen2.5-3B', 'mapping': '20to8', 'wbits': '2', 'seqlen': '128', 'nsamples1': '8', 'nsamples2': '8', 'epochs1': '1', 'epochs2': '1', 'batch_size': '2', 'quant_start': '0', 'quant_end': '1', 'eval_ppl': False, 'tasks': ''}",
+      "id": "PATCHED_LAYER0_SMOKE_IS_NOT_FULL_REPRODUCTION",
+      "impact": "This validates a bounded execution path and artifact write, not full-model PPL, task accuracy, or deployment bytes.",
+      "scope": "block_correction_qwen_smoke",
+      "severity": "MEDIUM"
+    }
+  ],
+  "model_cache": {
+    "appears_complete": true,
+    "completeness_claim": "minimal local-file/header gate only; no full shard hash, tensor load, or model forward",
+    "exists": true,
+    "index_error": null,
+    "index_present": true,
+    "minimal_files_present": true,
+    "missing_essential_files": [],
+    "missing_referenced_shards": [],
+    "path": "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "provided": true,
+    "referenced_shards": [
+      "model-00001-of-00002.safetensors",
+      "model-00002-of-00002.safetensors"
+    ],
+    "revision": null,
+    "shard_checks": [
+      {
+        "exists": true,
+        "header_size_bytes": 30200,
+        "name": "model-00001-of-00002.safetensors",
+        "nonzero": true,
+        "safetensors_header_json_valid": true,
+        "size_bytes": 3968658944
+      },
+      {
+        "exists": true,
+        "header_size_bytes": 19400,
+        "name": "model-00002-of-00002.safetensors",
+        "nonzero": true,
+        "safetensors_header_json_valid": true,
+        "size_bytes": 2203268048
+      }
+    ],
+    "snapshot": "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "snapshot_exists": true,
+    "tokenizer_assets_present": [
+      "tokenizer.json",
+      "vocab.json"
+    ]
+  },
+  "patched_smoke_evidence": {
+    "compatibility_patch": {
+      "clean_target_filesystem_mode": "775",
+      "clean_target_git_mode": "100755",
+      "declared_file_modes": [
+        "100755"
+      ],
+      "exists": true,
+      "git_apply_check": {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/external_patches/liftquant_72b3875_qwen2_attention_type.patch"
+        ],
+        "returncode": 0,
+        "stderr_excerpt": "",
+        "stderr_length_chars": 0,
+        "stderr_line_count": 0,
+        "stderr_nonempty": false,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_truncated": false,
+        "stdout_excerpt": "",
+        "stdout_length_chars": 0,
+        "stdout_line_count": 0,
+        "stdout_nonempty": false,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdout_truncated": false,
+        "timed_out": false
+      },
+      "hunk_count": 1,
+      "logical_path": "external_patches/liftquant_72b3875_qwen2_attention_type.patch",
+      "mode_metadata_matches_clean_target": true,
+      "path": "/home/wangmeiqi/codex_worktrees/com_compression-hessian-repair-exact-rate-20260713/external_patches/liftquant_72b3875_qwen2_attention_type.patch",
+      "preserves_attention_type": true,
+      "provided": true,
+      "sha256": "47d5437744873f9d2b65074ebf4a07322f4a92d73ea6bf427ce5b2afc6f7d7a2",
+      "size_bytes": 680,
+      "target_mode_probe": {
+        "command": [
+          "git",
+          "ls-files",
+          "--stage",
+          "--",
+          "quantize/liftq.py"
+        ],
+        "returncode": 0,
+        "stderr_excerpt": "",
+        "stderr_length_chars": 0,
+        "stderr_line_count": 0,
+        "stderr_nonempty": false,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_truncated": false,
+        "stdout_excerpt": "100755 e25b4f0b91fd8cbdfbf6686da8585d0d2ea9d162 0\tquantize/liftq.py\n",
+        "stdout_length_chars": 68,
+        "stdout_line_count": 1,
+        "stdout_nonempty": true,
+        "stdout_sha256": "5dd386d3f3db12894737cb04fd94243443a54197ba59dcafaed0d53f405ff350",
+        "stdout_truncated": false,
+        "timed_out": false
+      }
+    },
+    "official_unpatched_run": {
+      "argv": [
+        "main.py",
+        "--model",
+        "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+        "--net",
+        "Qwen2.5-3B",
+        "--cache_dir",
+        "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/cache",
+        "--output_dir",
+        "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/log",
+        "--save_dir",
+        "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/qmodels",
+        "--save_per_layer",
+        "--wbits",
+        "2",
+        "--expc",
+        "20to8",
+        "--w_sym",
+        "--abits",
+        "16",
+        "--kbits",
+        "16",
+        "--vbits",
+        "16",
+        "--true-sequential",
+        "--act-order",
+        "--use_fpinps",
+        "--Rres_init",
+        "Hadamard",
+        "--nsamples1",
+        "8",
+        "--nsamples2",
+        "8",
+        "--epochs1",
+        "1",
+        "--epochs2",
+        "1",
+        "--batch_size",
+        "2",
+        "--calib_dataset",
+        "wikitext2",
+        "--usefullfp",
+        "--training_trans",
+        "--finetuning_weights",
+        "--align",
+        "1",
+        "--lscale_lr",
+        "5e-3",
+        "--lexw_lr",
+        "2e-2",
+        "--lw_lr",
+        "2e-5",
+        "--la_lr",
+        "2e-3",
+        "--lt_lr",
+        "2e-4",
+        "--quant_start",
+        "0",
+        "--quant_end",
+        "1",
+        "--seqlen",
+        "128",
+        "--dtype",
+        "float16",
+        "--seed",
+        "42"
+      ],
+      "artifacts": [
+        {
+          "path": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-non_layer.pth",
+          "relative_path": "qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-non_layer.pth",
+          "size_bytes": 622335754
+        }
+      ],
+      "elapsed_seconds": 33.14,
+      "error_signature": "AttributeError: 'Catcher' object has no attribute 'attention_type'",
+      "exists": true,
+      "exit_code": 1,
+      "exit_code_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "maxrss_kb": 9004140,
+      "physical_gpu": null,
+      "provided": true,
+      "resolved_options": {
+        "--Rres_init": "Hadamard",
+        "--abits": "16",
+        "--act-order": true,
+        "--align": "1",
+        "--batch_size": "2",
+        "--cache_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/cache",
+        "--calib_dataset": "wikitext2",
+        "--dtype": "float16",
+        "--epochs1": "1",
+        "--epochs2": "1",
+        "--expc": "20to8",
+        "--finetuning_weights": true,
+        "--kbits": "16",
+        "--la_lr": "2e-3",
+        "--lexw_lr": "2e-2",
+        "--lscale_lr": "5e-3",
+        "--lt_lr": "2e-4",
+        "--lw_lr": "2e-5",
+        "--model": "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+        "--net": "Qwen2.5-3B",
+        "--nsamples1": "8",
+        "--nsamples2": "8",
+        "--output_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/log",
+        "--quant_end": "1",
+        "--quant_start": "0",
+        "--save_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/qmodels",
+        "--save_per_layer": true,
+        "--seed": "42",
+        "--seqlen": "128",
+        "--training_trans": true,
+        "--true-sequential": true,
+        "--use_fpinps": true,
+        "--usefullfp": true,
+        "--vbits": "16",
+        "--w_sym": true,
+        "--wbits": "2"
+      },
+      "run_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714",
+      "scope": {
+        "batch_size": "2",
+        "epochs1": "1",
+        "epochs2": "1",
+        "eval_ppl": false,
+        "mapping": "20to8",
+        "model": "Qwen2.5-3B",
+        "nsamples1": "8",
+        "nsamples2": "8",
+        "quant_end": "1",
+        "quant_start": "0",
+        "seqlen": "128",
+        "tasks": "",
+        "wbits": "2"
+      },
+      "source_variant": "official_pinned_commit_unpatched",
+      "status_file": "FAILED",
+      "status_sha256": "03cbb6c52e522ce55e217e3f9d66dbd66d21ef6bf85024016a3b7f3080c7944f",
+      "stderr_sha256": "1b963f3b3bd39dde54ff9760fff07c2d547bd0287878bde95793eae142ef7992",
+      "stderr_tail": "))\n    ~~~~~^^^^^^^^^^^^^^^^^^\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/torch/nn/modules/module.py\", line 1739, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/torch/nn/modules/module.py\", line 1750, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/transformers/utils/generic.py\", line 918, in wrapper\n    output = func(self, *args, **kwargs)\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/transformers/models/qwen2/modeling_qwen2.py\", line 449, in forward\n    outputs: BaseModelOutputWithPast = self.model(\n                                       ~~~~~~~~~~^\n        input_ids=input_ids,\n        ^^^^^^^^^^^^^^^^^^^^\n    ...<6 lines>...\n        **kwargs,\n        ^^^^^^^^^\n    )\n    ^\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/torch/nn/modules/module.py\", line 1739, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/torch/nn/modules/module.py\", line 1750, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/transformers/utils/generic.py\", line 1064, in wrapper\n    outputs = func(self, *args, **kwargs)\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/transformers/models/qwen2/modeling_qwen2.py\", line 386, in forward\n    attention_mask=causal_mask_mapping[decoder_layer.attention_type],\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/wangmeiqi/anaconda3/lib/python3.13/site-packages/torch/nn/modules/module.py\", line 1928, in __getattr__\n    raise AttributeError(\n        f\"'{type(self).__name__}' object has no attribute '{name}'\"\n    )\nAttributeError: 'Catcher' object has no attribute 'attention_type'\n",
+      "stdout_sha256": "0489985c976929881e05bb3aa933a8cfcbcc4ffdc0c1f9ac50fd6bed986b8311",
+      "stdout_tail": "se)\n)\n[2026-07-14 00:55:57 root](main.py 421): INFO === start quantization ===\n'/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke_20260714/cache/dataloader_qwen2.5_wikitext2_8_128.cache'\nget_wikitext2\n[2026-07-14 00:55:57 datasets.load](load.py 818): WARNING Using the latest cached version of the dataset since wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).\n[2026-07-14 00:55:57 datasets.packaged_modules.cache.cache](cache.py 94): WARNING Found the latest cached dataset configuration 'wikitext-2-raw-v1' at /home/wangmeiqi/.cache/huggingface/datasets/wikitext/wikitext-2-raw-v1/0.0.0/4c6a41deac4b4d5d (last modified on Fri Mar 20 02:07:29 2026).\n[2026-07-14 00:55:57 datasets.load](load.py 818): WARNING Using the latest cached version of the dataset since wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).\n[2026-07-14 00:55:57 datasets.packaged_modules.cache.cache](cache.py 94): WARNING Found the latest cached dataset configuration 'wikitext-2-raw-v1' at /home/wangmeiqi/.cache/huggingface/datasets/wikitext/wikitext-2-raw-v1/0.0.0/4c6a41deac4b4d5d (last modified on Fri Mar 20 02:07:29 2026).\nget_wikitext2 over\n[2026-07-14 00:56:11 root](liftq.py 86): INFO Starting ...\nsave non-layer-statedict\nQwen2DecoderLayer(\n  (self_attn): Qwen2Attention(\n    (q_proj): Linear(in_features=2048, out_features=2048, bias=True)\n    (k_proj): Linear(in_features=2048, out_features=256, bias=True)\n    (v_proj): Linear(in_features=2048, out_features=256, bias=True)\n    (o_proj): Linear(in_features=2048, out_features=2048, bias=False)\n  )\n  (mlp): Qwen2MLP(\n    (gate_proj): Linear(in_features=2048, out_features=11008, bias=False)\n    (up_proj): Linear(in_features=2048, out_features=11008, bias=False)\n    (down_proj): Linear(in_features=11008, out_features=2048, bias=False)\n    (act_fn): SiLUActivation()\n  )\n  (input_layernorm): Qwen2RMSNorm((2048,), eps=1e-06)\n  (post_attention_layernorm): Qwen2RMSNorm((2048,), eps=1e-06)\n)\n",
+      "success_markers": {
+        "reported_layer0_save": false,
+        "reported_main_elapsed": false,
+        "started_layer0": false
+      },
+      "time_sha256": "21dff46f97c597135a633c12f7e5029038641cfbf0fd254fbb8b5e9cd72ab65d"
+    },
+    "patched_run": {
+      "argv": [
+        "main.py",
+        "--model",
+        "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+        "--net",
+        "Qwen2.5-3B",
+        "--cache_dir",
+        "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/cache",
+        "--output_dir",
+        "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/log",
+        "--save_dir",
+        "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/qmodels",
+        "--save_per_layer",
+        "--wbits",
+        "2",
+        "--expc",
+        "20to8",
+        "--w_sym",
+        "--abits",
+        "16",
+        "--kbits",
+        "16",
+        "--vbits",
+        "16",
+        "--true-sequential",
+        "--act-order",
+        "--use_fpinps",
+        "--Rres_init",
+        "Hadamard",
+        "--nsamples1",
+        "8",
+        "--nsamples2",
+        "8",
+        "--epochs1",
+        "1",
+        "--epochs2",
+        "1",
+        "--batch_size",
+        "2",
+        "--calib_dataset",
+        "wikitext2",
+        "--usefullfp",
+        "--training_trans",
+        "--finetuning_weights",
+        "--align",
+        "1",
+        "--lscale_lr",
+        "5e-3",
+        "--lexw_lr",
+        "2e-2",
+        "--lw_lr",
+        "2e-5",
+        "--la_lr",
+        "2e-3",
+        "--lt_lr",
+        "2e-4",
+        "--quant_start",
+        "0",
+        "--quant_end",
+        "1",
+        "--seqlen",
+        "128",
+        "--dtype",
+        "float16",
+        "--seed",
+        "42"
+      ],
+      "artifacts": [
+        {
+          "path": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-layer0.pth",
+          "relative_path": "qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-layer0.pth",
+          "sha256": "5382f0f65da351df04ae2c84b028b2c3ad18370b720f68d1fc007f27ddefa5e1",
+          "size_bytes": 24566073
+        },
+        {
+          "path": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-non_layer.pth",
+          "relative_path": "qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-non_layer.pth",
+          "size_bytes": 622335754
+        }
+      ],
+      "elapsed_seconds": 195.71,
+      "error_signature": null,
+      "exists": true,
+      "exit_code": 0,
+      "exit_code_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "maxrss_kb": 9000700,
+      "physical_gpu": "2",
+      "provided": true,
+      "resolved_options": {
+        "--Rres_init": "Hadamard",
+        "--abits": "16",
+        "--act-order": true,
+        "--align": "1",
+        "--batch_size": "2",
+        "--cache_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/cache",
+        "--calib_dataset": "wikitext2",
+        "--dtype": "float16",
+        "--epochs1": "1",
+        "--epochs2": "1",
+        "--expc": "20to8",
+        "--finetuning_weights": true,
+        "--kbits": "16",
+        "--la_lr": "2e-3",
+        "--lexw_lr": "2e-2",
+        "--lscale_lr": "5e-3",
+        "--lt_lr": "2e-4",
+        "--lw_lr": "2e-5",
+        "--model": "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+        "--net": "Qwen2.5-3B",
+        "--nsamples1": "8",
+        "--nsamples2": "8",
+        "--output_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/log",
+        "--quant_end": "1",
+        "--quant_start": "0",
+        "--save_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/qmodels",
+        "--save_per_layer": true,
+        "--seed": "42",
+        "--seqlen": "128",
+        "--training_trans": true,
+        "--true-sequential": true,
+        "--use_fpinps": true,
+        "--usefullfp": true,
+        "--vbits": "16",
+        "--w_sym": true,
+        "--wbits": "2"
+      },
+      "run_dir": "/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714",
+      "scope": {
+        "batch_size": "2",
+        "epochs1": "1",
+        "epochs2": "1",
+        "eval_ppl": false,
+        "mapping": "20to8",
+        "model": "Qwen2.5-3B",
+        "nsamples1": "8",
+        "nsamples2": "8",
+        "quant_end": "1",
+        "quant_start": "0",
+        "seqlen": "128",
+        "tasks": "",
+        "wbits": "2"
+      },
+      "source_variant": "official_pinned_commit_plus_compatibility_patch",
+      "status_file": "COMPLETED",
+      "status_sha256": "adce7ab9847b30ed365adfabae1d6539223ce48fd530f0a0f68df0e0b9f30c97",
+      "stderr_sha256": "59daa2d797699a16574e0e8236300dfc36336c706550a5f0cc5cb9852f75a793",
+      "stderr_tail": "████ | 2506/2752 [00:40<00:04, 60.16it/s]\n 91%|█████████▏| 2513/2752 [00:40<00:03, 60.12it/s]\n 92%|█████████▏| 2520/2752 [00:40<00:03, 60.16it/s]\n 92%|█████████▏| 2527/2752 [00:40<00:03, 60.16it/s]\n 92%|█████████▏| 2534/2752 [00:40<00:03, 60.18it/s]\n 92%|█████████▏| 2541/2752 [00:40<00:03, 60.21it/s]\n 93%|█████████▎| 2548/2752 [00:40<00:03, 60.19it/s]\n 93%|█████████▎| 2555/2752 [00:40<00:03, 60.22it/s]\n 93%|█████████▎| 2562/2752 [00:40<00:03, 60.16it/s]\n 93%|█████████▎| 2569/2752 [00:41<00:03, 60.16it/s]\n 94%|█████████▎| 2576/2752 [00:41<00:02, 60.16it/s]\n 94%|█████████▍| 2583/2752 [00:41<00:02, 60.18it/s]\n 94%|█████████▍| 2590/2752 [00:41<00:02, 60.16it/s]\n 94%|█████████▍| 2597/2752 [00:41<00:02, 60.22it/s]\n 95%|█████████▍| 2604/2752 [00:41<00:02, 60.22it/s]\n 95%|█████████▍| 2611/2752 [00:41<00:02, 60.25it/s]\n 95%|█████████▌| 2618/2752 [00:41<00:02, 60.21it/s]\n 95%|█████████▌| 2625/2752 [00:42<00:02, 60.20it/s]\n 96%|█████████▌| 2632/2752 [00:42<00:01, 60.13it/s]\n 96%|█████████▌| 2639/2752 [00:42<00:01, 60.15it/s]\n 96%|█████████▌| 2646/2752 [00:42<00:01, 60.15it/s]\n 96%|█████████▋| 2653/2752 [00:42<00:01, 60.19it/s]\n 97%|█████████▋| 2660/2752 [00:42<00:01, 60.20it/s]\n 97%|█████████▋| 2667/2752 [00:42<00:01, 60.19it/s]\n 97%|█████████▋| 2674/2752 [00:42<00:01, 60.22it/s]\n 97%|█████████▋| 2681/2752 [00:42<00:01, 60.21it/s]\n 98%|█████████▊| 2688/2752 [00:43<00:01, 60.15it/s]\n 98%|█████████▊| 2695/2752 [00:43<00:00, 60.14it/s]\n 98%|█████████▊| 2702/2752 [00:43<00:00, 60.20it/s]\n 98%|█████████▊| 2709/2752 [00:43<00:00, 60.18it/s]\n 99%|█████████▊| 2716/2752 [00:43<00:00, 60.15it/s]\n 99%|█████████▉| 2723/2752 [00:43<00:00, 60.20it/s]\n 99%|█████████▉| 2730/2752 [00:43<00:00, 60.22it/s]\n 99%|█████████▉| 2737/2752 [00:43<00:00, 60.20it/s]\n100%|█████████▉| 2744/2752 [00:44<00:00, 60.17it/s]\n100%|█████████▉| 2751/2752 [00:44<00:00, 60.14it/s]\n100%|██████████| 2752/2752 [00:44<00:00, 62.33it/s]\n\n  0%|          | 0/2 [00:00<?, ?it/s]\n100%|██████████| 2/2 [00:00<00:00, 128.65it/s]\n",
+      "stdout_sha256": "ea1f8a3f8778d283ae2fb7181d2b06c80472e072b09d4eb21ac4ae651a3ab1d5",
+      "stdout_tail": "vice='cuda:0', grad_fn=<DivBackward0>)\nstd error in ori domain tensor(0.0025, device='cuda:0', grad_fn=<StdBackward0>) tensor(0.0116, device='cuda:0', grad_fn=<StdBackward0>)\nrelated std error in ori domain tensor(0.2198, device='cuda:0', grad_fn=<DivBackward0>)\nrelated std error in ori domain, Uniform Quantizater tensor(0.3557, device='cuda:0', grad_fn=<DivBackward0>)\nup_proj\nrelated std error in trans domain tensor(0.2171, device='cuda:0', grad_fn=<DivBackward0>)\nstd error in ori domain tensor(0.0022, device='cuda:0', grad_fn=<StdBackward0>) tensor(0.0101, device='cuda:0', grad_fn=<StdBackward0>)\nrelated std error in ori domain tensor(0.2192, device='cuda:0', grad_fn=<DivBackward0>)\nrelated std error in ori domain, Uniform Quantizater tensor(0.3536, device='cuda:0', grad_fn=<DivBackward0>)\nstart finetuning all weights\ndown_proj\nrelated std error in trans domain tensor(0.2168, device='cuda:0', grad_fn=<DivBackward0>)\nstd error in ori domain tensor(0.0067, device='cuda:0', grad_fn=<StdBackward0>) tensor(0.0309, device='cuda:0', grad_fn=<StdBackward0>)\nrelated std error in ori domain tensor(0.2539, device='cuda:0', grad_fn=<DivBackward0>)\nrelated std error in ori domain, Uniform Quantizater tensor(0.4055, device='cuda:0', grad_fn=<DivBackward0>)\nstart finetuning all weights\ntensor([-0.4873,  0.4084, -0.0181, -0.3352, -0.0168, -0.2527, -0.1660, -0.1155,\n        -0.3926, -0.0201, -0.2583, -0.3003,  0.2202,  0.4075, -0.0596,  0.1059],\n       dtype=torch.float16)\ntensor([-0.4873,  0.4084, -0.0181, -0.3352, -0.0168, -0.2527, -0.1660, -0.1155,\n        -0.3926, -0.0201, -0.2583, -0.3003,  0.2202,  0.4075, -0.0596,  0.1059],\n       dtype=torch.float16)\n[2026-07-14 01:02:33 root](liftq.py 618): INFO MSE: 0.0, Energy: 0.20631790161132812\nQuantized model has been saved to：/home/wangmeiqi/codex_external_runs/liftquant_72b3875_block_smoke2_20260714/qmodels/Qwen2.5-3B/Qwen2.5-3B+20to8-layer0.pth\n[2026-07-14 01:02:34 root](main.py 456): INFO 188.33884000778198\nHaven't set save_dir\n",
+      "success_markers": {
+        "reported_layer0_save": true,
+        "reported_main_elapsed": true,
+        "started_layer0": true
+      },
+      "time_sha256": "2ec2d343d69ad7689fd0fa725d1417c21eafab29a3732ead43bad8b5a72f2774"
+    },
+    "patched_run_completion_gate": {
+      "checks": {
+        "all_success_markers": true,
+        "exit_code_zero": true,
+        "nonempty_hashed_layer0_artifact": true,
+        "provided_and_exists": true,
+        "status_completed": true
+      },
+      "passed": true
+    },
+    "separation_rule": "干净 official commit 是兼容性基线；patched run 只是本地 adapter smoke，不得重新标成官方完整复现。"
+  },
+  "paths": {
+    "absolute_literals": [
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils_e2e.py",
+        "line": 122,
+        "path": "/data/shared_data/datasets"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils_e2e.py",
+        "line": 127,
+        "path": "/data/shared_data/datasets"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils_e2e.py",
+        "line": 131,
+        "path": "/data/shared_data/datasets"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils.py",
+        "line": 16,
+        "path": "/mnt/bn/adsinfra-gpu-dev-hl/heliulu/datasets/redpajama_cache"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "chat/chat_bitblas_compile.py",
+        "line": 184,
+        "path": "/mnt/bn/adsinfra-gpu-dev-hl/heliulu/LLMs/Qwen3.5-27B"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "chat/chat_bitblas_compile.py",
+        "line": 186,
+        "path": "/mnt/bn/adsinfra-gpu-dev-hl/heliulu/qmodels/LiftQuant/24to8f1/Qwen3.5-27B/Qwen3.5-27B+24to8"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "chat/chat_quant_bitblas.py",
+        "line": 589,
+        "path": "/mnt/bn/adsinfra-gpu-dev-hl/heliulu/LLMs/Qwen3.5-27B"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "chat/chat_quant_bitblas.py",
+        "line": 591,
+        "path": "/mnt/bn/adsinfra-gpu-dev-hl/heliulu/qmodels/LiftQuant/24to8f1/Qwen3.5-27B/Qwen3.5-27B+24to8"
+      }
+    ],
+    "additional_probes": [],
+    "hardcoded_redpajama": [
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils_e2e.py",
+        "line": 122,
+        "path": "/data/shared_data/datasets"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils_e2e.py",
+        "line": 127,
+        "path": "/data/shared_data/datasets"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils_e2e.py",
+        "line": 131,
+        "path": "/data/shared_data/datasets"
+      },
+      {
+        "exists_on_audit_host": false,
+        "file": "datautils.py",
+        "line": 16,
+        "path": "/mnt/bn/adsinfra-gpu-dev-hl/heliulu/datasets/redpajama_cache"
+      }
+    ]
+  },
+  "provenance": {
+    "commit": "72b3875c770e4579639931fed89dc95e4067edac",
+    "commit_matches": true,
+    "dirty_entries": [],
+    "dirty_entries_truncated": false,
+    "dirty_entry_count": 0,
+    "expected_commit": "72b3875c770e4579639931fed89dc95e4067edac",
+    "head_probe": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "stderr_excerpt": "",
+      "stderr_length_chars": 0,
+      "stderr_line_count": 0,
+      "stderr_nonempty": false,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_truncated": false,
+      "stdout_excerpt": "72b3875c770e4579639931fed89dc95e4067edac\n",
+      "stdout_length_chars": 41,
+      "stdout_line_count": 1,
+      "stdout_nonempty": true,
+      "stdout_sha256": "31d82030953b3e5039370b0c8eef0aca65d8ff1a71d2206dd12a4574a4a33c90",
+      "stdout_truncated": false,
+      "timed_out": false
+    },
+    "provenance_verified": true,
+    "source_dirty_entries": [],
+    "source_dirty_entries_truncated": false,
+    "source_dirty_entry_count": 0,
+    "source_status_probe": {
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--untracked-files=all",
+        "--",
+        ".",
+        ":(exclude)**/__pycache__/**",
+        ":(exclude)**/*.pyc"
+      ],
+      "returncode": 0,
+      "stderr_excerpt": "",
+      "stderr_length_chars": 0,
+      "stderr_line_count": 0,
+      "stderr_nonempty": false,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_truncated": false,
+      "stdout_excerpt": "",
+      "stdout_length_chars": 0,
+      "stdout_line_count": 0,
+      "stdout_nonempty": false,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_truncated": false,
+      "timed_out": false
+    },
+    "source_worktree_clean": true,
+    "status_probe": {
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--untracked-files=all"
+      ],
+      "returncode": 0,
+      "stderr_excerpt": "",
+      "stderr_length_chars": 0,
+      "stderr_line_count": 0,
+      "stderr_nonempty": false,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_truncated": false,
+      "stdout_excerpt": "",
+      "stdout_length_chars": 0,
+      "stdout_line_count": 0,
+      "stdout_nonempty": false,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_truncated": false,
+      "timed_out": false
+    },
+    "worktree_clean": true
+  },
+  "readme_commands": [
+    {
+      "command": "python chat/chat_bitblas_compile.py \\\n    --fp_model_path /path/to/your/fp_hf_model \\\n    --quant_model_path /path/to/your/quant_checkpoint",
+      "entrypoint": "chat/chat_bitblas_compile.py",
+      "fence_index": 2,
+      "flags": [
+        "--fp_model_path",
+        "--quant_model_path"
+      ]
+    },
+    {
+      "command": "python lattice_generator2.py",
+      "entrypoint": "lattice_generator2.py",
+      "fence_index": 4,
+      "flags": []
+    },
+    {
+      "command": "python main.py \\\n    --model /path/to/your/Llama-2-7B \\\n    --save_dir ./qmodels \\\n    --eval_ppl \\\n    --wbits 2 \\\n    --expc 20to8 \\\n    --w_sym \\\n    --abits 16 \\\n    --kbits 16 \\\n    --vbits 16 \\\n    --true-sequential \\\n    --act-order \\\n    --use_fpinps \\\n    --Rres_init Hadamard \\\n    --nsamples 4096 \\\n    --epochs 2 \\\n    --batch_size 2 \\\n    --calib_dataset redpajama \\\n    --usefullfp \\\n    --training_trans \\\n    --finetuning_weights \\\n    --align 1 \\\n    --lscale_lr 5e-3 \\\n    --lexw_lr 2e-2 \\\n    --lw_lr 2e-5 \\\n    --la_lr 2e-3 \\\n    --lt_lr 2e-4",
+      "entrypoint": "main.py",
+      "fence_index": 5,
+      "flags": [
+        "--Rres_init",
+        "--abits",
+        "--act-order",
+        "--align",
+        "--batch_size",
+        "--calib_dataset",
+        "--epochs",
+        "--eval_ppl",
+        "--expc",
+        "--finetuning_weights",
+        "--kbits",
+        "--la_lr",
+        "--lexw_lr",
+        "--lscale_lr",
+        "--lt_lr",
+        "--lw_lr",
+        "--model",
+        "--nsamples",
+        "--save_dir",
+        "--training_trans",
+        "--true-sequential",
+        "--use_fpinps",
+        "--usefullfp",
+        "--vbits",
+        "--w_sym",
+        "--wbits"
+      ]
+    },
+    {
+      "command": "CUDA_VISIBLE_DEVICES=0 python e2efinetune.py \\\n    --fp_model_path /path/to/your/Llama-2-7B \\\n    --quant_model_path ./Llama-2-7B+n.pth \\\n    --model_family Llama-2 \\\n    --wbits 2 \\\n    --expc n \\\n    --factor_a 100 \\\n    --factor_t 10 \\\n    --learning_rate 2e-5 \\\n    --dataset redpajama \\\n    --dataset_format pt \\\n    --output_dir ./output/e2e-qp-output/Llama-2-7B-redpajama-4096 \\\n    --do_train True \\\n    --pt_context_len 4096 \\\n    --per_device_train_batch_size 4 \\\n    --per_device_eval_batch_size 4 \\\n    --gradient_accumulation_steps 8 \\\n    --logging_steps 1 \\\n    --save_strategy epoch \\\n    --training_strategy epochs \\\n    --evaluation_strategy steps \\\n    --eval_steps 200 \\\n    --max_train_samples 4096 \\\n    --num_train_epochs 1 \\\n    --eval_dataset_size 64 \\\n    --bf16 \\\n    --data_seed 42 \\\n    --max_grad_norm 0.3 \\\n    --eval_tasks piqa,arc_easy,arc_challenge,hellaswag,winogrande \\\n    --preprocessing_num_workers 32 \\\n    --do_ppl_eval",
+      "entrypoint": "e2efinetune.py",
+      "fence_index": 6,
+      "flags": [
+        "--bf16",
+        "--data_seed",
+        "--dataset",
+        "--dataset_format",
+        "--do_ppl_eval",
+        "--do_train",
+        "--eval_dataset_size",
+        "--eval_steps",
+        "--eval_tasks",
+        "--evaluation_strategy",
+        "--expc",
+        "--factor_a",
+        "--factor_t",
+        "--fp_model_path",
+        "--gradient_accumulation_steps",
+        "--learning_rate",
+        "--logging_steps",
+        "--max_grad_norm",
+        "--max_train_samples",
+        "--model_family",
+        "--num_train_epochs",
+        "--output_dir",
+        "--per_device_eval_batch_size",
+        "--per_device_train_batch_size",
+        "--preprocessing_num_workers",
+        "--pt_context_len",
+        "--quant_model_path",
+        "--save_strategy",
+        "--training_strategy",
+        "--wbits"
+      ]
+    }
+  ],
+  "repository": "/home/wangmeiqi/codex_external/LiftQuant_audit_clean_72b3875",
+  "requirements": {
+    "comparison": [
+      {
+        "exact_pin": "5.9.0",
+        "installed": "4.57.1",
+        "line": "1",
+        "name": "transformers",
+        "normalized_name": "transformers",
+        "raw": "transformers==5.9.0",
+        "status": "version_mismatch"
+      },
+      {
+        "exact_pin": "0.4.11",
+        "installed": "0.4.11",
+        "line": "2",
+        "name": "lm-eval",
+        "normalized_name": "lm-eval",
+        "raw": "lm-eval==0.4.11",
+        "status": "exact_match"
+      },
+      {
+        "exact_pin": "2.6.0",
+        "installed": "2.6.0",
+        "line": "3",
+        "name": "torch",
+        "normalized_name": "torch",
+        "raw": "torch==2.6.0",
+        "status": "exact_match"
+      },
+      {
+        "exact_pin": "0.1.0.post1",
+        "installed": null,
+        "line": "4",
+        "name": "bitblas",
+        "normalized_name": "bitblas",
+        "raw": "bitblas==0.1.0.post1",
+        "status": "missing"
+      },
+      {
+        "exact_pin": null,
+        "installed": "3.10.0",
+        "line": "5",
+        "name": "matplotlib",
+        "normalized_name": "matplotlib",
+        "raw": "matplotlib",
+        "status": "present_unpinned"
+      },
+      {
+        "exact_pin": null,
+        "installed": "3.3.0",
+        "line": "6",
+        "name": "termcolor",
+        "normalized_name": "termcolor",
+        "raw": "termcolor",
+        "status": "present_unpinned"
+      },
+      {
+        "exact_pin": null,
+        "installed": "4.67.1",
+        "line": "7",
+        "name": "tqdm",
+        "normalized_name": "tqdm",
+        "raw": "tqdm",
+        "status": "present_unpinned"
+      }
+    ],
+    "declared": [
+      {
+        "exact_pin": "5.9.0",
+        "line": "1",
+        "name": "transformers",
+        "normalized_name": "transformers",
+        "raw": "transformers==5.9.0"
+      },
+      {
+        "exact_pin": "0.4.11",
+        "line": "2",
+        "name": "lm-eval",
+        "normalized_name": "lm-eval",
+        "raw": "lm-eval==0.4.11"
+      },
+      {
+        "exact_pin": "2.6.0",
+        "line": "3",
+        "name": "torch",
+        "normalized_name": "torch",
+        "raw": "torch==2.6.0"
+      },
+      {
+        "exact_pin": "0.1.0.post1",
+        "line": "4",
+        "name": "bitblas",
+        "normalized_name": "bitblas",
+        "raw": "bitblas==0.1.0.post1"
+      },
+      {
+        "exact_pin": null,
+        "line": "5",
+        "name": "matplotlib",
+        "normalized_name": "matplotlib",
+        "raw": "matplotlib"
+      },
+      {
+        "exact_pin": null,
+        "line": "6",
+        "name": "termcolor",
+        "normalized_name": "termcolor",
+        "raw": "termcolor"
+      },
+      {
+        "exact_pin": null,
+        "line": "7",
+        "name": "tqdm",
+        "normalized_name": "tqdm",
+        "raw": "tqdm"
+      }
+    ],
+    "imported_but_not_declared": [
+      "accelerate",
+      "datasets",
+      "numpy",
+      "scipy"
+    ],
+    "installed_probe": {
+      "metadata": {
+        "executable": "/home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python",
+        "packages": {
+          "bitblas": null,
+          "lm-eval": "0.4.11",
+          "matplotlib": "3.10.0",
+          "termcolor": "3.3.0",
+          "torch": "2.6.0",
+          "tqdm": "4.67.1",
+          "transformers": "4.57.1"
+        },
+        "python": "3.13.5"
+      },
+      "probe": {
+        "command": [
+          "/home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python",
+          "-B",
+          "-I",
+          "-c",
+          "def _has(n,m):\n try:\n  m.version(n); return True\n except m.PackageNotFoundError:\n  return False\nimport importlib.metadata as m,json,platform,sys;names=[\"transformers\", \"lm-eval\", \"torch\", \"bitblas\", \"matplotlib\", \"termcolor\", \"tqdm\"];out={'python':platform.python_version(),'executable':sys.executable,'packages':{}};[(out['packages'].__setitem__(n,(m.version(n) if _has(n,m) else None))) for n in names];print(json.dumps(out,sort_keys=True))"
+        ],
+        "returncode": 0,
+        "stderr_excerpt": "",
+        "stderr_length_chars": 0,
+        "stderr_line_count": 0,
+        "stderr_nonempty": false,
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_truncated": false,
+        "stdout_excerpt": "{\"executable\": \"/home/wangmeiqi/codex_envs/liftquant-72b3875/bin/python\", \"packages\": {\"bitblas\": null, \"lm-eval\": \"0.4.11\", \"matplotlib\": \"3.10.0\", \"termcolor\": \"3.3.0\", \"torch\": \"2.6.0\", \"tqdm\": \"4.67.1\", \"transformers\": \"4.57.1\"}, \"python\": \"3.13.5\"}\n",
+        "stdout_length_chars": 254,
+        "stdout_line_count": 1,
+        "stdout_nonempty": true,
+        "stdout_sha256": "495e5bd191b923719063d1fc132082571a41e62150476436bbcf587d44e4cc9a",
+        "stdout_truncated": false,
+        "timed_out": false
+      }
+    },
+    "readme_python_version": "3.12",
+    "repository_imported_distributions": [
+      "accelerate",
+      "bitblas",
+      "datasets",
+      "lm-eval",
+      "matplotlib",
+      "numpy",
+      "scipy",
+      "termcolor",
+      "torch",
+      "tqdm",
+      "transformers"
+    ]
+  },
+  "sample_accounting": {
+    "implication_for_4096_4096": "Both stages iterate over 3968 samples after the in-code 1/32 reduction; the loaded calibration pool remains 4096.",
+    "main_uses_max_of_two_sample_flags": true,
+    "stage1_reduces_equal_max_by_one_thirty_second": true,
+    "stage2_reduces_equal_max_by_one_thirty_second": true
+  },
+  "schema_version": 2,
+  "verified_as_of": "2026-07-14"
+}

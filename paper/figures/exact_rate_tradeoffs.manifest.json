@@ -1,0 +1,14 @@
+{
+  "evidence_status": "verified_local_experiment",
+  "inputs": {
+    "results/pretrained_hessian_repair_pythia70m_serialized_20260714/paired_method_comparisons.csv": "3eee0272ae51239c0845c8aa30de6e4441afff82b97031945e2e246840d07f1b",
+    "results/pretrained_hessian_repair_pythia70m_serialized_20260714/strategy_endpoints.csv": "5557f6a608d0e26bdd650d82ec2569606b824933fd74c9476acf24021a8a88e4"
+  },
+  "outputs": [
+    "exact_rate_tradeoffs.pdf",
+    "exact_rate_tradeoffs.svg",
+    "exact_rate_tradeoffs.png"
+  ],
+  "schema_version": 1,
+  "scope": "Pythia-70M; selected six MLP linear tensors; one seed"
+}

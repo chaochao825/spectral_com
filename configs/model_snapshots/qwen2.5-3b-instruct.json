@@ -1,0 +1,86 @@
+{
+  "schema_version": "model_snapshot_manifest.v1",
+  "label": "Qwen2.5-3B-Instruct-aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "model_dir": "/home/spco/base-2-bitnet/.hf_cache/hub/models--Qwen--Qwen2.5-3B-Instruct/snapshots/aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "output": "/home/wangmeiqi/codex_results/large_model_global_controls_v3_20260716_819ddc6/model_snapshots/qwen2.5-3b-instruct.json",
+  "generated_at": "2026-07-16T13:42:10Z",
+  "hash_algorithm": "sha256",
+  "aggregate_scope": "schema version plus newline-delimited canonical file records sorted by path; excludes label, locations, and generated_at",
+  "file_count": 9,
+  "total_bytes": 6183451098,
+  "aggregate_sha256": "772b60e01e987854a5574385707d8a6212dab05d2e623a5c7f4c6ac936b2dce0",
+  "files": [
+    {
+      "path": "config.json",
+      "role": "config",
+      "bytes": 661,
+      "sha256": "eed00b17e22553979d090fa492e587e92885e328914c8e0b0b78f0a0d3576b3b",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/51b83fbd4e2d363b60235b9c8d494046a83c1cbf"
+    },
+    {
+      "path": "generation_config.json",
+      "role": "config",
+      "bytes": 242,
+      "sha256": "ea35dfb6fc5051b01114f9b995820d55dab01ed33ee490f6378b442af82c09f9",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/bf077f03dc569cfb8a90b3ec1ad20365a620bad6"
+    },
+    {
+      "path": "merges.txt",
+      "role": "tokenizer",
+      "bytes": 1671839,
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+    },
+    {
+      "path": "model-00001-of-00002.safetensors",
+      "role": "checkpoint",
+      "bytes": 3968658944,
+      "sha256": "67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/67347b23fb4165b652eb6611f5e1f2a06dfcddba8e909df1b2b0b1857bee06c2"
+    },
+    {
+      "path": "model-00002-of-00002.safetensors",
+      "role": "checkpoint",
+      "bytes": 2203268048,
+      "sha256": "a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/a40d941d0e7e0b966ad8b62bb6d6b7c88cce1299197b599d9d0a4ce59aabfc1d"
+    },
+    {
+      "path": "model.safetensors.index.json",
+      "role": "checkpoint",
+      "bytes": 35581,
+      "sha256": "bc8aaa0c87d4335177e01c765f1de0db81661c67c1a72fbfb0d521b09f5ddc56",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/38047c6284a25427043f0ab040f623a2a20dd093"
+    },
+    {
+      "path": "tokenizer.json",
+      "role": "tokenizer",
+      "bytes": 7031645,
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/443909a61d429dff23010e5bddd28ff530edda00"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "role": "tokenizer",
+      "bytes": 7305,
+      "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/07bfe0640cb5a0037f9322287fbfc682806cf672"
+    },
+    {
+      "path": "vocab.json",
+      "role": "tokenizer",
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "is_symlink": true,
+      "symlink_target": "../../blobs/4783fe10ac3adce15ac8f358ef5462739852c569"
+    }
+  ]
+}

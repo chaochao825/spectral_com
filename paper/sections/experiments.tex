@@ -1,0 +1,59 @@
+\section{Experimental Protocol}
+\label{sec:experiments}
+
+\paragraph{Verified exploratory endpoint.}
+The currently verified artifact uses the pinned Pythia-70M checkpoint
+\citep{biderman2023pythia}, WikiText-2 raw validation text
+\citep{merity2017wikitext}, and six MLP projections from the first,
+middle, and last transformer blocks.  Calibration and evaluation source texts
+are content-disjoint; fallback text is disabled.  Held-out metrics cover
+\VerifiedEvalTokens{} next-token predictions and dense perplexity
+\DensePPL{}.  The target selected-tensor artifact ratio is 0.258 relative to
+an FP16 reference.  Six strategies are probed on 13-point paths, and 16 fixed
+contiguous windows provide paired descriptive differences.  These windows are
+not treated as independent population samples.
+
+\paragraph{Completed scalability smoke.}
+We execute every native endpoint once at seed \ScalePilotSeed{} and target
+selected-weight artifact ratio 0.258 on three scopes.  Pythia-70M uses all
+\ScalePilotPythiaSelectedTensors{} transformer-block MLP projections;
+OPT-125M~\citep{zhang2022opt} uses \texttt{fc1/fc2} in five depth-stratified
+blocks (\ScalePilotOPTSelectedTensors{} tensors); and
+Qwen3-0.6B~\citep{yang2025qwen3} uses \texttt{up/down} projections
+in five blocks, excluding its gate projection
+(\ScalePilotQwenSelectedTensors{} tensors).  Every job evaluates
+\ScalePilotEvalTokens{} next-token predictions in eight fixed windows and
+probes six directions on the same 13-point path.  All three share numerical
+source \ScalePilotNumericalSourceSHA{}, record a per-layer PSD covariance
+audit, and pass round-trip SHA and exact-file-byte checks.  The jobs are three
+separate observations: each uses WikiText-2 raw validation text with
+content-disjoint calibration/evaluation source windows and fallback disabled;
+tokenizers and tensor scopes differ, and no cross-model metric is pooled or
+ranked.
+
+\paragraph{Preregistered and planned scale matrix.}
+The released 69-job configuration also declares Pythia-160M/410M and
+Llama-3.2-1B~\citep{grattafiori2024llama3}, multiple rates, and additional
+seeds.  Those rows remain unexecuted.  Moreover, the present runner's seed
+argument does not alter its sequential data windows, so repeated invocations
+cannot be treated as independent confirmation.  The separate eight-seed
+content-disjoint split manifest is preregistered but not yet consumed by this
+runner.
+
+\paragraph{Baselines and fairness.}
+Native comparisons include Q, global and block scales, Q+S, Q+S with OBS,
+Q+L, strict and relaxed QSL, Q+S$_{\rm OBS}$+L, and component-scaled QSL.
+External methods enter a numeric table only if model checkpoint, W-only scope,
+tensor manifest, calibration/evaluation data, and exported physical payload
+match.  We report data-free A0, calibrated no-backward A1, local
+backward-assisted B, and global fine-tuned/QAT C methods separately
+(\cref{tab:lane-summary,tab:lanes}).  Literature numbers never populate
+measured cells.
+
+\paragraph{Metrics.}
+Primary metrics are final file bytes, held-out NLL and perplexity change,
+normalized PSD proxy cost, and all pairwise signed $\rho_H$.  For a positive
+byte increment we use held-out NLL recovery per added byte.  Equal-byte
+re-estimation is reported as direct recovery, not infinite efficiency.
+Natural bytes, alignment, encoder wall time, peak memory, and provenance are
+secondary diagnostics.

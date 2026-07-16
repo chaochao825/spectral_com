@@ -1,0 +1,12 @@
+{
+  "evidence_status": "verified_local_experiment",
+  "input": "results/pretrained_hessian_repair_pythia70m_serialized_20260714/comfort_sweep.csv",
+  "input_sha256": "720cfa930d161600df54d3c5f97705eb1420e0b05e170a2d43e80c003e97a8d1",
+  "outputs": [
+    "loss_landscape.pdf",
+    "loss_landscape.svg",
+    "loss_landscape.png"
+  ],
+  "schema_version": 1,
+  "scope": "Pythia-70M; selected six MLP linear tensors; one seed; 13-point paths"
+}

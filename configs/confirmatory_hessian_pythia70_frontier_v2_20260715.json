@@ -1,0 +1,151 @@
+{
+  "schema_version": "large_scale_hessian_suite.v1",
+  "suite_id": "confirmatory_hessian_pythia70_frontier_v2_20260715",
+  "description": "Preregistered Pythia-70M endpoint screen. Eight disjoint calibration allocations are evaluated at three paired search budgets on fixed protocol test windows; actual serialized rates are audited, and only each QL-budget variant versus Q+L is exact-byte constrained.",
+  "evidence_contract": {
+    "current_data_window_policy": "preregistered per-seed calibration source rows are disjoint; fixed test windows are shared across seed values for paired evaluation",
+    "protocol_manifest_interface_supported": true,
+    "multi_seed_aggregation_requires_consumed_protocol_manifest": true,
+    "default_evidence_role": "confirmatory"
+  },
+  "analysis_plan": {
+    "schema_version": "confirmatory_hessian_endpoint_screen_analysis.v1",
+    "freeze_status": "analysis_config_frozen_before_confirmatory_test_evaluation",
+    "data_split_preregistration": "the separate 2026-07-14 protocol freezes dataset rows and token windows; this analysis plan freezes contrasts and inference before model test endpoints run",
+    "primary_metric": "heldout_nll",
+    "primary_contrast": {
+      "candidate": "Q+S+L_QL_budget",
+      "reference": "Q+L",
+      "design_label": "strict_same_byte_composite_vs_ql",
+      "directional_hypothesis": "candidate_lower",
+      "rate_match_rule": "claim rate-matched only when the candidate and reference artifact files have exactly equal actual serialized bytes"
+    },
+    "co_primary_contrasts": [
+      {
+        "candidate": "Q+S_OBS+L",
+        "reference": "Q+S_OBS",
+        "design_label": "obs_lowrank_increment",
+        "directional_hypothesis": "candidate_lower",
+        "rate_comparison_rule": "actual_serialized_rate_pareto_only_not_a_rate_matched_contrast"
+      },
+      {
+        "candidate": "Q+S_OBS+L",
+        "reference": "Q+L",
+        "design_label": "obs_composite_vs_ql",
+        "directional_hypothesis": "candidate_lower",
+        "rate_comparison_rule": "actual_serialized_rate_pareto_only_not_a_rate_matched_contrast"
+      }
+    ],
+    "replicate_unit": "seed",
+    "rate_pairing": "the three rates are paired within each seed",
+    "fixed_test_window_role": "paired_diagnostic_only_not_independent_replicates",
+    "inference": "exact_paired_randomization_on_eight_seed_level_differences",
+    "multiplicity": "holm_across_co_primary_family",
+    "within_seed_rate_aggregation": "unweighted_arithmetic_mean_of_candidate_minus_reference_heldout_nll_at_frozen_rates_0p258_0p275_0p300",
+    "test_statistic": "mean_of_eight_seed_level_rate_averaged_differences",
+    "randomization": "one_sided_exact_sign_flip_all_2_power_8_assignments",
+    "zero_difference_handling": "retained_as_zero_under_all_sign_flips",
+    "p_value": "count(T_perm <= T_obs)/256",
+    "rate_match_gate": "only the primary Q+S+L_QL_budget versus Q+L contrast is labelled rate-matched, and only under exact actual serialized-byte equality; co-primary OBS contrasts are actual-rate/Pareto comparisons",
+    "required_reporting": [
+      "seed_mean_nll_difference",
+      "seed_standard_deviation",
+      "eight_seed_signs",
+      "exact_randomization_p_value",
+      "actual_serialized_bytes"
+    ],
+    "orthogonality_role": "mechanism_diagnostic_only",
+    "orthogonality_required_diagnostics": [
+      "single_component_costs",
+      "signed_cross_term",
+      "decomposition_closure_residual",
+      "heldout_advantage"
+    ],
+    "orthogonality_success_rule": "absolute rho below 0.1 alone is insufficient and this endpoint screen cannot establish active orthogonalization"
+  },
+  "output_root": "results/confirmatory_hessian_pythia70_frontier_v2_20260715",
+  "runner": "scripts/run_pretrained_hessian_repair_protocol_v2.py",
+  "expected_strategies": [
+    "Q",
+    "Q_global_scale",
+    "Q_block_scale",
+    "Q+S",
+    "Q+S_OBS",
+    "Q+L",
+    "Q+S+L_QL_budget",
+    "Q+S+L_QL_budget_component_scale",
+    "Q+S+L",
+    "Q+S_OBS+L",
+    "Q+S+L_component_scale"
+  ],
+  "expected_outputs": [
+    "run_config.json",
+    "candidate_ablation.csv",
+    "strategy_endpoints.csv",
+    "endpoint_window_nll.csv",
+    "covariance_psd_audit.csv",
+    "artifact_manifest.json",
+    "artifact_payloads.csv",
+    "summary.md"
+  ],
+  "common": {
+    "device": "auto",
+    "svd_device": "auto",
+    "torch_dtype": "float32",
+    "local_files_only": true,
+    "dataset": "wikitext",
+    "subset": "wikitext-2-raw-v1",
+    "split": "test",
+    "calib_limit": 32,
+    "eval_limit": 64,
+    "sequence_length": 256,
+    "batch_size": 1,
+    "texts_per_batch_window": 1,
+    "selector_activation_sample_rows": 512,
+    "bits": 4,
+    "support_encoding": "csr_fixed",
+    "emit_codec_artifacts": true,
+    "enforce_serialized_rate_cap": true,
+    "artifact_alignment": 64,
+    "s_method": "wanda",
+    "l_method": "whitened_svd",
+    "repair_block_sizes": [32, 64, 128, 256, 512],
+    "max_allocation_ranks": 32,
+    "obs_rcond": 1e-10,
+    "scale_min": 0.0,
+    "scale_max": 2.0,
+    "rho_threshold": 0.1,
+    "rate_tolerance": 0.01,
+    "skip_comfort": true,
+    "skip_plots": true,
+    "proxy_only": false
+  },
+  "stages": [
+    {
+      "id": "pythia70m_full_mlp_confirmatory_frontier",
+      "lane": "A_post_training_no_backward",
+      "evidence_role": "confirmatory",
+      "protocol_manifest_consumed": true,
+      "seed_aggregation_allowed": true,
+      "data_window_independence": "per_seed_calibration_source_rows_disjoint_fixed_test_windows_shared_for_paired_evaluation",
+      "protocol_manifest": "results/confirmatory_hessian_protocol_20260714/protocol.json",
+      "protocol_manifest_sha256": "9e8315ad6bb60a7a0c17765058564f23f6e5eff2337e089f41a451eb51e15547",
+      "protocol_eval_role": "test",
+      "model": "EleutherAI/pythia-70m",
+      "model_scale": "70M",
+      "model_availability": "required",
+      "availability_note": "protocol-bound model/tokenizer snapshot; cache verified on server 210",
+      "revision": "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+      "seeds": [17, 29, 43, 59, 71, 89, 101, 113],
+      "rates": [0.258, 0.275, 0.3],
+      "tensor_scope": {
+        "id": "full_mlp_weights",
+        "claim_scope": "all transformer-block MLP projection weights; embeddings, attention and output head remain dense",
+        "module_types": ["dense_h_to_4h", "dense_4h_to_h"],
+        "layers": [0, 1, 2, 3, 4, 5],
+        "max_modules": 0,
+        "expected_selected_tensors": 12
+      }
+    }
+  ]
+}

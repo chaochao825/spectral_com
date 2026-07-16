@@ -1,0 +1,89 @@
+\documentclass{article}
+
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{hyperref}
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+\usepackage{icml2026}
+\usepackage{iftex}
+\ifXeTeX
+  % Tectonic uses XeTeX.  Its legacy `times` package can otherwise fall back
+  % to Latin Modern; TeX Gyre Termes is the metrically compatible Times face.
+  \usepackage{fontspec}
+  \setmainfont{texgyretermes}[
+    Path=fonts/, Extension=.otf,
+    UprightFont=*-regular, BoldFont=*-bold,
+    ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+  \setsansfont{texgyreheros}[
+    Path=fonts/, Extension=.otf,
+    UprightFont=*-regular, BoldFont=*-bold,
+    ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+  \setmonofont{texgyrecursor}[
+    Path=fonts/, Extension=.otf,
+    UprightFont=*-regular, BoldFont=*-bold,
+    ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\fi
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}[proposition]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[proposition]{Remark}
+
+\input{results/verified_numbers}
+\input{results/scaling_pilot_numbers}
+
+\icmltitlerunning{Exact-Byte Compression}
+
+\begin{document}
+
+\twocolumn[
+  \icmltitle{When Do Compression Errors Cooperate?\\
+  Exact-Byte Hessian Geometry for Composite Language-Model Compression}
+
+  \begin{icmlauthorlist}
+    \icmlauthor{Anonymous Authors}{anon}
+  \end{icmlauthorlist}
+  \icmlaffiliation{anon}{Anonymous Institution}
+  \icmlcorrespondingauthor{Anonymous Authors}{anonymous@example.com}
+  \icmlkeywords{language-model compression, post-training quantization, pruning, low-rank repair, Hessian geometry, rate distortion}
+  \vskip 0.3in
+]
+
+\printAffiliationsAndNotice{}
+
+\begin{abstract}
+Low-bit quantization, pruning, scale protection, and low-rank correction can each be benign for small perturbations, suggesting that distributing compression across mechanisms may avoid pushing any one beyond its local \emph{comfort zone}.  Testing this hypothesis is easy to bias because heterogeneous codecs carry different indices, factors, scales, descriptors, and alignment overhead.  We formulate composite post-training compression as a discrete exact-serialized-byte problem and decompose its local loss into gradient, self, cross, proxy-mismatch, and path-curvature terms in a declared positive-semidefinite geometry.  Our audited \VerifiedModel{} probe shows why orthogonality alone is insufficient: sparse and low-rank repairs are nearly orthogonal, yet a conservative component-scaled Q+S+L candidate loses to Q+L by \StrictQSLMinusQLPPL{} perplexity when tail-padded to the same \QLBytes{}-byte final file; its natural encoding leaves \StrictQSLTailPaddingBytes{} bytes unused.  Optimal Brain Surgeon (OBS) re-estimation meanwhile improves a fixed sparse payload at zero additional bytes.  Three separate seed-\ScalePilotSeed{} scalability-smoke jobs over Pythia-70M, OPT-125M, and Qwen3-0.6B repeat the near-orthogonal S--L geometry and the positive strict-QSL-minus-QL endpoint sign for similarly underfilled candidates, without being pooled or promoted to multi-seed evidence.  We release a round-trip research codec, loss-landscape probes, a fail-closed scale runner, and a training-dependence taxonomy separating frozen PTQ from backward-assisted and fine-tuned methods.
+\end{abstract}
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/problem_method}
+\input{sections/theory}
+\input{sections/experiments}
+\input{sections/results}
+\FloatBarrier
+\input{sections/conclusion}
+
+\FloatBarrier
+\section*{Impact Statement}
+This work aims to make language-model compression comparisons more reproducible by charging actual serialized state and by separating diagnostic proxies from held-out endpoint evidence.  Better compression can reduce storage and inference-resource requirements, but accuracy losses can be uneven across tasks or populations.  The research artifact codec is not a production runtime, and the present experiments do not establish deployment speed, energy savings, safety preservation, or fairness preservation; those properties require separate evaluation before use.
+
+\clearpage
+\bibliography{references}
+\bibliographystyle{icml2026}
+
+\clearpage
+\appendix
+\input{appendices/theory_proofs}
+\input{appendices/reproducibility}
+
+\end{document}

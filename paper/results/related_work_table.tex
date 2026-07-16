@@ -1,0 +1,38 @@
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{2.65cm}p{1.50cm}cp{4.05cm}p{4.10cm}c@{}}
+\toprule
+Method & Venue & Lane & Encoder process & Deployed state to charge & Exact file bytes? \\
+\midrule
+GPTQ~\citep{frantar2023gptq} & ICLR'23 & A1 & Activation Hessian proxy; no backward & Codes, scales, grouping/order metadata & No$^\dagger$ \\
+SparseGPT~\citep{frantar2023sparsegpt} & ICML'23 & A1 & Second-order one-shot pruning & Values and explicit support/N:M layout & No$^\dagger$ \\
+Wanda~\citep{sun2024wanda} & ICLR'24 & A1 & Weight--activation magnitude; no update & Values and explicit support/N:M layout & No$^\dagger$ \\
+AWQ~\citep{lin2024awq} & MLSys'24 & A1 & Activation-aware scale/clipping search & Codes, scales and non-folded transforms & No$^\dagger$ \\
+SpQR~\citep{dettmers2024spqr} & ICLR'24 & A1 & Second-order outlier separation & Bulk codes plus outlier values/indices & No$^\dagger$ \\
+LQER~\citep{zhang2024lqer} & ICML'24 & A1 & Activation-scaled closed-form SVD & Base codec plus low-rank factors & No$^\dagger$ \\
+QERA~\citep{zhang2025qera} & ICLR'25 & A1 & Closed-form reconstruction (PTQ row) & Base codec plus low-rank factors & No$^\dagger$ \\
+EoRA~\citep{liu2024eora} & arXiv'24 & A1 & Eigenspace low-rank approximation & Compressed base plus low-rank factors & No$^\dagger$ \\
+SLiM~\citep{mozaffari2025slim} & ICML'25 & A1 & One-shot quantization, 2:4 pruning, LR repair & Codes, 2:4 layout and low-rank factors & No$^\dagger$ \\
+Harma et al.~\citep{harma2025effective} & ICLR'25 & A0 & Q/S order and non-orthogonality analysis & Sparse quantized values, scales and support & No$^\dagger$ \\
+OBR~\citep{guo2026optimal} & ICLR'26 & A1 & Closed-form Hessian Q/S compensation & Folded sparse low-bit weights and layout & No$^\dagger$ \\
+FOEM~\citep{zheng2026foem} & AAAI'26 & A1 & First-order proxy without backpropagation & Base-codec state after compensation & No$^\dagger$ \\
+Radio~\citep{young2025radio} & ICML'25 & A1 & Post-training rate--distortion allocation & Codes plus allocation/decoder metadata & No$^\dagger$ \\
+Q-Palette~\citep{lee2025qpalette} & NeurIPS'25 & A0/A1 & Data-free or calibrated mixed-scheme search & Codes, codebooks, scheme/fusion metadata & No$^\dagger$ \\
+SRR~\citep{cho2026srr} & ICML'26 & A1 & Closed-form preserve/reconstruct rank split & Base codec plus both low-rank parts & No$^\dagger$ \\
+SERQ~\citep{park2026serq} & ICLR'26 & A1 & Offline saliency decomposition/permutation & W/A codec, one LR matrix, permutation & No$^\dagger$ \\
+ResComp~\citep{li2026rescomp} & ICLR'26 & A1 & Sequential compensation; no global tuning & Base codec plus any unabsorbed state & No$^\dagger$ \\
+\midrule
+SqueezeLLM~\citep{kim2024squeezellm} & ICML'24 & B & Loss-gradient-square/Fisher checkpoint & Indices, codebooks and sparse outliers & No$^\dagger$ \\
+GuidedQuant~\citep{kim2025guidedquant} & ICML'25 & B & End-loss backward/Fisher blocks & Attached base-quantizer payload & No$^\dagger$ \\
+Hessian ECSQ~\citep{choi2017towards} & ICLR'17 & B & Hessian-weighted entropy-constrained coding & Code stream, codebook/LUT and rate metadata & No$^\dagger$ \\
+Optimal Formats~\citep{orr2025optimal} & arXiv'25 & B$^*$ & Variable-length formats; Fisher allocation & Streams, code tables and format allocation & No$^\dagger$ \\
+SliderQuant~\citep{wang2026sliderquant} & ICLR'26 & B & Learned sliding-window scales and rank-4 repair & Codes plus any unmerged scale/low-rank state & No$^\dagger$ \\
+YAQA~\citep{tseng2026yaqa} & ICML'26 & B & Full-model KL HVP/backward sketches & Quantizer payload; sketches are encoder-only & No$^\dagger$ \\
+LiftQuant (block)~\citep{he2026liftquant} & ICML'26 & B & Block-output correction with backward passes & Lifted codes and projection/correction state & No$^\dagger$ \\
+\midrule
+LiftQuant (E2E)~\citep{he2026liftquant} & ICML'26 & C & Global causal-LM recovery & Learned lifted/projection/correction state & No$^\dagger$ \\
+FPTQuant~\citep{vanbreugel2026fptquant} & ICML'26$^\ddagger$ & C & Locally and end-to-end learned transforms & Transformed codec and dynamic transform state & No$^\dagger$ \\
+ProjQ~\citep{yu2026projq} & ICML'26 & C & Orthogonal Q/L projection plus adaptation & Base codec, adapter and projection state & No$^\dagger$ \\
+\bottomrule
+\multicolumn{6}{@{}p{16.3cm}@{}}{\footnotesize A0: data-free frozen compression; A1: calibrated/no-backward frozen compression; B: encoder-side backward/HVP without global recovery; C: learned or fine-tuned recovery. Optional QPEFT/PEFT results in QERA, SLiM, YAQA, and SRR are excluded from their A/B rows. $^*$Optimal Formats also contains a data-free format-analysis lane; B refers only to Fisher allocation. $^\dagger$The primary source reports bit width, sparsity, rank, logical memory, or runtime memory, but this audit found no complete deployable output-file byte enumeration including all codebooks, supports, factors, scales, headers, padding, and alignment. $^\ddagger$The official ICML 2026 listing and current arXiv metadata identify ICML 2026; an older OpenReview listing identifies ICLR 2026.} \\
+\end{tabular}

@@ -1,0 +1,129 @@
+\section{Theory and Diagnostic Predictions}
+\label{sec:theory}
+
+\paragraph{Curvature is not automatically a geometry.}
+Let $\mathcal{L}(w)$ be held-out loss, $g=\nabla\mathcal{L}(w_0)$, and
+$J_0=\nabla^2\mathcal{L}(w_0)$.  The task Hessian $J_0$ may be
+indefinite, so $x^\top J_0x$ is not a squared norm and a ``Hessian
+cosine'' based on it need not be an angle.  We reserve $H\succeq0$ for
+a declared positive-semidefinite metric: an empirical Fisher, a
+generalized Gauss--Newton matrix, the activation Gram proxy used in our
+experiments, or $J_0+\lambda I$ only when $\lambda$ is large enough to
+make it PSD.  We write
+$\langle a,b\rangle_H=a^\top Hb$ and
+$\|a\|_H^2=a^\top Ha$; zero-energy directions are excluded when a
+correlation is reported.
+
+\paragraph{Self, cross, and path terms.}
+For sequential compression stages, define the realized increments
+$\delta_i=w_i-w_{i-1}$ and $\delta=\sum_i\delta_i$.  This telescoping
+identity is exact, although each $\delta_i$ depends on stage order.  A
+local expansion around $w_0$ can be written
+\begin{equation}
+\label{eq:loss-decomposition}
+\begin{split}
+\mathcal{L}(w_0+\delta)-\mathcal{L}(w_0)
+={}&g^\top\delta\\
+&+\frac{1}{2}\sum_i q_i+\sum_{i<j}c_{ij}
++\varepsilon_H(\delta),\\
+q_i={}&\|\delta_i\|_H^2,\\
+c_{ij}={}&\langle\delta_i,\delta_j\rangle_H .
+\end{split}
+\end{equation}
+Here $\varepsilon_H$ contains both the mismatch between $H$ and $J_0$
+and curvature variation along the path.  If $H=J_0$ and the Hessian is
+$M$-Lipschitz in the relevant trust region, then
+$|\varepsilon_H(\delta)|\le M\|\delta\|_2^3/6$.
+Thus a small quadratic cost alone does not justify dropping the
+first-order term or evaluating only an interpolation point with
+$\epsilon<1$.
+
+\paragraph{What near-orthogonality guarantees.}
+For $q_iq_j>0$, define
+\begin{equation}
+\rho_H(i,j)=\frac{c_{ij}}{\sqrt{q_iq_j}},\qquad
+\mu=\max_{i\ne j}|\rho_H(i,j)|.
+\end{equation}
+For $k$ components in a common PSD metric,
+\begin{equation}
+\label{eq:coherence-bound}
+\bigl(1-(k-1)\mu\bigr)\sum_iq_i
+\le \Bigl\|\sum_i\delta_i\Bigr\|_H^2
+\le \bigl(1+(k-1)\mu\bigr)\sum_iq_i,
+\end{equation}
+with a nontrivial lower bound when $(k-1)\mu<1$.
+Consequently, near-zero $\rho_H(S,L)$ says that the sparse and low-rank
+repair costs are approximately additive.  It does \emph{not} say that
+their self costs are small, that either is orthogonal to quantization,
+or that the combination beats a single codec.  Likewise,
+$\rho_H<0$ is cancellation, not orthogonality.  Achieving prescribed
+orthogonality further requires the repair degrees of freedom to span
+the relevant $H$-moments and to remain feasible after coefficient
+rounding and serialization (Appendix~\ref{app:theory-proofs}).
+
+\paragraph{Comfort zones at a common rate.}
+Let $s_i\ge0$ denote compression burden assigned to mechanism $i$ in a
+continuous relaxation, and let $d_i(s_i)$ be its local loss cost after
+its fixed codec charges have been paid.  If the $d_i$ are differentiable
+and convex inside their comfort zones, an interior allocation solving
+$\min\sum_i d_i(s_i)$ subject to $\sum_i s_i=S$ satisfies
+\begin{equation}
+\label{eq:kkt-comfort}
+d_i'(s_i)=\lambda\quad(s_i>0),
+\qquad d_i'(0^+)\ge\lambda\quad(s_i=0).
+\end{equation}
+This separable condition assumes that allocation-dependent interactions
+are negligible or absorbed into the $d_i$; otherwise their partial
+derivatives enter the KKT condition.
+In particular, if a single mechanism $A$ carries all burden $S$ and
+$d_A'(S)>d_B'(0^+)$, shifting a sufficiently small amount to $B$
+reduces the relaxed cost.  This formalizes the comfort-zone intuition,
+but ranks only local candidates: ranks, sparse groups, descriptors, and
+alignment make the deployable problem discrete.
+
+For a strict byte test, let $A$ be a realized reference endpoint at budget
+$B$, $u$ the degradation needed to free bytes, and $r$ a repair.  A frontier
+claim additionally requires $A$ to be the best eligible single-mechanism
+endpoint under the same protocol.
+For the realized candidate $C=A+u+r$, define
+\begin{align}
+P_A(u)&=\mathcal{L}(A+u)-\mathcal{L}(A),\nonumber\\
+G_A(r)&=\mathcal{L}(A)-\mathcal{L}(A+r),\nonumber\\
+\Gamma_A(u,r)&=\mathcal{L}(A+u+r)-\mathcal{L}(A+u)\nonumber\\
+&\quad-\mathcal{L}(A+r)+\mathcal{L}(A).
+\end{align}
+Then the combination is better at the same rate whenever its actual
+serialized length obeys $\mathcal{B}(C)\le\mathcal{B}(A)$ and
+\begin{equation}
+\label{eq:exact-exchange}
+G_A(r)>P_A(u)+\Gamma_A(u,r).
+\end{equation}
+Locally, $\Gamma_A(u,r)$ contains the curvature cross term
+$u^\top H_A r$ plus proxy and path errors, where $H_A$ is the declared
+PSD proxy at $A$.  Equation~\eqref{eq:exact-exchange}, not pairwise
+orthogonality, is the relevant sufficient condition.
+
+\paragraph{Repair efficiency must charge the file.}
+For a positive marginal file cost
+$m_r=\mathcal{B}(A+r)-\mathcal{B}(A)$, we report
+$\eta_{\mathrm{NLL}}=G_A(r)/m_r$.  The byte function includes codes,
+scales, sparse values, indices and row pointers, low-rank factors,
+descriptors, manifests, headers, and alignment/padding.  Parameter count or
+value-only bits cannot substitute for this ledger.  If OBS value
+re-estimation or a folded scale changes no final bytes, its direct
+held-out recovery is reported separately rather than as infinite
+efficiency; the zero-byte claim also requires decoding to contain no
+hidden state.  A local quadratic ranking remains diagnostic until the
+final decoded endpoint is evaluated on held-out data.
+
+These distinctions first appeared in one seed on six selected Pythia-70M
+MLP tensors: $S$ and $L$ are nearly orthogonal in the PSD proxy, both
+correlate negatively with $Q$, and a conservative QSL candidate is
+nevertheless worse than Q+L after tail padding to the same final bytes.  Three
+additional, unpooled scalability-smoke jobs execute
+the same diagnostic over full Pythia MLP scope and depth-stratified OPT and
+Qwen MLP scopes.  They repeat the near-orthogonal S--L category and positive
+strict-QSL-minus-QL endpoint sign for similarly underfilled candidates
+(\cref{tab:scaling-pilot}), but they are
+still single-seed observations with unequal scopes.  Multi-seed, common-scope,
+multi-rate, and production-format tests remain confirmatory requirements.

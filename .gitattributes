@@ -14,6 +14,19 @@
 
 *.png binary
 *.pdf binary
+*.hrc binary
+*.otf binary
 *.pt binary
 *.pth binary
 *.gguf binary
+
+# Model snapshot contracts hash raw JSON bytes.
+configs/model_snapshots/*.json text eol=lf
+
+# Generated evidence and vendored publication assets retain their source formatting.
+results/large_scale_hessian_pilot_20260714/** -whitespace
+paper/*.bst -whitespace
+paper/*.sty -whitespace
+paper/fonts/*.txt -whitespace
+paper/figures/*.svg -whitespace
+paper/results/scaling_pilot_summary.md -whitespace

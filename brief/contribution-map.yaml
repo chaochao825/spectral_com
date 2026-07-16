@@ -1,0 +1,191 @@
+primary_claim:
+  claim_id: C0
+  statement: >-
+    We provide an executable, byte-faithful evaluation protocol for frozen
+    heterogeneous Q/S/L/scale endpoints under a declared research codec, coupling
+    round-trip artifact accounting with signed local-PSD interaction diagnostics
+    and realized same-cap endpoint loss with natural bytes and tail padding
+    reported separately.
+  novelty_type: "measurement and evaluation protocol candidate; not base QSL, orthogonality, or rate-allocation novelty"
+  evidence_status: verified
+  gap_evidence: >-
+    Primary-source audit now includes Harma et al. for Q/S non-orthogonality,
+    Choi et al. and Orr et al. for Hessian/Fisher rate coding, OBR for Hessian
+    joint Q/S, SLiM for Q/S/L, and ProjQ for orthogonal Q/L coordination. The
+    defensible gap is the combined byte-faithful artifact and signed-endpoint audit,
+    not first use of any individual mechanism. The legacy audit protocol has
+    committed round-trip evidence; the budget-band allocator is implemented, while
+    the 15-job extension has only partial untracked live outputs and no verified
+    frontier.
+
+secondary_claims:
+  - claim_id: C1
+    statement: >-
+      Exact physical serialization can reverse a conclusion obtained from logical
+      value-stream accounting.
+    evidence_status: verified
+    scope: "Pythia-70M; six selected MLP linear tensors; one seed"
+    supports_primary: true
+  - claim_id: C2
+    statement: >-
+      In the current bounded run, the conservative per-layer-guarded scaled Q+S+L
+      natural artifact is 15,680 bytes smaller than Q+L, is tail-padded to the
+      same 3,248,832-byte final length, and does not outperform Q+L.
+    evidence_status: verified
+    scope: "Pythia-70M; six selected MLP linear tensors; one seed"
+    supports_primary: true
+  - claim_id: C3
+    statement: >-
+      Sparse and low-rank repairs are nearly Hessian-orthogonal in the active
+      layers, while their relations to the quantization perturbation are large
+      negative cross terms rather than mutual orthogonality.
+    evidence_status: verified
+    scope: "same bounded run; diagnostic Hessian proxy"
+    supports_primary: true
+  - claim_id: C4
+    statement: >-
+      A Hessian quadratic proxy tracks the sampled interpolation paths closely,
+      but nonzero first-order terms and the epsilon-one endpoint prevent the proxy
+      from replacing held-out evaluation.
+    evidence_status: verified
+    scope: "same bounded run; six 13-point paths"
+    supports_primary: true
+  - claim_id: C5
+    statement: >-
+      Repair parameters should be selected by held-out loss recovery per exact
+      added byte; OBS value re-estimation and scale protection are candidate
+      mechanisms for improving the use of already-paid support or scale state.
+    evidence_status: verified
+    scope: "bounded run plus three unpooled single-seed/rate smoke scopes; diagnostic comparisons only"
+    supports_primary: true
+  - claim_id: C6
+    statement: >-
+      A sufficient local same-byte condition requires realized repair gain to
+      exceed payload give-up and interaction cost at a feasible discrete endpoint
+      after every descriptor and alignment byte is charged.
+    evidence_status: verified
+    scope: "mathematical derivation only; multi-seed/multi-rate ablations remain planned"
+    supports_primary: true
+  - claim_id: C7
+    statement: >-
+      The preregistered eight-seed split can test whether the strict QSL-versus-QL
+      sign and the proxy ordering persist beyond the exploratory run.
+    evidence_status: preregistered
+    scope: "data/split manifest only; model runs not executed"
+    supports_primary: true
+  - claim_id: C8
+    statement: >-
+      The exact-rate framework improves compression frontiers across larger models
+      and model families.
+    evidence_status: planned
+    scope: "the 15-job live directory has 2 completed_valid CPU Pythia/OPT controls and 13 planned rows; separate untracked suites have 1/24 Pythia completion and 2/28 Qwen2.5-3B layer-0 gate-only SVD sentinels; no completed 3B/7B, full-MLP, multi-seed, or multi-rate frontier result"
+    supports_primary: true
+  - claim_id: C9
+    statement: >-
+      External methods can only enter direct numeric tables after their training
+      lane, calibration tokens, tensor scope, and physical payload are aligned.
+    evidence_status: literature-reported
+    scope: "protocol taxonomy; not a reproduced leaderboard"
+    supports_primary: true
+  - claim_id: C10
+    statement: >-
+      LiftQuant block correction and optional end-to-end recovery belong to
+      different training and reproduction lanes.
+    evidence_status: literature-reported
+    scope: "official-code audit plus compatibility-patched layer-0 smoke; no full-model endpoint result"
+    supports_primary: false
+  - claim_id: C11
+    statement: >-
+      Completed research artifacts are checked against on-disk sizes and hashes,
+      decoder round trips, controlled completion state, and recorded source/model
+      identities, subject to the disclosed provenance boundary of the original run.
+    evidence_status: verified
+    scope: "bounded serialized run plus three fail-closed scalability-smoke jobs"
+    supports_primary: true
+  - claim_id: C12
+    statement: >-
+      The new allocator yields a better accuracy-rate frontier than every single
+      repair and matched baseline.
+    evidence_status: planned
+    scope: "decisive performance claim; absent until multi-model, multi-seed, multi-rate matched evidence exists"
+    supports_primary: true
+  - claim_id: C13
+    statement: >-
+      Three separate seed-17, selected-weight-target-0.258 smoke jobs repeat
+      near-orthogonal S/L Hessian geometry and the same positive
+      strict-scaled-QSL-minus-QL endpoint NLL sign after conservative candidates
+      are tail-padded to equal final within-job bytes.
+    evidence_status: verified
+    scope: >-
+      unpooled Pythia-70M full-MLP, OPT-125M five-depth MLP, and Qwen3-0.6B
+      five-depth up/down-MLP observations; one seed, one rate, selected weights
+      only; strict natural underfill is 31,360/640/1,024 bytes, respectively
+    supports_primary: true
+  - claim_id: C14
+    statement: >-
+      A multimodal extension should jointly gate sink/global-low-rank,
+      local/cyclic, dynamic-sparse, and dense attention paths while accounting for
+      exact-byte weight Q/S/L/OBS, W/A PTQ, cache, temporal reuse, runtime state,
+      peak memory, and end-to-end latency.
+    evidence_status: planned
+    scope: >-
+      cross-repository visual diagnostics and primary-source literature synthesis
+      only; no HunyuanVideo endpoint or system result from this repository
+    supports_primary: false
+
+non_claims:
+  - "This is the first Q/S/L combination, compression-interaction theory, Hessian-aware rate allocator, or orthogonality-based Q/L method."
+  - "The new global allocator is exhaustive or globally Pareto optimal; only final serializer feasibility is exact over an enumerated, budget-band, additively pruned state set."
+  - "The current experiment proves universal orthogonality among Q, S, and L."
+  - "The current strict combined endpoint is better than Q+L."
+  - "The six selected tensors represent a complete model checkpoint or deployment package."
+  - "The three scalability-smoke scopes constitute a pooled comparison, model-size trend, or whole-model compression result."
+  - "The selected-weight artifact target 0.258 is the compression ratio of the complete checkpoint."
+  - "The research codec is a production inference format or establishes kernel speedup."
+  - "LiftQuant or any other external method has been fully reproduced in this repository."
+  - "Literature-reported numbers are directly comparable across training lanes."
+  - "The proposed multimodal stack has measured quality, compression, memory, or speed."
+  - "Standalone cache, sparse-attention, PTQ, kernel, or end-to-end speedups can be multiplied."
+
+risks:
+  - description: "Server 210 is reachable, but the new result directories are partial, untracked live state and include CPU controls plus one-tensor Qwen sentinels."
+    mitigation: "Do not promote them into branch evidence; complete fail-closed aggregation, hash/endpoint checks, review, and an explicit commit before changing claim status."
+  - description: "Completed evidence comprises one bounded one-seed probe and three separate seed-17/target-0.258 selected-weight smoke jobs; none is multi-seed or whole-model evidence."
+    mitigation: "Keep all observations unpooled; implement preregistered-protocol consumption, then execute the planned 69-job multi-seed/multi-rate matrix before generalization."
+  - description: "A discrete sparse/index payload can consume the theoretical gain of a heterogeneous allocation."
+    mitigation: "Allocate using natural and aligned artifact-byte deltas and report strict plus relaxed endpoints separately."
+  - description: "Hessian quadratic analysis omits a nonzero first-order held-out term."
+    mitigation: "Report fitted linear/quadratic terms and require epsilon-one NLL/perplexity for every selected endpoint."
+  - description: "External baselines use different backward budgets and sometimes different tensor or activation scopes."
+    mitigation: "Maintain A0/A1/B/C/D tracks and prohibit cross-lane ranking without an explicit compute, compressed-object, and scope disclosure."
+  - description: "Multimodal components can interact in quality, memory, and latency, and fixed attention routes may not transfer across inputs or timesteps."
+    mitigation: "Use a joint controller with dense fallback, held-out transfer tests, complete runtime-state accounting, and one measured end-to-end stack instead of multiplying standalone gains."
+  - description: "The original bounded run predates source-file SHA capture for its dirty working tree."
+    mitigation: "Disclose that boundary; the three smoke jobs already record aggregate numerical-source hashes, config/job hashes, pinned checkpoints, and physical artifact hashes, and confirmatory runs must preserve the same standard."
+  - description: "The exact serialized research codec may differ from an optimized deployment format."
+    mitigation: "Call it a research artifact codec and add a deployment-format study as planned work."
+
+reviewer_objections:
+  - objection: "The paper claims a combined method, but every completed strict equal-rate endpoint comparison has the unfavorable sign."
+    preemptive_response: >-
+      Present both the bounded endpoint and all three unpooled smoke observations
+      prominently. The current contribution is the exact-rate diagnostic and
+      allocation hypothesis; performance superiority is conditional and remains a
+      planned multi-seed, multi-rate confirmatory claim.
+  - objection: "Near-zero rho for S and L does not establish three-way orthogonality."
+    preemptive_response: >-
+      Report every pairwise Hessian correlation and distinguish complementary
+      cancellation against Q from repair-to-repair orthogonality.
+  - objection: "The repeated signs could still reflect one seed and shared sequential data windows."
+    preemptive_response: >-
+      Keep the three jobs separate, make no independence or significance claim,
+      and require the numerical runner to consume the preregistered protocol before
+      aggregating independent seeds.
+  - objection: "The rate comparison ignores metadata or relies on nominal bpw."
+    preemptive_response: >-
+      Validate on-disk file length, manifest-reported natural/aligned bytes, SHA256,
+      and independent round-trip decoding over an identical tensor set.
+  - objection: "Training-assisted baselines are mixed with frozen PTQ."
+    preemptive_response: >-
+      Separate A0, A1, B, C, and D tracks in setup, tables, and conclusions; use
+      cross-track results only as compute-qualified context.

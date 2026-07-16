@@ -1,0 +1,984 @@
+{
+  "created_at": "2026-07-17T01:00:33+0800",
+  "model": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+  "revision": null,
+  "model_identity": {
+    "requested_revision": null,
+    "resolved_model_commit_hash": "a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+    "resolved_tokenizer_commit_hash": null,
+    "model_config_sha256": "b671239b3ecc12bc07ccc573318982882b8afa68d61b3442fdad4e17acc0355c",
+    "model_name_or_path": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+    "tokenizer_name_or_path": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42"
+  },
+  "model_snapshot": null,
+  "resource_gate": null,
+  "git": {
+    "commit": "5ba2675a3b8ec05f5d1062dfa05465ea988f3177",
+    "branch": "agent/interaction-aware-two-stage-20260717",
+    "dirty": true,
+    "status_porcelain": "M scripts/run_pretrained_hessian_repair.py\n M scripts/run_pretrained_llm_orthogonality.py\n M src/llm_spectral_dynamics/structured/codec_artifact.py\n M tests/test_codec_artifact.py\n M tests/test_hessian_method_variants.py\n?? results/two_stage_heterogeneous_pythia70m_natural_match_smoke_20260717/\n?? results/two_stage_heterogeneous_pythia70m_smoke_v2_20260717/"
+  },
+  "source_snapshot": {
+    "runner": {
+      "path": "scripts/run_pretrained_hessian_repair.py",
+      "size_bytes": 260736,
+      "sha256": "06c9b5009b9a2ca029e9d0b318ce39f9fa7b11318e0bf84f217b9ed5623acbde"
+    },
+    "codec": {
+      "path": "src/llm_spectral_dynamics/structured/codec_artifact.py",
+      "size_bytes": 51318,
+      "sha256": "865d08def81e1115e2c882561b53097168396a651c21450168241fcbb70ee0f2"
+    },
+    "hessian_repair": {
+      "path": "src/llm_spectral_dynamics/structured/hessian_repair.py",
+      "size_bytes": 38784,
+      "sha256": "cb8f16ef90bb6685fbec957773ad840abe84cb97b6bff784f137f7b39cbf7d53"
+    },
+    "base_runner": {
+      "path": "scripts/run_pretrained_llm_orthogonality.py",
+      "size_bytes": 239896,
+      "sha256": "48c7dc2b20e65d7f36cecad45cbf74bf6f1857a90b7cdd5c4fb1e509d92966ba"
+    }
+  },
+  "device": "cuda",
+  "svd_device": "cuda",
+  "selected_layers": [
+    "gpt_neox.layers.0.mlp.dense_h_to_4h"
+  ],
+  "selected_parameter_count": 1048576,
+  "model_parameter_count": 70426624,
+  "baseline_metrics": {
+    "nll": 4.594139591340096,
+    "perplexity": 98.90300192871851,
+    "tokens": 62
+  },
+  "allocation_validation_baseline_metrics": {
+    "nll": 4.212843125866305,
+    "perplexity": 67.54831542263511,
+    "tokens": 62
+  },
+  "actual_eval_tokens": 62,
+  "payload_scope": "selected_linear_weights_only",
+  "payload_codec": {
+    "reference": "FP16 weights",
+    "q_codes": "packed 4-bit symmetric row RTN",
+    "q_scales": "FP16 row or row-column-block scales",
+    "sparse_values": "FP16",
+    "sparse_support": "fixed-width CSR (storage index width inferred from columns, uint32 row pointers)",
+    "lowrank_factors": "two FP16 factors",
+    "folded_repairs": "no additional payload; rounded back into already-counted FP16 values/scales/factors",
+    "container_headers": "measured in deterministic 64-byte-aligned research artifacts",
+    "research_codec_only": true,
+    "production_inference_backend": false
+  },
+  "artifact_evidence": {
+    "emitted": true,
+    "manifest": "artifact_manifest.json",
+    "payload_table": "artifact_payloads.csv",
+    "strategy_count": 13,
+    "alignment_bytes": 64,
+    "serialized_rate_cap_enforced": true,
+    "pre_evaluation_natural_file_bytes": {
+      "Q+L": 627712,
+      "Q+S+L_QL_budget": 627712,
+      "Q+S+L_QL_budget_component_scale": 627712,
+      "Q+S_OBS_global": 615684,
+      "Q+L_global": 627712,
+      "Q+S_OBS_or_L_global": 627712
+    }
+  },
+  "hessian_proxy": "input covariance C kron I_out; activation MSE proxy, not full task Hessian; geometry mode=full, configured damping ratio=0; empirical Gram collection uses a 1e-5 mean-diagonal ridge before this declared ablation; materially indefinite matrices fail; relative negative numerical PSD error <=1e-7 is repaired once for endpoint scoring and nonfactorizer repairs, with a float32 storage floor of eight machine epsilons; whitened SVD may use its separately recorded fitting floor; the spectrum is decomposed once and identity shifts are propagated algebraically",
+  "covariance_psd_audit": {
+    "path": "covariance_psd_audit.csv",
+    "layer_count": 1,
+    "mode": "full",
+    "configured_damping_ratio": 0.0,
+    "psd_rejection_rtol": 1e-07,
+    "float32_storage_floor_rtol": 9.5367431640625e-07,
+    "maximum_original_negative_relative": 0.0,
+    "maximum_diagonal_shift_relative": 9.184117054071986e-07,
+    "all_endpoint_scoring_and_nonfactorizer_repairs_share_prepared_covariance": true,
+    "lowrank_fit_uses_disclosed_factorizer_floor": true,
+    "all_consumers_share_prepared_covariance": false
+  },
+  "targets": [
+    0.3
+  ],
+  "endpoint_target": 0.3,
+  "data": {
+    "requested": {
+      "dataset": "wikitext",
+      "subset": "wikitext-2-raw-v1",
+      "split": "validation",
+      "backup_name": "",
+      "sequence_length": 32,
+      "batch_size": 1,
+      "allow_fallback": false
+    },
+    "source_used": "dataset:wikitext|dataset:wikitext|dataset:wikitext",
+    "source_metadata": [
+      {
+        "source": "dataset",
+        "dataset": "wikitext",
+        "subset": "wikitext-2-raw-v1",
+        "split": "train",
+        "backup_name": "",
+        "rows_requested": 68,
+        "evidence_role": "calibration_proxy_fit",
+        "requested_split": "train"
+      },
+      {
+        "source": "dataset",
+        "dataset": "wikitext",
+        "subset": "wikitext-2-raw-v1",
+        "split": "validation",
+        "backup_name": "",
+        "rows_requested": 74,
+        "evidence_role": "allocation_validation_and_comfort",
+        "requested_split": "validation"
+      },
+      {
+        "source": "dataset",
+        "dataset": "wikitext",
+        "subset": "wikitext-2-raw-v1",
+        "split": "test",
+        "backup_name": "",
+        "rows_requested": 78,
+        "evidence_role": "final_test_evaluation",
+        "requested_split": "test"
+      }
+    ],
+    "fallback_allowed": false,
+    "split_policy": "independent_train_validation_test_dataset_splits_with_cross_role_content_deduplication",
+    "role_splits": {
+      "calibration": "train",
+      "selection": "validation",
+      "test": "test"
+    },
+    "text_pool_count": 220,
+    "unique_text_pool_count": 14,
+    "calib_text_count": 4,
+    "selection_text_count": 4,
+    "eval_text_count": 4,
+    "recovery_text_count": 2,
+    "eval_window_count": 2,
+    "allocation_validation_window_count": 2,
+    "window_interval_semantics": "paired fixed-window mean +/- 1.96 standard errors; descriptive, not an independence-based population CI",
+    "calib_digest": "47cce4200c2b259c0b694689ac511829c61ab4b67b048a365181bdc90b9786bb",
+    "selection_digest": "82eb6e9843146c4deecdbe96a11b6d605de9e1c14655b368cf617504c14caea7",
+    "eval_digest": "fa338edb7d380288eaa1f2dc8baddedf537a924a3230aa2a58fc18b92773b25e",
+    "identical_text_overlap_count": 0,
+    "content_disjoint": true,
+    "selection_test_identical_text_overlap_count": 0,
+    "calibration_selection_identical_text_overlap_count": 0,
+    "test_reserved_until_after_validation_selection": true
+  },
+  "activation_counts": {
+    "gpt_neox.layers.0.mlp.dense_h_to_4h": 64
+  },
+  "factorizer_input_dims": {
+    "gpt_neox.layers.0.mlp.dense_h_to_4h": 512
+  },
+  "factorizer": {
+    "method": "whitened_svd",
+    "whitening_floor_ratio": 1e-05,
+    "floor_scope": "factorizer_only_endpoint_scored_with_declared_covariance",
+    "per_layer_audit": {
+      "gpt_neox.layers.0.mlp.dense_h_to_4h": {
+        "method": "whitened_svd",
+        "whitening_floor_ratio": 1e-05,
+        "svd_solver": "auto",
+        "randomized_oversampling": 4,
+        "randomized_niter": 2,
+        "randomized_seed": 17,
+        "randomized_seed_namespace": "gpt_neox.layers.0.mlp.dense_h_to_4h",
+        "randomized_seed_scheme": "sha256(job_seed|layer|rank), isolated with torch.random.fork_rng",
+        "resolved_svd_solvers": [
+          "torch.linalg.svd"
+        ],
+        "svd_solver_call_counts": {
+          "torch.linalg.svd": 66
+        },
+        "factorizer_regularization_applied": true,
+        "score_covariance_min_eigenvalue": 0.00010181702236877754,
+        "score_covariance_max_eigenvalue": 121.86080932617188,
+        "fit_covariance_floor": 0.0012186081148684025,
+        "fit_covariance_clipped_eigenvalues": 465,
+        "fit_covariance_dimension": 512,
+        "fit_covariance_condition_after_floor": 99999.99822693749,
+        "last_resolved_svd_solver": "torch.linalg.svd",
+        "last_randomized_q": 0
+      }
+    }
+  },
+  "rate_allocator": {
+    "mode": "global_exact",
+    "endpoint_label": "Q+S+L_QL_budget",
+    "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+    "optimality_scope": "enumerated_rank_support_budget_band_and_supplied_degenerate_pure_candidate_pool_with_safe_header_payload_cost_pareto_and_exact_final_serialization",
+    "layer_count": 1,
+    "candidate_count": 60,
+    "final_pareto_state_count": 18,
+    "peak_pareto_state_count": 18,
+    "frontier_coarsening_events": 0,
+    "maximum_pre_coarsening_state_count": 0,
+    "frontier_fail_closed_state_limit": 100000,
+    "expansion_fail_closed_state_limit": 500000,
+    "exact_combinations_checked": 18,
+    "metadata_exact_combinations_checked": 18,
+    "partial_metadata_layouts_checked": 60,
+    "full_serializer_cross_checks": 3,
+    "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+    "q_l_cap_natural_file_bytes": 627712,
+    "selected_natural_file_bytes": 627712,
+    "unused_natural_bytes_before_tail_padding": 0,
+    "selected_hessian_cost": 0.7743474245071411,
+    "strict_file_byte_feasible": true,
+    "required_natural_file_bytes": null,
+    "exact_natural_file_byte_match_required": false,
+    "exact_natural_file_byte_match_available": true,
+    "exact_natural_file_byte_match": false,
+    "proxy_top_k_requested": 2,
+    "proxy_top_k_returned": 2,
+    "proxy_top_k": [
+      {
+        "proxy_rank": 1,
+        "natural_file_bytes": 627712,
+        "hessian_cost": 0.7743474245071411,
+        "allocation_digest": "7f00f1e0e512a34ce5fb6391ebef1a877c8aa202cdb635e36b5df350469b94e2"
+      },
+      {
+        "proxy_rank": 2,
+        "natural_file_bytes": 627712,
+        "hessian_cost": 0.7743474245071411,
+        "allocation_digest": "7f802cdd1ad554f874d358ba6ad96bac1b56137a0b7bdf1be1407016cf99c0d2"
+      }
+    ],
+    "selected_qsl_natural_file_bytes": 627712,
+    "fallback_policy": "audit_only_fail_closed_never_selected",
+    "joint_control_strategy": "Q+S_OBS_or_L_global",
+    "joint_candidate_incremental_hessian_gain": 0.0,
+    "joint_proxy_pool_weakly_dominated": true,
+    "joint_control_weakly_dominated": true,
+    "nonjoint_union_weakly_dominates_pure_controls": true,
+    "best_pure_control_hessian_cost": 0.7743474245071411,
+    "nonjoint_heterogeneous_gain_over_best_pure": 0.0,
+    "shared_control_cap_policy": "all global controls and QSL use the same aggregate natural Q+L file-byte cap; each selected artifact is padded to that exact physical byte count",
+    "nojoint_cap_best_audit": {
+      "mode": "global_exact",
+      "endpoint_label": "Q+S_OBS_or_L_global",
+      "selection_source": "global_exact_canonical_layout_pareto_frontier",
+      "optimality_scope": "enumerated_union_of_pure_sparse_OBS_and_independent_pure_lowrank_families_with_no_same_layer_joint_state_and_safe_header_payload_cost_pareto_and_exact_final_serialization",
+      "layer_count": 1,
+      "candidate_count": 38,
+      "final_pareto_state_count": 17,
+      "peak_pareto_state_count": 17,
+      "frontier_coarsening_events": 0,
+      "maximum_pre_coarsening_state_count": 0,
+      "frontier_fail_closed_state_limit": 100000,
+      "expansion_fail_closed_state_limit": 500000,
+      "exact_combinations_checked": 17,
+      "metadata_exact_combinations_checked": 17,
+      "partial_metadata_layouts_checked": 38,
+      "full_serializer_cross_checks": 3,
+      "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+      "q_l_cap_natural_file_bytes": 627712,
+      "selected_natural_file_bytes": 627712,
+      "unused_natural_bytes_before_tail_padding": 0,
+      "selected_hessian_cost": 0.7743474245071411,
+      "strict_file_byte_feasible": true,
+      "required_natural_file_bytes": null,
+      "exact_natural_file_byte_match_required": false,
+      "exact_natural_file_byte_match_available": true,
+      "exact_natural_file_byte_match": false,
+      "proxy_top_k_requested": 2,
+      "proxy_top_k_returned": 2,
+      "proxy_top_k": [
+        {
+          "proxy_rank": 1,
+          "natural_file_bytes": 627712,
+          "hessian_cost": 0.7743474245071411,
+          "allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd"
+        },
+        {
+          "proxy_rank": 2,
+          "natural_file_bytes": 600064,
+          "hessian_cost": 0.8449200391769409,
+          "allocation_digest": "566a4004a561c8fc92c2f5a00be6434127ee534262c65e83442904d5400d3842"
+        }
+      ],
+      "strategy": "Q+S_OBS_or_L_global",
+      "candidate_pool_asymmetry": "this no-joint control uses exactly the Q, pure-S/OBS and pure-L states nested in the QSL candidate pool; QSL differs only by additionally admitting same-layer joint S+L states and its audited local sentinel",
+      "fallback_policy": "forbidden_fail_closed"
+    },
+    "joint_control_natural_match_available": true,
+    "joint_control_required_natural_file_bytes": 627712,
+    "joint_control_natural_match_policy": "after validation selects QSL, the no-joint pool is reallocated under exact equality to the selected QSL natural artifact bytes and independently reranked on the same validation split",
+    "proxy_best_hessian_cost": 0.7743474245071411,
+    "proxy_best_natural_file_bytes": 627712,
+    "proxy_best_unused_natural_bytes_before_tail_padding": 0,
+    "proxy_top_k_evaluated": 2,
+    "validation_selected_proxy_rank": 1,
+    "validation_selected_allocation_digest": "7f00f1e0e512a34ce5fb6391ebef1a877c8aa202cdb635e36b5df350469b94e2",
+    "validation_selected_hessian_cost": 0.7743474245071411,
+    "validation_selected_natural_file_bytes": 627712,
+    "validation_selected_nll": 4.237091802781628,
+    "validation_selected_perplexity": 69.20629334508847,
+    "validation_selected_tokens": 62,
+    "validation_selected_nll_delta": 0.024248676915322953,
+    "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+    "two_stage_selection": {
+      "enabled": true,
+      "proxy_screen": "exact_file_byte_feasible_hessian_top_k",
+      "proxy_top_k": 2,
+      "rerank_metric": "validation_nll",
+      "selection_split": "validation",
+      "test_split_reserved_until_after_selection": true,
+      "selection_reports": {
+        "Q+S_OBS_global": {
+          "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+          "proxy_top_k_evaluated": 2,
+          "validation_selected_proxy_rank": 1,
+          "validation_selected_allocation_digest": "d073dad48584f41eb83f8da54346a95025f2f83604808f2aea0db1249db33f28",
+          "validation_selected_hessian_cost": 1.0217571258544922,
+          "validation_selected_natural_file_bytes": 615684,
+          "validation_selected_nll": 4.236273242581275,
+          "validation_selected_perplexity": 69.14966700693736,
+          "validation_selected_tokens": 62,
+          "validation_selected_nll_delta": 0.02343011671496953
+        },
+        "Q+L_global": {
+          "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+          "proxy_top_k_evaluated": 2,
+          "validation_selected_proxy_rank": 1,
+          "validation_selected_allocation_digest": "8eccc9cf600424977e90d26ddec55381f5b1cd9f960b6fb8501b1a346ae4e89a",
+          "validation_selected_hessian_cost": 0.7743474245071411,
+          "validation_selected_natural_file_bytes": 627712,
+          "validation_selected_nll": 4.237091802781628,
+          "validation_selected_perplexity": 69.20629334508847,
+          "validation_selected_tokens": 62,
+          "validation_selected_nll_delta": 0.024248676915322953
+        },
+        "Q+S_OBS_or_L_global": {
+          "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+          "proxy_top_k_evaluated": 1,
+          "validation_selected_proxy_rank": 1,
+          "validation_selected_allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd",
+          "validation_selected_hessian_cost": 0.7743474245071411,
+          "validation_selected_natural_file_bytes": 627712,
+          "validation_selected_nll": 4.237091802781628,
+          "validation_selected_perplexity": 69.20629334508847,
+          "validation_selected_tokens": 62,
+          "validation_selected_nll_delta": 0.024248676915322953
+        },
+        "Q+S+L_QL_budget": {
+          "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+          "proxy_top_k_evaluated": 2,
+          "validation_selected_proxy_rank": 1,
+          "validation_selected_allocation_digest": "7f00f1e0e512a34ce5fb6391ebef1a877c8aa202cdb635e36b5df350469b94e2",
+          "validation_selected_hessian_cost": 0.7743474245071411,
+          "validation_selected_natural_file_bytes": 627712,
+          "validation_selected_nll": 4.237091802781628,
+          "validation_selected_perplexity": 69.20629334508847,
+          "validation_selected_tokens": 62,
+          "validation_selected_nll_delta": 0.024248676915322953
+        }
+      }
+    },
+    "joint_validation_nll_gain_over_nojoint": 0.0,
+    "single_component_controls": {
+      "Q+S_OBS_global": {
+        "mode": "global_exact",
+        "endpoint_label": "Q+S_OBS_global",
+        "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+        "optimality_scope": "enumerated_pure_sparse_OBS_local_and_budget_band_support_grid_with_safe_header_payload_cost_pareto_and_exact_final_serialization",
+        "layer_count": 1,
+        "candidate_count": 20,
+        "final_pareto_state_count": 6,
+        "peak_pareto_state_count": 6,
+        "frontier_coarsening_events": 0,
+        "maximum_pre_coarsening_state_count": 0,
+        "frontier_fail_closed_state_limit": 100000,
+        "expansion_fail_closed_state_limit": 500000,
+        "exact_combinations_checked": 6,
+        "metadata_exact_combinations_checked": 6,
+        "partial_metadata_layouts_checked": 20,
+        "full_serializer_cross_checks": 3,
+        "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+        "q_l_cap_natural_file_bytes": 627712,
+        "selected_natural_file_bytes": 615684,
+        "unused_natural_bytes_before_tail_padding": 12028,
+        "selected_hessian_cost": 1.0217571258544922,
+        "strict_file_byte_feasible": true,
+        "required_natural_file_bytes": null,
+        "exact_natural_file_byte_match_required": false,
+        "exact_natural_file_byte_match_available": true,
+        "exact_natural_file_byte_match": false,
+        "proxy_top_k_requested": 2,
+        "proxy_top_k_returned": 2,
+        "proxy_top_k": [
+          {
+            "proxy_rank": 1,
+            "natural_file_bytes": 615684,
+            "hessian_cost": 1.0217571258544922,
+            "allocation_digest": "d073dad48584f41eb83f8da54346a95025f2f83604808f2aea0db1249db33f28"
+          },
+          {
+            "proxy_rank": 2,
+            "natural_file_bytes": 615358,
+            "hessian_cost": 1.0236270427703857,
+            "allocation_digest": "5cc5e86ffd05b4e6d87a59dfbe103445253409416c2960174e3c16f7d9687957"
+          }
+        ],
+        "strategy": "Q+S_OBS_global",
+        "candidate_pool_asymmetry": "pure-S enumerates OBS-refit supports at every budget-band extremum and declared fraction; QSL enumerates rank-conditioned supports, so only the byte oracle, cap, support scorer and OBS value refit are shared",
+        "fallback_policy": "forbidden_fail_closed",
+        "proxy_best_hessian_cost": 1.0217571258544922,
+        "proxy_best_natural_file_bytes": 615684,
+        "proxy_best_unused_natural_bytes_before_tail_padding": 12028,
+        "proxy_top_k_evaluated": 2,
+        "validation_selected_proxy_rank": 1,
+        "validation_selected_allocation_digest": "d073dad48584f41eb83f8da54346a95025f2f83604808f2aea0db1249db33f28",
+        "validation_selected_hessian_cost": 1.0217571258544922,
+        "validation_selected_natural_file_bytes": 615684,
+        "validation_selected_nll": 4.236273242581275,
+        "validation_selected_perplexity": 69.14966700693736,
+        "validation_selected_tokens": 62,
+        "validation_selected_nll_delta": 0.02343011671496953,
+        "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k"
+      },
+      "Q+L_global": {
+        "mode": "global_exact",
+        "endpoint_label": "Q+L_global",
+        "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+        "optimality_scope": "enumerated_independent_pure_lowrank_rank_grid_and_budget_band_extrema_with_safe_header_payload_cost_pareto_and_exact_final_serialization",
+        "layer_count": 1,
+        "candidate_count": 20,
+        "final_pareto_state_count": 15,
+        "peak_pareto_state_count": 15,
+        "frontier_coarsening_events": 0,
+        "maximum_pre_coarsening_state_count": 0,
+        "frontier_fail_closed_state_limit": 100000,
+        "expansion_fail_closed_state_limit": 500000,
+        "exact_combinations_checked": 15,
+        "metadata_exact_combinations_checked": 15,
+        "partial_metadata_layouts_checked": 20,
+        "full_serializer_cross_checks": 3,
+        "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+        "q_l_cap_natural_file_bytes": 627712,
+        "selected_natural_file_bytes": 627712,
+        "unused_natural_bytes_before_tail_padding": 0,
+        "selected_hessian_cost": 0.7743474245071411,
+        "strict_file_byte_feasible": true,
+        "required_natural_file_bytes": null,
+        "exact_natural_file_byte_match_required": false,
+        "exact_natural_file_byte_match_available": true,
+        "exact_natural_file_byte_match": false,
+        "proxy_top_k_requested": 2,
+        "proxy_top_k_returned": 2,
+        "proxy_top_k": [
+          {
+            "proxy_rank": 1,
+            "natural_file_bytes": 627712,
+            "hessian_cost": 0.7743474245071411,
+            "allocation_digest": "8eccc9cf600424977e90d26ddec55381f5b1cd9f960b6fb8501b1a346ae4e89a"
+          },
+          {
+            "proxy_rank": 2,
+            "natural_file_bytes": 600064,
+            "hessian_cost": 0.8449200391769409,
+            "allocation_digest": "566a4004a561c8fc92c2f5a00be6434127ee534262c65e83442904d5400d3842"
+          }
+        ],
+        "strategy": "Q+L_global",
+        "candidate_pool_asymmetry": "pure-L independently fits the unchanged Q residual at each rank and reuses the original local Q+L factor at its rank; QSL fits each rank after a rank-conditioned sparse support, so residual targets differ even though the factorizer settings, byte oracle and aggregate cap are shared",
+        "fallback_policy": "forbidden_fail_closed",
+        "proxy_best_hessian_cost": 0.7743474245071411,
+        "proxy_best_natural_file_bytes": 627712,
+        "proxy_best_unused_natural_bytes_before_tail_padding": 0,
+        "proxy_top_k_evaluated": 2,
+        "validation_selected_proxy_rank": 1,
+        "validation_selected_allocation_digest": "8eccc9cf600424977e90d26ddec55381f5b1cd9f960b6fb8501b1a346ae4e89a",
+        "validation_selected_hessian_cost": 0.7743474245071411,
+        "validation_selected_natural_file_bytes": 627712,
+        "validation_selected_nll": 4.237091802781628,
+        "validation_selected_perplexity": 69.20629334508847,
+        "validation_selected_tokens": 62,
+        "validation_selected_nll_delta": 0.024248676915322953,
+        "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k"
+      },
+      "Q+S_OBS_or_L_global": {
+        "mode": "global_exact",
+        "endpoint_label": "Q+S_OBS_or_L_global",
+        "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+        "optimality_scope": "enumerated_union_of_pure_sparse_OBS_and_independent_pure_lowrank_families_with_no_same_layer_joint_state_and_safe_header_payload_cost_pareto_and_exact_final_serialization",
+        "layer_count": 1,
+        "candidate_count": 38,
+        "final_pareto_state_count": 19,
+        "peak_pareto_state_count": 19,
+        "frontier_coarsening_events": 0,
+        "maximum_pre_coarsening_state_count": 0,
+        "frontier_fail_closed_state_limit": 100000,
+        "expansion_fail_closed_state_limit": 500000,
+        "exact_combinations_checked": 19,
+        "metadata_exact_combinations_checked": 19,
+        "partial_metadata_layouts_checked": 38,
+        "full_serializer_cross_checks": 2,
+        "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+        "q_l_cap_natural_file_bytes": 627712,
+        "selected_natural_file_bytes": 627712,
+        "unused_natural_bytes_before_tail_padding": 0,
+        "selected_hessian_cost": 0.7743474245071411,
+        "strict_file_byte_feasible": true,
+        "required_natural_file_bytes": 627712,
+        "exact_natural_file_byte_match_required": true,
+        "exact_natural_file_byte_match_available": true,
+        "exact_natural_file_byte_match": true,
+        "proxy_top_k_requested": 2,
+        "proxy_top_k_returned": 1,
+        "proxy_top_k": [
+          {
+            "proxy_rank": 1,
+            "natural_file_bytes": 627712,
+            "hessian_cost": 0.7743474245071411,
+            "allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd"
+          }
+        ],
+        "strategy": "Q+S_OBS_or_L_global",
+        "candidate_pool_asymmetry": "this no-joint control uses exactly the Q, pure-S/OBS and pure-L states nested in the QSL candidate pool; QSL differs only by additionally admitting same-layer joint S+L states and its audited local sentinel",
+        "fallback_policy": "forbidden_fail_closed",
+        "cap_best_under_shared_cap": {
+          "selected_hessian_cost": 0.7743474245071411,
+          "selected_natural_file_bytes": 627712,
+          "proxy_top_k": [
+            {
+              "proxy_rank": 1,
+              "natural_file_bytes": 627712,
+              "hessian_cost": 0.7743474245071411,
+              "allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd"
+            },
+            {
+              "proxy_rank": 2,
+              "natural_file_bytes": 600064,
+              "hessian_cost": 0.8449200391769409,
+              "allocation_digest": "566a4004a561c8fc92c2f5a00be6434127ee534262c65e83442904d5400d3842"
+            }
+          ]
+        },
+        "proxy_best_hessian_cost": 0.7743474245071411,
+        "proxy_best_natural_file_bytes": 627712,
+        "proxy_best_unused_natural_bytes_before_tail_padding": 0,
+        "proxy_top_k_evaluated": 1,
+        "validation_selected_proxy_rank": 1,
+        "validation_selected_allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd",
+        "validation_selected_hessian_cost": 0.7743474245071411,
+        "validation_selected_natural_file_bytes": 627712,
+        "validation_selected_nll": 4.237091802781628,
+        "validation_selected_perplexity": 69.20629334508847,
+        "validation_selected_tokens": 62,
+        "validation_selected_nll_delta": 0.024248676915322953,
+        "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k"
+      }
+    },
+    "global_control_reports": {
+      "Q+S_OBS_global": {
+        "mode": "global_exact",
+        "endpoint_label": "Q+S_OBS_global",
+        "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+        "optimality_scope": "enumerated_pure_sparse_OBS_local_and_budget_band_support_grid_with_safe_header_payload_cost_pareto_and_exact_final_serialization",
+        "layer_count": 1,
+        "candidate_count": 20,
+        "final_pareto_state_count": 6,
+        "peak_pareto_state_count": 6,
+        "frontier_coarsening_events": 0,
+        "maximum_pre_coarsening_state_count": 0,
+        "frontier_fail_closed_state_limit": 100000,
+        "expansion_fail_closed_state_limit": 500000,
+        "exact_combinations_checked": 6,
+        "metadata_exact_combinations_checked": 6,
+        "partial_metadata_layouts_checked": 20,
+        "full_serializer_cross_checks": 3,
+        "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+        "q_l_cap_natural_file_bytes": 627712,
+        "selected_natural_file_bytes": 615684,
+        "unused_natural_bytes_before_tail_padding": 12028,
+        "selected_hessian_cost": 1.0217571258544922,
+        "strict_file_byte_feasible": true,
+        "required_natural_file_bytes": null,
+        "exact_natural_file_byte_match_required": false,
+        "exact_natural_file_byte_match_available": true,
+        "exact_natural_file_byte_match": false,
+        "proxy_top_k_requested": 2,
+        "proxy_top_k_returned": 2,
+        "proxy_top_k": [
+          {
+            "proxy_rank": 1,
+            "natural_file_bytes": 615684,
+            "hessian_cost": 1.0217571258544922,
+            "allocation_digest": "d073dad48584f41eb83f8da54346a95025f2f83604808f2aea0db1249db33f28"
+          },
+          {
+            "proxy_rank": 2,
+            "natural_file_bytes": 615358,
+            "hessian_cost": 1.0236270427703857,
+            "allocation_digest": "5cc5e86ffd05b4e6d87a59dfbe103445253409416c2960174e3c16f7d9687957"
+          }
+        ],
+        "strategy": "Q+S_OBS_global",
+        "candidate_pool_asymmetry": "pure-S enumerates OBS-refit supports at every budget-band extremum and declared fraction; QSL enumerates rank-conditioned supports, so only the byte oracle, cap, support scorer and OBS value refit are shared",
+        "fallback_policy": "forbidden_fail_closed",
+        "proxy_best_hessian_cost": 1.0217571258544922,
+        "proxy_best_natural_file_bytes": 615684,
+        "proxy_best_unused_natural_bytes_before_tail_padding": 12028,
+        "proxy_top_k_evaluated": 2,
+        "validation_selected_proxy_rank": 1,
+        "validation_selected_allocation_digest": "d073dad48584f41eb83f8da54346a95025f2f83604808f2aea0db1249db33f28",
+        "validation_selected_hessian_cost": 1.0217571258544922,
+        "validation_selected_natural_file_bytes": 615684,
+        "validation_selected_nll": 4.236273242581275,
+        "validation_selected_perplexity": 69.14966700693736,
+        "validation_selected_tokens": 62,
+        "validation_selected_nll_delta": 0.02343011671496953,
+        "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k"
+      },
+      "Q+L_global": {
+        "mode": "global_exact",
+        "endpoint_label": "Q+L_global",
+        "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+        "optimality_scope": "enumerated_independent_pure_lowrank_rank_grid_and_budget_band_extrema_with_safe_header_payload_cost_pareto_and_exact_final_serialization",
+        "layer_count": 1,
+        "candidate_count": 20,
+        "final_pareto_state_count": 15,
+        "peak_pareto_state_count": 15,
+        "frontier_coarsening_events": 0,
+        "maximum_pre_coarsening_state_count": 0,
+        "frontier_fail_closed_state_limit": 100000,
+        "expansion_fail_closed_state_limit": 500000,
+        "exact_combinations_checked": 15,
+        "metadata_exact_combinations_checked": 15,
+        "partial_metadata_layouts_checked": 20,
+        "full_serializer_cross_checks": 3,
+        "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+        "q_l_cap_natural_file_bytes": 627712,
+        "selected_natural_file_bytes": 627712,
+        "unused_natural_bytes_before_tail_padding": 0,
+        "selected_hessian_cost": 0.7743474245071411,
+        "strict_file_byte_feasible": true,
+        "required_natural_file_bytes": null,
+        "exact_natural_file_byte_match_required": false,
+        "exact_natural_file_byte_match_available": true,
+        "exact_natural_file_byte_match": false,
+        "proxy_top_k_requested": 2,
+        "proxy_top_k_returned": 2,
+        "proxy_top_k": [
+          {
+            "proxy_rank": 1,
+            "natural_file_bytes": 627712,
+            "hessian_cost": 0.7743474245071411,
+            "allocation_digest": "8eccc9cf600424977e90d26ddec55381f5b1cd9f960b6fb8501b1a346ae4e89a"
+          },
+          {
+            "proxy_rank": 2,
+            "natural_file_bytes": 600064,
+            "hessian_cost": 0.8449200391769409,
+            "allocation_digest": "566a4004a561c8fc92c2f5a00be6434127ee534262c65e83442904d5400d3842"
+          }
+        ],
+        "strategy": "Q+L_global",
+        "candidate_pool_asymmetry": "pure-L independently fits the unchanged Q residual at each rank and reuses the original local Q+L factor at its rank; QSL fits each rank after a rank-conditioned sparse support, so residual targets differ even though the factorizer settings, byte oracle and aggregate cap are shared",
+        "fallback_policy": "forbidden_fail_closed",
+        "proxy_best_hessian_cost": 0.7743474245071411,
+        "proxy_best_natural_file_bytes": 627712,
+        "proxy_best_unused_natural_bytes_before_tail_padding": 0,
+        "proxy_top_k_evaluated": 2,
+        "validation_selected_proxy_rank": 1,
+        "validation_selected_allocation_digest": "8eccc9cf600424977e90d26ddec55381f5b1cd9f960b6fb8501b1a346ae4e89a",
+        "validation_selected_hessian_cost": 0.7743474245071411,
+        "validation_selected_natural_file_bytes": 627712,
+        "validation_selected_nll": 4.237091802781628,
+        "validation_selected_perplexity": 69.20629334508847,
+        "validation_selected_tokens": 62,
+        "validation_selected_nll_delta": 0.024248676915322953,
+        "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k"
+      },
+      "Q+S_OBS_or_L_global": {
+        "mode": "global_exact",
+        "endpoint_label": "Q+S_OBS_or_L_global",
+        "selection_source": "validation_nll_rerank_of_exact_proxy_top_k",
+        "optimality_scope": "enumerated_union_of_pure_sparse_OBS_and_independent_pure_lowrank_families_with_no_same_layer_joint_state_and_safe_header_payload_cost_pareto_and_exact_final_serialization",
+        "layer_count": 1,
+        "candidate_count": 38,
+        "final_pareto_state_count": 19,
+        "peak_pareto_state_count": 19,
+        "frontier_coarsening_events": 0,
+        "maximum_pre_coarsening_state_count": 0,
+        "frontier_fail_closed_state_limit": 100000,
+        "expansion_fail_closed_state_limit": 500000,
+        "exact_combinations_checked": 19,
+        "metadata_exact_combinations_checked": 19,
+        "partial_metadata_layouts_checked": 38,
+        "full_serializer_cross_checks": 2,
+        "byte_oracle": "canonical_manifest_header_payload_metadata_pareto_with_full_serializer_cross_check",
+        "q_l_cap_natural_file_bytes": 627712,
+        "selected_natural_file_bytes": 627712,
+        "unused_natural_bytes_before_tail_padding": 0,
+        "selected_hessian_cost": 0.7743474245071411,
+        "strict_file_byte_feasible": true,
+        "required_natural_file_bytes": 627712,
+        "exact_natural_file_byte_match_required": true,
+        "exact_natural_file_byte_match_available": true,
+        "exact_natural_file_byte_match": true,
+        "proxy_top_k_requested": 2,
+        "proxy_top_k_returned": 1,
+        "proxy_top_k": [
+          {
+            "proxy_rank": 1,
+            "natural_file_bytes": 627712,
+            "hessian_cost": 0.7743474245071411,
+            "allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd"
+          }
+        ],
+        "strategy": "Q+S_OBS_or_L_global",
+        "candidate_pool_asymmetry": "this no-joint control uses exactly the Q, pure-S/OBS and pure-L states nested in the QSL candidate pool; QSL differs only by additionally admitting same-layer joint S+L states and its audited local sentinel",
+        "fallback_policy": "forbidden_fail_closed",
+        "cap_best_under_shared_cap": {
+          "selected_hessian_cost": 0.7743474245071411,
+          "selected_natural_file_bytes": 627712,
+          "proxy_top_k": [
+            {
+              "proxy_rank": 1,
+              "natural_file_bytes": 627712,
+              "hessian_cost": 0.7743474245071411,
+              "allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd"
+            },
+            {
+              "proxy_rank": 2,
+              "natural_file_bytes": 600064,
+              "hessian_cost": 0.8449200391769409,
+              "allocation_digest": "566a4004a561c8fc92c2f5a00be6434127ee534262c65e83442904d5400d3842"
+            }
+          ]
+        },
+        "proxy_best_hessian_cost": 0.7743474245071411,
+        "proxy_best_natural_file_bytes": 627712,
+        "proxy_best_unused_natural_bytes_before_tail_padding": 0,
+        "proxy_top_k_evaluated": 1,
+        "validation_selected_proxy_rank": 1,
+        "validation_selected_allocation_digest": "30d6a98f22d91536b9b4d6eb72a38db0dd06359ced4f0c135ad2e05122028bdd",
+        "validation_selected_hessian_cost": 0.7743474245071411,
+        "validation_selected_natural_file_bytes": 627712,
+        "validation_selected_nll": 4.237091802781628,
+        "validation_selected_perplexity": 69.20629334508847,
+        "validation_selected_tokens": 62,
+        "validation_selected_nll_delta": 0.024248676915322953,
+        "final_selection_source": "validation_nll_rerank_of_exact_proxy_top_k"
+      }
+    },
+    "joint_value_claim": {
+      "evaluated": true,
+      "supported": false,
+      "reason": "QSL did not beat the no-joint control on final test NLL",
+      "same_natural_file_bytes": true,
+      "same_physical_file_bytes_after_padding": true,
+      "qsl_natural_file_bytes": 627712,
+      "nojoint_natural_file_bytes": 627712,
+      "qsl_test_nll": 4.544342041015625,
+      "nojoint_test_nll": 4.544342041015625,
+      "qsl_test_nll_gain_over_nojoint": 0.0
+    }
+  },
+  "joint_value_claim": {
+    "evaluated": true,
+    "supported": false,
+    "reason": "QSL did not beat the no-joint control on final test NLL",
+    "same_natural_file_bytes": true,
+    "same_physical_file_bytes_after_padding": true,
+    "qsl_natural_file_bytes": 627712,
+    "nojoint_natural_file_bytes": 627712,
+    "qsl_test_nll": 4.544342041015625,
+    "nojoint_test_nll": 4.544342041015625,
+    "qsl_test_nll_gain_over_nojoint": 0.0
+  },
+  "runtime": {
+    "python": "3.10.18",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.57.1",
+    "datasets": "4.3.0",
+    "numpy": "2.2.6",
+    "cuda_available": true,
+    "cuda_device": "NVIDIA A800 80GB PCIe",
+    "cuda_visible_devices": "2"
+  },
+  "arguments": {
+    "active_strategies": [
+      "Q",
+      "Q_global_scale",
+      "Q+S",
+      "Q+S_OBS",
+      "Q+L",
+      "Q+S_OBS_global",
+      "Q+L_global",
+      "Q+S_OBS_or_L_global",
+      "Q+S+L_QL_budget",
+      "Q+S+L_QL_budget_component_scale",
+      "Q+S+L",
+      "Q+S_OBS+L",
+      "Q+S+L_component_scale"
+    ],
+    "allocation_rank_grid": [
+      0,
+      1,
+      2,
+      4,
+      8
+    ],
+    "artifact_alignment": 64,
+    "backup_name": "",
+    "batch_size": 1,
+    "bits": 4,
+    "calib_limit": 2,
+    "calibration_split": "train",
+    "candidate_bits": [
+      3,
+      4
+    ],
+    "candidate_family_top_k": 1,
+    "candidate_lowrank_factor_bits": [
+      4,
+      16
+    ],
+    "candidate_q_group_sizes": [
+      0,
+      64
+    ],
+    "candidate_quantizers": [
+      "symmetric_mse_clip",
+      "symmetric_rtn"
+    ],
+    "comfort_absolute_tolerance": 0.0001,
+    "comfort_epsilons": [
+      0.0,
+      0.125,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "comfort_eval_limit": 1,
+    "comfort_evidence_role": "validation_comfort_disjoint_from_allocation_selection",
+    "comfort_fit_max_epsilon": 0.25,
+    "comfort_relative_tolerance": 0.2,
+    "comfort_strategies": [
+      "Q",
+      "Q_block_scale",
+      "Q+S_OBS",
+      "Q+L",
+      "Q+S+L_QL_budget_component_scale",
+      "Q+S+L_component_scale"
+    ],
+    "covariance_damping_ratio": 0.0,
+    "covariance_mode": "full",
+    "data_role_splits": {
+      "calibration": "train",
+      "selection": "validation",
+      "test": "test"
+    },
+    "dataset": "wikitext",
+    "device": "cuda",
+    "disjoint_text_splits": true,
+    "emit_codec_artifacts": true,
+    "endpoint_target": 0.3,
+    "enforce_serialized_rate_cap": true,
+    "eval_limit": 2,
+    "global_frontier_budget_multipliers": [
+      1.25
+    ],
+    "global_frontier_support_fractions": [
+      0.75
+    ],
+    "global_frontier_top_ranks": 1,
+    "include_global_single_component_controls": true,
+    "l_method": "whitened_svd",
+    "layer_positions": [
+      "first",
+      "middle",
+      "last"
+    ],
+    "layers": [
+      0
+    ],
+    "local_files_only": true,
+    "lowrank_svd_niter": 2,
+    "lowrank_svd_oversampling": 4,
+    "lowrank_svd_solver": "auto",
+    "max_allocation_ranks": 8,
+    "max_modules": 1,
+    "model": "/home/wangmeiqi/.cache/huggingface/hub/models--EleutherAI--pythia-70m/snapshots/a39f36b100fe8a5377810d56c3f4789b9c53ac42",
+    "model_snapshot_aggregate_sha256": "",
+    "model_snapshot_manifest": "",
+    "model_snapshot_manifest_sha256": "",
+    "module_types": [
+      "dense_h_to_4h"
+    ],
+    "obs_rcond": 1e-10,
+    "omitted_strategy_reasons": {
+      "Q_block_scale": "explicit_large_tensor_resource_guard"
+    },
+    "output_dir": "results/two_stage_heterogeneous_pythia70m_natural_match_smoke_20260717",
+    "proxy_only": false,
+    "rate_allocation": "global_exact",
+    "rate_tolerance": 0.01,
+    "repair_block_sizes": [
+      32,
+      64,
+      128,
+      256,
+      512
+    ],
+    "residual_order": "s_then_l",
+    "resource_gate_manifest": "",
+    "revision": "",
+    "rho_threshold": 0.1,
+    "s_method": "wanda",
+    "scale_bounds": [
+      0.0,
+      2.0
+    ],
+    "scale_max": 2.0,
+    "scale_min": 0.0,
+    "seed": 17,
+    "selected_layers": [
+      "gpt_neox.layers.0.mlp.dense_h_to_4h"
+    ],
+    "selection_limit": 2,
+    "selection_split": "validation",
+    "selection_top_k": 2,
+    "selector_activation_sample_rows": 64,
+    "sequence_length": 32,
+    "skip_block_scale": true,
+    "skip_comfort": true,
+    "skip_plots": true,
+    "split": "validation",
+    "spq_lora_steps": 0,
+    "spq_lora_train_limit": 0,
+    "strict_sparse_refit": "obs",
+    "subset": "wikitext-2-raw-v1",
+    "support_encoding": "csr_fixed",
+    "svd_device": "cuda",
+    "target_ratios": [
+      0.3
+    ],
+    "test_split": "test",
+    "text_pool_count": 220,
+    "text_source": "dataset",
+    "text_source_used": "dataset:wikitext|dataset:wikitext|dataset:wikitext",
+    "text_split_policy": "independent_train_validation_test_dataset_splits_with_cross_role_content_deduplication",
+    "texts_per_batch_window": 2,
+    "torch_dtype": "float16",
+    "two_stage_selection": true,
+    "unique_text_pool_count": 14,
+    "whitening_floor_ratio": 1e-05,
+    "zero_shot_tasks": []
+  }
+}

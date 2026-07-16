@@ -1,0 +1,110 @@
+\section{Exact-Byte Composite Compression}
+\label{sec:method}
+
+\paragraph{Scope and objective.}
+Let $\mathcal{T}$ be an ordered manifest of eligible weight matrices and
+$w_0$ their dense FP16 values.  A codec endpoint $z$ decodes to
+$\widehat w(z)$ and has on-disk length $\mathcal{B}(z)$.  For a fixed
+manifest, model, and held-out distribution, the discrete problem is
+\begin{equation}
+  \min_{z\in\mathcal{Z}}\;
+  \mathcal{L}(\widehat w(z))
+  \quad\text{s.t.}\quad \mathcal{B}(z)\le B.
+  \label{eq:discrete-rate}
+\end{equation}
+The same $\mathcal{T}$ is used for every comparator; all other model weights
+remain dense.  Thus bytes in this paper describe the selected-tensor artifact,
+not a whole checkpoint or inference package.
+
+\paragraph{Byte-faithful codec.}
+For each tensor, the artifact stores packed signed Q codes, FP16 row or
+row--column-block scales, optional FP16 sparse values with fixed-width
+compressed sparse row (CSR)
+support, and optional FP16 low-rank factors.  A deterministic manifest stores
+shapes, dtypes, stream offsets, and alignment.  We report both natural bytes
+and final file bytes after 64-byte alignment and tail padding, then verify file
+length, SHA-256, decoding, and elementwise equality with the evaluated FP16
+endpoint.  This is an auditable research format, not a claim of production
+kernel support.
+
+\paragraph{Candidate mechanisms.}
+Q is symmetric row-wise 4-bit round-to-nearest quantization.  Block-scale
+protection solves bounded row--column-block multipliers in the local PSD
+metric and stores the resulting FP16 scales.  S selects a residual support by
+Wanda-style activation--magnitude importance; a matched control stores the
+naive residual values.  OBS then re-estimates values on the \emph{same}
+support, replacing already-paid values without changing the artifact layout.
+L applies a covariance-whitened SVD to the post-Q residual and stores two FP16
+factors.  Component scales for Q/S/L are solved jointly and folded into their
+existing FP16 state, so a zero-byte claim is accepted only after natural and
+file-byte verification.  The verified legacy endpoints use the declared
+Q$\rightarrow$S$\rightarrow$L construction order; the new unexecuted matrix
+also exposes L$\rightarrow$S as an order ablation.  We call Q+L a
+\emph{single repair over the mandatory Q
+base}, and Q+S+L a composite repair; neither phrase means that Q is absent.
+
+\paragraph{Implemented PSD proxy.}
+For layer $j$, calibration activations define a covariance $C_j$ and
+\begin{equation}
+ \begin{aligned}
+ q_j(\Delta W)
+   &=\tfrac12\operatorname{tr}(\Delta W C_j\Delta W^\top),\\
+ \rho_H(a,b)
+   &=\frac{\sum_j\langle a_j,b_j\rangle_{C_j}}
+   {\sqrt{\sum_j\|a_j\|_{C_j}^2\sum_j\|b_j\|_{C_j}^2}}.
+ \end{aligned}
+ \label{eq:implemented-proxy}
+\end{equation}
+The reported normalized cost is
+$\sum_j\|\Delta W_j\|_{C_j}^2/
+ \sum_j\|W_j\|_{C_j}^2$.  Each empirical Gram receives a
+$10^{-5}$ mean-diagonal ridge.  Matrices with relative negative spectrum worse
+than $10^{-7}$ fail; accepted float32 numerical error is repaired once, and an
+eight-machine-epsilon target and the applied diagonal shift are recorded per
+layer.  Damping and the repair are identity shifts, so the final spectral
+lower bound is derived from one validated eigenspectrum instead of repeating
+cubic audit decompositions.  Whitened fitting retains one separate cached
+eigendecomposition used to construct its square-root maps.  The same
+prepared $C_j$ is used by selection, OBS, endpoint costs, Gram terms, and
+$\rho_H$.  Whitened SVD has a separately disclosed numerical fit metric
+$\widetilde C_j$: eigenvalues below a configurable fraction of
+$\lambda_{\max}(C_j)$ are floored before forming the square root and inverse
+square root.  The runner records that fraction, the number of clipped
+eigenvalues, and the resulting condition number per layer.  Every decoded
+candidate is still scored in $C_j$; factorizer regularization is not silently
+presented as the common scoring metric.
+For the unexecuted large-model smoke, each residual fit uses a seeded
+randomized SVD with four oversampling vectors and two power iterations; the
+resolved solver is recorded per layer.  Full SVD remains an explicit
+small-matrix control, so computational approximation is not hidden inside the
+geometry ablation.
+
+\paragraph{Discrete strict-rate selection.}
+For each layer and target, we enumerate feasible low-rank ranks.  At each rank,
+the largest CSR support fitting the requested serialized cap is constructed;
+the candidate with minimum activation-Gram cost is retained.  The strict QSL
+control uses that layer's Q+L artifact as its cap, reserves alignment slack,
+and is rejected before NLL evaluation if the aggregate serialized file exceeds
+the Q+L file.  This is a deterministic layerwise constrained search, not a
+claim of global discrete optimality.  It yields an executable endpoint rather
+than a fractional rank or value-only relaxation.  A relaxed QSL point is
+reported separately to show the effect of the next discrete allocation step.
+The new, unexecuted aggregate allocator removes the forced-composition condition:
+each layer may select Q, Q+S$_{\rm OBS}$, Q+L, or an enumerated QSL state.  It
+adds intermediate supports and 1.25/1.5/2.0 multiples of the local Q+L repair
+allowance beyond base Q near the strongest rank states, thereby permitting
+enumerated cross-layer byte borrowing.  It prunes an additive one-layer
+byte/cost surrogate and checks every surviving combination with the exact
+multi-layer serializer.  The additive pruning is heuristic; feasibility is
+exact under the research codec, while optimality remains limited to this
+enumerated budget-band state set.  We therefore do not call it a globally
+optimal frontier.  Component scaling is fitted only after the unscaled QSL
+allocation is selected, so the scaled row is a fixed-allocation post-selection
+ablation rather than the optimum scaled candidate over the whole frontier.
+
+\paragraph{Endpoint gate.}
+For every retained endpoint, we evaluate
+$w(\epsilon)=w_0+\epsilon(\widehat w-w_0)$ on held-out text at 13 fixed
+values from 0 to 1.  The first five points through $\epsilon=1/8$ fit a local
+linear--quadratic model; the full path measures proxy/NLL correlation.  Only
+$\epsilon=1$ is serialized and eligible for a rate--accuracy conclusion.

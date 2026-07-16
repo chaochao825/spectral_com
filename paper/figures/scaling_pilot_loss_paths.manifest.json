@@ -1,0 +1,28 @@
+{
+  "evidence_status": "verified_single_seed_scalability_smoke",
+  "inputs": {
+    "paper/results/scaling_pilot_manifest.json": "e766ccbb838687b104e7705cbdc4040ac983bea58d53ebbca848615b8d82d503",
+    "paper/results/scaling_pilot_models.csv": "6f6f7168ac35981996ab05c3b8826a3a0956370c89706c26df6b1b55e8e474ae",
+    "paper/results/scaling_pilot_paths.csv": "cee9e08bbd6d8bebc88b2ec3b1fe8b143889fcc7035e6e0e3a7bdf4f157a8109"
+  },
+  "interval_semantics": "fixed-window descriptive mean +/- 1.96 sample standard errors; not an independence-based confidence interval or significance test",
+  "outputs": {
+    "scaling_pilot_loss_paths.pdf": "8ebc11c220986fcef2d9d94ad1ad42ed8f443d9e2cbb130225dafa4f8f6547e6",
+    "scaling_pilot_loss_paths.png": "d0ee4e463c8bf4a7a05c91a5b76c6d06e92093e195ff21de366431989c3f9984",
+    "scaling_pilot_loss_paths.svg": "77e76dc6305e8c468b2b2e8b6d2c2d8eb90df641d751793489e9aa15431eb633"
+  },
+  "plot_script": {
+    "path": "paper/figures/scaling_pilot_plots.py",
+    "sha256": "6bb5fd84df31743b2c787a3b991713eaa72967a3469045692ddd13785f3c7fd1"
+  },
+  "prohibited_inference": [
+    "no cross-model absolute NLL or perplexity ranking",
+    "no whole-model compression claim",
+    "no multi-seed or population-significance claim",
+    "fixed-window intervals are descriptive and are not significance tests",
+    "path correlations apply only to the shown one-dimensional 13-point slices"
+  ],
+  "schema_version": "scaling_pilot_figure.v1",
+  "scope": "13-point Q+L and strict-scaled-QSL one-dimensional path slices for three separate single-seed scalability-smoke jobs",
+  "taylor_fit_semantics": "fits use epsilon <= 0.125; dotted curves beyond 0.125 are extrapolations"
+}

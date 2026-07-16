@@ -18,6 +18,7 @@ results/**/.state/run.lock
 *.onnx
 *.pth
 *.gguf
+*.hrc
 *.h5
 *.tflite
 *.pb

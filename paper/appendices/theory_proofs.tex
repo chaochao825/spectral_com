@@ -1,0 +1,258 @@
+\section{Proofs and Scope of the Curvature Analysis}
+\label{app:theory-proofs}
+
+\subsection{Taylor expansion and the role of a PSD proxy}
+
+Let $\mathcal{L}:\mathbb{R}^p\rightarrow\mathbb{R}$ be twice
+continuously differentiable on the segment from $w_0$ to
+$w_0+\delta$.  With $J(w)=\nabla^2\mathcal{L}(w)$, Taylor's integral
+form gives
+\begin{equation}
+\label{eq:integral-taylor}
+\mathcal{L}(w_0+\delta)-\mathcal{L}(w_0)
+=g^\top\delta+
+\int_0^1(1-t)\,\delta^\top J(w_0+t\delta)\delta\,dt.
+\end{equation}
+Writing $J_0=J(w_0)$ yields the usual quadratic term and a path
+remainder.  If
+$\|J(w_0+t\delta)-J_0\|_{\mathrm{op}}\le Mt\|\delta\|_2$, then
+\begin{equation}
+\left|\mathcal{L}(w_0+\delta)-\mathcal{L}(w_0)
+-g^\top\delta-\tfrac12\delta^\top J_0\delta\right|
+\le \frac{M}{6}\|\delta\|_2^3,
+\end{equation}
+because $\int_0^1t(1-t)dt=1/6$.
+
+The task Hessian $J_0$ can be indefinite.  For geometric diagnostics we
+instead select and disclose $H\succeq0$.  Combining proxy mismatch and
+path variation gives
+\begin{equation}
+\label{eq:proxy-error-bound}
+\begin{split}
+\varepsilon_H(\delta)
+={}&\tfrac12\delta^\top(J_0-H)\delta+R_3(\delta),\\
+|\varepsilon_H(\delta)|
+\le{}&\tfrac12\|J_0-H\|_{\mathrm{op}}\|\delta\|_2^2\\
+&+\tfrac{M}{6}\|\delta\|_2^3.
+\end{split}
+\end{equation}
+The bound need not be numerically tight; its purpose is to expose the
+assumption hidden when a PSD surrogate is called ``the Hessian.''  For
+a damped task Hessian, $H=J_0+\lambda I$ is a metric only when
+$\lambda\ge-\lambda_{\min}(J_0)$.  Damping must therefore be reported,
+and it changes the measured angles.  If $H$ is singular, its inner
+product is understood on the quotient by $\ker(H)$; correlations with
+$q_i=0$ are undefined rather than zero.
+
+For sequential maps $T_1,\ldots,T_k$, let
+$w_i=T_i(w_{i-1})$ and $\delta_i=w_i-w_{i-1}$.  Then
+$w_k-w_0=\sum_i\delta_i$, so substituting into the $H$-quadratic gives
+\begin{equation}
+\frac12\Bigl\|\sum_i\delta_i\Bigr\|_H^2
+=\frac12\sum_i\|\delta_i\|_H^2
++\sum_{i<j}\langle\delta_i,\delta_j\rangle_H.
+\end{equation}
+This algebra does not make the components order invariant.  If
+$T_iT_j(w)\ne T_jT_i(w)$, changing order changes both increments and
+the final endpoint; all terms must be recomputed after final decoding.
+
+\subsection{Coherence bound}
+
+\paragraph{Proposition 1 (PSD coherence).}
+Let $H\succeq0$, let $q_i=\|\delta_i\|_H^2>0$, and suppose
+$|\rho_H(i,j)|\le\mu$ for every $i\ne j$.  Then
+Equation~\eqref{eq:coherence-bound} holds.
+
+\paragraph{Proof.}
+Cauchy--Schwarz in the PSD seminorm gives
+$|\langle\delta_i,\delta_j\rangle_H|
+\le\mu\sqrt{q_iq_j}$.  Moreover,
+\begin{equation}
+2\sum_{i<j}\sqrt{q_iq_j}
+=\left(\sum_i\sqrt{q_i}\right)^2-\sum_iq_i
+\le(k-1)\sum_iq_i,
+\end{equation}
+where the last inequality follows from
+$(\sum_i\sqrt{q_i})^2\le k\sum_iq_i$.  Applying the upper and lower
+signs to the cross-term expansion proves the claim. \hfill$\square$
+
+The proposition controls only additivity of the PSD quadratic.  It
+does not control $g^\top\delta$, proxy error, path remainder, component
+self costs, or serialized rate.  A negative correlation may reduce the
+quadratic through cancellation, but $|\rho_H|$ is then large and the
+components are not near-orthogonal.
+
+\subsection{Feasibility of enforced orthogonality}
+
+Suppose an error $e$ can be modified using columns
+$B=[b_1,\ldots,b_d]$ and we want the result to be $H$-orthogonal to
+columns $U=[u_1,\ldots,u_m]$.  A coefficient vector $\alpha$ must solve
+\begin{equation}
+\label{eq:orthogonal-feasibility}
+A\alpha=-c,\qquad A=U^\top HB,\qquad c=U^\top He.
+\end{equation}
+An unconstrained solution exists if and only if $-c$ lies in the range
+of $A$.  Thus a single global scale generally cannot remove several
+independent moments.  Codec feasibility adds stronger conditions:
+$\alpha$ must respect the allowed scale range, support or rank, storage
+precision, and descriptor layout.  After rounding, the residual
+$\|A\widehat\alpha+c\|$ must be remeasured.  Subsequent requantization,
+support selection, or rank truncation can reintroduce the moments, so
+orthogonality is a property of the final decoded endpoint, not of an
+intermediate floating-point solve.
+
+\subsection{A sufficient endpoint comparison}
+
+Define the local PSD score
+\begin{equation}
+\widehat\Delta_H(z)=g^\top z+\tfrac12 z^\top Hz
+\end{equation}
+and suppose a candidate-specific certificate satisfies
+\begin{equation}
+\left|\mathcal{L}(w_0+z)-\mathcal{L}(w_0)
+-\widehat\Delta_H(z)\right|\le r(z).
+\end{equation}
+The radius $r(z)$ must include proxy mismatch and path curvature; it may
+be estimated conservatively from held-out interpolation diagnostics but
+is not supplied by coherence alone.
+
+\paragraph{Proposition 2 (same-byte sufficient condition).}
+Let $z_C$ be a composite candidate and $\{z_j\}$ the eligible
+single-mechanism candidates.  If
+\begin{equation}
+\label{eq:certified-comparison}
+\begin{split}
+\mathcal{B}(z_C)&\le B,\\
+\widehat\Delta_H(z_C)+r(z_C)
+&<\min_{j:\,\mathcal{B}(z_j)\le B}
+  \bigl\{\widehat\Delta_H(z_j)-r(z_j)\bigr\}.
+\end{split}
+\end{equation}
+then the composite has lower loss than every eligible single candidate
+at budget $B$.
+
+\paragraph{Proof.}
+The left side of the strict inequality upper-bounds the composite loss
+increment, while every term on the right lower-bounds the corresponding
+single-candidate increment. \hfill$\square$
+
+This proposition is deliberately sufficient, not necessary.  In the
+absence of a trustworthy $r(z)$, held-out endpoint loss replaces the
+certificate; a high proxy/path correlation is a diagnostic, not a
+proof of the inequality.
+
+\subsection{Comfort-zone allocation}
+
+Let each $d_i:[0,S]\rightarrow\mathbb{R}$ be differentiable, convex,
+and nondecreasing in assigned compression burden.  Consider
+\begin{equation}
+\label{eq:continuous-allocation}
+\min_{s_i\ge0}\sum_{i=1}^k d_i(s_i)
+\quad\text{subject to}\quad \sum_{i=1}^k s_i=S.
+\end{equation}
+
+\paragraph{Proposition 3 (marginal-cost allocation).}
+At an optimum of Equation~\eqref{eq:continuous-allocation}, every
+active component satisfies $d_i'(s_i)=\lambda$ and every inactive
+component satisfies $d_i'(0^+)\ge\lambda$.  If the all-$A$ allocation
+has $d_A'(S)>d_B'(0^+)$ and both derivatives are continuous near the
+endpoint, then an allocation using both $A$ and $B$ has strictly lower
+cost.
+
+\paragraph{Proof.}
+The KKT stationarity and complementary-slackness conditions are
+\begin{equation*}
+d_i'(s_i)-\lambda-\nu_i=0,\qquad
+\nu_i\ge0,\qquad \nu_i s_i=0.
+\end{equation*}
+They give the stated active and inactive conditions.  For the second
+claim, set $f(\epsilon)=d_A(S-\epsilon)+d_B(\epsilon)$.  Then
+$f'(0^+)=-d_A'(S)+d_B'(0^+)<0$, so sufficiently small positive
+$\epsilon$ improves the objective. \hfill$\square$
+
+Separability is an assumption of Equation~\eqref{eq:continuous-allocation}.
+For an objective $\sum_i d_i(s_i)+\gamma(s)$ with non-negligible
+allocation-dependent interactions, the active condition becomes
+$d_i'(s_i)+\partial_i\gamma(s)=\lambda$.
+
+The proposition explains why several mechanisms can outperform one
+mechanism pushed beyond its comfortable region, but only in the stated
+continuous model.  A codec has a lattice of feasible endpoints: one
+rank, one sparse group, or a new descriptor may have a fixed charge.
+The deployable analogue is a finite exact-byte exchange.
+
+Let $A$ be a realized endpoint, $u$ a perturbation that frees payload,
+and $r$ a repair perturbation.  For a fixed, order-specific decomposition
+$C=A+u+r$, direct addition and subtraction gives
+\begin{equation}
+\label{eq:exchange-identity}
+\mathcal{L}(C)-\mathcal{L}(A)=P_A(u)-G_A(r)+\Gamma_A(u,r).
+\end{equation}
+Hence Equation~\eqref{eq:exact-exchange} is equivalent to a strict
+improvement once $\mathcal{B}(C)\le\mathcal{B}(A)$.  Around $A$, the
+second-order part of $\Gamma_A$ is $u^\top J_A r$; replacing $J_A$ by a
+PSD proxy again adds a mismatch and path term.  This identity also shows
+why repair-to-repair orthogonality is insufficient: the cost of freeing
+bytes and all interactions still remain.
+
+\subsection{Physical bytes and parameter utilization}
+
+For endpoint $z$, the comparison rate is the on-disk length
+\begin{equation}
+\label{eq:byte-ledger}
+\begin{split}
+\mathcal{B}(z)={}&B_{\rm header}+B_{\rm manifest}+B_{\rm descriptor}\\
+&+B_{\rm codes}+B_{\rm scales}\\
+&+B_{\rm sparse\ values}+B_{\rm indices}\\
+&+B_{\rm rowptr}+B_{\rm factors}+B_{\rm alignment}\\
+&+B_{\rm tail\ padding}.
+\end{split}
+\end{equation}
+The marginal cost $m_r=\mathcal{B}(A+r)-\mathcal{B}(A)$ is therefore
+integer-valued and need not equal the sum of value streams.  Alignment
+can make it nonadditive.  We disclose both natural bytes and final file
+bytes: the latter decides the strict budget, while the former reveals
+when a nominally zero-cost change merely consumes padding slack.
+
+When $m_r>0$, held-out recovery per byte is
+\begin{equation}
+\eta_{\rm NLL}(r\mid A)
+=\frac{\mathcal{L}(A)-\mathcal{L}(A+r)}{m_r}.
+\end{equation}
+Suppose $u$ frees $f_u>0$ bytes and has loss penalty
+$P_A(u)=f_u\eta_{\rm giveup}$.  If the repair has
+$G_A(r)=m_r\eta_{\rm repair}$, then a feasible exchange improves loss
+when
+\begin{equation}
+m_r\eta_{\rm repair}
+>f_u\eta_{\rm giveup}+\Gamma_A(u,r),
+\qquad m_r\le f_u,
+\end{equation}
+with any remaining slack represented in the actual serialization.
+For an exactly matched exchange $m_r=f_u$, this reduces to an efficiency
+comparison corrected by interaction per byte.  Merely comparing the two
+ratios is not sufficient when the exchanged byte amounts differ.
+
+If $m_r=0$, division would create an artificial infinite efficiency.
+Instead we report the direct recovery, verify that the decoded artifact
+contains no side state, and state whether natural bytes or only final
+file bytes are unchanged.  Fixed-support OBS can satisfy this condition
+when re-estimated values replace already stored values; a scale can do
+so only if it is demonstrably folded into an already stored field.
+
+\subsection{Limits of the diagnostic}
+
+The analysis is local and order specific.  Its strongest threats are:
+(i) noncommuting quantization, support selection, and low-rank fitting;
+(ii) curvature drift between $w_0$ and the decoded endpoint;
+(iii) an activation/Fisher/GGN proxy that does not preserve task-loss
+ranking; (iv) calibration geometry that does not transfer to held-out
+text, seeds, layers, or model families; and (v) discrete metadata and
+alignment thresholds.  These threats motivate final-endpoint NLL,
+multiple independent splits, source and artifact hashes, and full byte
+round trips.  The strongest fine-grained numerical evidence remains one seed
+and six selected MLP linear tensors of Pythia-70M.  Three additional, unpooled
+seed-17 scalability-smoke jobs cover full Pythia-70M MLP scope and
+depth-stratified OPT-125M and Qwen3-0.6B MLP scopes at one selected-weight
+artifact rate.  The propositions and smoke observations do not upgrade these
+probes into a multi-seed, whole-model, or cross-model advantage claim.
