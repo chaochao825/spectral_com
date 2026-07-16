@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="${LLM_SD_ROOT:-/data6/user20111239/llm_spectral_dynamics}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="${LLM_SD_ROOT:-$(cd -- "$SCRIPT_DIR/.." && pwd)}"
 PYTHON="${LLM_SD_PYTHON:-python}"
-OUT_ROOT="${LLM_SD_OUTPUT_ROOT:-/data6/user20111239/llm_spectral_dynamics/results/large_435}"
+OUT_ROOT="${LLM_SD_OUTPUT_ROOT:-$ROOT/results/large_435}"
+RUNTIME_ROOT="${LLM_SD_RUNTIME_ROOT:-$ROOT/trash/runtime}"
+QWEN15_MODEL="${LLM_SD_QWEN15_MODEL:-/data6/user20111239/Qwen1.5-MoE-A2.7B}"
+QWEN57_MODEL="${LLM_SD_QWEN57_MODEL:-/data6/user20111239/Qwen2-57B-A14B-Instruct}"
+LLAMA70_MODEL="${LLM_SD_LLAMA70_MODEL:-/data6/user24111736/meta-llama/Llama-2-70b-chat-hf}"
 
 cd "$ROOT"
 export PYTHONPATH="$ROOT/src:${PYTHONPATH:-}"
@@ -11,8 +16,8 @@ export HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 export TRANSFORMERS_OFFLINE="${TRANSFORMERS_OFFLINE:-1}"
 export HF_DATASETS_OFFLINE="${HF_DATASETS_OFFLINE:-1}"
 export TOKENIZERS_PARALLELISM="${TOKENIZERS_PARALLELISM:-false}"
-export HF_HOME="${HF_HOME:-/data6/user20111239/hf_home}"
-export TMPDIR="${TMPDIR:-/data6/user20111239/tmp}"
+export HF_HOME="${HF_HOME:-$RUNTIME_ROOT/hf_home}"
+export TMPDIR="${TMPDIR:-$RUNTIME_ROOT/tmp}"
 mkdir -p "$OUT_ROOT" "$TMPDIR" "$HF_HOME"
 
 BASE_ARGS=(
@@ -37,7 +42,7 @@ fi
     "${BASE_ARGS[@]}" \
     --batch-size "${LLM_SD_QWEN15_BATCH_SIZE:-4}" \
     --torch-dtype bfloat16 \
-    --models /data6/user20111239/Qwen1.5-MoE-A2.7B \
+    --models "$QWEN15_MODEL" \
     --layers 0,12,23 \
     --num-sequences "${LLM_SD_QWEN15_NUM_SEQUENCES:-64}" \
     --seq-len "${LLM_SD_QWEN15_SEQ_LEN:-128}" \
@@ -49,7 +54,7 @@ fi
   --batch-size 1 \
   --device-map auto \
   --torch-dtype bfloat16 \
-  --models /data6/user20111239/Qwen2-57B-A14B-Instruct \
+  --models "$QWEN57_MODEL" \
   --layers 0,14,27 \
   --num-sequences "${LLM_SD_QWEN57_NUM_SEQUENCES:-16}" \
   --seq-len "${LLM_SD_QWEN57_SEQ_LEN:-128}" \
@@ -64,7 +69,7 @@ if [[ "$MIN_FREE" -ge "${LLM_SD_LLAMA_MIN_FREE_MB:-51200}" ]]; then
       --batch-size 1 \
       --device-map auto \
       --torch-dtype float16 \
-      --models /data6/user24111736/meta-llama/Llama-2-70b-chat-hf \
+      --models "$LLAMA70_MODEL" \
       --layers 0,40,79 \
       --num-sequences "${LLM_SD_LLAMA_NUM_SEQUENCES:-4}" \
       --seq-len "${LLM_SD_LLAMA_SEQ_LEN:-64}" \

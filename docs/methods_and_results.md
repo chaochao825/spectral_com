@@ -62,6 +62,12 @@ All three use sample-space reservoir eigenspectrum estimation. Pretrained/random
 
 The archived report gives a dense baseline perplexity of `7.649`. For the tested `down_proj` replacement, the best compressed row had perplexity `9.875`; low-rank was the best tested weight-error structure. The best reported adapter smoke row was a structured adapter with perplexity `6.715`, but this is not a controlled broad benchmark and should not be read as a general superiority claim.
 
+### Structured Qwen2.5-1.5B formal run
+
+`results/structured_qwen25_1p5b_formal_20260610_194113` completed phases 1--5 and figure generation with exit code 0. Its dense baseline perplexity was `13.85`; the best compressed replacement row was still about `1.061e4`. Every tested module type selected low-rank as the best weight approximation. This is a qualified but useful negative result against direct structured replacement at the tested budgets.
+
+The best phase-4 adapter row reports perplexity `5.763`, but the natural-condition training path and perplexity evaluation both read the leading examples of the same validation split. The result is therefore in-sample and cannot support a generalization claim. The phase-5 Hadamard result validates the implementation but overlaps established rotation-based quantization work.
+
 ### Residual-stack evidence
 
 The July Qwen2-7B comparison used a matched nominal memory ratio of at most `0.258` on selected layers:
@@ -73,7 +79,7 @@ The July Qwen2-7B comparison used a matched nominal memory ratio of at most `0.2
 
 The two rows came from separate run directories and their dense baselines differ substantially. The archived metadata is insufficient to prove that evaluation examples, revisions, seeds, and all scoring settings were identical. Therefore, compare each method only with the dense baseline in the same row; do not compare the two absolute PPL values or their deltas across rows as if they were one matched experiment.
 
-The six-module result supports continued testing of residual-space composition. It does not establish a general advantage because it covers one model family, a small layer subset, and a tiny evaluation set. The DAM rows in this repository are formula-based proxies rather than an official implementation and cannot be used to reject the published method.
+The six-module result supports continued testing of residual-space composition. Its `Q+S` delta was `-0.2760`, while `Q+S+L` was `-0.2807`; the extra low-rank term improved PPL by only about `0.00465`, which is not meaningful evidence at this evaluation scale. The current signal is primarily for sparse residual recovery on the MLP-inclusive subset. It does not establish a general advantage because it covers one model family, a small layer subset, and a tiny evaluation set. The DAM rows in this repository are formula-based proxies rather than an official implementation and cannot be used to reject the published method.
 
 ## 4. Reproduction map
 
@@ -97,3 +103,4 @@ The six-module result supports continued testing of residual-space composition. 
 - Keep pretrained/random controls for activation claims and pretrained-only language for feasibility runs.
 - Extend the activation pipeline to vision without pooling away spatial structure; the required measurements are specified in `docs/vision_residual_rank_locality.md`.
 - Emit a machine-readable manifest for every new run with package/CUDA versions, model and tokenizer revisions, dataset revision or local hash, seed, command, and git commit. These fields cannot be reconstructed reliably for every historical result in this archive.
+- Use disjoint calibration, adapter-training, and evaluation examples for every future adaptation run; the archived formal phase-4 result does not meet this requirement.

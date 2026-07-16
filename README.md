@@ -31,7 +31,7 @@ The repository contains the current implementation, tests, run scripts, notebook
 - Sparse/low-rank residual stacking, OASR candidates, Hessian-weighted orthogonality, additivity tests, and selector diagnostics.
 - Structured and low-rank adapters, rotations, and quantization experiments.
 
-See [current methods and results](docs/methods_and_results.md) for the evidence summary and [vision residual rank and locality](docs/vision_residual_rank_locality.md) for the proposed vision-model extension.
+See the [Chinese current-methods and results overview](docs/current_methods_and_results_zh.md) for a concise project-level judgment, [current methods and results](docs/methods_and_results.md) for the English technical summary, [the 2026-07-16 remote merge and research audit](docs/remote_merge_and_research_audit_20260716.md) for provenance and novelty qualification, and [vision residual rank and locality](docs/vision_residual_rank_locality.md) for the proposed vision-model extension. Verified server-35 model paths are recorded in [the model registry](configs/model_paths_435.yaml).
 
 ## Current Evidence
 
@@ -40,6 +40,7 @@ See [current methods and results](docs/methods_and_results.md) for the evidence 
 | `results/mvp_real` | GPT-2 and Pythia-70M, pretrained/random, real text | Pretrained/random differences are visible in matched metrics but are subtle in raw log-log plots; attention outputs have lower effective rank than FFN/residual outputs in this sample. |
 | `results/large_435_download_20260604_1026` | Qwen1.5-MoE-A2.7B, Qwen2-57B-A14B, Llama-2-70B | Multi-GPU, local-path spectral collection is feasible. Qwen1.5 is a reduced feasibility run; Qwen57 and Llama70 cover the planned layer/site smoke settings. |
 | `results/structured_qwen25_1p5b_goal_smoke_20260606_024653` | Qwen2.5-1.5B structured compression | Low-rank was the best tested weight approximation for `down_proj`; structured adapters and rotation/quantization signals remain preliminary. |
+| `results/structured_qwen25_1p5b_formal_20260610_194113` | Complete Qwen2.5-1.5B five-phase run | Direct structured replacements failed badly: baseline PPL was `13.85` and the best compressed row was about `1.061e4`. The adapter result is in-sample because training and evaluation reuse the validation prefix. |
 | `results/compression_orthogonality_mvp_20260623_v7` | Orthogonality/additivity MVP | Provides Hessian-cosine, additivity, loss-landscape, and goal-audit artifacts; it is a methodology check, not a large-model conclusion. |
 | `results/compare_7b_dam_residual_stack_20260707` | Qwen2-7B layer subsets and Pythia controls | `Q+S+L` produced a positive signal on the six-module Qwen2-7B attention+MLP subset, but the evaluation is too small for a general or SOTA claim. |
 
@@ -53,7 +54,7 @@ source .venv/bin/activate
 pip install -e ".[dev,research]"
 ```
 
-The large-model scripts assume local model directories and can run fully offline. They do not download or commit model weights.
+The large-model scripts assume local model directories and can run fully offline. They do not download or commit model weights. `scripts/run_large_435.sh` is project-relative and accepts `LLM_SD_QWEN15_MODEL`, `LLM_SD_QWEN57_MODEL`, and `LLM_SD_LLAMA70_MODEL` overrides. Runtime caches default to ignored `trash/runtime`; set `LLM_SD_RUNTIME_ROOT` when a different high-capacity scratch path is preferred.
 
 ## Entry Points
 

@@ -1,0 +1,22 @@
+2026-06-10 20:45:37,084 INFO loading baseline model
+2026-06-10 20:45:40,475 INFO Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+2026-06-10 20:45:40,475 INFO Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+2026-06-10 20:45:40,475 INFO NumExpr defaulting to 16 threads.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2026-06-10 20:45:45,272 INFO phase3 ratio=2.0 residual_fraction=0.0
+2026-06-10 20:45:46,193 INFO using NumPy SVD backend
+2026-06-10 20:52:22,684 INFO phase3 ratio=2.0 residual_fraction=0.01
+2026-06-10 21:01:23,167 INFO phase3 ratio=2.0 residual_fraction=0.02
+2026-06-10 21:09:44,750 INFO phase3 ratio=2.0 residual_fraction=0.04
+2026-06-10 21:18:16,405 INFO phase3 ratio=4.0 residual_fraction=0.0
+2026-06-10 21:22:53,821 INFO phase3 ratio=4.0 residual_fraction=0.01
+2026-06-10 21:32:02,753 INFO phase3 ratio=4.0 residual_fraction=0.02
+2026-06-10 21:40:51,073 INFO phase3 ratio=4.0 residual_fraction=0.04
+2026-06-10 21:50:02,448 INFO phase3 ratio=8.0 residual_fraction=0.0
+2026-06-10 21:54:28,676 INFO phase3 ratio=8.0 residual_fraction=0.01
+2026-06-10 22:02:50,767 INFO phase3 ratio=8.0 residual_fraction=0.02
+2026-06-10 22:11:51,505 INFO phase3 ratio=8.0 residual_fraction=0.04
+2026-06-10 22:20:24,653 INFO phase3 ratio=16.0 residual_fraction=0.0
+2026-06-10 22:24:51,815 INFO phase3 ratio=16.0 residual_fraction=0.01
+2026-06-10 22:33:31,654 INFO phase3 ratio=16.0 residual_fraction=0.02
+2026-06-10 22:41:51,277 INFO phase3 ratio=16.0 residual_fraction=0.04

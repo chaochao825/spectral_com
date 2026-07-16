@@ -1,0 +1,2162 @@
+[
+  {
+    "method": "structured",
+    "seed": 17,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      }
+    ]
+  },
+  {
+    "method": "structured",
+    "seed": 18,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      }
+    ]
+  },
+  {
+    "method": "structured",
+    "seed": 19,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      }
+    ]
+  },
+  {
+    "method": "structured",
+    "seed": 20,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 21,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 1024,
+        "within_budget": true,
+        "adapter_params": 60416
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 1024,
+        "within_budget": true,
+        "adapter_params": 60416
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 1024,
+        "within_budget": true,
+        "adapter_params": 60416
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 22,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 23,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 24,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 1024,
+        "within_budget": true,
+        "adapter_params": 60416
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 1024,
+        "within_budget": true,
+        "adapter_params": 60416
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 1024,
+        "within_budget": true,
+        "adapter_params": 60416
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 25,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 26,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 5,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 62720
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 27,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 95744
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 95744
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 95744
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 28,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 512,
+        "within_budget": true,
+        "adapter_params": 111616
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 512,
+        "within_budget": true,
+        "adapter_params": 111616
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 512,
+        "within_budget": true,
+        "adapter_params": 111616
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 29,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 11,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 125696
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 11,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 125696
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 11,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 125696
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 30,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 95744
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 95744
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 95744
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 31,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 512,
+        "within_budget": true,
+        "adapter_params": 111616
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 512,
+        "within_budget": true,
+        "adapter_params": 111616
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 512,
+        "within_budget": true,
+        "adapter_params": 111616
+      }
+    ]
+  },
+  {
+    "method": "structured_lora",
+    "seed": 32,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 11,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 125696
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 11,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 125696
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "structured_lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 11,
+        "block_size": 2048,
+        "within_budget": true,
+        "adapter_params": 125696
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 33,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 34,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 35,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 36,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 37,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 38,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 62976
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 39,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 40,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 83968
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 83968
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 83968
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 41,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 125952
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 125952
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 125952
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 42,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 41984
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 43,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 83968
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 83968
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 83968
+      }
+    ]
+  },
+  {
+    "method": "lora",
+    "seed": 44,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 125952
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 125952
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "lora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 125952
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 45,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 46,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 47,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 48,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 49,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 8,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 50,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 65536,
+        "requested_rank": 16,
+        "rank": 6,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 63012
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 51,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 52,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 84032
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 84032
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 84032
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 53,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 126096
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 126096
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 126096
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 54,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 4,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 4,
+        "rank": 4,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 42000
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 55,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 8,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 84032
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 84032
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 8,
+        "rank": 8,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 84032
+      }
+    ]
+  },
+  {
+    "method": "mora",
+    "seed": 56,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": 16,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 126096
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 126096
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "mora",
+        "budget_per_module": 131072,
+        "requested_rank": 16,
+        "rank": 12,
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 126096
+      }
+    ]
+  },
+  {
+    "method": "fourierft",
+    "seed": 57,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 65536
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 65536
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 65536
+      }
+    ]
+  },
+  {
+    "method": "fourierft",
+    "seed": 58,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 65536
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 65536
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 65536
+      }
+    ]
+  },
+  {
+    "method": "fourierft",
+    "seed": 59,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 131072
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 131072
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 131072
+      }
+    ]
+  },
+  {
+    "method": "fourierft",
+    "seed": 60,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 131072
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 131072
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "fourierft",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 64,
+        "within_budget": true,
+        "adapter_params": 131072
+      }
+    ]
+  },
+  {
+    "method": "bca",
+    "seed": 61,
+    "budget_per_module": 65536,
+    "condition": "natural",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      }
+    ]
+  },
+  {
+    "method": "bca",
+    "seed": 62,
+    "budget_per_module": 65536,
+    "condition": "structured",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 65536,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 256,
+        "within_budget": true,
+        "adapter_params": 53760
+      }
+    ]
+  },
+  {
+    "method": "bca",
+    "seed": 63,
+    "budget_per_module": 131072,
+    "condition": "natural",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      }
+    ]
+  },
+  {
+    "method": "bca",
+    "seed": 64,
+    "budget_per_module": 131072,
+    "condition": "structured",
+    "requested_rank": null,
+    "records": [
+      {
+        "name": "model.layers.0.mlp.down_proj",
+        "layer": 0,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.14.mlp.down_proj",
+        "layer": 14,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      },
+      {
+        "name": "model.layers.27.mlp.down_proj",
+        "layer": 27,
+        "module_type": "down_proj",
+        "method": "bca",
+        "budget_per_module": 131072,
+        "requested_rank": "",
+        "rank": "",
+        "block_size": 128,
+        "within_budget": true,
+        "adapter_params": 107520
+      }
+    ]
+  }
+]

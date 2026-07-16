@@ -1,0 +1,7 @@
+2026-06-10 20:33:22,962 INFO collecting activation reconstruction data for 21 modules
+2026-06-10 20:33:23,100 INFO Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+2026-06-10 20:33:23,100 INFO Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+2026-06-10 20:33:23,100 INFO NumExpr defaulting to 16 threads.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2026-06-10 20:33:25,297 INFO using torch SVD backend cuda
+2026-06-10 20:33:36,140 INFO using NumPy SVD backend

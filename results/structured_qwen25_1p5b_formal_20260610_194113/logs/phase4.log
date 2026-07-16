@@ -1,0 +1,52 @@
+2026-06-10 22:50:24,413 INFO phase4 run 1/48 method=structured budget=65536 condition=natural rank=None
+2026-06-10 22:50:27,828 INFO Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+2026-06-10 22:50:27,828 INFO Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+2026-06-10 22:50:27,828 INFO NumExpr defaulting to 16 threads.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2026-06-10 22:50:39,625 INFO phase4 run 2/48 method=structured budget=65536 condition=structured rank=None
+2026-06-10 22:50:51,790 INFO phase4 run 3/48 method=structured budget=131072 condition=natural rank=None
+2026-06-10 22:51:03,718 INFO phase4 run 4/48 method=structured budget=131072 condition=structured rank=None
+2026-06-10 22:51:15,390 INFO phase4 run 5/48 method=structured_lora budget=65536 condition=natural rank=4
+2026-06-10 22:51:27,247 INFO phase4 run 6/48 method=structured_lora budget=65536 condition=natural rank=8
+2026-06-10 22:51:39,085 INFO phase4 run 7/48 method=structured_lora budget=65536 condition=natural rank=16
+2026-06-10 22:51:50,920 INFO phase4 run 8/48 method=structured_lora budget=65536 condition=structured rank=4
+2026-06-10 22:52:02,607 INFO phase4 run 9/48 method=structured_lora budget=65536 condition=structured rank=8
+2026-06-10 22:52:14,619 INFO phase4 run 10/48 method=structured_lora budget=65536 condition=structured rank=16
+2026-06-10 22:52:26,367 INFO phase4 run 11/48 method=structured_lora budget=131072 condition=natural rank=4
+2026-06-10 22:52:38,388 INFO phase4 run 12/48 method=structured_lora budget=131072 condition=natural rank=8
+2026-06-10 22:52:50,296 INFO phase4 run 13/48 method=structured_lora budget=131072 condition=natural rank=16
+2026-06-10 22:53:02,321 INFO phase4 run 14/48 method=structured_lora budget=131072 condition=structured rank=4
+2026-06-10 22:53:13,930 INFO phase4 run 15/48 method=structured_lora budget=131072 condition=structured rank=8
+2026-06-10 22:53:24,068 INFO phase4 run 16/48 method=structured_lora budget=131072 condition=structured rank=16
+2026-06-10 22:53:35,292 INFO phase4 run 17/48 method=lora budget=65536 condition=natural rank=4
+2026-06-10 22:53:47,172 INFO phase4 run 18/48 method=lora budget=65536 condition=natural rank=8
+2026-06-10 22:53:59,502 INFO phase4 run 19/48 method=lora budget=65536 condition=natural rank=16
+2026-06-10 22:54:11,418 INFO phase4 run 20/48 method=lora budget=65536 condition=structured rank=4
+2026-06-10 22:54:23,192 INFO phase4 run 21/48 method=lora budget=65536 condition=structured rank=8
+2026-06-10 22:54:34,689 INFO phase4 run 22/48 method=lora budget=65536 condition=structured rank=16
+2026-06-10 22:54:46,740 INFO phase4 run 23/48 method=lora budget=131072 condition=natural rank=4
+2026-06-10 22:54:58,721 INFO phase4 run 24/48 method=lora budget=131072 condition=natural rank=8
+2026-06-10 22:55:10,815 INFO phase4 run 25/48 method=lora budget=131072 condition=natural rank=16
+2026-06-10 22:55:22,650 INFO phase4 run 26/48 method=lora budget=131072 condition=structured rank=4
+2026-06-10 22:55:34,481 INFO phase4 run 27/48 method=lora budget=131072 condition=structured rank=8
+2026-06-10 22:55:46,063 INFO phase4 run 28/48 method=lora budget=131072 condition=structured rank=16
+2026-06-10 22:55:57,972 INFO phase4 run 29/48 method=mora budget=65536 condition=natural rank=4
+2026-06-10 22:56:10,049 INFO phase4 run 30/48 method=mora budget=65536 condition=natural rank=8
+2026-06-10 22:56:21,907 INFO phase4 run 31/48 method=mora budget=65536 condition=natural rank=16
+2026-06-10 22:56:33,718 INFO phase4 run 32/48 method=mora budget=65536 condition=structured rank=4
+2026-06-10 22:56:46,071 INFO phase4 run 33/48 method=mora budget=65536 condition=structured rank=8
+2026-06-10 22:56:57,375 INFO phase4 run 34/48 method=mora budget=65536 condition=structured rank=16
+2026-06-10 22:57:08,518 INFO phase4 run 35/48 method=mora budget=131072 condition=natural rank=4
+2026-06-10 22:57:20,842 INFO phase4 run 36/48 method=mora budget=131072 condition=natural rank=8
+2026-06-10 22:57:33,443 INFO phase4 run 37/48 method=mora budget=131072 condition=natural rank=16
+2026-06-10 22:57:45,074 INFO phase4 run 38/48 method=mora budget=131072 condition=structured rank=4
+2026-06-10 22:57:57,561 INFO phase4 run 39/48 method=mora budget=131072 condition=structured rank=8
+2026-06-10 22:58:09,650 INFO phase4 run 40/48 method=mora budget=131072 condition=structured rank=16
+2026-06-10 22:58:20,982 INFO phase4 run 41/48 method=fourierft budget=65536 condition=natural rank=None
+2026-06-10 22:58:33,928 INFO phase4 run 42/48 method=fourierft budget=65536 condition=structured rank=None
+2026-06-10 22:58:47,285 INFO phase4 run 43/48 method=fourierft budget=131072 condition=natural rank=None
+2026-06-10 22:58:59,094 INFO phase4 run 44/48 method=fourierft budget=131072 condition=structured rank=None
+2026-06-10 22:59:10,732 INFO phase4 run 45/48 method=bca budget=65536 condition=natural rank=None
+2026-06-10 22:59:23,245 INFO phase4 run 46/48 method=bca budget=65536 condition=structured rank=None
+2026-06-10 22:59:44,753 INFO phase4 run 47/48 method=bca budget=131072 condition=natural rank=None
+2026-06-10 23:00:17,664 INFO phase4 run 48/48 method=bca budget=131072 condition=structured rank=None

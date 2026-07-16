@@ -1,0 +1,170 @@
+# Read-only model inventory verified on SSH profile 435 (172.25.4.35).
+# Keep these assets in place; the active project is hosted on profile 237.
+# Entries marked ownership: external are not project-owned and must not be modified.
+profile: "435"
+verified_at: "2026-07-16"
+default_policy: read_only
+
+models:
+  qwen15_moe_a2_7b:
+    path: /data6/user20111239/Qwen1.5-MoE-A2.7B
+    status: complete
+    architecture: Qwen2MoeForCausalLM
+    dtype: bfloat16
+    hidden_size: 2048
+    layers: 24
+    format: safetensors
+    shards_present: 8
+    shards_expected: 8
+    shard_bytes: 28632144944
+    env_override: LLM_SD_QWEN15_MODEL
+
+  qwen2_57b_a14b_instruct:
+    path: /data6/user20111239/Qwen2-57B-A14B-Instruct
+    status: complete
+    architecture: Qwen2MoeForCausalLM
+    dtype: bfloat16
+    hidden_size: 3584
+    layers: 28
+    format: safetensors
+    shards_present: 29
+    shards_expected: 29
+    shard_bytes: 114818032896
+    env_override: LLM_SD_QWEN57_MODEL
+
+  llama2_70b_chat:
+    path: /data6/user24111736/meta-llama/Llama-2-70b-chat-hf
+    status: complete_safetensors
+    architecture: LlamaForCausalLM
+    dtype: float16
+    hidden_size: 8192
+    layers: 80
+    format: safetensors
+    shards_present: 15
+    shards_expected: 15
+    shard_bytes: 137953408952
+    env_override: LLM_SD_LLAMA70_MODEL
+    note: A stale pytorch_model.bin.index.json is present, but none of its 15 bin shards exist. Load safetensors.
+
+  llama2_7b_chat:
+    path: /data6/user24111736/meta-llama/Llama-2-7b-chat-hf
+    status: incomplete_do_not_use
+    note: Directory contains no config or model shards.
+
+  llama2_7b_hf_external:
+    path: /data2/user21312681/llama/llama-2-7b
+    status: complete_safetensors
+    ownership: external
+    owner: user24215461
+    access_policy: read_only
+    architecture: LlamaForCausalLM
+    dtype: float16
+    hidden_size: 4096
+    layers: 32
+    format: safetensors
+    shards_present: 2
+    shards_expected: 2
+    shard_bytes: 13476876272
+
+  llama2_7b_chat_external:
+    path: /data5/user21312681/Llama-2-7b-chat-hf
+    status: complete_safetensors
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    architecture: LlamaForCausalLM
+    dtype: float16
+    hidden_size: 4096
+    layers: 32
+    format: safetensors
+    shards_present: 2
+    shards_expected: 2
+    shard_bytes: 13476872576
+    note: The working weights are complete; the large .git directory appears to duplicate Git LFS objects.
+
+  llama31_8b_instruct_external:
+    path: /data5/user21312681/llm_test/meta-llama-3.1-8b-instruct
+    status: complete_safetensors
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    architecture: LlamaForCausalLM
+    dtype: bfloat16
+    hidden_size: 4096
+    layers: 32
+    format: safetensors
+    shards_present: 4
+    shards_expected: 4
+    shard_bytes: 16060556376
+
+  opt_125m_external:
+    path: /data5/user21312681/opt-125m
+    status: complete
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    architecture: OPTForCausalLM
+    dtype: float16
+    hidden_size: 768
+    layers: 12
+    format: pytorch_bin
+    shards_present: 1
+    shards_expected: 1
+    shard_bytes: 250540281
+    note: Additional H5 and Flax formats are also present.
+
+  qwen2_0p5b_external:
+    path: /data5/user21312681/Qwen2-0.5B
+    status: incomplete_do_not_use
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    note: No top-level config or model weight shards were found during the 2026-07-16 audit.
+
+  mistral_small_24b_instruct_2501_external:
+    path: /data6/user21312681/Mistral-Small-24B-Instruct-2501
+    status: complete_safetensors
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    architecture: MistralForCausalLM
+    dtype: bfloat16
+    hidden_size: 5120
+    layers: 40
+    format: safetensors_and_consolidated
+    shards_present: 10
+    shards_expected: 10
+    shard_bytes: 47144848872
+    consolidated_bytes: 47144846024
+    note: The large .git directory appears to duplicate both weight layouts through Git LFS.
+
+  mistral_small_3p1_24b_instruct_2503_external:
+    path: /data6/user21312681/Mistral-Small-3.1-24B-Instruct-2503
+    status: complete_safetensors
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    architecture: Mistral3ForConditionalGeneration
+    dtype: bfloat16
+    format: safetensors_and_consolidated
+    shards_present: 10
+    shards_expected: 10
+    shard_bytes: 48022800560
+    consolidated_bytes: 48022792280
+    note: Multimodal Mistral3/Pixtral model; the large .git directory appears to duplicate both weight layouts through Git LFS.
+
+  deepseek_moe_16b_chat_external:
+    path: /data6/user21312681/deepseek-moe-16b-chat
+    status: complete_safetensors
+    ownership: external
+    owner: user21312681
+    access_policy: read_only
+    architecture: DeepseekForCausalLM
+    dtype: bfloat16
+    hidden_size: 2048
+    layers: 28
+    format: safetensors
+    shards_present: 7
+    shards_expected: 7
+    shard_bytes: 32752135032
+    note: The large .git directory appears to duplicate the working weight shards through Git LFS.

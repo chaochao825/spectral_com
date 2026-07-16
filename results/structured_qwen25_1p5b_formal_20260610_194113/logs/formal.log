@@ -1,0 +1,295 @@
+start phase1 2026-06-10T19:41:46+08:00
+2026-06-10 19:41:49,723 INFO phase1 1/196 model.layers.0.mlp.down_proj
+2026-06-10 19:41:49,770 INFO using torch SVD backend cuda
+2026-06-10 19:41:53,101 INFO using NumPy SVD backend
+2026-06-10 19:42:18,629 INFO phase1 2/196 model.layers.0.mlp.gate_proj
+2026-06-10 19:42:49,414 INFO phase1 3/196 model.layers.0.self_attn.k_proj
+2026-06-10 19:42:50,174 INFO phase1 4/196 model.layers.0.self_attn.o_proj
+2026-06-10 19:42:55,921 INFO phase1 5/196 model.layers.0.self_attn.q_proj
+2026-06-10 19:43:10,685 INFO phase1 6/196 model.layers.0.mlp.up_proj
+2026-06-10 19:43:54,944 INFO phase1 7/196 model.layers.0.self_attn.v_proj
+2026-06-10 19:43:55,579 INFO phase1 8/196 model.layers.1.mlp.down_proj
+2026-06-10 19:45:03,747 INFO phase1 9/196 model.layers.1.mlp.gate_proj
+2026-06-10 19:46:04,442 INFO phase1 10/196 model.layers.1.self_attn.k_proj
+2026-06-10 19:46:05,235 INFO phase1 11/196 model.layers.1.self_attn.o_proj
+2026-06-10 19:46:29,910 INFO phase1 12/196 model.layers.1.self_attn.q_proj
+2026-06-10 19:46:34,603 INFO phase1 13/196 model.layers.1.mlp.up_proj
+2026-06-10 19:47:26,924 INFO phase1 14/196 model.layers.1.self_attn.v_proj
+2026-06-10 19:47:37,210 INFO phase1 15/196 model.layers.2.mlp.down_proj
+2026-06-10 19:48:09,822 INFO phase1 16/196 model.layers.2.mlp.gate_proj
+2026-06-10 19:48:42,987 INFO phase1 17/196 model.layers.2.self_attn.k_proj
+2026-06-10 19:48:43,693 INFO phase1 18/196 model.layers.2.self_attn.o_proj
+2026-06-10 19:48:48,630 INFO phase1 19/196 model.layers.2.self_attn.q_proj
+2026-06-10 19:48:53,841 INFO phase1 20/196 model.layers.2.mlp.up_proj
+2026-06-10 19:49:25,837 INFO phase1 21/196 model.layers.2.self_attn.v_proj
+2026-06-10 19:49:26,449 INFO phase1 22/196 model.layers.3.mlp.down_proj
+2026-06-10 19:49:54,890 INFO phase1 23/196 model.layers.3.mlp.gate_proj
+2026-06-10 19:50:23,702 INFO phase1 24/196 model.layers.3.self_attn.k_proj
+2026-06-10 19:50:24,338 INFO phase1 25/196 model.layers.3.self_attn.o_proj
+2026-06-10 19:50:29,275 INFO phase1 26/196 model.layers.3.self_attn.q_proj
+2026-06-10 19:50:34,132 INFO phase1 27/196 model.layers.3.mlp.up_proj
+2026-06-10 19:51:03,956 INFO phase1 28/196 model.layers.3.self_attn.v_proj
+2026-06-10 19:51:04,741 INFO phase1 29/196 model.layers.4.mlp.down_proj
+2026-06-10 19:51:34,646 INFO phase1 30/196 model.layers.4.mlp.gate_proj
+2026-06-10 19:52:17,348 INFO phase1 31/196 model.layers.4.self_attn.k_proj
+2026-06-10 19:52:18,137 INFO phase1 32/196 model.layers.4.self_attn.o_proj
+2026-06-10 19:52:23,417 INFO phase1 33/196 model.layers.4.self_attn.q_proj
+2026-06-10 19:52:28,557 INFO phase1 34/196 model.layers.4.mlp.up_proj
+2026-06-10 19:53:04,087 INFO phase1 35/196 model.layers.4.self_attn.v_proj
+2026-06-10 19:53:04,885 INFO phase1 36/196 model.layers.5.mlp.down_proj
+2026-06-10 19:53:35,335 INFO phase1 37/196 model.layers.5.mlp.gate_proj
+2026-06-10 19:54:08,642 INFO phase1 38/196 model.layers.5.self_attn.k_proj
+2026-06-10 19:54:09,499 INFO phase1 39/196 model.layers.5.self_attn.o_proj
+2026-06-10 19:54:14,720 INFO phase1 40/196 model.layers.5.self_attn.q_proj
+2026-06-10 19:54:19,872 INFO phase1 41/196 model.layers.5.mlp.up_proj
+2026-06-10 19:54:53,996 INFO phase1 42/196 model.layers.5.self_attn.v_proj
+2026-06-10 19:54:54,763 INFO phase1 43/196 model.layers.6.mlp.down_proj
+2026-06-10 19:55:27,650 INFO phase1 44/196 model.layers.6.mlp.gate_proj
+2026-06-10 19:55:57,112 INFO phase1 45/196 model.layers.6.self_attn.k_proj
+2026-06-10 19:55:57,851 INFO phase1 46/196 model.layers.6.self_attn.o_proj
+2026-06-10 19:56:02,412 INFO phase1 47/196 model.layers.6.self_attn.q_proj
+2026-06-10 19:56:08,132 INFO phase1 48/196 model.layers.6.mlp.up_proj
+2026-06-10 19:56:39,699 INFO phase1 49/196 model.layers.6.self_attn.v_proj
+2026-06-10 19:56:40,456 INFO phase1 50/196 model.layers.7.mlp.down_proj
+2026-06-10 19:57:10,327 INFO phase1 51/196 model.layers.7.mlp.gate_proj
+2026-06-10 19:57:42,035 INFO phase1 52/196 model.layers.7.self_attn.k_proj
+2026-06-10 19:57:42,800 INFO phase1 53/196 model.layers.7.self_attn.o_proj
+2026-06-10 19:57:48,719 INFO phase1 54/196 model.layers.7.self_attn.q_proj
+2026-06-10 19:57:53,843 INFO phase1 55/196 model.layers.7.mlp.up_proj
+2026-06-10 19:58:24,532 INFO phase1 56/196 model.layers.7.self_attn.v_proj
+2026-06-10 19:58:25,350 INFO phase1 57/196 model.layers.8.mlp.down_proj
+2026-06-10 19:58:55,950 INFO phase1 58/196 model.layers.8.mlp.gate_proj
+2026-06-10 19:59:25,924 INFO phase1 59/196 model.layers.8.self_attn.k_proj
+2026-06-10 19:59:26,558 INFO phase1 60/196 model.layers.8.self_attn.o_proj
+2026-06-10 19:59:31,504 INFO phase1 61/196 model.layers.8.self_attn.q_proj
+2026-06-10 19:59:37,895 INFO phase1 62/196 model.layers.8.mlp.up_proj
+2026-06-10 20:00:08,987 INFO phase1 63/196 model.layers.8.self_attn.v_proj
+2026-06-10 20:00:09,852 INFO phase1 64/196 model.layers.9.mlp.down_proj
+2026-06-10 20:00:41,074 INFO phase1 65/196 model.layers.9.mlp.gate_proj
+2026-06-10 20:01:11,167 INFO phase1 66/196 model.layers.9.self_attn.k_proj
+2026-06-10 20:01:11,928 INFO phase1 67/196 model.layers.9.self_attn.o_proj
+2026-06-10 20:01:17,133 INFO phase1 68/196 model.layers.9.self_attn.q_proj
+2026-06-10 20:01:22,585 INFO phase1 69/196 model.layers.9.mlp.up_proj
+2026-06-10 20:01:53,516 INFO phase1 70/196 model.layers.9.self_attn.v_proj
+2026-06-10 20:01:54,275 INFO phase1 71/196 model.layers.10.mlp.down_proj
+2026-06-10 20:02:24,428 INFO phase1 72/196 model.layers.10.mlp.gate_proj
+2026-06-10 20:02:55,824 INFO phase1 73/196 model.layers.10.self_attn.k_proj
+2026-06-10 20:02:56,602 INFO phase1 74/196 model.layers.10.self_attn.o_proj
+2026-06-10 20:03:03,797 INFO phase1 75/196 model.layers.10.self_attn.q_proj
+2026-06-10 20:03:17,768 INFO phase1 76/196 model.layers.10.mlp.up_proj
+2026-06-10 20:03:45,613 INFO phase1 77/196 model.layers.10.self_attn.v_proj
+2026-06-10 20:03:46,242 INFO phase1 78/196 model.layers.11.mlp.down_proj
+2026-06-10 20:04:13,353 INFO phase1 79/196 model.layers.11.mlp.gate_proj
+2026-06-10 20:04:42,142 INFO phase1 80/196 model.layers.11.self_attn.k_proj
+2026-06-10 20:04:42,904 INFO phase1 81/196 model.layers.11.self_attn.o_proj
+2026-06-10 20:04:47,954 INFO phase1 82/196 model.layers.11.self_attn.q_proj
+2026-06-10 20:04:53,055 INFO phase1 83/196 model.layers.11.mlp.up_proj
+2026-06-10 20:05:23,046 INFO phase1 84/196 model.layers.11.self_attn.v_proj
+2026-06-10 20:05:23,814 INFO phase1 85/196 model.layers.12.mlp.down_proj
+2026-06-10 20:05:49,144 INFO phase1 86/196 model.layers.12.mlp.gate_proj
+2026-06-10 20:06:15,592 INFO phase1 87/196 model.layers.12.self_attn.k_proj
+2026-06-10 20:06:16,223 INFO phase1 88/196 model.layers.12.self_attn.o_proj
+2026-06-10 20:06:20,713 INFO phase1 89/196 model.layers.12.self_attn.q_proj
+2026-06-10 20:06:25,879 INFO phase1 90/196 model.layers.12.mlp.up_proj
+2026-06-10 20:06:56,590 INFO phase1 91/196 model.layers.12.self_attn.v_proj
+2026-06-10 20:06:57,356 INFO phase1 92/196 model.layers.13.mlp.down_proj
+2026-06-10 20:07:27,924 INFO phase1 93/196 model.layers.13.mlp.gate_proj
+2026-06-10 20:07:58,497 INFO phase1 94/196 model.layers.13.self_attn.k_proj
+2026-06-10 20:07:59,127 INFO phase1 95/196 model.layers.13.self_attn.o_proj
+2026-06-10 20:08:03,533 INFO phase1 96/196 model.layers.13.self_attn.q_proj
+2026-06-10 20:08:08,114 INFO phase1 97/196 model.layers.13.mlp.up_proj
+2026-06-10 20:08:45,952 INFO phase1 98/196 model.layers.13.self_attn.v_proj
+2026-06-10 20:08:46,778 INFO phase1 99/196 model.layers.14.mlp.down_proj
+2026-06-10 20:09:25,026 INFO phase1 100/196 model.layers.14.mlp.gate_proj
+2026-06-10 20:09:59,694 INFO phase1 101/196 model.layers.14.self_attn.k_proj
+2026-06-10 20:10:00,461 INFO phase1 102/196 model.layers.14.self_attn.o_proj
+2026-06-10 20:10:05,643 INFO phase1 103/196 model.layers.14.self_attn.q_proj
+2026-06-10 20:10:13,091 INFO phase1 104/196 model.layers.14.mlp.up_proj
+2026-06-10 20:10:44,697 INFO phase1 105/196 model.layers.14.self_attn.v_proj
+2026-06-10 20:10:45,467 INFO phase1 106/196 model.layers.15.mlp.down_proj
+2026-06-10 20:11:20,192 INFO phase1 107/196 model.layers.15.mlp.gate_proj
+2026-06-10 20:11:55,016 INFO phase1 108/196 model.layers.15.self_attn.k_proj
+2026-06-10 20:11:55,792 INFO phase1 109/196 model.layers.15.self_attn.o_proj
+2026-06-10 20:12:01,062 INFO phase1 110/196 model.layers.15.self_attn.q_proj
+2026-06-10 20:12:06,752 INFO phase1 111/196 model.layers.15.mlp.up_proj
+2026-06-10 20:12:36,859 INFO phase1 112/196 model.layers.15.self_attn.v_proj
+2026-06-10 20:12:37,627 INFO phase1 113/196 model.layers.16.mlp.down_proj
+2026-06-10 20:13:06,391 INFO phase1 114/196 model.layers.16.mlp.gate_proj
+2026-06-10 20:13:36,361 INFO phase1 115/196 model.layers.16.self_attn.k_proj
+2026-06-10 20:13:37,172 INFO phase1 116/196 model.layers.16.self_attn.o_proj
+2026-06-10 20:13:42,327 INFO phase1 117/196 model.layers.16.self_attn.q_proj
+2026-06-10 20:13:47,441 INFO phase1 118/196 model.layers.16.mlp.up_proj
+2026-06-10 20:14:17,453 INFO phase1 119/196 model.layers.16.self_attn.v_proj
+2026-06-10 20:14:18,211 INFO phase1 120/196 model.layers.17.mlp.down_proj
+2026-06-10 20:14:48,234 INFO phase1 121/196 model.layers.17.mlp.gate_proj
+2026-06-10 20:15:19,095 INFO phase1 122/196 model.layers.17.self_attn.k_proj
+2026-06-10 20:15:19,972 INFO phase1 123/196 model.layers.17.self_attn.o_proj
+2026-06-10 20:15:25,262 INFO phase1 124/196 model.layers.17.self_attn.q_proj
+2026-06-10 20:15:30,442 INFO phase1 125/196 model.layers.17.mlp.up_proj
+2026-06-10 20:16:01,135 INFO phase1 126/196 model.layers.17.self_attn.v_proj
+2026-06-10 20:16:01,888 INFO phase1 127/196 model.layers.18.mlp.down_proj
+2026-06-10 20:16:28,226 INFO phase1 128/196 model.layers.18.mlp.gate_proj
+2026-06-10 20:16:59,553 INFO phase1 129/196 model.layers.18.self_attn.k_proj
+2026-06-10 20:17:00,349 INFO phase1 130/196 model.layers.18.self_attn.o_proj
+2026-06-10 20:17:05,696 INFO phase1 131/196 model.layers.18.self_attn.q_proj
+2026-06-10 20:17:10,993 INFO phase1 132/196 model.layers.18.mlp.up_proj
+2026-06-10 20:17:42,461 INFO phase1 133/196 model.layers.18.self_attn.v_proj
+2026-06-10 20:17:43,092 INFO phase1 134/196 model.layers.19.mlp.down_proj
+2026-06-10 20:18:09,113 INFO phase1 135/196 model.layers.19.mlp.gate_proj
+2026-06-10 20:18:36,209 INFO phase1 136/196 model.layers.19.self_attn.k_proj
+2026-06-10 20:18:36,832 INFO phase1 137/196 model.layers.19.self_attn.o_proj
+2026-06-10 20:18:41,226 INFO phase1 138/196 model.layers.19.self_attn.q_proj
+2026-06-10 20:18:46,033 INFO phase1 139/196 model.layers.19.mlp.up_proj
+2026-06-10 20:19:13,191 INFO phase1 140/196 model.layers.19.self_attn.v_proj
+2026-06-10 20:19:13,814 INFO phase1 141/196 model.layers.20.mlp.down_proj
+2026-06-10 20:19:40,001 INFO phase1 142/196 model.layers.20.mlp.gate_proj
+2026-06-10 20:20:06,871 INFO phase1 143/196 model.layers.20.self_attn.k_proj
+2026-06-10 20:20:07,858 INFO phase1 144/196 model.layers.20.self_attn.o_proj
+2026-06-10 20:20:12,297 INFO phase1 145/196 model.layers.20.self_attn.q_proj
+2026-06-10 20:20:16,896 INFO phase1 146/196 model.layers.20.mlp.up_proj
+2026-06-10 20:20:43,686 INFO phase1 147/196 model.layers.20.self_attn.v_proj
+2026-06-10 20:20:44,313 INFO phase1 148/196 model.layers.21.mlp.down_proj
+2026-06-10 20:21:09,743 INFO phase1 149/196 model.layers.21.mlp.gate_proj
+2026-06-10 20:21:36,340 INFO phase1 150/196 model.layers.21.self_attn.k_proj
+2026-06-10 20:21:37,038 INFO phase1 151/196 model.layers.21.self_attn.o_proj
+2026-06-10 20:21:42,344 INFO phase1 152/196 model.layers.21.self_attn.q_proj
+2026-06-10 20:21:47,504 INFO phase1 153/196 model.layers.21.mlp.up_proj
+2026-06-10 20:22:14,763 INFO phase1 154/196 model.layers.21.self_attn.v_proj
+2026-06-10 20:22:15,525 INFO phase1 155/196 model.layers.22.mlp.down_proj
+2026-06-10 20:22:43,406 INFO phase1 156/196 model.layers.22.mlp.gate_proj
+2026-06-10 20:23:14,180 INFO phase1 157/196 model.layers.22.self_attn.k_proj
+2026-06-10 20:23:14,954 INFO phase1 158/196 model.layers.22.self_attn.o_proj
+2026-06-10 20:23:20,020 INFO phase1 159/196 model.layers.22.self_attn.q_proj
+2026-06-10 20:23:25,109 INFO phase1 160/196 model.layers.22.mlp.up_proj
+2026-06-10 20:23:54,616 INFO phase1 161/196 model.layers.22.self_attn.v_proj
+2026-06-10 20:23:55,556 INFO phase1 162/196 model.layers.23.mlp.down_proj
+2026-06-10 20:24:25,621 INFO phase1 163/196 model.layers.23.mlp.gate_proj
+2026-06-10 20:24:55,089 INFO phase1 164/196 model.layers.23.self_attn.k_proj
+2026-06-10 20:24:55,731 INFO phase1 165/196 model.layers.23.self_attn.o_proj
+2026-06-10 20:25:00,629 INFO phase1 166/196 model.layers.23.self_attn.q_proj
+2026-06-10 20:25:04,999 INFO phase1 167/196 model.layers.23.mlp.up_proj
+2026-06-10 20:25:31,250 INFO phase1 168/196 model.layers.23.self_attn.v_proj
+2026-06-10 20:25:31,874 INFO phase1 169/196 model.layers.24.mlp.down_proj
+2026-06-10 20:25:57,832 INFO phase1 170/196 model.layers.24.mlp.gate_proj
+2026-06-10 20:26:46,689 INFO phase1 171/196 model.layers.24.self_attn.k_proj
+2026-06-10 20:26:47,485 INFO phase1 172/196 model.layers.24.self_attn.o_proj
+2026-06-10 20:26:52,732 INFO phase1 173/196 model.layers.24.self_attn.q_proj
+2026-06-10 20:26:57,893 INFO phase1 174/196 model.layers.24.mlp.up_proj
+2026-06-10 20:27:38,984 INFO phase1 175/196 model.layers.24.self_attn.v_proj
+2026-06-10 20:27:44,852 INFO phase1 176/196 model.layers.25.mlp.down_proj
+2026-06-10 20:28:13,859 INFO phase1 177/196 model.layers.25.mlp.gate_proj
+2026-06-10 20:28:45,834 INFO phase1 178/196 model.layers.25.self_attn.k_proj
+2026-06-10 20:28:49,709 INFO phase1 179/196 model.layers.25.self_attn.o_proj
+2026-06-10 20:28:55,590 INFO phase1 180/196 model.layers.25.self_attn.q_proj
+2026-06-10 20:29:00,672 INFO phase1 181/196 model.layers.25.mlp.up_proj
+2026-06-10 20:29:30,464 INFO phase1 182/196 model.layers.25.self_attn.v_proj
+2026-06-10 20:29:31,218 INFO phase1 183/196 model.layers.26.mlp.down_proj
+2026-06-10 20:30:00,295 INFO phase1 184/196 model.layers.26.mlp.gate_proj
+2026-06-10 20:30:42,503 INFO phase1 185/196 model.layers.26.self_attn.k_proj
+2026-06-10 20:30:43,275 INFO phase1 186/196 model.layers.26.self_attn.o_proj
+2026-06-10 20:30:49,003 INFO phase1 187/196 model.layers.26.self_attn.q_proj
+2026-06-10 20:30:54,905 INFO phase1 188/196 model.layers.26.mlp.up_proj
+2026-06-10 20:31:26,892 INFO phase1 189/196 model.layers.26.self_attn.v_proj
+2026-06-10 20:31:27,651 INFO phase1 190/196 model.layers.27.mlp.down_proj
+2026-06-10 20:31:56,142 INFO phase1 191/196 model.layers.27.mlp.gate_proj
+2026-06-10 20:32:27,931 INFO phase1 192/196 model.layers.27.self_attn.k_proj
+2026-06-10 20:32:30,258 INFO phase1 193/196 model.layers.27.self_attn.o_proj
+2026-06-10 20:32:35,395 INFO phase1 194/196 model.layers.27.self_attn.q_proj
+2026-06-10 20:32:40,582 INFO phase1 195/196 model.layers.27.mlp.up_proj
+2026-06-10 20:33:15,328 INFO phase1 196/196 model.layers.27.self_attn.v_proj
+done phase1 2026-06-10T20:33:18+08:00
+start phase2 2026-06-10T20:33:19+08:00
+2026-06-10 20:33:22,962 INFO collecting activation reconstruction data for 21 modules
+2026-06-10 20:33:23,100 INFO Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+2026-06-10 20:33:23,100 INFO Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+2026-06-10 20:33:23,100 INFO NumExpr defaulting to 16 threads.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2026-06-10 20:33:25,297 INFO using torch SVD backend cuda
+2026-06-10 20:33:36,140 INFO using NumPy SVD backend
+done phase2 2026-06-10T20:45:36+08:00
+start phase3 2026-06-10T20:45:36+08:00
+2026-06-10 20:45:37,084 INFO loading baseline model
+2026-06-10 20:45:40,475 INFO Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+2026-06-10 20:45:40,475 INFO Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+2026-06-10 20:45:40,475 INFO NumExpr defaulting to 16 threads.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2026-06-10 20:45:45,272 INFO phase3 ratio=2.0 residual_fraction=0.0
+2026-06-10 20:45:46,193 INFO using NumPy SVD backend
+2026-06-10 20:52:22,684 INFO phase3 ratio=2.0 residual_fraction=0.01
+2026-06-10 21:01:23,167 INFO phase3 ratio=2.0 residual_fraction=0.02
+2026-06-10 21:09:44,750 INFO phase3 ratio=2.0 residual_fraction=0.04
+2026-06-10 21:18:16,405 INFO phase3 ratio=4.0 residual_fraction=0.0
+2026-06-10 21:22:53,821 INFO phase3 ratio=4.0 residual_fraction=0.01
+2026-06-10 21:32:02,753 INFO phase3 ratio=4.0 residual_fraction=0.02
+2026-06-10 21:40:51,073 INFO phase3 ratio=4.0 residual_fraction=0.04
+2026-06-10 21:50:02,448 INFO phase3 ratio=8.0 residual_fraction=0.0
+2026-06-10 21:54:28,676 INFO phase3 ratio=8.0 residual_fraction=0.01
+2026-06-10 22:02:50,767 INFO phase3 ratio=8.0 residual_fraction=0.02
+2026-06-10 22:11:51,505 INFO phase3 ratio=8.0 residual_fraction=0.04
+2026-06-10 22:20:24,653 INFO phase3 ratio=16.0 residual_fraction=0.0
+2026-06-10 22:24:51,815 INFO phase3 ratio=16.0 residual_fraction=0.01
+2026-06-10 22:33:31,654 INFO phase3 ratio=16.0 residual_fraction=0.02
+2026-06-10 22:41:51,277 INFO phase3 ratio=16.0 residual_fraction=0.04
+done phase3 2026-06-10T22:50:21+08:00
+start phase4 2026-06-10T22:50:22+08:00
+2026-06-10 22:50:24,413 INFO phase4 run 1/48 method=structured budget=65536 condition=natural rank=None
+2026-06-10 22:50:27,828 INFO Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+2026-06-10 22:50:27,828 INFO Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 16.
+2026-06-10 22:50:27,828 INFO NumExpr defaulting to 16 threads.
+Starting from v4.46, the `logits` model output will have the same type as the model (except at train time, where it will always be FP32)
+2026-06-10 22:50:39,625 INFO phase4 run 2/48 method=structured budget=65536 condition=structured rank=None
+2026-06-10 22:50:51,790 INFO phase4 run 3/48 method=structured budget=131072 condition=natural rank=None
+2026-06-10 22:51:03,718 INFO phase4 run 4/48 method=structured budget=131072 condition=structured rank=None
+2026-06-10 22:51:15,390 INFO phase4 run 5/48 method=structured_lora budget=65536 condition=natural rank=4
+2026-06-10 22:51:27,247 INFO phase4 run 6/48 method=structured_lora budget=65536 condition=natural rank=8
+2026-06-10 22:51:39,085 INFO phase4 run 7/48 method=structured_lora budget=65536 condition=natural rank=16
+2026-06-10 22:51:50,920 INFO phase4 run 8/48 method=structured_lora budget=65536 condition=structured rank=4
+2026-06-10 22:52:02,607 INFO phase4 run 9/48 method=structured_lora budget=65536 condition=structured rank=8
+2026-06-10 22:52:14,619 INFO phase4 run 10/48 method=structured_lora budget=65536 condition=structured rank=16
+2026-06-10 22:52:26,367 INFO phase4 run 11/48 method=structured_lora budget=131072 condition=natural rank=4
+2026-06-10 22:52:38,388 INFO phase4 run 12/48 method=structured_lora budget=131072 condition=natural rank=8
+2026-06-10 22:52:50,296 INFO phase4 run 13/48 method=structured_lora budget=131072 condition=natural rank=16
+2026-06-10 22:53:02,321 INFO phase4 run 14/48 method=structured_lora budget=131072 condition=structured rank=4
+2026-06-10 22:53:13,930 INFO phase4 run 15/48 method=structured_lora budget=131072 condition=structured rank=8
+2026-06-10 22:53:24,068 INFO phase4 run 16/48 method=structured_lora budget=131072 condition=structured rank=16
+2026-06-10 22:53:35,292 INFO phase4 run 17/48 method=lora budget=65536 condition=natural rank=4
+2026-06-10 22:53:47,172 INFO phase4 run 18/48 method=lora budget=65536 condition=natural rank=8
+2026-06-10 22:53:59,502 INFO phase4 run 19/48 method=lora budget=65536 condition=natural rank=16
+2026-06-10 22:54:11,418 INFO phase4 run 20/48 method=lora budget=65536 condition=structured rank=4
+2026-06-10 22:54:23,192 INFO phase4 run 21/48 method=lora budget=65536 condition=structured rank=8
+2026-06-10 22:54:34,689 INFO phase4 run 22/48 method=lora budget=65536 condition=structured rank=16
+2026-06-10 22:54:46,740 INFO phase4 run 23/48 method=lora budget=131072 condition=natural rank=4
+2026-06-10 22:54:58,721 INFO phase4 run 24/48 method=lora budget=131072 condition=natural rank=8
+2026-06-10 22:55:10,815 INFO phase4 run 25/48 method=lora budget=131072 condition=natural rank=16
+2026-06-10 22:55:22,650 INFO phase4 run 26/48 method=lora budget=131072 condition=structured rank=4
+2026-06-10 22:55:34,481 INFO phase4 run 27/48 method=lora budget=131072 condition=structured rank=8
+2026-06-10 22:55:46,063 INFO phase4 run 28/48 method=lora budget=131072 condition=structured rank=16
+2026-06-10 22:55:57,972 INFO phase4 run 29/48 method=mora budget=65536 condition=natural rank=4
+2026-06-10 22:56:10,049 INFO phase4 run 30/48 method=mora budget=65536 condition=natural rank=8
+2026-06-10 22:56:21,907 INFO phase4 run 31/48 method=mora budget=65536 condition=natural rank=16
+2026-06-10 22:56:33,718 INFO phase4 run 32/48 method=mora budget=65536 condition=structured rank=4
+2026-06-10 22:56:46,071 INFO phase4 run 33/48 method=mora budget=65536 condition=structured rank=8
+2026-06-10 22:56:57,375 INFO phase4 run 34/48 method=mora budget=65536 condition=structured rank=16
+2026-06-10 22:57:08,518 INFO phase4 run 35/48 method=mora budget=131072 condition=natural rank=4
+2026-06-10 22:57:20,842 INFO phase4 run 36/48 method=mora budget=131072 condition=natural rank=8
+2026-06-10 22:57:33,443 INFO phase4 run 37/48 method=mora budget=131072 condition=natural rank=16
+2026-06-10 22:57:45,074 INFO phase4 run 38/48 method=mora budget=131072 condition=structured rank=4
+2026-06-10 22:57:57,561 INFO phase4 run 39/48 method=mora budget=131072 condition=structured rank=8
+2026-06-10 22:58:09,650 INFO phase4 run 40/48 method=mora budget=131072 condition=structured rank=16
+2026-06-10 22:58:20,982 INFO phase4 run 41/48 method=fourierft budget=65536 condition=natural rank=None
+2026-06-10 22:58:33,928 INFO phase4 run 42/48 method=fourierft budget=65536 condition=structured rank=None
+2026-06-10 22:58:47,285 INFO phase4 run 43/48 method=fourierft budget=131072 condition=natural rank=None
+2026-06-10 22:58:59,094 INFO phase4 run 44/48 method=fourierft budget=131072 condition=structured rank=None
+2026-06-10 22:59:10,732 INFO phase4 run 45/48 method=bca budget=65536 condition=natural rank=None
+2026-06-10 22:59:23,245 INFO phase4 run 46/48 method=bca budget=65536 condition=structured rank=None
+2026-06-10 22:59:44,753 INFO phase4 run 47/48 method=bca budget=131072 condition=natural rank=None
+2026-06-10 23:00:17,664 INFO phase4 run 48/48 method=bca budget=131072 condition=structured rank=None
+done phase4 2026-06-10T23:00:45+08:00
+start phase5 2026-06-10T23:00:46+08:00
+2026-06-10 23:00:49,563 INFO phase5 1/3 model.layers.0.mlp.down_proj
+2026-06-10 23:00:50,181 INFO using NumPy SVD backend
+2026-06-10 23:16:56,806 INFO phase5 2/3 model.layers.14.mlp.down_proj
+2026-06-10 23:31:55,534 INFO phase5 3/3 model.layers.27.mlp.down_proj
+done phase5 2026-06-10T23:45:18+08:00
+start figures 2026-06-10T23:45:18+08:00
+done figures 2026-06-10T23:45:24+08:00
