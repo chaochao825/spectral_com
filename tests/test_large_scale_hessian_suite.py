@@ -1528,7 +1528,7 @@ def test_two_stage_allocator_uses_proxy_costs_for_nested_dominance() -> None:
         )
 
 
-def test_v4_config_uses_runner_canonical_quantizer_order() -> None:
+def test_v4_config_uses_canonical_quantizers_and_matched_sentinel_grids() -> None:
     config_path = (
         REPO_ROOT / "configs" / "large_model_interaction_aware_v4_20260717.json"
     )
@@ -1538,12 +1538,7 @@ def test_v4_config_uses_runner_canonical_quantizer_order() -> None:
         "symmetric_mse_clip",
         "symmetric_rtn",
     ]
-    qwen_sentinel = next(
-        stage
-        for stage in payload["stages"]
-        if stage["id"] == "s0_qwen_two_stage_sentinel"
-    )
-    assert qwen_sentinel["runner_overrides"] == {
+    expected_sentinel_overrides = {
         "calib_limit": 4,
         "selection_limit": 2,
         "eval_limit": 2,
@@ -1557,6 +1552,61 @@ def test_v4_config_uses_runner_canonical_quantizer_order() -> None:
         "max_allocation_ranks": 32,
         "allocation_rank_grid": [0, 1, 2, 4, 8, 16, 32],
     }
+    assert payload["resource_policy"]["sentinel_timeout_hours"] == 16
+    sentinel_ids = {
+        "s0_qwen_two_stage_sentinel",
+        "s0_llama_two_stage_sentinel",
+        "s0_mistral_two_stage_sentinel",
+    }
+    for stage_id in (
+        "s0_qwen_two_stage_sentinel",
+        "s0_llama_two_stage_sentinel",
+        "s0_mistral_two_stage_sentinel",
+    ):
+        sentinel = next(
+            stage for stage in payload["stages"] if stage["id"] == stage_id
+        )
+        assert sentinel["runner_overrides"] == expected_sentinel_overrides
+
+    definition = SUITE.load_suite_definition(config_path, repo_root=REPO_ROOT)
+    sentinel_jobs = [
+        job
+        for job in SUITE.expand_jobs(definition, environment={})
+        if job.stage_id in sentinel_ids
+    ]
+    assert {job.stage_id for job in sentinel_jobs} == sentinel_ids
+    assert len(sentinel_jobs) == 3
+    for job in sentinel_jobs:
+        for key, value in expected_sentinel_overrides.items():
+            assert job.effective_arguments[key] == value
+        command = SUITE.build_runner_command(
+            job,
+            python_executable="python",
+            runner=definition.runner,
+        )
+
+        def command_value(flag: str) -> str:
+            assert command.count(flag) == 1
+            return command[command.index(flag) + 1]
+
+        expected_cli_values = {
+            "--calib-limit": "4",
+            "--selection-limit": "2",
+            "--eval-limit": "2",
+            "--candidate-lowrank-factor-bits": "4,16",
+            "--candidate-family-top-k": "1",
+            "--selection-top-k": "2",
+            "--global-frontier-top-ranks": "1",
+            "--global-frontier-support-fractions": "0.75",
+            "--global-frontier-budget-multipliers": "1.25",
+            "--repair-block-sizes": "512",
+            "--max-allocation-ranks": "32",
+            "--allocation-rank-grid": "0,1,2,4,8,16,32",
+        }
+        for flag, expected in expected_cli_values.items():
+            assert command_value(flag) == expected
+        assert command.count("--two-stage-selection") == 1
+        assert command.count("--include-global-single-component-controls") == 1
 
 
 def test_two_stage_evidence_keeps_validation_proxies_out_of_final_test(

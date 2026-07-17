@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import gc
 import importlib.util
 import json
 import sys
+import weakref
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -79,7 +81,331 @@ def test_covariance_modes_and_factorizer_floor_are_disclosed() -> None:
     np.testing.assert_array_equal(codec.left, codec_repeat.left)
     np.testing.assert_array_equal(codec.right, codec_repeat.right)
     assert randomized.diagnostics["last_resolved_svd_solver"] == "torch.svd_lowrank"
-    assert randomized.diagnostics["svd_solver_call_counts"] == {"torch.svd_lowrank": 2}
+    assert randomized.diagnostics["svd_solver_call_counts"] == {"torch.svd_lowrank": 1}
+    assert randomized.diagnostics["factorization_cache_hits"] == 1
+    assert randomized.diagnostics["factorization_cache_misses"] == 1
+
+
+def test_factorizer_reuses_a_nested_superset_rank() -> None:
+    factorizer = RUNNER.LowRankFactorizer(
+        torch.eye(8),
+        method="svd",
+        device="cpu",
+        svd_solver="full",
+    )
+    residual = np.arange(128, dtype=np.float32).reshape(16, 8) / 128.0
+    rank_four = factorizer.factorize(residual, rank=4)
+    rank_two = factorizer.factorize(residual, rank=2)
+
+    assert rank_four is not None and rank_two is not None
+    np.testing.assert_array_equal(rank_two.left, rank_four.left[:, :2])
+    np.testing.assert_array_equal(rank_two.right, rank_four.right[:2, :])
+    assert factorizer.diagnostics["svd_solver_call_counts"] == {"torch.linalg.svd": 1}
+    assert factorizer.diagnostics["factorization_cache_hits"] == 1
+    assert factorizer.diagnostics["last_factorization_cache_source_rank"] == 4
+
+
+def test_factorizer_promotes_a_late_largest_superset_rank() -> None:
+    factorizer = RUNNER.LowRankFactorizer(
+        torch.eye(8),
+        method="svd",
+        device="cpu",
+        svd_solver="full",
+    )
+    residual = np.arange(128, dtype=np.float32).reshape(16, 8) / 128.0
+    rank_two = factorizer.factorize(residual, rank=2)
+    rank_six = factorizer.factorize(residual, rank=6)
+    rank_one = factorizer.factorize(residual, rank=1)
+
+    assert rank_two is not None and rank_six is not None and rank_one is not None
+    np.testing.assert_array_equal(rank_one.left, rank_six.left[:, :1])
+    np.testing.assert_array_equal(rank_one.right, rank_six.right[:1, :])
+    assert factorizer.diagnostics["svd_solver_call_counts"] == {"torch.linalg.svd": 2}
+    assert factorizer.diagnostics["last_factorization_cache_source_rank"] == 6
+
+
+def test_q_residual_priming_covers_factor_widths_and_global_budget_bands() -> None:
+    factorizer = RUNNER.LowRankFactorizer(
+        torch.eye(8),
+        method="svd",
+        device="cpu",
+        svd_solver="full",
+    )
+    weight = np.arange(128, dtype=np.float32).reshape(16, 8) / 128.0
+    q = RUNNER.QuantCodec(
+        codes=np.zeros_like(weight, dtype=np.int8),
+        scales=np.ones(weight.shape[0], dtype=np.float16),
+        bits=4,
+    )
+    target_ratio = 0.6
+    budget_multipliers = (1.0, 2.0)
+    base_ranks = [
+        RUNNER.max_rank_under_target(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            target_ratio=target_ratio,
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=factor_bits,
+        )
+        for factor_bits in (4, 16)
+    ]
+    expected_ranks = []
+    for factor_bits, base_rank in zip((4, 16), base_ranks):
+        q_payload = RUNNER._payload_for_counts(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            rank=0,
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=factor_bits,
+        )
+        ql_payload = RUNNER._payload_for_counts(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            rank=base_rank,
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=factor_bits,
+        )
+        repair_bits = ql_payload.total_bits - q_payload.total_bits
+        for multiplier in budget_multipliers:
+            expected_ranks.append(
+                RUNNER.max_rank_under_budget_bits(
+                    weight.shape,
+                    bits=q.bits,
+                    scale_count=q.scale_count,
+                    sparse_nonzero=0,
+                    budget_bits=q_payload.total_bits + int(multiplier * repair_bits),
+                    support_encoding="csr_fixed",
+                    lowrank_factor_bits=factor_bits,
+                )
+            )
+    audit = RUNNER.prime_q_residual_factorizations(
+        weight=weight,
+        factorizer=factorizer,
+        families=[(q, 4, target_ratio), (q, 16, target_ratio)],
+        support_encoding="csr_fixed",
+        global_band_families=[(q, 4, target_ratio), (q, 16, target_ratio)],
+        budget_multipliers=budget_multipliers,
+    )
+    assert audit[0]["primed_maximum_rank"] == max(expected_ranks)
+    assert audit[0]["base_required_ranks"] == base_ranks
+    assert audit[0]["requested_budget_multipliers"] == [1.0, 2.0]
+    assert max(expected_ranks) > max(base_ranks)
+    for rank in expected_ranks:
+        assert factorizer.factorize(weight - q.decode(), rank) is not None
+    assert factorizer.diagnostics["svd_solver_call_counts"] == {"torch.linalg.svd": 1}
+    assert factorizer.diagnostics["factorization_cache_misses"] == 1
+    assert factorizer.diagnostics["factorization_cache_hits"] == len(expected_ranks)
+
+
+def test_q_residual_priming_does_not_cross_nonendpoint_targets_with_bands() -> None:
+    factorizer = RUNNER.LowRankFactorizer(
+        torch.eye(16),
+        method="svd",
+        device="cpu",
+        svd_solver="full",
+    )
+    weight = np.arange(1024, dtype=np.float32).reshape(64, 16) / 1024.0
+    q = RUNNER.QuantCodec(
+        codes=np.zeros_like(weight, dtype=np.int8),
+        scales=np.ones(weight.shape[0], dtype=np.float16),
+        bits=4,
+    )
+    endpoint_target = 0.45
+    other_target = 0.6
+    multiplier = 2.0
+
+    def band_rank(target_ratio: float) -> int:
+        base_rank = RUNNER.max_rank_under_target(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            target_ratio=target_ratio,
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=16,
+        )
+        q_payload = RUNNER._payload_for_counts(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            rank=0,
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=16,
+        )
+        ql_payload = RUNNER._payload_for_counts(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            rank=base_rank,
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=16,
+        )
+        return RUNNER.max_rank_under_budget_bits(
+            weight.shape,
+            bits=q.bits,
+            scale_count=q.scale_count,
+            sparse_nonzero=0,
+            budget_bits=q_payload.total_bits
+            + int(multiplier * (ql_payload.total_bits - q_payload.total_bits)),
+            support_encoding="csr_fixed",
+            lowrank_factor_bits=16,
+        )
+
+    endpoint_band_rank = band_rank(endpoint_target)
+    other_base_rank = RUNNER.max_rank_under_target(
+        weight.shape,
+        bits=q.bits,
+        scale_count=q.scale_count,
+        sparse_nonzero=0,
+        target_ratio=other_target,
+        support_encoding="csr_fixed",
+        lowrank_factor_bits=16,
+    )
+    nonexistent_cross_product_rank = band_rank(other_target)
+    expected_maximum = max(endpoint_band_rank, other_base_rank)
+    assert nonexistent_cross_product_rank > expected_maximum
+
+    audit = RUNNER.prime_q_residual_factorizations(
+        weight=weight,
+        factorizer=factorizer,
+        families=[(q, 16, endpoint_target), (q, 16, other_target)],
+        global_band_families=[(q, 16, endpoint_target)],
+        support_encoding="csr_fixed",
+        budget_multipliers=[multiplier],
+    )
+    assert audit[0]["primed_maximum_rank"] == expected_maximum
+    assert audit[0]["primed_maximum_rank"] < nonexistent_cross_product_rank
+
+
+def test_candidate_cost_and_obs_refit_use_exact_content_caches(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    covariance_tensor = torch.eye(3, dtype=torch.float32)
+    covariance, prepared, _report = RUNNER.prepare_metric_covariance(
+        covariance_tensor,
+        mode="full",
+    )
+    metric = RUNNER.HessianMetric(
+        covariance,
+        device="cpu",
+        prepared_covariance=prepared,
+    )
+    residual = np.array(
+        [[1.0, -0.5, 0.25], [0.125, 0.75, -0.25]],
+        dtype=np.float32,
+    )
+    mask = np.array(
+        [[True, False, True], [False, True, True]],
+        dtype=bool,
+    )
+    sparse = RUNNER.SparseCodec(
+        np.asarray(np.where(mask, residual, 0.0), dtype=np.float16),
+        mask,
+    )
+    obs_calls = 0
+    original_obs = RUNNER.obs_retained_support_correction
+
+    def counted_obs(*args: object, **kwargs: object) -> object:
+        nonlocal obs_calls
+        obs_calls += 1
+        return original_obs(*args, **kwargs)
+
+    monkeypatch.setattr(RUNNER, "obs_retained_support_correction", counted_obs)
+    stored_a, diagnostics_a = RUNNER.obs_refit_sparse(
+        residual,
+        sparse,
+        prepared,
+        metric=metric,
+        rcond=1e-10,
+    )
+    stored_b, diagnostics_b = RUNNER.obs_refit_sparse(
+        residual.copy(),
+        RUNNER.SparseCodec(sparse.values.copy(), sparse.mask.copy()),
+        prepared,
+        metric=metric,
+        rcond=1e-10,
+    )
+    assert stored_a is not None and stored_b is stored_a
+    assert diagnostics_b == diagnostics_a
+    assert obs_calls == 1
+    assert metric.diagnostics["obs_refit_cache_hits"] == 1
+    assert metric.diagnostics["obs_refit_cache_misses"] == 1
+    assert metric.diagnostics["obs_refit_cache_entries"] == 1
+
+    _other_covariance, other_prepared, _other_report = RUNNER.prepare_metric_covariance(
+        torch.eye(3, dtype=torch.float32) * 2.0,
+        mode="full",
+    )
+    with pytest.raises(ValueError, match="different prepared covariance"):
+        RUNNER.obs_refit_sparse(
+            residual,
+            sparse,
+            other_prepared,
+            metric=metric,
+            rcond=1e-10,
+        )
+
+    stored_ref = weakref.ref(stored_a)
+    del stored_a, stored_b
+    gc.collect()
+    assert stored_ref() is None
+    assert metric.diagnostics["obs_refit_cache_entries"] == 0
+
+    q = RUNNER.QuantCodec(
+        codes=np.zeros_like(residual, dtype=np.int8),
+        scales=np.ones(residual.shape[0], dtype=np.float16),
+        bits=4,
+    )
+    candidate = _candidate("Q", residual, q)
+    relabelled = RUNNER._candidate_with_strategy(candidate, "Q_global_scale")
+    cost_calls = 0
+    original_cost = metric.cost
+
+    def counted_cost(delta: np.ndarray) -> float:
+        nonlocal cost_calls
+        cost_calls += 1
+        return original_cost(delta)
+
+    monkeypatch.setattr(metric, "cost", counted_cost)
+    first = RUNNER._candidate_fast_cost(candidate, metric)
+    second = RUNNER._candidate_fast_cost(candidate, metric)
+    relabelled_cost = RUNNER._candidate_fast_cost(relabelled, metric)
+    assert first == second == relabelled_cost
+    assert cost_calls == 1
+    assert metric.diagnostics["candidate_cost_cache_hits"] == 2
+    assert metric.diagnostics["candidate_cost_cache_misses"] == 1
+
+
+def test_candidate_cost_cache_uses_weak_metric_identity() -> None:
+    weight = np.array([[1.0, -0.5], [0.25, 0.75]], dtype=np.float32)
+    q = RUNNER.QuantCodec(
+        codes=np.zeros_like(weight, dtype=np.int8),
+        scales=np.ones(weight.shape[0], dtype=np.float16),
+        bits=4,
+    )
+    candidate = _candidate("Q", weight, q)
+    metric = RUNNER.HessianMetric(torch.eye(2), device="cpu")
+    first = RUNNER._candidate_fast_cost(candidate, metric)
+    cache = candidate._metric_cost_cache
+    metric_ref = weakref.ref(metric)
+
+    del metric
+    gc.collect()
+    assert metric_ref() is None
+    assert len(cache) == 0
+
+    replacement = RUNNER.HessianMetric(torch.eye(2) * 2.0, device="cpu")
+    second = RUNNER._candidate_fast_cost(candidate, replacement)
+    assert second == pytest.approx(2.0 * first)
+    assert len(cache) == 1
 
 
 def _candidate(

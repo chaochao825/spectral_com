@@ -116,9 +116,21 @@ large_model_interaction_aware_v4_ea77d12_20260717
 - 91 项 codec/Hessian/suite 关键回归通过；目标发布树全量回归为 318 passed、3 skipped，skip 仅对应按发布政策省略的历史 `.hrc` payload；
 - 新增 `configs/large_model_interaction_aware_v4_20260717.json`；
 - v4 包含 Qwen2.5-3B、Llama-2-7B、Mistral-7B 的单层 sentinel、三深度 6-tensor 和全 MLP feasibility 阶段；
-- Qwen2.5-3B sentinel 使用缩减但仍异构的提交门禁网格：3/4-bit、row/group、RTN/MSE、4/16-bit factors、proxy top-2 validation rerank 和 exact-natural no-joint；更完整的 factor/rank 网格保留在三深度阶段；
+- 三个单层 sentinel 使用相同的缩减但仍异构的提交门禁网格：3/4-bit、row/group、RTN/MSE、4/16-bit factors、proxy top-2 validation rerank 和 exact-natural no-joint；更完整的 factor/rank 网格保留在三深度阶段；
 - 旧配置 Qwen sentinel 在 8 小时门限后失败，已原样移入输出根目录的 `trash/`；修复后的 commit `ea77d126` sentinel 在 210 的物理 GPU 0 完成并通过 suite 独立检查；
 - 修复后结果的 QSL/no-joint exact-natural 匹配成功，但两者退化为同一个 pure-L endpoint，因此联合价值门禁给出明确 negative，而不是不可判定或正结论。
+
+### 可扩展性优化
+
+候选范围不因性能优化而删除。runner 对以下严格相同的计算做复用：
+
+- 相同 candidate 与相同 Hessian metric 的 endpoint cost；
+- 相同 residual、support、`rcond` 的 OBS refit；
+- 相同 Q residual 的 pure-L rank frontier。
+
+pure-L frontier 先计算该 residual 在各 base target 以及明确存在的 endpoint global budget multiplier band 下所需的最大 rank；不会把非 endpoint target 与 multiplier 做笛卡尔积。较小 rank 始终从当前最大 superset 分解中截取。对 randomized SVD 而言，这会把“每个 rank 独立随机分解”改为“共享的 nested randomized decomposition”，因此属于显式数值求解策略，不伪装成无语义影响的缓存。candidate-cost cache 使用弱 metric 身份键，OBS cache 先校验并绑定实际 prepared covariance，codec 回收时同步移除弱缓存条目。每层 `factorization_cache_*`、`q_residual_prime_*` 和 `performance_cache` 计数写入 `run_config.json`。
+
+Pythia-70M 同配置端到端回归中，SVD solver 调用从原始 66 降至 44；获得 24 次 factorization、308 次 candidate-cost 和 7 次 OBS cache hit。修复前只按 target priming 时，pure-L/QSL/no-joint 的 test NLL 为 `4.5443420410`；覆盖 `1.25x` global budget band 并统一使用当前最大 superset 后，三者仍严格匹配 `627712` natural bytes，test NLL 同为 `4.5663907451`，联合价值结论仍为 false。两次 Q+L artifact 只有 161 个 FP16 endpoint 元素不同，最大绝对差为 `3.0517578e-05`；因此这是明确披露的求解策略变化，不把该回归描述为逐值不变。
 
 ## 6. 结果解释原则
 

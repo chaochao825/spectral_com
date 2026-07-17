@@ -25,6 +25,7 @@ import os
 import platform
 import subprocess
 import time
+import weakref
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
@@ -125,6 +126,17 @@ def _runtime_fp16(value: np.ndarray) -> np.ndarray:
     """Round a decoded tensor to the runtime/storage endpoint used in this probe."""
 
     return np.asarray(value, dtype=np.float16).astype(np.float32)
+
+
+def _array_content_digest(value: np.ndarray) -> bytes:
+    """Hash an array without materializing a second full byte payload."""
+
+    work = np.ascontiguousarray(value)
+    digest = hashlib.sha256()
+    digest.update(work.dtype.str.encode("ascii"))
+    digest.update(np.asarray(work.shape, dtype=np.int64).tobytes())
+    digest.update(memoryview(work).cast("B"))
+    return digest.digest()
 
 
 def _finite_or_nan(value: float) -> float:
@@ -528,6 +540,11 @@ class Candidate:
     lowrank: LowRankCodec | None = None
     diagnostics: dict[str, object] = field(default_factory=dict)
     repair_dof: int = 0
+    _metric_cost_cache: weakref.WeakKeyDictionary[object, float] = field(
+        default_factory=weakref.WeakKeyDictionary,
+        repr=False,
+        compare=False,
+    )
 
     @property
     def q_decoded(self) -> np.ndarray:
@@ -768,6 +785,7 @@ class LowRankFactorizer:
         self.randomized_seed = int(randomized_seed)
         self.seed_namespace = str(seed_namespace)
         self._solver_call_counts: dict[str, int] = {}
+        self._factorization_cache: dict[bytes, dict[int, LowRankCodec]] = {}
         if not math.isfinite(self.whitening_floor_ratio) or self.whitening_floor_ratio < 0.0:
             raise ValueError("whitening floor ratio must be finite and non-negative")
         if self.svd_solver not in {"auto", "full", "randomized"}:
@@ -784,9 +802,18 @@ class LowRankFactorizer:
             "randomized_niter": self.randomized_niter,
             "randomized_seed": self.randomized_seed,
             "randomized_seed_namespace": self.seed_namespace,
-            "randomized_seed_scheme": "sha256(job_seed|layer|rank), isolated with torch.random.fork_rng",
+            "randomized_seed_scheme": (
+                "sha256(job_seed|layer|decomposition_rank), isolated with torch.random.fork_rng; "
+                "smaller ranks may slice a disclosed cached superset decomposition"
+            ),
             "resolved_svd_solvers": [],
             "svd_solver_call_counts": {},
+            "factorization_cache_policy": (
+                "sha256_exact_residual_with_largest_cached_superset_rank_reuse"
+            ),
+            "factorization_cache_hits": 0,
+            "factorization_cache_misses": 0,
+            "factorization_cache_entries": 0,
             "factorizer_regularization_applied": False,
         }
         if self.method not in {"svd", "whitened_svd"}:
@@ -824,11 +851,43 @@ class LowRankFactorizer:
             self.inv_sqrt_h = evecs @ torch.diag(torch.rsqrt(fitted_evals)) @ evecs.transpose(0, 1)
 
     def factorize(self, residual: np.ndarray, rank: int) -> LowRankCodec | None:
-        rows, cols = residual.shape
+        residual_array = np.ascontiguousarray(
+            np.asarray(residual, dtype=np.float32)
+        )
+        rows, cols = residual_array.shape
         bounded = max(0, min(int(rank), min(rows, cols)))
         if bounded <= 0:
             return None
-        work = torch.from_numpy(np.asarray(residual, dtype=np.float32)).to(self.device)
+        residual_digest = _array_content_digest(residual_array)
+        cached_ranks = self._factorization_cache.setdefault(residual_digest, {})
+        reusable_ranks = [cached_rank for cached_rank in cached_ranks if cached_rank >= bounded]
+        if reusable_ranks:
+            source_rank = max(reusable_ranks)
+            source = cached_ranks[source_rank]
+            if source_rank == bounded:
+                result = source
+            else:
+                result = LowRankCodec(
+                    np.ascontiguousarray(source.left[:, :bounded]),
+                    np.ascontiguousarray(source.right[:bounded, :]),
+                )
+                cached_ranks[bounded] = result
+            self.diagnostics["factorization_cache_hits"] = int(
+                self.diagnostics["factorization_cache_hits"]
+            ) + 1
+            self.diagnostics["factorization_cache_entries"] = sum(
+                len(entries) for entries in self._factorization_cache.values()
+            )
+            self.diagnostics["last_factorization_cache_hit"] = True
+            self.diagnostics["last_factorization_cache_source_rank"] = source_rank
+            return result
+
+        self.diagnostics["factorization_cache_misses"] = int(
+            self.diagnostics["factorization_cache_misses"]
+        ) + 1
+        self.diagnostics["last_factorization_cache_hit"] = False
+        self.diagnostics["last_factorization_cache_source_rank"] = 0
+        work = torch.from_numpy(residual_array).to(self.device)
         if self.method == "whitened_svd":
             assert self.sqrt_h is not None and self.inv_sqrt_h is not None
             transformed = work @ self.sqrt_h
@@ -897,7 +956,12 @@ class LowRankFactorizer:
             right[index, :] /= balance
         stored_left = left.to(dtype=torch.float16, device="cpu").numpy()
         stored_right = right.to(dtype=torch.float16, device="cpu").numpy()
-        return LowRankCodec(stored_left, stored_right)
+        result = LowRankCodec(stored_left, stored_right)
+        cached_ranks[bounded] = result
+        self.diagnostics["factorization_cache_entries"] = sum(
+            len(entries) for entries in self._factorization_cache.values()
+        )
+        return result
 
 
 def prepare_metric_covariance(
@@ -1108,9 +1172,110 @@ class HessianMetric:
     wide MLP projections while preserving the same ``tr(d C d^T)`` proxy.
     """
 
-    def __init__(self, covariance: torch.Tensor, *, device: str) -> None:
+    def __init__(
+        self,
+        covariance: torch.Tensor,
+        *,
+        device: str,
+        prepared_covariance: PreparedInputCovariance | None = None,
+    ) -> None:
         self.device = str(device)
         self.covariance = covariance.detach().float().to(self.device)
+        self._prepared_covariance: PreparedInputCovariance | None = None
+        self._obs_refit_cache: dict[
+            tuple[int, bytes, bytes, float],
+            tuple[weakref.ReferenceType[SparseCodec], dict[str, object]],
+        ] = {}
+        self.diagnostics: dict[str, object] = {
+            "candidate_cost_cache_hits": 0,
+            "candidate_cost_cache_misses": 0,
+            "obs_refit_cache_policy": (
+                "prepared_covariance_identity_plus_sha256_exact_residual_and_support_"
+                "with_callback_cleaned_weak_value_retention"
+            ),
+            "obs_refit_cache_hits": 0,
+            "obs_refit_cache_misses": 0,
+            "obs_refit_cache_entries": 0,
+        }
+        if prepared_covariance is not None:
+            self.bind_prepared_covariance(prepared_covariance)
+
+    def bind_prepared_covariance(
+        self,
+        covariance: PreparedInputCovariance,
+    ) -> None:
+        if self._prepared_covariance is covariance:
+            return
+        if self._prepared_covariance is not None:
+            raise ValueError("Hessian metric is already bound to a different prepared covariance")
+        metric_matrix = self.covariance.detach().cpu().numpy()
+        prepared_matrix = np.asarray(covariance.matrix, dtype=np.float32)
+        if not np.array_equal(metric_matrix, prepared_matrix):
+            raise ValueError("prepared OBS covariance differs from the Hessian metric covariance")
+        self._prepared_covariance = covariance
+        self.diagnostics["obs_covariance_binding"] = (
+            "identity_bound_after_exact_float32_matrix_match"
+        )
+
+    def obs_refit_cache_key(
+        self,
+        residual: np.ndarray,
+        mask: np.ndarray,
+        *,
+        covariance: PreparedInputCovariance,
+        rcond: float,
+    ) -> tuple[int, bytes, bytes, float]:
+        self.bind_prepared_covariance(covariance)
+        return (
+            id(covariance),
+            _array_content_digest(np.asarray(residual, dtype=np.float32)),
+            _array_content_digest(np.asarray(mask, dtype=bool)),
+            float(rcond),
+        )
+
+    def get_cached_obs_refit(
+        self,
+        key: tuple[int, bytes, bytes, float],
+    ) -> tuple[SparseCodec, dict[str, object]] | None:
+        cached = self._obs_refit_cache.get(key)
+        if cached is not None:
+            codec = cached[0]()
+            if codec is not None:
+                self.diagnostics["obs_refit_cache_hits"] = int(
+                    self.diagnostics["obs_refit_cache_hits"]
+                ) + 1
+                return codec, dict(cached[1])
+            self._obs_refit_cache.pop(key, None)
+        self.diagnostics["obs_refit_cache_misses"] = int(
+            self.diagnostics["obs_refit_cache_misses"]
+        ) + 1
+        self.diagnostics["obs_refit_cache_entries"] = len(self._obs_refit_cache)
+        return None
+
+    def store_cached_obs_refit(
+        self,
+        key: tuple[int, bytes, bytes, float],
+        codec: SparseCodec,
+        diagnostics: dict[str, object],
+    ) -> None:
+        metric_ref = weakref.ref(self)
+
+        def discard_dead_codec(codec_ref: weakref.ReferenceType[SparseCodec]) -> None:
+            metric = metric_ref()
+            if metric is None:
+                return
+            cached = metric._obs_refit_cache.get(key)
+            if cached is not None and cached[0] is codec_ref:
+                metric._obs_refit_cache.pop(key, None)
+                metric.diagnostics["obs_refit_cache_entries"] = len(
+                    metric._obs_refit_cache
+                )
+
+        self._obs_refit_cache[key] = (
+            weakref.ref(codec, discard_dead_codec),
+            dict(diagnostics),
+        )
+        self.diagnostics["obs_refit_cache_entries"] = len(self._obs_refit_cache)
 
     def inner(self, left: np.ndarray, right: np.ndarray) -> float:
         a = torch.from_numpy(np.asarray(left, dtype=np.float32)).to(self.device)
@@ -1428,6 +1593,15 @@ def obs_refit_sparse(
             "obs_relative_stationarity_continuous": float("nan"),
             "obs_relative_stationarity_stored": float("nan"),
         }
+    cache_key = metric.obs_refit_cache_key(
+        residual,
+        sparse.mask,
+        covariance=covariance,
+        rcond=float(rcond),
+    )
+    cached = metric.get_cached_obs_refit(cache_key)
+    if cached is not None:
+        return cached
     result = obs_retained_support_correction(
         residual,
         sparse.mask,
@@ -1442,7 +1616,7 @@ def obs_refit_sparse(
     stored_stationarity = float(np.max(retained_gradient, initial=0.0) / max(float(np.linalg.norm(gradient)), EPS))
     continuous_cost = float(result.corrected_cost)
     stored_cost = metric.cost(stored_error)
-    return stored, {
+    diagnostics = {
         "obs_applied": True,
         "obs_unique_support_count": result.unique_support_count,
         "obs_relative_stationarity_continuous": result.relative_stationarity,
@@ -1452,6 +1626,8 @@ def obs_refit_sparse(
         "obs_fp16_rounding_cost_gap": stored_cost - continuous_cost,
         "obs_rhs_null_residual_max": result.rhs_null_residual_max,
     }
+    metric.store_cached_obs_refit(cache_key, stored, diagnostics)
+    return stored, diagnostics
 
 
 def _hessian_inner_np(left: np.ndarray, right: np.ndarray, covariance: np.ndarray) -> float:
@@ -1626,6 +1802,146 @@ def max_rank_under_budget_bits(
         else:
             high = middle - 1
     return int(low)
+
+
+def prime_q_residual_factorizations(
+    *,
+    weight: np.ndarray,
+    factorizer: LowRankFactorizer,
+    families: Iterable[tuple[QuantCodec, int, float]],
+    support_encoding: str,
+    global_band_families: Iterable[tuple[QuantCodec, int, float]] = (),
+    budget_multipliers: Iterable[float] = (1.0,),
+) -> list[dict[str, object]]:
+    """Prime one nested decomposition per selected Q residual family.
+
+    Factor storage width changes the byte-feasible rank but not the underlying
+    residual. Base target requests are primed at 1x; only explicitly supplied
+    endpoint global-control families receive multiplier bands. Computing that
+    exact maximum first lets all smaller pure-L states reuse one nested
+    randomized decomposition without removing any allocation state.
+    """
+
+    shape = tuple(map(int, weight.shape))
+    multipliers = sorted({1.0, *map(float, budget_multipliers)})
+    if any(not math.isfinite(value) or value <= 0.0 for value in multipliers):
+        raise ValueError("factorization-prime budget multipliers must be finite and positive")
+    grouped: dict[int, dict[str, object]] = {}
+
+    def add_request(
+        q: QuantCodec,
+        factor_bits: int,
+        target_ratio: float,
+        request_multipliers: Iterable[float],
+    ) -> None:
+        entry = grouped.setdefault(
+            id(q),
+            {
+                "q": q,
+                "requests": {},
+            },
+        )
+        requests = entry["requests"]
+        assert isinstance(requests, dict)
+        request_key = (int(factor_bits), float(target_ratio))
+        requested_bands = requests.setdefault(request_key, set())
+        assert isinstance(requested_bands, set)
+        requested_bands.update(map(float, request_multipliers))
+
+    for q, factor_bits, target_ratio in families:
+        add_request(q, factor_bits, target_ratio, (1.0,))
+    for q, factor_bits, target_ratio in global_band_families:
+        add_request(q, factor_bits, target_ratio, multipliers)
+
+    audit_rows: list[dict[str, object]] = []
+    for entry in grouped.values():
+        q = entry["q"]
+        requests = entry["requests"]
+        assert isinstance(q, QuantCodec) and isinstance(requests, dict)
+        required_ranks: list[int] = []
+        base_required_ranks: list[int] = []
+        for (factor_bits, target_ratio), request_multipliers in sorted(
+            requests.items()
+        ):
+            assert isinstance(request_multipliers, set)
+            base_rank = max_rank_under_target(
+                shape,
+                bits=q.bits,
+                scale_count=q.scale_count,
+                sparse_nonzero=0,
+                target_ratio=target_ratio,
+                support_encoding=support_encoding,
+                lowrank_factor_bits=factor_bits,
+            )
+            base_required_ranks.append(base_rank)
+            q_payload = _payload_for_counts(
+                shape,
+                bits=q.bits,
+                scale_count=q.scale_count,
+                sparse_nonzero=0,
+                rank=0,
+                support_encoding=support_encoding,
+                lowrank_factor_bits=factor_bits,
+            )
+            ql_payload = _payload_for_counts(
+                shape,
+                bits=q.bits,
+                scale_count=q.scale_count,
+                sparse_nonzero=0,
+                rank=base_rank,
+                support_encoding=support_encoding,
+                lowrank_factor_bits=factor_bits,
+            )
+            repair_bits = max(0, int(ql_payload.total_bits) - int(q_payload.total_bits))
+            for multiplier in sorted(request_multipliers):
+                band_budget = int(q_payload.total_bits) + int(
+                    math.floor(multiplier * repair_bits)
+                )
+                required_ranks.append(
+                    max_rank_under_budget_bits(
+                        shape,
+                        bits=q.bits,
+                        scale_count=q.scale_count,
+                        sparse_nonzero=0,
+                        budget_bits=band_budget,
+                        support_encoding=support_encoding,
+                        lowrank_factor_bits=factor_bits,
+                    )
+                )
+        maximum_rank = max(required_ranks, default=0)
+        if maximum_rank > 0:
+            factorizer.factorize(weight - q.decode(), maximum_rank)
+        audit_rows.append(
+            {
+                "q_bits": int(q.bits),
+                "q_quantizer": q.quantizer,
+                "q_col_block_size": (
+                    0 if q.col_block_size is None else int(q.col_block_size)
+                ),
+                "requested_factor_bits": sorted(
+                    {factor_bits for factor_bits, _target in requests}
+                ),
+                "requested_target_ratios": sorted(
+                    {target for _factor_bits, target in requests}
+                ),
+                "requested_budget_multipliers": sorted(
+                    {
+                        multiplier
+                        for request_multipliers in requests.values()
+                        for multiplier in request_multipliers
+                    }
+                ),
+                "base_required_ranks": base_required_ranks,
+                "primed_maximum_rank": int(maximum_rank),
+            }
+        )
+    factorizer.diagnostics["q_residual_prime_policy"] = (
+        "largest_required_rank_across_base_targets_and_explicit_endpoint_global_bands_"
+        "first_per_exact_q_residual"
+    )
+    factorizer.diagnostics["q_residual_primed_family_count"] = len(audit_rows)
+    factorizer.diagnostics["q_residual_prime_audit"] = audit_rows
+    return audit_rows
 
 
 def candidate_geometry(
@@ -1879,7 +2195,20 @@ def make_component_scaled_candidate(
 
 
 def _candidate_fast_cost(candidate: Candidate, metric: HessianMetric) -> float:
-    return metric.cost(candidate.final - candidate.weight)
+    metric_diagnostics = getattr(metric, "diagnostics", None)
+    if metric in candidate._metric_cost_cache:
+        if isinstance(metric_diagnostics, dict):
+            metric_diagnostics["candidate_cost_cache_hits"] = int(
+                metric_diagnostics.get("candidate_cost_cache_hits", 0)
+            ) + 1
+        return candidate._metric_cost_cache[metric]
+    if isinstance(metric_diagnostics, dict):
+        metric_diagnostics["candidate_cost_cache_misses"] = int(
+            metric_diagnostics.get("candidate_cost_cache_misses", 0)
+        ) + 1
+    cost = metric.cost(candidate.final - candidate.weight)
+    candidate._metric_cost_cache[metric] = cost
+    return cost
 
 
 def parse_allocation_rank_grid(value: str | None) -> list[int]:
@@ -1934,6 +2263,7 @@ def _candidate_with_strategy(
         source.lowrank,
         diagnostics={**source.diagnostics, **(diagnostics or {})},
         repair_dof=source.repair_dof,
+        _metric_cost_cache=source._metric_cost_cache,
     )
 
 
@@ -1957,10 +2287,11 @@ def build_global_single_component_option_pools(
 
     Both controls use the same local Q+L repair allowance, support fractions,
     budget multipliers and configured rank-grid envelope as the QSL search.  A
-    Pure-L refits the unchanged Q residual independently at each enumerated
-    rank, while the original local maximum-rank Q+L factor is reused exactly.
-    Thus a one-layer cap cannot improve merely by changing the SVD call used at
-    the same rank; multi-layer gains isolate the enumerated rank allocation.
+    Pure-L uses a shared nested decomposition of the unchanged Q residual for
+    every enumerated rank, while the original local maximum-rank Q+L factor is
+    reused exactly. Thus a one-layer cap cannot improve merely by changing the
+    decomposition used at the same rank; multi-layer gains isolate the
+    enumerated rank allocation.
     """
 
     weight = weight_tensor.detach().cpu().float().numpy()
@@ -2043,7 +2374,7 @@ def build_global_single_component_option_pools(
                 "global_control_rank": rank,
                 "global_control_budget_multipliers": json.dumps(band_multipliers),
                 "global_control_decomposition_policy": (
-                    "independent_same_Q_residual_factorization_per_enumerated_rank; "
+                    "shared_nested_same_Q_residual_factorization_across_enumerated_ranks; "
                     "original_local_Q+L_factor_reused_at_its_rank"
                 ),
             },
@@ -3013,7 +3344,7 @@ def _rank_global_exact_pareto_allocations(
             size = codec_artifact_allocations_natural_file_bytes(
                 [allocation], alignment=alignment
             )
-            cost = metrics[layer].cost(candidate.final - candidate.weight)
+            cost = _candidate_fast_cost(candidate, metrics[layer])
             if not math.isfinite(cost):
                 raise ValueError(
                     f"global {endpoint_label} candidate cost is non-finite for {layer}"
@@ -5445,7 +5776,11 @@ def main() -> None:
             randomized_seed=args.seed,
             seed_namespace=layer,
         )
-        metric = HessianMetric(covariance_tensor, device=args.svd_device)
+        metric = HessianMetric(
+            covariance_tensor,
+            device=args.svd_device,
+            prepared_covariance=prepared_covariance,
+        )
         layer_metrics[layer] = metric
         layer_covariances[layer] = prepared_covariance
         factorizer_dims[layer] = int(covariance_tensor.shape[0])
@@ -5463,6 +5798,31 @@ def main() -> None:
             )
         )
         candidate_rows.extend(family_rows)
+        prime_q_residual_factorizations(
+            weight=weight_np,
+            factorizer=factorizer,
+            families=[
+                *((q, 16, target) for target in args.target_ratios),
+                *(
+                    (family_q, int(factor_bits), args.endpoint_target)
+                    for family_q, factor_bits in heterogeneous_families
+                ),
+            ],
+            support_encoding=args.support_encoding,
+            global_band_families=(
+                [
+                    (family_q, int(factor_bits), args.endpoint_target)
+                    for family_q, factor_bits in heterogeneous_families
+                ]
+                if args.include_global_single_component_controls
+                else []
+            ),
+            budget_multipliers=(
+                [1.0, *args.global_frontier_budget_multipliers]
+                if args.include_global_single_component_controls
+                else [1.0]
+            ),
+        )
         for target in args.target_ratios:
             selected, rows, global_option_pools = build_layer_candidates(
                 layer=layer,
@@ -6269,6 +6629,19 @@ def main() -> None:
             "whitening_floor_ratio": args.whitening_floor_ratio,
             "floor_scope": "factorizer_only_endpoint_scored_with_declared_covariance",
             "per_layer_audit": factorizer_audit,
+        },
+        "performance_cache": {
+            "semantics": (
+                "no allocation states are removed; exact-content candidate costs use weak metric "
+                "identity keys; OBS repeats are prepared-covariance-bound and weakly retained; "
+                "pure-L ranks use the disclosed largest-superset decomposition across base "
+                "targets and explicit endpoint global budget bands; endpoint byte ledgers "
+                "remain exact"
+            ),
+            "per_layer_metric_audit": {
+                layer: dict(metric.diagnostics)
+                for layer, metric in sorted(layer_metrics.items())
+            },
         },
         "rate_allocator": rate_allocator_report,
         "joint_value_claim": joint_value_claim,
