@@ -82,6 +82,33 @@ QSL 和 no-joint 最终都选择了同一个 4-bit row-scale RTN + FP16 low-rank
 
 pure-S endpoint 选择了 4-bit、group-64、MSE-clip base quantizer，说明异构候选分配确实生效，而非始终退化为默认量化器。
 
+### Qwen2.5-3B sentinel
+
+运行目录：
+
+```text
+/home/wangmeiqi/codex_results/
+large_model_interaction_aware_v4_ea77d12_20260717
+```
+
+设置：Qwen2.5-3B-Instruct、layer-0 `gate_proj` 一个 tensor、`calib-limit/selection-limit/eval-limit=4/2/2`、`sequence_length=128`、3/4-bit、row/group-128、MSE-clip/RTN、4/16-bit low-rank factors，以及 proxy top-2 validation NLL 重排。
+
+关键结果：
+
+| 项目 | 结果 |
+|---|---:|
+| QSL natural bytes | 13,506,496 |
+| exact-matched no-joint natural bytes | 13,506,496 |
+| padded physical file bytes | 13,515,712 |
+| QSL final-test NLL | 2.550458 |
+| no-joint final-test NLL | 2.550458 |
+| QSL test NLL gain | 0.000000 |
+| joint-value claim | false |
+
+两个 endpoint 都选择了同一个 4-bit、group-128、symmetric RTN base quantizer 和 rank-72 FP16 low-rank repair，没有启用 sparse component。exact-natural counterfactual 搜索成功，train/validation/test 的文本重叠计数均为 0，canonical proxy `selection_source` 与 validation `final_selection_source` 也分别保留。
+
+该结果把两阶段异构分配扩展到了 3B 模型，但仍然只是单 tensor、两个 validation/test window 的 scalability smoke。它证明工程路径可行，不证明同层 S+L 有价值，也不支持模型级质量或压缩结论。
+
 ## 5. 当前工程状态
 
 - codec 支持分组量化 scale、不同 base bitwidth/quantizer 和量化低秩 factors；
@@ -90,7 +117,8 @@ pure-S endpoint 选择了 4-bit、group-64、MSE-clip base quantizer，说明异
 - 新增 `configs/large_model_interaction_aware_v4_20260717.json`；
 - v4 包含 Qwen2.5-3B、Llama-2-7B、Mistral-7B 的单层 sentinel、三深度 6-tensor 和全 MLP feasibility 阶段；
 - Qwen2.5-3B sentinel 使用缩减但仍异构的提交门禁网格：3/4-bit、row/group、RTN/MSE、4/16-bit factors、proxy top-2 validation rerank 和 exact-natural no-joint；更完整的 factor/rank 网格保留在三深度阶段；
-- 首个 Qwen2.5-3B sentinel 使用旧配置在 210 的物理 GPU 2 启动；其输出只保留为迁移审计，修复后的门禁结果完成前不作结论。
+- 旧配置 Qwen sentinel 在 8 小时门限后失败，已原样移入输出根目录的 `trash/`；修复后的 commit `ea77d126` sentinel 在 210 的物理 GPU 0 完成并通过 suite 独立检查；
+- 修复后结果的 QSL/no-joint exact-natural 匹配成功，但两者退化为同一个 pure-L endpoint，因此联合价值门禁给出明确 negative，而不是不可判定或正结论。
 
 ## 6. 结果解释原则
 

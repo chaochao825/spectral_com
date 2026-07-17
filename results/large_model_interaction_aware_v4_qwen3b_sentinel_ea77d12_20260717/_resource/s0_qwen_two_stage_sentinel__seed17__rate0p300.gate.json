@@ -1,0 +1,95 @@
+{
+  "attempt": 219,
+  "cuda_device_order": "PCI_BUS_ID",
+  "cuda_visible_devices": "0",
+  "execution_fingerprint_sha256": "f9ca7d62bdd38f8e5e61dbc0169f3ab545c4213b18b7fcb03d81e102f7ae0f3a",
+  "gate_passed": true,
+  "gate_passed_at": "2026-07-16T20:29:26Z",
+  "host_post_lock": {
+    "available_host_memory_gib": 842.9239082336426,
+    "output_disk_free_gib": 16971.30966567993,
+    "output_disk_probe_path": "/home/wangmeiqi/codex_results/large_model_interaction_aware_v4_ea77d12_20260717",
+    "sampled_at": "2026-07-16T20:29:26Z"
+  },
+  "host_pre_lock": {
+    "available_host_memory_gib": 861.0135536193848,
+    "output_disk_free_gib": 16971.312114715576,
+    "output_disk_probe_path": "/home/wangmeiqi/codex_results/large_model_interaction_aware_v4_ea77d12_20260717",
+    "sampled_at": "2026-07-16T20:28:25Z"
+  },
+  "job_config_sha256": "629e9eb2f30b0463ba7798471172946748adb3e4fb46061b2de0e940f2c29c39",
+  "job_id": "s0_qwen_two_stage_sentinel__seed17__rate0p300",
+  "lock_acquired": true,
+  "lock_path": "/tmp/com_compression_gpu_0.lock",
+  "policy": {
+    "eligible_physical_gpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "enforce_at_runtime": true,
+    "fail_closed_events": [
+      "model snapshot or resource-gate mismatch",
+      "non-zero runner exit, timeout or non-finite metric",
+      "calibration, validation and test role overlap",
+      "validation proxy evidence leaking into final test",
+      "artifact checksum, roundtrip or exact byte ledger mismatch",
+      "allocator fallback, frontier coarsening or open byte ledger",
+      "missing pure-S, pure-L or no-joint control",
+      "proxy nested-pool dominance mismatch",
+      "joint-value support without equal natural bytes and lower final-test NLL"
+    ],
+    "gate_wait_timeout_hours": 24,
+    "gpu_memory_threshold_mib": 1024,
+    "gpu_selection": "select an eligible physical GPU after two idle samples while holding its flock",
+    "gpu_utilization_threshold_percent": 10,
+    "launch_gate": "two consecutive 30-second samples with memory.used < 1024 MiB and utilization.gpu < 10 percent",
+    "maximum_gpu_memory_mib": 77824,
+    "maximum_rss_gib": 512,
+    "minimum_available_host_memory_gib": 128,
+    "minimum_output_disk_free_gib": 100,
+    "preferred_physical_gpu": 2,
+    "sample_interval_seconds": 30,
+    "sentinel_timeout_hours": 8,
+    "server": "210",
+    "three_tensor_pair_timeout_hours": 72
+  },
+  "policy_sha256": "b836a8ea9b683b009408252a27dbf96d3d5b4df2d835d06de98dee22066947bd",
+  "post_lock_samples": [
+    {
+      "memory_used_mib": 17,
+      "monotonic_seconds": 997840.66818357,
+      "physical_gpu": 0,
+      "sampled_at": "2026-07-16T20:28:56Z",
+      "utilization_gpu_percent": 0
+    },
+    {
+      "memory_used_mib": 17,
+      "monotonic_seconds": 997871.077800261,
+      "physical_gpu": 0,
+      "sampled_at": "2026-07-16T20:29:26Z",
+      "utilization_gpu_percent": 0
+    }
+  ],
+  "pre_lock_samples": [
+    {
+      "memory_used_mib": 17,
+      "monotonic_seconds": 997809.980148535,
+      "physical_gpu": 0,
+      "sampled_at": "2026-07-16T20:28:25Z",
+      "utilization_gpu_percent": 0
+    },
+    {
+      "memory_used_mib": 17,
+      "monotonic_seconds": 997840.415184436,
+      "physical_gpu": 0,
+      "sampled_at": "2026-07-16T20:28:56Z",
+      "utilization_gpu_percent": 0
+    }
+  ],
+  "schema_version": "large_scale_hessian_resource_gate.v1",
+  "selected_physical_gpu": 0,
+  "suite_config_sha256": "330127e39f8ee21af6758f3df1cc18ecb01d2db929ca678c8e3e690e4b61e317",
+  "suite_id": "large_model_interaction_aware_v4_20260717"
+}
