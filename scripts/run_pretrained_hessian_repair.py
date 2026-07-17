@@ -760,6 +760,18 @@ def _max_sparse_under_serialized_budget(
     return low
 
 
+@dataclass(frozen=True)
+class CovarianceEigensystem:
+    """A prepared covariance eigensystem bound to its float32 metric bytes."""
+
+    eigenvalues: torch.Tensor
+    eigenvectors: torch.Tensor
+    covariance_digest: bytes
+    decomposition_device: str
+    storage_device: str
+    source: str
+
+
 class LowRankFactorizer:
     """Whitened/SVD factorizer which caches the covariance eigendecomposition."""
 
@@ -775,6 +787,7 @@ class LowRankFactorizer:
         randomized_niter: int = 2,
         randomized_seed: int = 0,
         seed_namespace: str = "",
+        covariance_eigensystem: CovarianceEigensystem | None = None,
     ) -> None:
         self.method = str(method)
         self.device = str(device)
@@ -794,6 +807,15 @@ class LowRankFactorizer:
             raise ValueError("randomized SVD oversampling/niter must be non-negative")
         self.sqrt_h: torch.Tensor | None = None
         self.inv_sqrt_h: torch.Tensor | None = None
+        if self.method == "svd":
+            covariance_eigendecomposition_reused = False
+            covariance_eigendecomposition_source = "not_applicable_unwhitened_svd"
+        elif covariance_eigensystem is not None:
+            covariance_eigendecomposition_reused = True
+            covariance_eigendecomposition_source = covariance_eigensystem.source
+        else:
+            covariance_eigendecomposition_reused = False
+            covariance_eigendecomposition_source = "factorizer_local_torch_linalg_eigh"
         self.diagnostics: dict[str, object] = {
             "method": self.method,
             "whitening_floor_ratio": self.whitening_floor_ratio,
@@ -815,12 +837,37 @@ class LowRankFactorizer:
             "factorization_cache_misses": 0,
             "factorization_cache_entries": 0,
             "factorizer_regularization_applied": False,
+            "covariance_eigendecomposition_reused": covariance_eigendecomposition_reused,
+            "covariance_eigendecomposition_source": covariance_eigendecomposition_source,
         }
         if self.method not in {"svd", "whitened_svd"}:
             raise ValueError(f"unsupported low-rank method: {self.method}")
         if self.method == "whitened_svd":
-            h = covariance.float().to(self.device)
-            evals, evecs = torch.linalg.eigh(0.5 * (h + h.transpose(0, 1)))
+            if covariance_eigensystem is None:
+                h = covariance.float().to(self.device)
+                evals, evecs = torch.linalg.eigh(0.5 * (h + h.transpose(0, 1)))
+            else:
+                covariance_digest = _array_content_digest(
+                    covariance.detach().cpu().float().numpy()
+                )
+                if covariance_digest != covariance_eigensystem.covariance_digest:
+                    raise ValueError(
+                        "prepared covariance eigensystem is bound to different metric bytes"
+                    )
+                if covariance_eigensystem.eigenvectors.shape != covariance.shape:
+                    raise ValueError("prepared covariance eigensystem dimension mismatch")
+                evals = covariance_eigensystem.eigenvalues.to(
+                    device=self.device, dtype=torch.float32
+                )
+                evecs = covariance_eigensystem.eigenvectors.to(
+                    device=self.device, dtype=torch.float32
+                )
+                self.diagnostics["covariance_eigendecomposition_device"] = (
+                    covariance_eigensystem.decomposition_device
+                )
+                self.diagnostics["covariance_eigensystem_storage_device"] = (
+                    covariance_eigensystem.storage_device
+                )
             # This is a factorizer-only numerical regularizer.  It does not
             # alter the declared metric used to score the decoded endpoint,
             # and is therefore recorded separately from covariance damping.
@@ -971,10 +1018,17 @@ def prepare_metric_covariance(
     damping_ratio: float = 0.0,
     psd_rtol: float = NUMERICAL_PSD_REJECTION_RTOL,
     storage_floor_rtol: float = FLOAT32_PSD_FLOOR_RTOL,
+    decomposition_device: str = "cpu",
+    return_eigensystem: bool = False,
 ) -> tuple[
     torch.Tensor,
     PreparedInputCovariance,
     dict[str, float | bool | str],
+] | tuple[
+    torch.Tensor,
+    PreparedInputCovariance,
+    dict[str, float | bool | str],
+    CovarianceEigensystem,
 ]:
     """Validate once and return the float32 PSD endpoint-scoring geometry.
 
@@ -996,7 +1050,15 @@ def prepare_metric_covariance(
 
     collected = covariance.detach().cpu().double().numpy()
     collected = 0.5 * (collected + collected.T)
-    collected_eigenvalues = np.linalg.eigvalsh(collected)
+    if return_eigensystem:
+        if mode != "full":
+            raise ValueError("prepared eigensystem reuse currently requires full covariance mode")
+        spectral_input = torch.from_numpy(collected).to(decomposition_device)
+        spectral_values = torch.linalg.eigvalsh(spectral_input)
+        collected_eigenvalues = spectral_values.detach().cpu().numpy()
+        del spectral_input, spectral_values
+    else:
+        collected_eigenvalues = np.linalg.eigvalsh(collected)
     collected_scale = float(np.max(np.abs(collected_eigenvalues), initial=0.0))
     collected_minimum = float(np.min(collected_eigenvalues)) if collected_eigenvalues.size else 0.0
     collected_diagonal_mean = float(np.mean(np.diag(collected))) if collected.size else 0.0
@@ -1075,8 +1137,137 @@ def prepare_metric_covariance(
         "downstream_covariance_binding": "immutable_prevalidated_input_covariance",
         "psd_rejection_rtol": float(psd_rtol),
         "float32_storage_floor_rtol": float(storage_floor_rtol),
+        "spectrum_decomposition_backend": (
+            "torch.linalg.eigvalsh" if return_eigensystem else "numpy.linalg.eigvalsh"
+        ),
+        "spectrum_decomposition_device": (
+            str(decomposition_device) if return_eigensystem else "cpu"
+        ),
+        "factorizer_eigensystem_reuse_enabled": bool(return_eigensystem),
+        "factorizer_eigensystem_backend": (
+            "torch.linalg.eigh_on_prepared_float32_metric"
+            if return_eigensystem
+            else "not_prepared_by_covariance_preparation"
+        ),
+        "factorizer_preparation_decomposition_count": int(return_eigensystem),
+        "spectrum_decomposition_count_this_call": 1,
+        "factorizer_preparation_decomposition_count_this_call": int(
+            return_eigensystem
+        ),
+        "decomposition_count_scope": "per_unique_shared_covariance_geometry",
     }
-    return prepared, prepared_input, report
+    if not return_eigensystem:
+        return prepared, prepared_input, report
+    factorizer_input = prepared.to(device=decomposition_device, dtype=torch.float32)
+    factorizer_values, factorizer_vectors = torch.linalg.eigh(
+        0.5 * (factorizer_input + factorizer_input.transpose(0, 1))
+    )
+    stored_factorizer_values = factorizer_values.detach().cpu()
+    stored_factorizer_vectors = factorizer_vectors.detach().cpu()
+    del factorizer_input, factorizer_values, factorizer_vectors
+    eigensystem = CovarianceEigensystem(
+        eigenvalues=stored_factorizer_values,
+        eigenvectors=stored_factorizer_vectors,
+        covariance_digest=_array_content_digest(
+            prepared.detach().cpu().float().numpy()
+        ),
+        decomposition_device=str(decomposition_device),
+        storage_device="cpu",
+        source="prepared_float32_metric_torch_linalg_eigh",
+    )
+    return prepared, prepared_input, report, eigensystem
+
+
+CovariancePreparation = tuple[
+    torch.Tensor,
+    PreparedInputCovariance,
+    dict[str, float | bool | str],
+    CovarianceEigensystem | None,
+]
+CovariancePreparationCacheKey = tuple[str, float, str, bool, bytes]
+
+
+def prepare_metric_covariance_cached(
+    covariance: torch.Tensor,
+    *,
+    mode: str,
+    damping_ratio: float,
+    decomposition_device: str,
+    return_eigensystem: bool,
+    cache: dict[CovariancePreparationCacheKey, CovariancePreparation],
+) -> CovariancePreparation:
+    if covariance.device.type != "cpu" or covariance.dtype != torch.float32:
+        raise ValueError(
+            "cached covariance preparation requires a CPU float32 source tensor"
+        )
+    cache_key: CovariancePreparationCacheKey = (
+        str(mode),
+        float(damping_ratio),
+        str(decomposition_device),
+        bool(return_eigensystem),
+        _array_content_digest(covariance.detach().numpy()),
+    )
+    cached = cache.get(cache_key)
+    if cached is not None:
+        tensor, prepared, report, eigensystem = cached
+        return (
+            tensor,
+            prepared,
+            {
+                **report,
+                "covariance_preparation_cache_hit": True,
+                "spectrum_decomposition_count_this_call": 0,
+                "factorizer_preparation_decomposition_count_this_call": 0,
+            },
+            eigensystem,
+        )
+
+    if return_eigensystem:
+        tensor, prepared, report, eigensystem = prepare_metric_covariance(
+            covariance,
+            mode=mode,
+            damping_ratio=damping_ratio,
+            decomposition_device=decomposition_device,
+            return_eigensystem=True,
+        )
+    else:
+        tensor, prepared, report = prepare_metric_covariance(
+            covariance,
+            mode=mode,
+            damping_ratio=damping_ratio,
+            decomposition_device=decomposition_device,
+            return_eigensystem=False,
+        )
+        eigensystem = None
+    stored: CovariancePreparation = (
+        tensor,
+        prepared,
+        {**report, "covariance_preparation_cache_hit": False},
+        eigensystem,
+    )
+    cache[cache_key] = stored
+    return stored
+
+
+def factorizer_covariance_preparation_description(method: str, mode: str) -> str:
+    if method == "svd":
+        return (
+            "unwhitened SVD does not perform a factorizer covariance "
+            "eigendecomposition; identical modules reuse only the PSD-audited metric"
+        )
+    if method != "whitened_svd":
+        raise ValueError(f"unsupported low-rank method: {method}")
+    if mode == "full":
+        return (
+            "whitened SVD reuses one separately disclosed float32 fitting eigensystem "
+            "for identical full-covariance gate/up geometries"
+        )
+    if mode in {"diagonal", "identity"}:
+        return (
+            "whitened SVD computes its fitting eigensystem locally per module for this "
+            f"{mode} covariance ablation; identical modules reuse only the PSD-audited metric"
+        )
+    raise ValueError(f"unsupported covariance mode: {mode}")
 
 
 def fit_sparse_lowrank_components(
@@ -5711,6 +5902,9 @@ def main() -> None:
     covariance_psd_rows: list[dict[str, object]] = []
     layer_metrics: dict[str, HessianMetric] = {}
     layer_covariances: dict[str, PreparedInputCovariance] = {}
+    covariance_preparation_cache: dict[
+        CovariancePreparationCacheKey, CovariancePreparation
+    ] = {}
     global_option_pools_by_strategy: dict[str, dict[str, list[Candidate]]] = {
         "Q+S+L_QL_budget": {}
     }
@@ -5726,10 +5920,20 @@ def main() -> None:
 
     for layer, weight_tensor in baseline_weights.items():
         weight_np = weight_tensor.detach().cpu().float().numpy()
-        covariance_tensor, prepared_covariance, covariance_psd_report = prepare_metric_covariance(
+        (
+            covariance_tensor,
+            prepared_covariance,
+            covariance_psd_report,
+            covariance_eigensystem,
+        ) = prepare_metric_covariance_cached(
             covariances[layer],
             mode=args.covariance_mode,
             damping_ratio=args.covariance_damping_ratio,
+            decomposition_device=args.svd_device,
+            return_eigensystem=(
+                args.covariance_mode == "full" and args.l_method == "whitened_svd"
+            ),
+            cache=covariance_preparation_cache,
         )
         covariance_psd_rows.append({"layer": layer, **covariance_psd_report})
         quantizer_codecs = build_quantizer_candidate_codecs(
@@ -5775,6 +5979,7 @@ def main() -> None:
             randomized_niter=args.lowrank_svd_niter,
             randomized_seed=args.seed,
             seed_namespace=layer,
+            covariance_eigensystem=covariance_eigensystem,
         )
         metric = HessianMetric(
             covariance_tensor,
@@ -6508,6 +6713,9 @@ def main() -> None:
         (max(0.0, float(row["diagonal_shift_relative"])) for row in covariance_psd_rows),
         default=0.0,
     )
+    factorizer_covariance_description = factorizer_covariance_preparation_description(
+        args.l_method, args.covariance_mode
+    )
     run_config = {
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "model": args.model,
@@ -6558,9 +6766,18 @@ def main() -> None:
             "mean-diagonal ridge before this declared ablation; materially indefinite matrices "
             "fail; relative negative numerical PSD error <=1e-7 is repaired once for endpoint "
             "scoring and nonfactorizer repairs, with a float32 storage floor of eight machine "
-            "epsilons; whitened SVD may use its separately recorded fitting floor; the spectrum "
-            "is decomposed once and identity shifts are propagated algebraically"
+            "epsilons; each unique shared covariance geometry receives one float64 PSD spectrum "
+            "audit and identity shifts are propagated algebraically; "
+            + factorizer_covariance_description
         ),
+        "factorizer_covariance_preparation": {
+            "method": args.l_method,
+            "covariance_mode": args.covariance_mode,
+            "shared_eigensystem_reuse": bool(
+                args.l_method == "whitened_svd" and args.covariance_mode == "full"
+            ),
+            "description": factorizer_covariance_description,
+        },
         "covariance_psd_audit": {
             "path": "covariance_psd_audit.csv",
             "layer_count": len(covariance_psd_rows),

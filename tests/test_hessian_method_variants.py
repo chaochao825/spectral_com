@@ -86,6 +86,191 @@ def test_covariance_modes_and_factorizer_floor_are_disclosed() -> None:
     assert randomized.diagnostics["factorization_cache_misses"] == 1
 
 
+def test_prepared_covariance_eigensystem_is_reused_without_a_second_decomposition(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    covariance = torch.tensor(
+        [[4.0, 1.0, 0.5], [1.0, 3.0, 0.25], [0.5, 0.25, 2.0]],
+        dtype=torch.float32,
+    )
+    original_eigh = torch.linalg.eigh
+    original_eigvalsh = torch.linalg.eigvalsh
+    eigh_calls = 0
+    eigvalsh_calls = 0
+
+    def counted_eigh(*args: object, **kwargs: object):
+        nonlocal eigh_calls
+        eigh_calls += 1
+        return original_eigh(*args, **kwargs)
+
+    def counted_eigvalsh(*args: object, **kwargs: object):
+        nonlocal eigvalsh_calls
+        eigvalsh_calls += 1
+        return original_eigvalsh(*args, **kwargs)
+
+    monkeypatch.setattr(torch.linalg, "eigh", counted_eigh)
+    monkeypatch.setattr(torch.linalg, "eigvalsh", counted_eigvalsh)
+    prepared, _prepared_input, report, eigensystem = RUNNER.prepare_metric_covariance(
+        covariance,
+        mode="full",
+        decomposition_device="cpu",
+        return_eigensystem=True,
+    )
+    factorizer = RUNNER.LowRankFactorizer(
+        prepared,
+        method="whitened_svd",
+        device="cpu",
+        covariance_eigensystem=eigensystem,
+    )
+
+    assert eigvalsh_calls == 1
+    assert eigh_calls == 1
+    assert report["spectrum_decomposition_backend"] == "torch.linalg.eigvalsh"
+    assert report["factorizer_eigensystem_backend"] == (
+        "torch.linalg.eigh_on_prepared_float32_metric"
+    )
+    assert report["factorizer_eigensystem_reuse_enabled"] is True
+    assert factorizer.diagnostics["covariance_eigendecomposition_reused"] is True
+    assert eigensystem.storage_device == "cpu"
+    assert eigensystem.eigenvalues.device.type == "cpu"
+    assert eigensystem.eigenvectors.device.type == "cpu"
+
+    reference = RUNNER.LowRankFactorizer(
+        prepared,
+        method="whitened_svd",
+        device="cpu",
+    )
+    assert eigvalsh_calls == 1
+    assert eigh_calls == 2
+    torch.testing.assert_close(factorizer.sqrt_h, reference.sqrt_h, rtol=0.0, atol=0.0)
+    torch.testing.assert_close(
+        factorizer.inv_sqrt_h,
+        reference.inv_sqrt_h,
+        rtol=0.0,
+        atol=0.0,
+    )
+
+
+def test_prepared_covariance_eigensystem_rejects_different_metric_bytes() -> None:
+    covariance = torch.tensor([[2.0, 0.25], [0.25, 1.0]], dtype=torch.float32)
+    prepared, _prepared_input, _report, eigensystem = RUNNER.prepare_metric_covariance(
+        covariance,
+        mode="full",
+        decomposition_device="cpu",
+        return_eigensystem=True,
+    )
+    with pytest.raises(ValueError, match="different metric bytes"):
+        RUNNER.LowRankFactorizer(
+            prepared + torch.eye(2) * 1e-3,
+            method="whitened_svd",
+            device="cpu",
+            covariance_eigensystem=eigensystem,
+        )
+
+
+def test_covariance_preparation_cache_reuses_identical_metric_content(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    covariance = torch.tensor([[2.0, 0.25], [0.25, 1.0]], dtype=torch.float32)
+    original_eigh = torch.linalg.eigh
+    original_eigvalsh = torch.linalg.eigvalsh
+    counts = {"eigh": 0, "eigvalsh": 0}
+
+    def counted_eigh(*args: object, **kwargs: object):
+        counts["eigh"] += 1
+        return original_eigh(*args, **kwargs)
+
+    def counted_eigvalsh(*args: object, **kwargs: object):
+        counts["eigvalsh"] += 1
+        return original_eigvalsh(*args, **kwargs)
+
+    monkeypatch.setattr(torch.linalg, "eigh", counted_eigh)
+    monkeypatch.setattr(torch.linalg, "eigvalsh", counted_eigvalsh)
+    cache: dict[
+        RUNNER.CovariancePreparationCacheKey, RUNNER.CovariancePreparation
+    ] = {}
+    first = RUNNER.prepare_metric_covariance_cached(
+        covariance,
+        mode="full",
+        damping_ratio=0.0,
+        decomposition_device="cpu",
+        return_eigensystem=True,
+        cache=cache,
+    )
+    second = RUNNER.prepare_metric_covariance_cached(
+        covariance.clone(),
+        mode="full",
+        damping_ratio=0.0,
+        decomposition_device="cpu",
+        return_eigensystem=True,
+        cache=cache,
+    )
+
+    assert counts == {"eigh": 1, "eigvalsh": 1}
+    assert first[0] is second[0]
+    assert first[1] is second[1]
+    assert first[3] is second[3]
+    assert first[2]["covariance_preparation_cache_hit"] is False
+    assert second[2]["covariance_preparation_cache_hit"] is True
+    assert first[2]["spectrum_decomposition_count_this_call"] == 1
+    assert first[2]["factorizer_preparation_decomposition_count_this_call"] == 1
+    assert second[2]["spectrum_decomposition_count_this_call"] == 0
+    assert second[2]["factorizer_preparation_decomposition_count_this_call"] == 0
+
+
+def test_covariance_preparation_cache_rejects_noncanonical_source_tensor() -> None:
+    cache: dict[
+        RUNNER.CovariancePreparationCacheKey, RUNNER.CovariancePreparation
+    ] = {}
+    with pytest.raises(ValueError, match="CPU float32"):
+        RUNNER.prepare_metric_covariance_cached(
+            torch.eye(2, dtype=torch.float64),
+            mode="full",
+            damping_ratio=0.0,
+            decomposition_device="cpu",
+            return_eigensystem=True,
+            cache=cache,
+        )
+
+
+def test_factorizer_covariance_diagnostics_cover_unwhitened_and_diagonal_paths() -> None:
+    unwhitened = RUNNER.LowRankFactorizer(
+        torch.eye(2),
+        method="svd",
+        device="cpu",
+    )
+    assert unwhitened.diagnostics["covariance_eigendecomposition_reused"] is False
+    assert unwhitened.diagnostics["covariance_eigendecomposition_source"] == (
+        "not_applicable_unwhitened_svd"
+    )
+    assert "does not perform" in RUNNER.factorizer_covariance_preparation_description(
+        "svd", "full"
+    )
+
+    diagonal, _prepared, report = RUNNER.prepare_metric_covariance(
+        torch.tensor([[2.0, 0.25], [0.25, 1.0]], dtype=torch.float32),
+        mode="diagonal",
+    )
+    whitened = RUNNER.LowRankFactorizer(
+        diagonal,
+        method="whitened_svd",
+        device="cpu",
+    )
+    assert report["factorizer_eigensystem_backend"] == (
+        "not_prepared_by_covariance_preparation"
+    )
+    assert whitened.diagnostics["covariance_eigendecomposition_reused"] is False
+    assert whitened.diagnostics["covariance_eigendecomposition_source"] == (
+        "factorizer_local_torch_linalg_eigh"
+    )
+    assert "locally per module" in RUNNER.factorizer_covariance_preparation_description(
+        "whitened_svd", "diagonal"
+    )
+    assert "reuses one" in RUNNER.factorizer_covariance_preparation_description(
+        "whitened_svd", "full"
+    )
+
+
 def test_factorizer_reuses_a_nested_superset_rank() -> None:
     factorizer = RUNNER.LowRankFactorizer(
         torch.eye(8),
